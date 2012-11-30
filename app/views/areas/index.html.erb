@@ -1,0 +1,31 @@
+<div class="page-header">
+  <%= link_to new_area_path, :class => 'btn btn-primary' do %>
+    <i class="icon-plus icon-white"></i>
+    New Area
+  <% end %>
+  <h1>Listing areas</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Coordinates</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @areas.each do |area| %>
+    <tr>
+      <td><%= area.title %></td>
+      <td><%= area.coordinates %></td>
+      <td><%= link_to 'Show', area %></td>
+      <td><%= link_to 'Edit', edit_area_path(area) %></td>
+      <td><%= link_to 'Destroy', area, confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

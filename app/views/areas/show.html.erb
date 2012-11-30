@@ -1,0 +1,20 @@
+<div class="page-header">
+  <%= link_to areas_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_area_path(@area), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing areas</h1>
+</div>
+
+<dl>
+  <dt>Title:</dt>
+  <dd><%= @area.title %></dd>
+
+  <dt>Coordinates:</dt>
+  <dd><%= @area.coordinates %></dd>
+
+</dl>
