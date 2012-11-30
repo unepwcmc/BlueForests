@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/decioferreira/bootstrap-generators.git
+  revision: 78b0c9614653c694f5ff5fb22a77f984c8e79757
+  specs:
+    bootstrap-generators (2.2.1)
+      railties (~> 3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -84,6 +91,9 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    simple_form (2.0.4)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     sprockets (2.1.3)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -103,9 +113,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bootstrap-generators (~> 2.1)!
   coffee-rails (~> 3.2.1)
   jquery-rails
   rails (= 3.2.8)
   sass-rails (~> 3.2.3)
+  simple_form
   sqlite3
   uglifier (>= 1.0.3)
