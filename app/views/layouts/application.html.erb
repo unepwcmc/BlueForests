@@ -30,6 +30,13 @@
           <ul class="nav">
             <li><%= link_to "Areas", areas_path %></li>
           </ul>
+          <ul class="nav pull-right">
+            <% if admin_signed_in? %>
+              <li><%= link_to truncate("Logout #{current_admin.email}"), destroy_admin_session_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to 'Login', new_admin_session_path %></li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
