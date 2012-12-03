@@ -14,6 +14,7 @@ set :git_enable_submodules, 1
 default_run_options[:pty] = true # Must be set for the password prompt from git to work
 
 set :deploy_to, "/home/ubuntu/#{application}"
+set :use_sudo, false
 
 # bundler bootstrap
 require 'bundler/capistrano'
