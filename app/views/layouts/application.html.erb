@@ -14,6 +14,7 @@
 
   <!--[if lte IE 8]>
     <%= stylesheet_link_tag "leaflet.ie.css" %>
+    <%= stylesheet_link_tag "leaflet.draw.ie.css" %>
   <![endif]-->
 
   <%= stylesheet_link_tag    "application" %>
@@ -36,7 +37,15 @@
           </ul>
           <ul class="nav pull-right">
             <% if admin_signed_in? %>
-              <li><%= link_to truncate("Logout #{current_admin.email}"), destroy_admin_session_path, method: :delete %></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= truncate("#{current_admin.email}") %> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "My Account", edit_admin_registration_path %></li>
+                  <li><%= link_to "Administrators", admins_path %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to "Logout", destroy_admin_session_path, method: :delete %></li>
+                </ul>
+              </li>
             <% else %>
               <li><%= link_to 'Login', new_admin_session_path %></li>
             <% end %>

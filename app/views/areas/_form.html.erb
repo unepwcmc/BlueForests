@@ -1,9 +1,9 @@
-<%= simple_form_for(@area, :defaults => { :input_html => { :class => 'input-xlarge' } }) do |f| %>
+<%= simple_form_for(@area, :defaults => { :input_html => { :class => 'span8' } }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :title %>
-    <%= f.input :coordinates %>
+    <%= f.input :coordinates, as: :hidden %>
   </div>
 
   <div id="map" style="height: 380px;"></div>

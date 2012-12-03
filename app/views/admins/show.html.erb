@@ -1,0 +1,17 @@
+<div class="page-header">
+  <%= link_to admins_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_admin_path(@admin), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing admins</h1>
+</div>
+
+<dl>
+  <dt>Email:</dt>
+  <dd><%= @admin.email %></dd>
+
+</dl>
