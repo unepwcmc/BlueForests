@@ -25,7 +25,7 @@
       <td><%= validation.coordinates %></td>
       <td><%= validation.action %></td>
       <td><%= validation.recorded_at %></td>
-      <td><%= validation.area_id %></td>
+      <td><%= link_to validation.area.title, validation.area %></td>
       <td><%= link_to 'Show', validation %></td>
       <td><%= link_to 'Edit', edit_validation_path(validation) %></td>
       <td><%= link_to 'Destroy', validation, confirm: 'Are you sure?', method: :delete %></td>

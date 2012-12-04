@@ -21,6 +21,6 @@
   <dd><%= @validation.recorded_at %></dd>
 
   <dt>Area:</dt>
-  <dd><%= @validation.area_id %></dd>
+  <dd><%= link_to @validation.area.title, @validation.area %></dd>
 
 </dl>
