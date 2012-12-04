@@ -43,6 +43,7 @@ editableMap = (map, drawnItems) ->
 
 findAreaCoordinates = ->
   return window.areaCoordinates if window.areaCoordinates?
-  return JSON.parse($('#area_coordinates').val()) if $('#area_coordinates').length > 0 && $('#area_coordinates').val() != ''
 
-  return false
+  try
+    return JSON.parse($('#area_coordinates').val()) if $('#area_coordinates').length > 0
+  false
