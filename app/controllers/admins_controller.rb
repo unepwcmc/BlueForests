@@ -1,4 +1,14 @@
 class AdminsController < ApplicationController
+  # GET /admins/me
+  # GET /admins/me.json
+  def me
+    if admin_signed_in?
+      render json: current_admin.to_json(only: [:id, :email, :login_method])
+    else
+      render json: { error:'401 Unauthorized' }, status: :unauthorized
+    end
+  end
+
   # GET /admins
   # GET /admins.json
   def index

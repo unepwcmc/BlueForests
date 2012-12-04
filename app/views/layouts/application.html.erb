@@ -33,7 +33,8 @@
         <%= link_to "BlueCarbon", root_path, :class => "brand" %>
         <div class="nav-collapse">
           <ul class="nav">
-            <li><%= link_to "Areas", areas_path %></li>
+            <%= content_tag :li, link_to("Areas", areas_path), class: params[:controller] == 'areas' ? 'active' : nil %>
+            <%= content_tag :li, link_to("Validations", validations_path), class: params[:controller] == 'validations' ? 'active' : nil %>
           </ul>
           <ul class="nav pull-right">
             <% if admin_signed_in? %>

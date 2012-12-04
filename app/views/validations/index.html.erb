@@ -1,0 +1,35 @@
+<div class="page-header">
+  <%= link_to new_validation_path, :class => 'btn btn-primary' do %>
+    <i class="icon-plus icon-white"></i>
+    New Validation
+  <% end %>
+  <h1>Listing validations</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Coordinates</th>
+      <th>Action</th>
+      <th>Recorded at</th>
+      <th>Area</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @validations.each do |validation| %>
+    <tr>
+      <td><%= validation.coordinates %></td>
+      <td><%= validation.action %></td>
+      <td><%= validation.recorded_at %></td>
+      <td><%= validation.area_id %></td>
+      <td><%= link_to 'Show', validation %></td>
+      <td><%= link_to 'Edit', edit_validation_path(validation) %></td>
+      <td><%= link_to 'Destroy', validation, confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

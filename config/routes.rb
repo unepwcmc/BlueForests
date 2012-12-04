@@ -1,7 +1,10 @@
 BlueCarbon::Application.routes.draw do
+  match 'admins/me' => 'admins#me'
+
   devise_for :admins, path_prefix: 'my'
   resources :admins
 
+  resources :validations
   resources :areas
 
   # The priority is based upon order of creation:

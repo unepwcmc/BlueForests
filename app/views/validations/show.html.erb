@@ -1,0 +1,26 @@
+<div class="page-header">
+  <%= link_to validations_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end %>
+  <%= link_to edit_validation_path(@validation), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+  <h1>Listing validations</h1>
+</div>
+
+<dl>
+  <dt>Coordinates:</dt>
+  <dd><%= @validation.coordinates %></dd>
+
+  <dt>Action:</dt>
+  <dd><%= @validation.action %></dd>
+
+  <dt>Recorded at:</dt>
+  <dd><%= @validation.recorded_at %></dd>
+
+  <dt>Area:</dt>
+  <dd><%= @validation.area_id %></dd>
+
+</dl>
