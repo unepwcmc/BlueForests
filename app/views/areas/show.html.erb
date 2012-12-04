@@ -16,5 +16,7 @@
 
   <dt>Coordinates:</dt>
   <dd><%= @area.coordinates %></dd>
-
 </dl>
+
+<%= javascript_tag "window.areaCoordinates = #{@area.coordinates}" %>
+<div id="map" style="height: 380px;"></div>

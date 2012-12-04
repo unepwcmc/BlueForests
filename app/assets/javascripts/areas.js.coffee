@@ -11,6 +11,17 @@ initializeMap = (map_id) ->
     maxZoom: 18
   .addTo(map)
 
+  drawnItems = new L.LayerGroup()
+
+  if findAreaCoordinates()
+    initialRectangle = new L.rectangle(findAreaCoordinates())
+    drawnItems.addLayer(initialRectangle)
+
+  editableMap(map, drawnItems) if $('#area_coordinates').length > 0
+
+  map.addLayer(drawnItems)
+
+editableMap = (map, drawnItems) ->
   drawControl = new L.Control.Draw
     polyline: false
     polygon: false
@@ -18,8 +29,20 @@ initializeMap = (map_id) ->
     marker: false
   map.addControl(drawControl)
 
-  drawnItems = new L.LayerGroup()
   map.on 'draw:rectangle-created', (e) ->
-    $('#area_coordinates').val(e.rect.getLatLngs())
+    rectangle = [[180, 90], [-180, -90]]
+
+    for latLng in e.rect.getLatLngs()
+      rectangle[0][0] = (latLng.lat % 180) if (latLng.lat % 180) < rectangle[0][0]
+      rectangle[0][1] = (latLng.lng % 90) if (latLng.lng % 90) < rectangle[0][1]
+      rectangle[1][0] = (latLng.lat % 180) if (latLng.lat % 180) > rectangle[1][0]
+      rectangle[1][1] = (latLng.lng % 90) if (latLng.lng % 90) > rectangle[1][1]
+
+    $('#area_coordinates').val("[[#{rectangle[0][0]},#{rectangle[0][1]}],[#{rectangle[1][0]},#{rectangle[1][1]}]]")
     drawnItems.addLayer(e.rect)
-  map.addLayer(drawnItems)
+
+findAreaCoordinates = ->
+  return window.areaCoordinates if window.areaCoordinates?
+  return JSON.parse($('#area_coordinates').val()) if $('#area_coordinates').length > 0
+
+  return false
