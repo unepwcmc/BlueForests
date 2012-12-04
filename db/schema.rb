@@ -24,10 +24,12 @@ ActiveRecord::Schema.define(:version => 20121204160220) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "authentication_token"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end
 
+  add_index "admins", ["authentication_token"], :name => "index_admins_on_authentication_token", :unique => true
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
 

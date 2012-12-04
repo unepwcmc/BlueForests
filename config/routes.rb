@@ -1,7 +1,7 @@
 BlueCarbon::Application.routes.draw do
   match 'admins/me' => 'admins#me'
 
-  devise_for :admins, path_prefix: 'my'
+  devise_for :admins, path_prefix: 'my', controllers: { sessions: 'sessions' }
   resources :admins
 
   resources :validations
