@@ -64,7 +64,7 @@ namespace :database do
 end
 
 after "deploy:setup", "database:build_configuration"
-after "deploy:update_code", "database:link_configuration_file"
+after "deploy:finalize_update", "database:link_configuration_file"
 
 # CartoDB
 
@@ -97,4 +97,4 @@ namespace :cartodb do
 end
 
 after "deploy:setup", "cartodb:build_configuration"
-after "deploy:update_code", "cartodb:link_configuration_file"
+after "deploy:finalize_update", "cartodb:link_configuration_file"
