@@ -1,0 +1,21 @@
+<div class="page-header">
+  <h1>Listing habitats</h1>
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @habitats.each do |habitat| %>
+    <tr>
+      <td><%= habitat.name %></td>
+      <td><%= link_to 'Show', habitat %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

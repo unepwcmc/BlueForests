@@ -36,6 +36,7 @@
             <%= content_tag :li, link_to("Areas", areas_path), class: params[:controller] == 'areas' ? 'active' : nil %>
             <%= content_tag :li, link_to("Validations", validations_path), class: params[:controller] == 'validations' ? 'active' : nil %>
             <%= content_tag :li, link_to("Administrators", admins_path), class: params[:controller] == 'admins' ? 'active' : nil %>
+            <%= content_tag :li, link_to("Habitats", habitats_path), class: params[:controller] == 'habitats' ? 'active' : nil %>
           </ul>
           <ul class="nav pull-right">
             <% if admin_signed_in? %>

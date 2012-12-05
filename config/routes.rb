@@ -6,6 +6,7 @@ BlueCarbon::Application.routes.draw do
 
   resources :validations
   resources :areas
+  resources :habitats, only: [:index, :show]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
