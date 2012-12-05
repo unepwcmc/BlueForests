@@ -5,6 +5,7 @@ class CreateValidations < ActiveRecord::Migration
       t.string :action
       t.datetime :recorded_at
       t.integer :area_id
+      t.integer :admin_id
 
       t.timestamps
     end

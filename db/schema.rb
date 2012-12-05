@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20121204160220) do
     t.string   "action"
     t.datetime "recorded_at"
     t.integer  "area_id"
+    t.integer  "admin_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

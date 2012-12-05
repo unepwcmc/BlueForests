@@ -43,6 +43,7 @@ class ValidationsController < ApplicationController
   # POST /validations.json
   def create
     @validation = Validation.new(params[:validation])
+    @validation.admin = current_admin
 
     respond_to do |format|
       if @validation.save

@@ -1,0 +1,8 @@
+development:
+  cartodb_table: 'algalmat'
+
+test:
+  cartodb_table: 'algalmat'
+
+production:
+  cartodb_table: 'algalmat'

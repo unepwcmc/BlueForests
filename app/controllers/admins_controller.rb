@@ -1,4 +1,6 @@
 class AdminsController < ApplicationController
+  before_filter :authenticate_admin!, except: :me
+
   # GET /admins/me
   # GET /admins/me.json
   def me

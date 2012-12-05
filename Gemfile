@@ -10,11 +10,12 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'pg'
 gem 'bootstrap-generators', '~> 2.1', :git => 'git://github.com/decioferreira/bootstrap-generators.git'
 gem 'simple_form'
 gem 'devise'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'cartodb-rb-client'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -34,34 +34,67 @@ namespace :deploy do
   end
 end
 
-# SQLite3 configuration
+# Database
 
-set(:shared_database_path) {"#{shared_path}/databases"}
-
-namespace :sqlite3 do
-  desc "Make a shared database folder"
-  task :make_shared_folder, :roles => :db do
-    run "mkdir -p #{shared_database_path}"
-  end
-
+namespace :database do
   desc "Generate a database configuration file"
-  task :build_configuration, :roles => :db do
+  task :build_configuration do
+    database_name = Capistrano::CLI.ui.ask("Database name: ")
+    database_user = Capistrano::CLI.ui.ask("Database username: ")
+    the_host = Capistrano::CLI.ui.ask("Database IP address: ")
+    pg_password = Capistrano::CLI.password_prompt("Database user password: ")
+
     db_options = {
-      "adapter"  => "sqlite3",
-      "database" => "#{shared_database_path}/production.sqlite3"
+      "adapter" => "postgresql",
+      "database" => database_name,
+      "username" => database_user,
+      "host" => the_host,
+      "password" => pg_password
     }
+
     config_options = {"production" => db_options}.to_yaml
     run "mkdir -p #{shared_path}/config"
-    put config_options, "#{shared_path}/config/sqlite_config.yml"
+    put config_options, "#{shared_path}/config/database.yml"
   end
 
   desc "Links the configuration file"
-  task :link_configuration_file, :roles => :db do
-    run "ln -nsf #{shared_path}/config/sqlite_config.yml #{latest_release}/config/database.yml"
+  task :link_configuration_file do
+    run "ln -nsf #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
   end
 end
 
-after "deploy:setup", "sqlite3:make_shared_folder"
-after "deploy:setup", "sqlite3:build_configuration"
+after "deploy:setup", "database:build_configuration"
+after "deploy:update_code", "database:link_configuration_file"
 
-after "deploy:update_code", "sqlite3:link_configuration_file"
+# CartoDB
+
+namespace :cartodb do
+  desc "Generate a cartodb configuration file"
+  task :build_configuration do
+    host = Capistrano::CLI.ui.ask("CartoDB host: ")
+    oauth_key = Capistrano::CLI.ui.ask("CartoDB key: ")
+    oauth_secret = Capistrano::CLI.ui.ask("CartoDB secret: ")
+    username = Capistrano::CLI.ui.ask("CartoDB username: ")
+    password = Capistrano::CLI.password_prompt("CartoDB password: ")
+
+    cartodb_options = {
+      "host" => host,
+      "oauth_key" => oauth_key,
+      "oauth_secret" => oauth_secret,
+      "username" => username,
+      "password" => password
+    }
+
+    config_options = {"production" => cartodb_options}.to_yaml
+    run "mkdir -p #{shared_path}/config"
+    put config_options, "#{shared_path}/config/cartodb_config.yml"
+  end
+
+  desc "Links the configuration file"
+  task :link_configuration_file do
+    run "ln -nsf #{shared_path}/config/cartodb_config.yml #{latest_release}/config/cartodb_config.yml"
+  end
+end
+
+after "deploy:setup", "cartodb:build_configuration"
+after "deploy:update_code", "cartodb:link_configuration_file"

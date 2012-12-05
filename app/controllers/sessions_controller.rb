@@ -1,9 +1,7 @@
 class SessionsController < Devise::SessionsController
   def create
     respond_to do |format|
-      format.html {
-        super
-      }
+      format.html { super }
       format.json {
         build_resource
         admin = Admin.find_for_database_authentication(email: params[:admin][:email])
@@ -20,16 +18,14 @@ class SessionsController < Devise::SessionsController
 
   def destroy
     respond_to do |format|
-      format.html {
-        super
-      }
+      format.html { super }
       format.json {
         admin = Admin.find_by_authentication_token(params[:auth_token])
         if admin
           admin.reset_authentication_token!
-          render json: { message: 'Session deleted.' }, success: true, status: 204
+          render json: { message: 'Session deleted' }, success: true, status: 204
         else
-          render json: { message: 'Invalid token.' }, status: 404
+          render json: { message: 'Invalid token' }, status: 404
         end
       }
     end
