@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="span9">
+    <div id="map" style="height: 600px">
+    </div>
+  </div>
+  <div class="span3">
+    <form id="edit-validation" name="validation">
+      <div class="control-group">
+        <div class="btn-group" id="type">
+          <button class="btn">Validate</button>
+          <button class="btn">Add</button>
+          <button class="btn">Delete</button>
+        </div>
+      </div>
+
+      <select>
+        <option>Validation evidence type</option>
+      </select>
+
+      <select>
+        <option>Habitat</option>
+      </select>
+
+      <div class="control-group">
+        <label class="control-label" for="density">Density</label>
+        <div class="controls">
+          <select id="density">
+            <option>1 - thin</option>
+          </select>
+        </div>
+
+        <label class="control-label" for="age">Age of Habitat</label>
+        <div class="controls">
+          <select id="age">
+            <option>Unknown</option>
+          </select>
+        <div>
+      </div>
+
+      <hr>
+
+      <div class="control-group">
+        <label class="control-label" for="name">Name</label>
+        <div class="controls">
+          <input type="text" id="name">
+        </div>
+      </div>
+
+      <p>
+        <button id="update-validation" class="btn btn-primary" type="button">Update Habitat Data</button>
+        <button class="btn" type="button">Clear</button>
+      </p>
+    </form>
+  </div>
+</div>

@@ -13,7 +13,15 @@ class BlueCarbon.Models.Validation extends Backbone.Model
     )
     points.push points[0]
 
-    @set(coordinates: [[points]])
+    @set(coordinates: JSON.stringify([[points]]))
+
+  coordsAsLatLngArray: () ->
+    latLngs = []
+
+    for point in JSON.parse(@get('coordinates'))[0][0]
+      latLngs.push(new L.LatLng(point[1], point[0]))
+
+    return latLngs
 
   parse: (resp, xhr) ->
     # Remove attributes returned from the server that are not in the

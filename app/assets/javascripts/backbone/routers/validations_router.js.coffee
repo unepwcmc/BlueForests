@@ -6,6 +6,8 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     # need for a second coming, I mean, loading.
     @validations.reset options.validations
 
+    @viewManager = new Backbone.ViewManager('#validations')
+
   routes:
     "new"      : "new"
     "index"    : "index"
@@ -13,17 +15,21 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     ".*"        : "index"
 
   new: ->
-    @view = new BlueCarbon.Views.Validations.NewView(collection: @validations)
-    $("#validations").html(@view.render().el)
+    validation = new BlueCarbon.Models.Validation()
+
+    view = new BlueCarbon.Views.Validations.FormView(model: validation)
+    @viewManager.showView(view)
+
+    @map_view = new BlueCarbon.Views.Validations.MapView(model: validation)
 
   index: ->
-    @view = new BlueCarbon.Views.Validations.IndexView(validations: @validations)
-    $("#validations").html(@view.render().el)
+    view = new BlueCarbon.Views.Validations.IndexView(validations: @validations)
+    @viewManager.showView(view)
 
   show: (id) ->
     validation = @validations.get(id)
 
-    @view = new BlueCarbon.Views.Validations.ShowView(model: validation)
-    $("#validations").html(@view.render().el)
+    view = new BlueCarbon.Views.Validations.FormView(model: validation)
+    @viewManager.showView(view)
 
     @map_view = new BlueCarbon.Views.Validations.MapView(model: validation)

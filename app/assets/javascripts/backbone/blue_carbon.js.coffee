@@ -9,3 +9,4 @@ window.BlueCarbon =
   Collections: {}
   Routers: {}
   Views: {}
+  Map: {}
