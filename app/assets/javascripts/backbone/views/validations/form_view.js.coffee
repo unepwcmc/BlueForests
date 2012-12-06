@@ -31,9 +31,10 @@ class BlueCarbon.Views.Validations.FormView extends Backbone.View
       @polygon = e.poly
       @polygon.addTo(BlueCarbon.Map)
 
-    @model.set('action', $target.text())
+    @model.set('action', $target.text().toLowerCase())
 
   update: (e) ->
+    console.log 'ok'
     e.preventDefault()
     e.stopPropagation()
 
