@@ -18,6 +18,7 @@ class BlueCarbon.Views.Validations.FormView extends Backbone.View
 
     if $target.hasClass('active')
       $target.removeClass('active')
+      return
     else
       $target.addClass('active')
       $target.siblings().removeClass('active')
