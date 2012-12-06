@@ -5,7 +5,10 @@ BlueCarbon::Application.routes.draw do
   resources :admins
 
   resources :validations
-  resources :areas
+  resources :areas do
+    get 'generate_mbtile', on: :member
+    match 'download_mbtile/:habitat' => 'areas#download_mbtile', as: 'download_mbtile'
+  end
   resources :habitats, only: [:index, :show]
 
   # The priority is based upon order of creation:

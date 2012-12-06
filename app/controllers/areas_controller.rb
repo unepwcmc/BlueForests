@@ -1,6 +1,21 @@
 class AreasController < ApplicationController
   before_filter :authenticate_admin!
 
+  # GET /areas/1/generate_mbtile
+  def generate_mbtile
+    @area = Area.find(params[:id])
+    @area.generate_mbtile
+    redirect_to @area, notice: 'MBTile was successfully created.'
+  end
+
+  # GET /areas/1/generate_mbtile
+  def download_mbtile
+    @area = Area.find(params[:area_id])
+    @habitat = Habitat.find(params[:habitat])
+
+    send_file @area.final_mbtile_path(@habitat)
+  end
+
   # GET /areas
   # GET /areas.json
   def index
