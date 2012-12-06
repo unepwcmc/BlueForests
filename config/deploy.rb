@@ -1,3 +1,5 @@
+require 'delayed/recipes'
+
 set :stages, %w(production staging)
 set :default_stage, 'production'
 require 'capistrano/ext/multistage'
@@ -98,3 +100,14 @@ end
 
 after "deploy:setup", "cartodb:build_configuration"
 after "deploy:finalize_update", "cartodb:link_configuration_file"
+
+# Delayed_job
+
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
+
+# If you want to use command line options, for example to start multiple workers,
+# define a Capistrano variable delayed_job_args:
+#
+#   set :delayed_job_args, "-n 2"

@@ -17,6 +17,10 @@ gem 'devise'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'cartodb-rb-client'
 
+gem 'daemons'
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

@@ -3,9 +3,13 @@ class AreasController < ApplicationController
 
   # GET /areas/1/generate_mbtile
   def generate_mbtile
+    # Create background jobs to generate the MBTiles
+    Habitat.all.each do |habitat|
+      Area.delay.generate_mbtile(params[:id], habitat.name)
+    end
+
     @area = Area.find(params[:id])
-    @area.generate_mbtile
-    redirect_to @area, notice: 'MBTile was successfully created.'
+    redirect_to @area, notice: 'MBTile generation was started successfully.'
   end
 
   # GET /areas/1/generate_mbtile

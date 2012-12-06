@@ -3,19 +3,21 @@ class Area < ActiveRecord::Base
 
   has_many :validations
 
-  def generate_mbtile
+  def self.generate_mbtile(id, habitat)
+    find(id).generate_mbtile(habitat)
+  end
+
+  def generate_mbtile(habitat)
     # Makes sure the export path exists
     export_path
 
-    Habitat.all.each do |habitat|
-      generate_style(habitat.to_param)
-      generate_geojson(habitat.to_param)
-      generate_mml(habitat.to_param, 10, 11)
+    generate_style(habitat)
+    generate_geojson(habitat)
+    generate_mml(habitat, 10, 11)
 
-      config_file = generate_config(habitat.to_param, 10, 11)
+    config_file = generate_config(habitat, 10, 11)
 
-      system "#{APP_CONFIG['projectmill_path']}/index.js --mill --render -p #{tilemill_path}/ -c #{config_file} -t #{APP_CONFIG['tilemill_path']}"
-    end
+    system "#{APP_CONFIG['projectmill_path']}/index.js --mill --render -p #{tilemill_path}/ -c #{config_file} -t #{APP_CONFIG['tilemill_path']}"
   end
 
   def final_mbtile_path(habitat)
