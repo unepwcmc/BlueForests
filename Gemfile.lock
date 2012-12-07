@@ -138,6 +138,8 @@ GEM
     rgeo (0.3.2)
     rgeo-geojson (0.2.1)
       rgeo (>= 0.2.8)
+    rvm-capistrano (1.2.7)
+      capistrano (>= 2.0.0)
     sass (3.2.3)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -188,6 +190,7 @@ DEPENDENCIES
   pg
   rack-cors
   rails (= 3.2.8)
+  rvm-capistrano
   sass-rails (~> 3.2.3)
   simple_form
   therubyracer

@@ -111,3 +111,7 @@ after "deploy:restart", "delayed_job:restart"
 # define a Capistrano variable delayed_job_args:
 #
 #   set :delayed_job_args, "-n 2"
+
+# RVM
+set :rvm_ruby_string, '1.9.2'                          # Or:
+require "rvm/capistrano"                               # Load RVM's capistrano plugin.
