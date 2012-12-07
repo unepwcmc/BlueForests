@@ -8,7 +8,7 @@ BlueCarbon::Application.routes.draw do
 
   resources :validations
   resources :areas do
-    match 'download_mbtile/:habitat' => 'areas#download_mbtile', as: 'download_mbtile'
+    resources :mbtiles, only: :show
   end
   resources :habitats, only: [:index, :show]
 

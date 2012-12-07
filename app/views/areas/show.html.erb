@@ -27,15 +27,21 @@
   <thead>
     <tr>
       <th>Habitat</th>
+      <th>Last generation started at</th>
+      <th>Last generated at</th>
+      <th>Status</th>
       <th></th>
     </tr>
   </thead>
 
   <tbody>
-<% Habitat.all.each do |habitat| %>
+<% @mbtiles.each do |mbtile| %>
     <tr>
-      <td><%= habitat.name %></td>
-      <td><%= link_to 'Download', area_download_mbtile_path(@area, habitat) %></td>
+      <td><%= mbtile.habitat %></td>
+      <td><%= mbtile.last_generation_started_at %></td>
+      <td><%= mbtile.last_generated_at %></td>
+      <td><%= mbtile.status %></td>
+      <td><%= link_to_if mbtile.completed?, 'Download', area_mbtile_path(@area, mbtile.habitat) %></td>
     </tr>
 <% end %>
   </tbody>

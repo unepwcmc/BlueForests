@@ -1,14 +1,6 @@
 class AreasController < ApplicationController
   before_filter :authenticate_admin!
 
-  # GET /areas/1/generate_mbtile
-  def download_mbtile
-    @area = Area.find(params[:area_id])
-    @habitat = Habitat.find(params[:habitat])
-
-    send_file @area.final_mbtile_path(@habitat)
-  end
-
   # GET /areas
   # GET /areas.json
   def index
@@ -16,7 +8,7 @@ class AreasController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @areas }
+      format.json { render json: @areas, include: { mbtiles: {only: [:habitat, :last_generated_at, :status] } } }
     end
   end
 
@@ -24,6 +16,7 @@ class AreasController < ApplicationController
   # GET /areas/1.json
   def show
     @area = Area.find(params[:id])
+    @mbtiles = @area.mbtiles
 
     respond_to do |format|
       format.html # show.html.erb
