@@ -8,7 +8,6 @@ BlueCarbon::Application.routes.draw do
 
   resources :validations
   resources :areas do
-    get 'generate_mbtile', on: :member
     match 'download_mbtile/:habitat' => 'areas#download_mbtile', as: 'download_mbtile'
   end
   resources :habitats, only: [:index, :show]

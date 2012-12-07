@@ -1,7 +1,7 @@
 class Validation < ActiveRecord::Base
   attr_accessible :action, :coordinates, :recorded_at, :area_id
 
-  belongs_to :area
+  belongs_to :area, touch: true
   belongs_to :admin
 
   validates :action, presence: true, inclusion: { in: %w(add delete validate) }

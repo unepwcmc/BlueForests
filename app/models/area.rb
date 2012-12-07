@@ -3,6 +3,12 @@ class Area < ActiveRecord::Base
 
   has_many :validations
 
+  after_touch do
+    Habitat.all.each do |habitat|
+      Area.delay.generate_mbtile(id, habitat.name)
+    end
+  end
+
   def self.generate_mbtile(id, habitat)
     find(id).generate_mbtile(habitat)
   end
