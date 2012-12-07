@@ -14,4 +14,8 @@
 /log/*.log
 /tmp
 
+# Configuration
 /config/cartodb_config.yml
+
+# Tilemill mbtiles generation
+/lib/tilemill

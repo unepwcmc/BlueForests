@@ -1,6 +1,25 @@
 class AreasController < ApplicationController
   before_filter :authenticate_admin!
 
+  # GET /areas/1/generate_mbtile
+  def generate_mbtile
+    # Create background jobs to generate the MBTiles
+    Habitat.all.each do |habitat|
+      Area.delay.generate_mbtile(params[:id], habitat.name)
+    end
+
+    @area = Area.find(params[:id])
+    redirect_to @area, notice: 'MBTile generation was started successfully.'
+  end
+
+  # GET /areas/1/generate_mbtile
+  def download_mbtile
+    @area = Area.find(params[:area_id])
+    @habitat = Habitat.find(params[:habitat])
+
+    send_file @area.final_mbtile_path(@habitat)
+  end
+
   # GET /areas
   # GET /areas.json
   def index
