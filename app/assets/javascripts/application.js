@@ -20,4 +20,6 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/blue_carbon
+//= require backbone-forms
+//= require backbone-forms-bootstrap
 //= require_tree .

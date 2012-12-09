@@ -1,11 +1,10 @@
 BlueCarbon.Views.Validations ||= {}
 
 class BlueCarbon.Views.Validations.NewView extends Backbone.View
-  template: JST["backbone/templates/validations/form"]
+  template: JST["backbone/templates/validations/new"]
 
   events:
-    "click #update-validation": "save"
-    "click #type" : "type_change"
+    "click #save": "save"
 
   constructor: (options) ->
     super(options)
@@ -15,31 +14,26 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
       this.render()
     )
 
-  type_change: (e) ->
-    e.stopPropagation()
-    e.preventDefault()
+    @form = new Backbone.Form(
+      model: @model
+    ).render()
 
+    @form.on('action:change', (form, element) =>
+      @actionChange(form, element)
+    )
+
+  actionChange: (form, element) ->
     @polygonDraw.disable()  if @polygonDraw?
     BlueCarbon.Map.removeLayer @polygon  if @polygon?
 
-    $target = $(e.target)
-
-    if $target.hasClass('active')
-      $target.removeClass('active')
-      return
-    else
-      $target.addClass('active')
-      $target.siblings().removeClass('active')
+    $target = $(element.el)
 
     @polygonDraw = new L.Polygon.Draw(BlueCarbon.Map, {})
     @polygonDraw.enable()
 
-    BlueCarbon.Map.on 'draw:poly-created', (e) =>
-      @model.setCoordsFromPoints(e.poly.getLatLngs())
-      @polygon = e.poly
-      @polygon.addTo(BlueCarbon.Map)
+    text = $target.find('input:checked').siblings().text()
 
-    @model.set('action', $target.text().toLowerCase())
+    @model.set('action', text.toLowerCase())
 
   save: (e) ->
     e.preventDefault()
@@ -57,7 +51,8 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
     )
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    $(@el).html(@template(@model.toJSON()))
+    $(@el).find('#form').html(@form.el)
 
     this.$("form").backboneLink(@model)
 

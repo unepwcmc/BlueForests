@@ -1,11 +1,25 @@
 class BlueCarbon.Models.Validation extends Backbone.Model
   paramRoot: 'validation'
 
+  schema:
+    action: { type: 'Radio', options: ['Validate', 'Add', 'Delete'] }
+    knowledge: { type: 'Select', options: ['test', 'testing'] }
+    habitat: { type: 'Select', options: ['Mangroves', 'Seagrass', 'Sabkha', 'Saltmarshes'] }
+    density: { type: 'Select', options: ['test', 'testing'] }
+    age: { type: 'Select', options: ['test', 'testing'] }
+    recorded_at: { type: 'Date' }
+    name: 'Text',
+
   defaults:
     coordinates: null
     action: null
     recorded_at: null
     area_id: null
+    name: null
+    knowledge: null
+    habitat: 'Mangroves'
+    density: null
+    age: null
 
   setCoordsFromPoints: (points) ->
     points = _.map(points, (p) ->
