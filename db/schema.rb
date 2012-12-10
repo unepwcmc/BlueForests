@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207140451) do
+ActiveRecord::Schema.define(:version => 20121210105435) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20121207140451) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "assignments", :force => true do |t|
+    t.integer  "admin_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
     t.integer  "attempts",   :default => 0
@@ -64,6 +71,12 @@ ActiveRecord::Schema.define(:version => 20121207140451) do
     t.integer  "area_id"
     t.datetime "created_at",                                        :null => false
     t.datetime "updated_at",                                        :null => false
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "validations", :force => true do |t|

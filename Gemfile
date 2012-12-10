@@ -16,8 +16,9 @@ gem 'simple_form'
 gem 'devise'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'cartodb-rb-client'
+gem 'cancan'
 
-gem "rails-backbone"
+gem 'rails-backbone'
 
 gem 'daemons'
 gem 'delayed_job_active_record'

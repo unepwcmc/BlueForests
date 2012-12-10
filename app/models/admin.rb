@@ -6,7 +6,10 @@ class Admin < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
+  attr_accessible :role_ids
 
   before_save :ensure_authentication_token
+
+  has_many :assignments
+  has_many :roles, :through => :assignments
 end

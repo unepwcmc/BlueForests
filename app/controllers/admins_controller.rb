@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
   before_filter :authenticate_admin!, except: :me
+  load_and_authorize_resource except: :me
 
   # GET /admins/me
   # GET /admins/me.json
@@ -7,7 +8,7 @@ class AdminsController < ApplicationController
     if admin_signed_in?
       render json: current_admin.to_json(only: [:id, :email, :login_method])
     else
-      render json: { error:'401 Unauthorized' }, status: :unauthorized
+      render json: { error: '401 Unauthorized' }, status: :unauthorized
     end
   end
 

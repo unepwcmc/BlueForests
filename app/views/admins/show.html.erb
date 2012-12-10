@@ -2,7 +2,7 @@
   <%= link_to admins_path, :class => 'btn' do %>
     <i class="icon-list-alt"></i>
     Back
-  <% end %>
+  <% end if can? :manage, Admin %>
   <%= link_to edit_admin_path(@admin), :class => 'btn btn-primary' do %>
     <i class="icon-pencil icon-white"></i>
     Edit
@@ -14,4 +14,6 @@
   <dt>Email:</dt>
   <dd><%= @admin.email %></dd>
 
+  <dt>Roles:</dt>
+  <dd><%= @admin.roles.map(&:name).join(', ') %></dd>
 </dl>

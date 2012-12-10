@@ -7,3 +7,5 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Admin.create(email: 'decio.ferreira@unep-wcmc.org', password: 'decioferreira', password_confirmation: 'decioferreira')
+
+Role.create([{ name: 'admin' }, { name: 'project_manager' }, { name: 'project_participant' }])

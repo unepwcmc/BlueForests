@@ -38,6 +38,7 @@ GEM
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
+    cancan (1.6.5)
     capistrano (2.13.5)
       highline
       net-scp (>= 1.0.0)
@@ -187,6 +188,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-generators (~> 2.1)!
+  cancan
   capistrano
   capistrano-ext
   cartodb-rb-client

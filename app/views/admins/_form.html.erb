@@ -5,6 +5,7 @@
     <%= f.input :email, :required => true, :autofocus => true %>
     <%= f.input :password, :required => true %>
     <%= f.input :password_confirmation, :required => true %>
+    <%= f.association :roles, :as => :check_boxes, :input_html => { :class => nil } %>
   </div>
 
   <div class="form-actions">

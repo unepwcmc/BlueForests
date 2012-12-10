@@ -2,7 +2,7 @@
   <%= link_to admins_path, :class => 'btn' do %>
     <i class="icon-list-alt"></i>
     Back
-  <% end %>
+  <% end if can? :manage, Admin %>
   <%= link_to @admin, :class => 'btn btn-primary' do %>
     <i class="icon-info-sign icon-white"></i>
     Show
