@@ -7,7 +7,6 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     @validations.reset options.validations
 
     @viewManager = new Backbone.ViewManager('#validations')
-    @mapViewManager = new Backbone.ViewManager('#map')
     @sidebarViewManager = new Backbone.ViewManager('#sidebar')
 
   routes:
@@ -21,7 +20,6 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     @viewManager.showView(view)
 
     map_view = new BlueCarbon.Views.Validations.MapView()
-    @mapViewManager.showView(map_view)
 
     sidebar_view = new BlueCarbon.Views.Validations.NewView(collection: @validations)
     @sidebarViewManager.showView(sidebar_view)
@@ -37,7 +35,6 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     @viewManager.showView(view)
 
     map_view = new BlueCarbon.Views.Validations.MapView(model: validation)
-    @mapViewManager.showView(map_view)
 
     sidebar_view = new BlueCarbon.Views.Validations.EditView(model: validation)
     @sidebarViewManager.showView(sidebar_view)
