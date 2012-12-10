@@ -200,8 +200,8 @@ DEPENDENCIES
   rabl
   rack-cors
   rails (= 3.2.8)
-  rvm-capistrano
   rails-backbone
+  rvm-capistrano
   sass-rails (~> 3.2.3)
   simple_form
   therubyracer
