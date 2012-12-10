@@ -24,6 +24,7 @@ gem 'delayed_job_active_record'
 gem 'delayed_job_web'
 
 gem 'rvm-capistrano'
+gem 'rabl'
 
 # Gems used only for assets and not required
 # in production environments by default.

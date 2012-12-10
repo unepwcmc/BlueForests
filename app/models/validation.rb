@@ -18,7 +18,7 @@ class Validation < ActiveRecord::Base
   before_create :cartodb
 
   after_save do
-    Mbtile.delay.generate(area_id, 'mangroves') # FIXME: use the model habitat attr
+    Mbtile.delay.generate(area_id, habitat)
   end
 
   def cartodb
