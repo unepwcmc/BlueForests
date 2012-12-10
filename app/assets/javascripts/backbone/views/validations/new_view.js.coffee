@@ -8,7 +8,6 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
 
   constructor: (options) ->
     super(options)
-    @model = new @collection.model()
 
     @model.bind("change:errors", () =>
       this.render()

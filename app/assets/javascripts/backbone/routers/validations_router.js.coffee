@@ -16,12 +16,14 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     ".*"        : "index"
 
   new: ->
+    validation = new @validations.model()
+
     view = new BlueCarbon.Views.Validations.DisplayView()
     @viewManager.showView(view)
 
-    map_view = new BlueCarbon.Views.Validations.MapView()
+    map_view = new BlueCarbon.Views.Validations.MapView(model: validation)
 
-    sidebar_view = new BlueCarbon.Views.Validations.NewView(collection: @validations)
+    sidebar_view = new BlueCarbon.Views.Validations.NewView(collection: @validations, model: validation)
     @sidebarViewManager.showView(sidebar_view)
 
   index: ->
