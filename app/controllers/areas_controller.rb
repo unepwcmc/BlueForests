@@ -8,7 +8,7 @@ class AreasController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @areas, include: { mbtiles: {only: [:habitat, :last_generated_at, :status] } } }
+      format.json
     end
   end
 
@@ -20,7 +20,7 @@ class AreasController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @area }
+      format.json
     end
   end
 
