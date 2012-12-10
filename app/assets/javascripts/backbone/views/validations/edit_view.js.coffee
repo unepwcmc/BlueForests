@@ -3,30 +3,20 @@ BlueCarbon.Views.Validations ||= {}
 class BlueCarbon.Views.Validations.EditView extends Backbone.View
   template: JST["backbone/templates/validations/edit"]
 
-  initialize: (options) ->
-    @form = new Backbone.Form(
-      model: @model
-    ).render()
+  events:
+    "click #save" : "update"
+    "click #type": "actionChange"
 
-    @form.on('action:change', (form, element) =>
-      @actionChange(form, element)
-    )
-
-  actionChange: (form, element) ->
+  actionChange: (e) ->
     @polygonDraw.disable()  if @polygonDraw?
     BlueCarbon.Map.removeLayer @polygon  if @polygon?
 
-    $target = $(element.el)
+    $target = $(e.target)
 
     @polygonDraw = new L.Polygon.Draw(BlueCarbon.Map, {})
     @polygonDraw.enable()
 
-    text = $target.find('input:checked').siblings().text()
-
-    @model.set('action', text.toLowerCase())
-
-  events:
-    "click #update" : "update"
+    @model.set('action', $target.text().toLowerCase())
 
   update: (e) ->
     e.preventDefault()
@@ -40,7 +30,7 @@ class BlueCarbon.Views.Validations.EditView extends Backbone.View
 
   render: ->
     $(@el).html(@template(@model.toJSON()))
-    $(@el).find('#form').html(@form.el)
+    $(@el).find('#form').html(window.JST['backbone/templates/validations/_form'](@model.toJSON()))
 
     this.$("form").backboneLink(@model)
 

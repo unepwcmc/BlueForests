@@ -8,8 +8,8 @@
 /* Bootstrap checkboxex/radios appear within labels and we don't want to
  * hide them */
 
-:not(label) input[type="checkbox"],
-:not(label) input[type="radio"] {
+#type :not(label) input[type="checkbox"],
+#type :not(label) input[type="radio"] {
   opacity: 0;
   position: absolute;
   /* Opera stills show an outline if not hidden */
@@ -25,8 +25,8 @@
 
 /* Toggle buttons */
 
-.bbf-radio input[data-toggle]:checked + label,
-.bbf-radio input[data-toggle]:checked + label:active {
+#type input[data-toggle]:checked + label,
+#type input[data-toggle]:checked + label:active {
   background-color: #0044CC;
   color: #FFFFFF;
   background-image: none;
@@ -35,39 +35,11 @@
   outline: 0 none;
 }
 
-.bbf-radio li {
-  list-style-type: none;
-  display: inline;
-}
-
-.form-horizontal {
-  .control-label {
-    width: 70px;
-  }
-
-  .controls {
-    margin-left: 105px;
-  }
-}
-
 /* Button groups */
 
-.bbf-radio li .btn {
-  border-radius: 0;
-  margin-left: 0;
-}
-
-.bbf-radio li:first-of-type .btn {
-  border-radius: 0;
+#type .btn-group > .btn:first-of-type {
   border-bottom-left-radius: 4px;
   border-top-left-radius: 4px;
-  margin-left: 0;
-}
-
-.bbf-radio li:last-of-type .btn {
-  border-radius: 0;
-  border-bottom-right-radius: 4px;
-  border-top-right-radius: 4px;
   margin-left: 0;
 }
 

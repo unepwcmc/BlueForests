@@ -42,7 +42,8 @@ class ValidationsController < ApplicationController
   # POST /validations
   # POST /validations.json
   def create
-    @validation = Validation.new(params[:validation])
+    @validation = Validation.new
+    @validation.attributes = params[:validation].reject{|k,v| !@validation.attributes.keys.member?(k.to_s) }
     @validation.admin = current_admin
 
     respond_to do |format|
