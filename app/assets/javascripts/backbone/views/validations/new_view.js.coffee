@@ -5,7 +5,7 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
 
   events:
     "click #save": "save"
-    "click #type": "actionChange"
+    "click #type label": "actionChange"
 
   constructor: (options) ->
     super(options)
@@ -29,6 +29,7 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
+    @model.unset('radio-group')
     @model.unset("errors")
 
     @collection.create(@model.toJSON(),

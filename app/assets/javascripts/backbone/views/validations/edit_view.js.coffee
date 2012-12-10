@@ -5,7 +5,7 @@ class BlueCarbon.Views.Validations.EditView extends Backbone.View
 
   events:
     "click #save" : "update"
-    "click #type": "actionChange"
+    "click #type label": "actionChange"
 
   actionChange: (e) ->
     @polygonDraw.disable()  if @polygonDraw?
@@ -21,6 +21,8 @@ class BlueCarbon.Views.Validations.EditView extends Backbone.View
   update: (e) ->
     e.preventDefault()
     e.stopPropagation()
+
+    @model.unset('radio-group')
 
     @model.save(null,
       success : (validation) =>

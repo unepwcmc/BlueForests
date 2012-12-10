@@ -11,6 +11,5 @@
  *= require_self
  *= require leaflet
  *= require leaflet.draw
- *= require backbone-forms-bootstrap
  *= require_tree .
  */
