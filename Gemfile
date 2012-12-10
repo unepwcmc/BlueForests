@@ -17,6 +17,8 @@ gem 'devise'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'cartodb-rb-client'
 
+gem "rails-backbone"
+
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
