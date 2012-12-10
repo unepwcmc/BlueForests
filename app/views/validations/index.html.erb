@@ -1,35 +1,17 @@
 <div class="page-header">
-  <%= link_to new_validation_path, :class => 'btn btn-primary' do %>
+  <a href="#/new" class="btn btn-primary">
     <i class="icon-plus icon-white"></i>
     New Validation
-  <% end %>
+  </a>
   <h1>Listing validations</h1>
 </div>
 
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Coordinates</th>
-      <th>Action</th>
-      <th>Recorded at</th>
-      <th>Area</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div id="validations">
+</div>
 
-  <tbody>
-<% @validations.each do |validation| %>
-    <tr>
-      <td><%= validation.coordinates %></td>
-      <td><%= validation.action %></td>
-      <td><%= validation.recorded_at %></td>
-      <td><%= link_to validation.area.title, validation.area %></td>
-      <td><%= link_to 'Show', validation %></td>
-      <td><%= link_to 'Edit', edit_validation_path(validation) %></td>
-      <td><%= link_to 'Destroy', validation, confirm: 'Are you sure?', method: :delete %></td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+<script type="text/javascript">
+  $(function() {
+    window.router = new BlueCarbon.Routers.ValidationsRouter({validations: <%= @validations.to_json.html_safe -%>});
+    Backbone.history.start();
+  });
+</script>

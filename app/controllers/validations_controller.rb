@@ -4,7 +4,7 @@ class ValidationsController < ApplicationController
   # GET /validations
   # GET /validations.json
   def index
-    @validations = Validation.all
+    @validations = Validation.select("id, coordinates, action, recorded_at, area_id, name, habitat, knowledge, density, age")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,7 @@ class ValidationsController < ApplicationController
   # GET /validations/1
   # GET /validations/1.json
   def show
-    @validation = Validation.find(params[:id])
+    @validation = Validation.where(:id => params[:id]).select("id, coordinates, action, recorded_at, area_id, name, habitat, knowledge, density, age")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -64,7 +64,7 @@ class ValidationsController < ApplicationController
     respond_to do |format|
       if @validation.update_attributes(params[:validation])
         format.html { redirect_to @validation, notice: 'Validation was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: @validation }
       else
         format.html { render action: "edit" }
         format.json { render json: @validation.errors, status: :unprocessable_entity }

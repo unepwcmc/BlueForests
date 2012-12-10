@@ -74,6 +74,11 @@ ActiveRecord::Schema.define(:version => 20121207140451) do
     t.integer  "admin_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "habitat"
+    t.string   "name"
+    t.string   "knowledge"
+    t.float    "density"
+    t.float    "age"
   end
 
 end
