@@ -7,27 +7,37 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     @validations.reset options.validations
 
     @viewManager = new Backbone.ViewManager('#validations')
+    @mapViewManager = new Backbone.ViewManager('#map')
+    @sidebarViewManager = new Backbone.ViewManager('#sidebar')
 
   routes:
     "new"      : "new"
     "index"    : "index"
-    ":id"      : "show"
+    ":id"      : "edit"
     ".*"        : "index"
 
   new: ->
-    view = new BlueCarbon.Views.Validations.NewView(collection: @validations)
+    view = new BlueCarbon.Views.Validations.DisplayView()
     @viewManager.showView(view)
 
-    @map_view = new BlueCarbon.Views.Validations.MapView(model: validation)
+    map_view = new BlueCarbon.Views.Validations.MapView()
+    @mapViewManager.showView(map_view)
+
+    sidebar_view = new BlueCarbon.Views.Validations.NewView(collection: @validations)
+    @sidebarViewManager.showView(sidebar_view)
 
   index: ->
     view = new BlueCarbon.Views.Validations.IndexView(validations: @validations)
     @viewManager.showView(view)
 
-  show: (id) ->
+  edit: (id) ->
     validation = @validations.get(id)
 
-    view = new BlueCarbon.Views.Validations.FormView(model: validation)
+    view = new BlueCarbon.Views.Validations.DisplayView()
     @viewManager.showView(view)
 
-    @map_view = new BlueCarbon.Views.Validations.MapView(model: validation)
+    map_view = new BlueCarbon.Views.Validations.MapView(model: validation)
+    @mapViewManager.showView(map_view)
+
+    sidebar_view = new BlueCarbon.Views.Validations.EditView(model: validation)
+    @sidebarViewManager.showView(sidebar_view)

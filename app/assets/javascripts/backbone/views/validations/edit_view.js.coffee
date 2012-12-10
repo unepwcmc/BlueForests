@@ -35,7 +35,7 @@ class BlueCarbon.Views.Validations.EditView extends Backbone.View
     @model.save(null,
       success : (validation) =>
         @model = validation
-        window.location.hash = "/#{@model.id}"
+        window.location.hash = "/"
     )
 
   render: ->
