@@ -1,43 +1,20 @@
 BlueCarbon.Views.Validations ||= {}
 
-class BlueCarbon.Views.Validations.NewView extends Backbone.View
+class BlueCarbon.Views.Validations.NewView extends BlueCarbon.Views.Validations.FormView
   template: JST["backbone/templates/validations/new"]
 
   events:
-    "click #save": "save"
+    "click #save" : "save"
+    "click #type label": "actionChange"
 
   constructor: (options) ->
     super(options)
-
-    @model.bind("change:errors", () =>
-      this.render()
-    )
-
-    @form = new Backbone.Form(
-      model: @model
-    ).render()
-
-    @form.on('action:change', (form, element) =>
-      @actionChange(form, element)
-    )
-
-  actionChange: (form, element) ->
-    @polygonDraw.disable()  if @polygonDraw?
-    BlueCarbon.Map.removeLayer @polygon  if @polygon?
-
-    $target = $(element.el)
-
-    @polygonDraw = new L.Polygon.Draw(BlueCarbon.Map, {})
-    @polygonDraw.enable()
-
-    text = $target.find('input:checked').siblings().text()
-
-    @model.set('action', text.toLowerCase())
 
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
+    @model.unset('radio-group')
     @model.unset("errors")
 
     @collection.create(@model.toJSON(),
@@ -48,11 +25,3 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
       error: (validation, jqXHR) =>
         @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )
-
-  render: ->
-    $(@el).html(@template(@model.toJSON()))
-    $(@el).find('#form').html(@form.el)
-
-    this.$("form").backboneLink(@model)
-
-    return this

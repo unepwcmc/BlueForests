@@ -1,19 +1,6 @@
 class BlueCarbon.Models.Validation extends Backbone.Model
   paramRoot: 'validation'
 
-  ###
-    This schema is used by backbone-forms to determine how to
-    display the new/edit form for this model
-  ###
-  schema:
-    action: { type: 'Radio', options: ['Validate', 'Add', 'Delete'] }
-    knowledge: { type: 'Select', options: ['Local Knowledge', 'Local Data'] }
-    habitat: { type: 'Select', options: ['Mangroves', 'Seagrass', 'Sabkha', 'Saltmarshes'] }
-    density: { type: 'Select', options: ['1 - thin', '2 - not as thin', '3 - even less thin'] }
-    age: { type: 'Select', options: ['1 year', '2 years'] }
-    recorded_at: { type: 'Date' }
-    name: 'Text',
-
   defaults:
     coordinates: null
     action: null
@@ -21,7 +8,7 @@ class BlueCarbon.Models.Validation extends Backbone.Model
     area_id: null
     name: null
     knowledge: null
-    habitat: 'Mangroves'
+    habitat: null
     density: null
     age: null
 

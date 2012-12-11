@@ -27,6 +27,8 @@ gem 'delayed_job_web'
 gem 'rvm-capistrano'
 gem 'rabl'
 
+gem 'activerecord-postgis-adapter', '0.4.1'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -35,6 +37,7 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
+  gem 'libv8', '~> 3.11.8'
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -56,3 +59,13 @@ gem 'capistrano-ext'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'rspec-rails', '~> 2.0', group: [:test, :development]
+gem 'database_cleaner', group: :test
+
+group :development do
+  gem 'guard-rspec'
+
+  gem 'rb-inotify', '~> 0.8.8', :require => RUBY_PLATFORM.include?('linux') && 'rb-inotify'
+  gem 'rb-fsevent', '~> 0.9.1', :require => RUBY_PLATFORM.include?('darwin') && 'rb-fsevent'
+end
