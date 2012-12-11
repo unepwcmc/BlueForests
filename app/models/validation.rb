@@ -22,9 +22,9 @@ class Validation < ActiveRecord::Base
 
   def cartodb
     # SQL CartoDB
-    sql = Query.add(APP_CONFIG['cartodb_table'], coordinates, {action: self.action})
+    sql = CartodbQuery.add(APP_CONFIG['cartodb_table'], coordinates)
 
-    CartoDB::Connection.query sql
+    CartoDB::Connection.query(sql)
   rescue CartoDB::Client::Error
     errors.add :base, 'There was an error trying to render the layers.'
     logger.info "There was an error trying to execute the following query:\n#{sql}"

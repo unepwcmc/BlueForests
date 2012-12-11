@@ -1,4 +1,4 @@
-class Query
+class CartodbQuery
   def self.add(table_name, coordinates)
     geom_sql = "ST_GeomFromText('MULTIPOLYGON(((#{coordinates})))', 4326)"
 
@@ -14,7 +14,7 @@ class Query
       UPDATE #{table_name} SET toggle = false WHERE ST_Intersects(#{table_name}.the_geom, #{geom_sql});
     SQL
   end
-  
+
   def self.add_broken_polygons(table_name, coordinates)
     geom_sql = "ST_GeomFromText('MULTIPOLYGON(((#{coordinates})))', 4326)"
 

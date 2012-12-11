@@ -1,11 +1,11 @@
 require 'spec_helper'
-require_relative '../../lib/query'
+require_relative '../../lib/cartodb_query'
 
-describe Query do
+describe CartodbQuery do
   describe '.deactivate_intersecting_polygons' do
     it 'should toggle to false intersecting polygons' do
-      add_query = Query.add('geometries', '-18 9, 18 9, 18 -9, -18 -9, -18 9')
-      update_query = Query.deactivate_intersecting_polygons('geometries', '-18 9, 18 9, 18 -9, -18 -9, -18 9')
+      add_query = CartodbQuery.add('geometries', '-18 9, 18 9, 18 -9, -18 -9, -18 9')
+      update_query = CartodbQuery.deactivate_intersecting_polygons('geometries', '-18 9, 18 9, 18 -9, -18 -9, -18 9')
 
       ActiveRecord::Base.connection.execute(add_query)
       ActiveRecord::Base.connection.execute(update_query)
@@ -17,8 +17,8 @@ describe Query do
   
   describe '.add_broken_polygons' do
     it 'should create three polygons plus the initial one' do
-      add_query = Query.add('geometries', '-18 9, 18 9, 18 -9, -18 -9, -18 9')
-      add_broken_query = Query.add_broken_polygons('geometries', '0 0, 36 0, 36 -18, 0 -18, 0 0')
+      add_query = CartodbQuery.add('geometries', '-18 9, 18 9, 18 -9, -18 -9, -18 9')
+      add_broken_query = CartodbQuery.add_broken_polygons('geometries', '0 0, 36 0, 36 -18, 0 -18, 0 0')
 
       ActiveRecord::Base.connection.execute(add_query)
       ActiveRecord::Base.connection.execute(add_broken_query)
