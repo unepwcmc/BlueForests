@@ -1,19 +1,33 @@
 class Query
-  def self.add(table_name)
+  def self.add(table_name, coordinates)
+    geom_sql = "ST_GeomFromText('MULTIPOLYGON(((#{coordinates})))', 4326)"
+
     <<-SQL
-      INSERT INTO #{table_name} (the_geom)
-        SELECT
-         ST_Multi(CASE WHEN existing_validations.the_geom IS NOT NULL THEN 
-           ST_Difference(
-             ST_GeomFromText('MULTIPOLYGON(((36.560096740722656 -18.550416726315852,36.56816482543945 -18.563435634003167,36.58069610595703 -18.55155592038031,36.560096740722656 -18.550416726315852)))', 4326),
-             ST_Multi(existing_validations.the_geom))
-         ELSE
-           ST_GeomFromText('MULTIPOLYGON(((36.560096740722656 -18.550416726315852,36.56816482543945 -18.563435634003167,36.58069610595703 -18.55155592038031,36.560096740722656 -18.550416726315852)))', 4326)
-         END) FROM (
-         SELECT ST_Union(the_geom) as the_geom
-         FROM #{table_name}
-         WHERE ST_Intersects(ST_GeomFromText('MULTIPOLYGON(((36.560096740722656 -18.550416726315852,36.56816482543945 -18.563435634003167,36.58069610595703 -18.55155592038031,36.560096740722656 -18.550416726315852)))', 4326), the_geom)
-        ) as existing_validations;
+      INSERT INTO #{table_name} (the_geom) VALUES (#{geom_sql});
+    SQL
+  end
+
+  def self.deactivate_intersecting_polygons(table_name, coordinates)
+    geom_sql = "ST_GeomFromText('MULTIPOLYGON(((#{coordinates})))', 4326)"
+
+    <<-SQL
+      UPDATE #{table_name} SET toggle = false WHERE ST_Intersects(#{table_name}.the_geom, #{geom_sql});
+    SQL
+  end
+  
+  def self.add_broken_polygons(table_name, coordinates)
+    geom_sql = "ST_GeomFromText('MULTIPOLYGON(((#{coordinates})))', 4326)"
+
+    <<-SQL
+      INSERT INTO #{table_name} (the_geom, author, display, phase, phase_id, prev_phase, toggle, value)
+        SELECT ST_Multi(ST_Intersection(#{geom_sql}, t.the_geom)) AS the_geom, 'Miguel' AS author, true AS display, 1 AS phase, 1 AS phase_id, 1 AS prev_phase, true AS toggle, 1 AS value
+          FROM #{table_name} t WHERE ST_Intersects(#{geom_sql}, t.the_geom)
+      UNION
+        SELECT ST_Multi(ST_Difference(t.the_geom, #{geom_sql})) AS the_geom, 'Miguel' AS author, true AS display, 1 AS phase, 1 AS phase_id, 1 AS prev_phase, true AS toggle, 1 AS value
+          FROM #{table_name} t WHERE ST_Intersects(#{geom_sql}, t.the_geom)
+      UNION
+        SELECT ST_Multi(ST_Difference(#{geom_sql}, t.the_geom)) AS the_geom, 'Miguel' AS author, true AS display, 1 AS phase, 1 AS phase_id, 1 AS prev_phase, true AS toggle, 1 AS value
+          FROM #{table_name} t;
     SQL
   end
 end

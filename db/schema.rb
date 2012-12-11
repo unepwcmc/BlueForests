@@ -57,7 +57,14 @@ ActiveRecord::Schema.define(:version => 20121211001959) do
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "geometries", :force => true do |t|
-    t.spatial "the_geom", :limit => {:srid=>0, :type=>"geometry"}
+    t.string  "author"
+    t.boolean "display"
+    t.integer "phase"
+    t.integer "phase_id"
+    t.integer "prev_phase"
+    t.boolean "toggle"
+    t.float   "value"
+    t.spatial "the_geom",   :limit => {:srid=>0, :type=>"geometry"}
   end
 
   create_table "mbtiles", :force => true do |t|

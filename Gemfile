@@ -57,7 +57,8 @@ gem 'capistrano'
 gem 'capistrano-ext'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
+#gem 'ruby-debug19', require: 'ruby-debug', group: [:test, :development]
 
 gem 'rspec-rails', '~> 2.0', group: [:test, :development]
 gem 'database_cleaner', group: :test

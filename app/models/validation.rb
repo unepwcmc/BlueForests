@@ -10,7 +10,6 @@ class Validation < ActiveRecord::Base
   validates :coordinates, presence: true
   validates :knowledge, presence: true
   validates :name, presence: true
-  validates :habitat, presence: true
   validates :density, presence: true
   validates :age, presence: true
   validates :admin, presence: true
@@ -22,10 +21,8 @@ class Validation < ActiveRecord::Base
   end
 
   def cartodb
-    geom_sql = "ST_GeomFromText('MULTIPOLYGON(((#{coordinates})))', 4326)"
-
     # SQL CartoDB
-    sql = Query.add(APP_CONFIG['cartodb_table'])
+    sql = Query.add(APP_CONFIG['cartodb_table'], coordinates, {action: self.action})
 
     CartoDB::Connection.query sql
   rescue CartoDB::Client::Error
