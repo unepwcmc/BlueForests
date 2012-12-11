@@ -11,7 +11,10 @@
 
 <script type="text/javascript">
   $(function() {
-    window.router = new BlueCarbon.Routers.ValidationsRouter({validations: <%= @validations.to_json.html_safe -%>});
+      window.router = new BlueCarbon.Routers.ValidationsRouter({
+        validations: <%= @validations.to_json.html_safe -%>,
+        areas: <%= @areas.to_json.html_safe %>
+      });
     Backbone.history.start();
   });
 </script>
