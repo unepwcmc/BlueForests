@@ -54,7 +54,7 @@ namespace :database do
       "password" => pg_password
     }
 
-    config_options = {"production" => db_options}.to_yaml
+    config_options = db_options.to_yaml
     run "mkdir -p #{shared_path}/config"
     put config_options, "#{shared_path}/config/database.yml"
   end
