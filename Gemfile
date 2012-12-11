@@ -59,6 +59,12 @@ gem 'capistrano-ext'
 # To use debugger
 # gem 'debugger'
 
-group :test, :development do
-  gem 'rspec-rails', '~> 2.0'
+gem 'rspec-rails', '~> 2.0', group: [:test, :development]
+gem 'database_cleaner', group: :test
+
+group :development do
+  gem 'guard-rspec'
+
+  gem 'rb-inotify', '~> 0.8.8', :require => RUBY_PLATFORM.include?('linux') && 'rb-inotify'
+  gem 'rb-fsevent', '~> 0.9.1', :require => RUBY_PLATFORM.include?('darwin') && 'rb-fsevent'
 end
