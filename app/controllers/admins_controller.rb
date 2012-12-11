@@ -76,6 +76,9 @@ class AdminsController < ApplicationController
 
     @admin = Admin.find(params[:id])
 
+    # Self user cannot change its roles
+    params[:admin].delete(:role_ids) if @admin == current_admin
+
     respond_to do |format|
       if @admin.update_attributes(params[:admin])
         format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }

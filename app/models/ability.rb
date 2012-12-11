@@ -29,7 +29,7 @@ class Ability
     @admin.roles.each { |role| send(role.name) }
 
     if @admin.roles.size == 0
-      can [:show, :update, :destroy], Admin, :id => @admin.id
+      can [:show, :update, :destroy], Admin, id: @admin.id
     end
   end
 
