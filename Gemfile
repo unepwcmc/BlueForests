@@ -17,7 +17,7 @@ gem 'devise'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'cartodb-rb-client'
 
-gem "rails-backbone"
+gem 'rails-backbone'
 
 gem 'daemons'
 gem 'delayed_job_active_record'
@@ -25,6 +25,8 @@ gem 'delayed_job_web'
 
 gem 'rvm-capistrano'
 gem 'rabl'
+
+gem 'activerecord-postgis-adapter', '0.4.1'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -34,6 +36,7 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
+  gem 'libv8', '~> 3.11.8'
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -55,3 +58,7 @@ gem 'capistrano-ext'
 
 # To use debugger
 # gem 'debugger'
+
+group :test, :development do
+  gem 'rspec-rails', '~> 2.0'
+end

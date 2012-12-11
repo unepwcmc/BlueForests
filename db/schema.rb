@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207140451) do
+ActiveRecord::Schema.define(:version => 20121211001959) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -55,6 +55,12 @@ ActiveRecord::Schema.define(:version => 20121207140451) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "geometries", :force => true do |t|
+    t.datetime "created_at",                                          :null => false
+    t.datetime "updated_at",                                          :null => false
+    t.spatial  "the_geom",   :limit => {:srid=>0, :type=>"geometry"}
+  end
 
   create_table "mbtiles", :force => true do |t|
     t.string   "status",                     :default => "pending"
