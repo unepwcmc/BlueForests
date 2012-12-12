@@ -1,4 +1,88 @@
-<h4>New Validation</h4>
+<div class="page-header">
+  <a href="#/index" class="btn"><i class="icon-list-alt"></i> Back</a>
+  <h1>New validation</h1>
+</div>
 
-<div id="form">
+<div class="row">
+  <div class="span8">
+    <div id="map" style="height: 380px;"></div>
+  </div>
+  <div class="span4">
+    <h3>Edit habitat area</h3>
+
+    <form id="new-validation" name="validation">
+      <div class="form-inputs">
+        <div class="control-group hidden">
+          <div class="controls">
+            <input class="hidden" type="hidden" name="coordinates" id="coordinates">
+          </div>
+        </div>
+
+        <div class="control-group hidden">
+          <div class="controls">
+            <input class="hidden" type="hidden" name="action" id="action">
+          </div>
+        </div>
+        
+        <div class="btn-group" data-toggle="buttons-radio">
+          <button type="button" class="btn btn-primary" data-action="validate">Validate</button>
+          <button type="button" class="btn btn-primary" data-action="add">Add</button>
+          <button type="button" class="btn btn-primary" data-action="delete">Clear</button>
+        </div>
+
+        <div class="control-group area_id">
+          <label class="control-label" for="area_id">Area</label>
+          <div class="controls">
+            <input class="span4" type="text" name="area_id" id="area_id" value="<%= area_id %>">
+          </div>
+        </div>
+
+        <div class="control-group recorded_at">
+          <label class="control-label" for="recorded_at">Recorded at</label>
+          <div class="controls">
+            <input class="span4" type="text" name="recorded_at" id="recorded_at" value="<%= recorded_at %>">
+          </div>
+        </div>
+
+        <div class="control-group knowledge">
+          <label class="control-label" for="knowledge">Knowledge</label>
+          <div class="controls">
+            <input class="span4" type="text" name="knowledge" id="knowledge" value="<%= knowledge %>">
+          </div>
+        </div>
+
+        <div class="control-group habitat">
+          <label class="control-label" for="habitat">Habitat</label>
+          <div class="controls">
+            <input class="span4" type="text" name="habitat" id="habitat" value="<%= habitat %>">
+          </div>
+        </div>
+
+        <div class="control-group density">
+          <label class="control-label" for="density">Density of habitat</label>
+          <div class="controls">
+            <input class="span4" type="text" name="density" id="density" value="<%= density %>">
+          </div>
+        </div>
+
+        <div class="control-group age">
+          <label class="control-label" for="age">Age of habitat</label>
+          <div class="controls">
+            <input class="span4" type="text" name="age" id="age" value="<%= age %>">
+          </div>
+        </div>
+
+        <div class="control-group name">
+          <label class="control-label" for="name">Name your edit</label>
+          <div class="controls">
+            <input class="span4" type="text" name="name" id="name" value="<%= name %>">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <input class="btn btn-primary" type="submit" value="Create Validation" />
+      </div>
+    </form>  
+  </div>
 </div>

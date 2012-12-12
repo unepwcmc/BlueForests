@@ -4,38 +4,28 @@ class BlueCarbon.Models.Validation extends Backbone.Model
   defaults:
     coordinates: null
     action: null
-    recorded_at: null
     area_id: null
-    name: null
+    recorded_at: null
     knowledge: null
     habitat: null
     density: null
     age: null
+    name: null
 
-  setCoordsFromPoints: (points) ->
-    points = _.map(points, (p) ->
-      [p.lng, p.lat]
-    )
-    points.push points[0]
 
-    @set(coordinates: JSON.stringify([[points]]))
+  # Can't update record; Can't mass-assign protected attributes: id
+  # (https://github.com/codebrew/backbone-rails/issues/38)
 
-  coordsAsLatLngArray: () ->
-    latLngs = []
+  secureAttributes: ['admin_id', 'created_at', 'updated_at']
 
-    for point in JSON.parse(@get('coordinates'))[0][0]
-      latLngs.push(new L.LatLng(point[1], point[0]))
+  toJSON: ->
+    @_cloneAttributes()
 
-    return latLngs
-
-  parse: (resp, xhr) ->
-    # Remove attributes returned from the server that are not in the
-    # default attributes list
-    for attr, val of resp
-      if @defaults[attr] == undefined
-        delete resp[attr]
-
-    return resp
+  _cloneAttributes: ->
+    attributes = _.clone(@attributes)
+    for sa in @secureAttributes
+      delete attributes[sa]
+    _.clone(attributes)
 
 class BlueCarbon.Collections.ValidationsCollection extends Backbone.Collection
   model: BlueCarbon.Models.Validation

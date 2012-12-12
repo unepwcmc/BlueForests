@@ -18,7 +18,10 @@
   color: #555;
 }
 
-/* FIXME: remove radio buttons from the form */
-.btn-group input {
-  display: none;
+.btn-group {
+  width: 100%;
+}
+
+.btn-group > .btn {
+  width: 33.333333333%;
 }

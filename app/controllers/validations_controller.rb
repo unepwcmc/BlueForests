@@ -5,7 +5,7 @@ class ValidationsController < ApplicationController
   # GET /validations
   # GET /validations.json
   def index
-    @validations = Validation.select("id, coordinates, action, recorded_at, area_id, name, habitat, knowledge, density, age")
+    @validations = Validation.all
     @areas = Area.all
 
     respond_to do |format|
@@ -17,7 +17,7 @@ class ValidationsController < ApplicationController
   # GET /validations/1
   # GET /validations/1.json
   def show
-    @validation = Validation.where(:id => params[:id]).select("id, coordinates, action, recorded_at, area_id, name, habitat, knowledge, density, age")
+    @validation = Validation.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
