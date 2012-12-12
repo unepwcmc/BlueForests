@@ -15,13 +15,13 @@ class Mbtile < ActiveRecord::Base
     status == 'complete'
   end
 
-  def last_validation
-    area.validations.select(:updated_at).order('updated_at DESC').first
+  def last_validation_updated_at
+    area.validations.select(:updated_at).order('updated_at DESC').try(:first).try(:updated_at)
   end
 
   def generate
     # Don't do anything if last generation was after the last validation edit
-    return if last_generation_started_at && last_generation_started_at > last_validation.updated_at
+    return if last_generation_started_at && last_validation_updated_at && last_generation_started_at > last_validation_updated_at
 
     update_attributes(status: 'generating', last_generation_started_at: Time.now)
 
