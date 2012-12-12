@@ -61,7 +61,7 @@ BlueCarbon::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'areas#index'
+  root :to => 'validations#index'
 
   # See how all your routes lay out with "rake routes"
 

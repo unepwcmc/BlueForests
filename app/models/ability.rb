@@ -34,12 +34,17 @@ class Ability
   end
 
   def admin
+    can :manage, Area
+    can :manage, Validation
     can :manage, Admin
+    can :read, Habitat
   end
 
   def project_manager
+    can :manage, Validation, admin_id: @admin.id
   end
 
   def project_participant
+    can :manage, Validation, admin_id: @admin.id
   end
 end

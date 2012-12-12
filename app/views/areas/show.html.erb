@@ -37,7 +37,7 @@
   <tbody>
 <% @mbtiles.each do |mbtile| %>
     <tr>
-      <td><%= mbtile.habitat %></td>
+      <td><%= mbtile.habitat.humanize %></td>
       <td><%= mbtile.last_generation_started_at %></td>
       <td><%= mbtile.last_generated_at %></td>
       <td><%= mbtile.status %></td>

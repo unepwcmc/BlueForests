@@ -1,5 +1,6 @@
 class AreasController < ApplicationController
   before_filter :authenticate_admin!
+  load_and_authorize_resource
 
   # GET /areas
   # GET /areas.json
@@ -16,7 +17,7 @@ class AreasController < ApplicationController
   # GET /areas/1.json
   def show
     @area = Area.find(params[:id])
-    @mbtiles = @area.mbtiles
+    @mbtiles = @area.mbtiles.order(:habitat)
 
     respond_to do |format|
       format.html # show.html.erb
