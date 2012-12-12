@@ -17,3 +17,8 @@
 .table {
   color: #555;
 }
+
+/* FIXME: remove radio buttons from the form */
+.btn-group input {
+  display: none;
+}
