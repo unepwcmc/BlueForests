@@ -25,3 +25,11 @@
 .btn-group > .btn {
   width: 33.333333333%;
 }
+
+::selection {
+	background: #acb251; /* Safari */
+}
+
+::-moz-selection {
+	background: #acb251; /* Firefox */
+}

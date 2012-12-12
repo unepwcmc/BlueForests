@@ -14,17 +14,17 @@
       <div class="form-inputs">
         <div class="control-group hidden">
           <div class="controls">
-            <input class="hidden" type="hidden" name="coordinates" id="coordinates">
+            <input class="hidden" type="hidden" name="coordinates" id="coordinates" value="<%= validation.coordinates %>">
           </div>
         </div>
 
         <div class="control-group hidden">
           <div class="controls">
-            <input class="hidden" type="hidden" name="action" id="action">
+            <input class="hidden" type="hidden" name="action" id="action" value="<%= validation.action %>">
           </div>
         </div>
-        
-        <div class="btn-group" data-toggle="buttons-radio">
+
+        <div class="control-group btn-group" data-toggle="buttons-radio">
           <button type="button" class="btn btn-primary" data-action="validate">Validate</button>
           <button type="button" class="btn btn-primary" data-action="add">Add</button>
           <button type="button" class="btn btn-primary" data-action="delete">Clear</button>
@@ -33,49 +33,71 @@
         <div class="control-group area_id">
           <label class="control-label" for="area_id">Area</label>
           <div class="controls">
-            <input class="span4" type="text" name="area_id" id="area_id" value="<%= area_id %>">
+            <select class="span4" name="area_id" id="area_id">
+              <option value=""></option>
+              <% for(var i = 0; i < areas.length; i++) { %>
+                <option value="<%= areas.at(i).id %>"<% if(areas.at(i).id == validation.area_id) { %> selected="selected"<% } %>><%= areas.at(i).get('title') %></option>
+              <% } %>
+            </select>
           </div>
         </div>
 
         <div class="control-group recorded_at">
           <label class="control-label" for="recorded_at">Recorded at</label>
-          <div class="controls">
-            <input class="span4" type="text" name="recorded_at" id="recorded_at" value="<%= recorded_at %>">
+          <div class="controls row">
+            <div class="span1">
+              <input class="span1" type="number" name="recorded_at(1i)" value="2012">
+            </div>
+            <div class="span2">
+              <input class="span2" type="number" name="recorded_at(2i)" value="12">
+            </div>
+            <div class="span1">
+              <input class="span1" type="number" name="recorded_at(3i)" value="12">
+            </div>
           </div>
         </div>
 
         <div class="control-group knowledge">
-          <label class="control-label" for="knowledge">Knowledge</label>
+          <label class="control-label" for="knowledge">Validation evidence type</label>
           <div class="controls">
-            <input class="span4" type="text" name="knowledge" id="knowledge" value="<%= knowledge %>">
+            <select class="span4" name="knowledge" id="knowledge">
+              <option value=""></option>
+              <option value="local_data"<% if("local_data" == validation.knowledge) { %> selected="selected"<% } %>>Local data</option>
+            </select>
           </div>
         </div>
 
         <div class="control-group habitat">
           <label class="control-label" for="habitat">Habitat</label>
           <div class="controls">
-            <input class="span4" type="text" name="habitat" id="habitat" value="<%= habitat %>">
+            <select class="span4" name="habitat" id="habitat">
+              <option value=""></option>
+              <option value="mangroves"<% if("mangroves" == validation.habitat) { %> selected="selected"<% } %>>Mangroves</option>
+              <option value="seagrass"<% if("seagrass" == validation.habitat) { %> selected="selected"<% } %>>Seagrass</option>
+              <option value="sabkha"<% if("sabkha" == validation.habitat) { %> selected="selected"<% } %>>Sabkha</option>
+              <option value="salt_marshes"<% if("salt_marshes" == validation.habitat) { %> selected="selected"<% } %>>Salt Marshes</option>
+            </select>
           </div>
         </div>
 
         <div class="control-group density">
           <label class="control-label" for="density">Density of habitat</label>
           <div class="controls">
-            <input class="span4" type="text" name="density" id="density" value="<%= density %>">
+            <input class="span4" type="number" name="density" id="density" value="<%= validation.density %>">
           </div>
         </div>
 
         <div class="control-group age">
           <label class="control-label" for="age">Age of habitat</label>
           <div class="controls">
-            <input class="span4" type="text" name="age" id="age" value="<%= age %>">
+            <input class="span4" type="number" name="age" id="age" value="<%= validation.age %>">
           </div>
         </div>
 
         <div class="control-group name">
           <label class="control-label" for="name">Name your edit</label>
           <div class="controls">
-            <input class="span4" type="text" name="name" id="name" value="<%= name %>">
+            <input class="span4" type="text" name="name" id="name" value="<%= validation.name %>">
           </div>
         </div>
       </div>
@@ -83,6 +105,6 @@
       <div class="form-actions">
         <input class="btn btn-primary" type="submit" value="Create Validation" />
       </div>
-    </form>  
+    </form>
   </div>
 </div>

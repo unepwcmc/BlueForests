@@ -3,6 +3,9 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     @validations = new BlueCarbon.Collections.ValidationsCollection()
     @validations.reset options.validations
 
+    @areas = new BlueCarbon.Collections.AreasCollection()
+    @areas.reset options.areas
+
   routes:
     "new"      : "newValidation"
     "index"    : "index"
@@ -11,7 +14,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     ".*"        : "index"
 
   newValidation: ->
-    @view = new BlueCarbon.Views.Validations.NewView(collection: @validations)
+    @view = new BlueCarbon.Views.Validations.NewView(collection: @validations, areas: @areas)
     $("#validations").html(@view.render().el)
 
     # Map
@@ -30,7 +33,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
   edit: (id) ->
     validation = @validations.get(id)
 
-    @view = new BlueCarbon.Views.Validations.EditView(model: validation)
+    @view = new BlueCarbon.Views.Validations.EditView(model: validation, areas: @areas)
     $("#validations").html(@view.render().el)
 
     # Map

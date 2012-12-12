@@ -3,6 +3,15 @@ BlueCarbon.Views.Validations ||= {}
 class BlueCarbon.Views.Validations.EditView extends Backbone.View
   template : JST["backbone/templates/validations/edit"]
 
+  constructor: (options) ->
+    super(options)
+    @areas = options.areas
+
+    @model.bind "change:errors", (model, errors) =>
+      if errors?
+        _.each @model.get('errors'), (errors, name) ->
+          $("form [name=#{name}]").parents('.control-group').addClass('error').find('label').append("<span class=\"error\"> #{errors[0]}</span>")
+
   events :
     "submit #edit-validation" : "update"
 
@@ -10,18 +19,26 @@ class BlueCarbon.Views.Validations.EditView extends Backbone.View
     e.preventDefault()
     e.stopPropagation()
 
+    @model.unset("errors")
+    $('form .control-group').removeClass('error').find('label span.error').remove()
+
     @model.save(null,
       success : (validation) =>
         @model = validation
         window.location.hash = "/#{@model.id}"
+
+      error: (validation, jqXHR) =>
+        @model.set({errors: $.parseJSON(jqXHR.responseText)})
     )
 
   render : ->
-    $(@el).html(@template(@model.toJSON() ))
+    $(@el).html(@template({validation: @model.toJSON(), areas: @areas }))
 
     this.$("form").backboneLink(@model)
 
     # Action btn-group
+    this.$(".btn-group button[data-action='#{@model.get('action')}']").addClass('active')
+    
     this.$(".btn-group button").click (e) ->
       $("#action").val($(e.target).data('action')).trigger('change')
 

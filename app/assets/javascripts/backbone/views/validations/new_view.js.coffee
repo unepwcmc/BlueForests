@@ -9,16 +9,19 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
   constructor: (options) ->
     super(options)
     @model = new @collection.model()
+    @areas = options.areas
 
-    @model.bind("change:errors", () =>
-      this.render()
-    )
+    @model.bind "change:errors", (model, errors) =>
+      if errors?
+        _.each @model.get('errors'), (errors, name) ->
+          $("form [name=#{name}]").parents('.control-group').addClass('error').find('label').append("<span class=\"error\"> #{errors[0]}</span>")
 
   save: (e) ->
     e.preventDefault()
     e.stopPropagation()
 
     @model.unset("errors")
+    $('form .control-group').removeClass('error').find('label span.error').remove()
 
     @collection.create(@model.toJSON(),
       success: (validation) =>
@@ -30,7 +33,7 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
     )
 
   render: ->
-    $(@el).html(@template(@model.toJSON() ))
+    $(@el).html(@template({validation: @model.toJSON(), areas: @areas }))
 
     this.$("form").backboneLink(@model)
 
