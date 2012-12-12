@@ -101,6 +101,25 @@ end
 after "deploy:setup", "cartodb:build_configuration"
 after "deploy:finalize_update", "cartodb:link_configuration_file"
 
+# Tilemill
+
+set(:shared_tilemill_path) {"#{shared_path}/tilemill"}
+
+namespace :tilemill do
+  desc "Make a shared tilemill folder"
+  task :make_shared_folder, :roles => :app do
+    run "mkdir -p #{shared_tilemill_path}"
+  end
+
+  desc "Links the tilemill folder"
+  task :link_folder, :roles => :db do
+    run "ln -s #{shared_tilemill_path} #{latest_release}/lib/tilemill"
+  end
+end
+
+after "deploy:setup", "tilemill:make_shared_folder"
+after "deploy:update_code", "tilemill:link_folder"
+
 # Delayed_job
 
 after "deploy:stop",    "delayed_job:stop"
@@ -113,5 +132,6 @@ after "deploy:restart", "delayed_job:restart"
 #   set :delayed_job_args, "-n 2"
 
 # RVM
+
 set :rvm_ruby_string, '1.9.2'                          # Or:
 require "rvm/capistrano"                               # Load RVM's capistrano plugin.
