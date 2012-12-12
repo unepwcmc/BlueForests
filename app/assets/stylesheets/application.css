@@ -13,3 +13,7 @@
  *= require leaflet.draw
  *= require_tree .
  */
+
+.table {
+  color: #555;
+}
