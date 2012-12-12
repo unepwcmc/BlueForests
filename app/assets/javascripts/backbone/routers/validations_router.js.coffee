@@ -18,7 +18,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     $("#validations").html(@view.render().el)
 
     # Map
-    @initializeMap('map')
+    @initializeMap('map', @findCoordinates())
 
   index: ->
     @view = new BlueCarbon.Views.Validations.IndexView(validations: @validations)
@@ -30,6 +30,9 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     @view = new BlueCarbon.Views.Validations.ShowView(model: validation)
     $("#validations").html(@view.render().el)
 
+    # Map
+    @initializeMap('map', JSON.parse(validation.get('coordinates')))
+
   edit: (id) ->
     validation = @validations.get(id)
 
@@ -37,9 +40,9 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     $("#validations").html(@view.render().el)
 
     # Map
-    @initializeMap('map')
+    @initializeMap('map', @findCoordinates())
 
-  initializeMap: (map_id) ->
+  initializeMap: (map_id, coordinates) ->
     map = L.map(map_id).setView([24.5, 54], 9)
     L.tileLayer 'http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png'
       maxZoom: 18
@@ -47,8 +50,8 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
 
     drawnItems = new L.LayerGroup()
 
-    if @findCoordinates()
-      initialPolygon = new L.polygon(@findCoordinates())
+    if coordinates
+      initialPolygon = new L.polygon(coordinates)
       drawnItems.addLayer(initialPolygon)
 
     @editableMap(map, drawnItems) if $('#coordinates').length > 0
@@ -70,8 +73,6 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       drawnItems.addLayer(e.poly)
 
   findCoordinates: ->
-    return window.validationCoordinates if window.validationCoordinates?
-
     try
       return JSON.parse($('#coordinates').val()) if $('#coordinates').length > 0
     false
