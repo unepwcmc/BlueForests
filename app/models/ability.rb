@@ -29,7 +29,6 @@ class Ability
     @admin.roles.each { |role| send(role.name) }
 
     if @admin.roles.size == 0
-      can [:show, :update, :destroy], Admin, id: @admin.id
     end
   end
 
@@ -41,10 +40,14 @@ class Ability
   end
 
   def project_manager
+    can :read, Area
     can :manage, Validation, admin_id: @admin.id
+    can [:show, :update, :destroy], Admin, id: @admin.id
   end
 
   def project_participant
+    can :read, Area
     can :manage, Validation, admin_id: @admin.id
+    can [:show, :update, :destroy], Admin, id: @admin.id
   end
 end

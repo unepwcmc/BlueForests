@@ -1,11 +1,11 @@
 class ValidationsController < ApplicationController
   before_filter :authenticate_admin!
+  load_and_authorize_resource
 
   # GET /validations
   # GET /validations.json
   def index
-    @validations = Validation.select("
-       id, coordinates, action, recorded_at, area_id, name, habitat, knowledge, density, age")
+    @validations = Validation.select("id, coordinates, action, recorded_at, area_id, name, habitat, knowledge, density, age")
     @areas = Area.all
 
     respond_to do |format|
@@ -17,8 +17,7 @@ class ValidationsController < ApplicationController
   # GET /validations/1
   # GET /validations/1.json
   def show
-    @validation = Validation.where(:id => params[:id])
-      .select("id, coordinates, action, recorded_at, area_id, name, habitat, knowledge, density, age")
+    @validation = Validation.where(:id => params[:id]).select("id, coordinates, action, recorded_at, area_id, name, habitat, knowledge, density, age")
 
     respond_to do |format|
       format.html # show.html.erb
@@ -46,7 +45,7 @@ class ValidationsController < ApplicationController
   # POST /validations.json
   def create
     @validation = Validation.new
-    @validation.attributes = params[:validation].reject{|k,v| !@validation.attributes.keys.member?(k.to_s) }
+    @validation.attributes = params[:validation].reject { |k,v| !@validation.attributes.keys.member?(k.to_s) }
     @validation.admin = current_admin
 
     respond_to do |format|

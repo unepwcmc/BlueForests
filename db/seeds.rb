@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Admin.create(email: 'decio.ferreira@unep-wcmc.org', password: 'decioferreira', password_confirmation: 'decioferreira')
+role_admin = Role.create(name: 'admin')
+role_project_manager = Role.create(name: 'project_manager')
+role_project_participant = Role.create(name: 'project_participant')
 
-Role.create([{ name: 'admin' }, { name: 'project_manager' }, { name: 'project_participant' }])
+admin = Admin.create(email: 'decio.ferreira@unep-wcmc.org', password: 'decioferreira', password_confirmation: 'decioferreira', role_ids: [role_admin.id])

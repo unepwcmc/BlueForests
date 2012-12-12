@@ -1,5 +1,6 @@
 class HabitatsController < ApplicationController
   before_filter :authenticate_admin!
+  load_and_authorize_resource
 
   # GET /habitats
   # GET /habitats.json
