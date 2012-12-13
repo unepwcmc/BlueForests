@@ -34,7 +34,7 @@ class Mbtile < ActiveRecord::Base
 
     config_file = generate_config(10, 11)
 
-    system "#{APP_CONFIG['projectmill_path']}/index.js --render -p #{tilemill_path}/ -c #{config_file} -t #{APP_CONFIG['tilemill_path']}"
+    system "#{APP_CONFIG['projectmill_path']}/index.js --mill --render -p #{tilemill_path}/ -c #{config_file} -t #{APP_CONFIG['tilemill_path']}"
 
     update_attributes(status: 'complete', last_generated_at: Time.now)
   end
