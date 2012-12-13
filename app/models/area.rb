@@ -1,8 +1,11 @@
 class Area < ActiveRecord::Base
-  attr_accessible :coordinates, :title
+  attr_accessible :title, :coordinates
 
-  has_many :validations
-  has_many :mbtiles
+  has_many :validations, dependent: :destroy
+  has_many :mbtiles, dependent: :destroy
+
+  validates :title, presence: true, uniqueness: true
+  validates :coordinates, presence: true
 
   before_create do
     Habitat.all.each do |habitat|
