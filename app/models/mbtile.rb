@@ -136,6 +136,6 @@ class Mbtile < ActiveRecord::Base
   end
 
   def cartodb_query
-    "http://carbon-tool.cartodb.com/api/v2/sql?format=geojson&q=SELECT%20*%20FROM%20algalmat"
+    "http://carbon-tool.cartodb.com/api/v2/sql?format=kml&q=SELECT%20*%20FROM%20algalmat"
   end
 end
