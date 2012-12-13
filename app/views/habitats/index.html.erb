@@ -13,7 +13,7 @@
   <tbody>
 <% @habitats.each do |habitat| %>
     <tr>
-      <td><%= habitat.name %></td>
+      <td><%= habitat.name.humanize %></td>
       <td><%= link_to 'Show', habitat %></td>
     </tr>
 <% end %>
