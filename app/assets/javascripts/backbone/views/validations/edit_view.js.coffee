@@ -9,8 +9,15 @@ class BlueCarbon.Views.Validations.EditView extends Backbone.View
 
     @model.bind "change:errors", (model, errors) =>
       if errors?
+        $("form").prepend("<div class='alert alert-error'>Oh snap! Change a few things up and try submitting again.</div>")
+
         _.each @model.get('errors'), (errors, name) ->
-          $("form [name=#{name}]").parents('.control-group').addClass('error').find('label').append("<span class=\"error\"> #{errors[0]}</span>")
+          if name == 'action'
+            $("form #control-group-action").after("<div id='action-error' class='control-group error'><span class='help-block error'>Action #{errors[0]}</span></div>")
+          else if name == 'coordinates'
+            $("#map").after("<div id='map-error' class='control-group error'><span class='help-block error'>Coordinates #{errors[0]}</span></div>")
+          else
+            $("form [name=#{name}]").parents('.control-group').addClass('error').find('label').append("<span class=\"error\"> #{errors[0]}</span>")
 
   events :
     "submit #edit-validation" : "update"
@@ -20,6 +27,7 @@ class BlueCarbon.Views.Validations.EditView extends Backbone.View
     e.stopPropagation()
 
     @model.unset("errors")
+    $("form .alert, #map-error, #action-error").remove()
     $('form .control-group').removeClass('error').find('label span.error').remove()
 
     @model.save(null,

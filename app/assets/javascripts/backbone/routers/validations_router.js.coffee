@@ -49,7 +49,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     map = L.map map_id,
       center: [24.5, 54]
       zoom: 9
-      layers: [baseMap, baseSatellite]
+      layers: [baseSatellite]
 
     # Layers
     baseMaps =
