@@ -43,10 +43,24 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     @initializeMap('map', @findCoordinates())
 
   initializeMap: (map_id, coordinates) ->
-    map = L.map(map_id).setView([24.5, 54], 9)
-    L.tileLayer 'http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png'
-      maxZoom: 18
-    .addTo(map)
+    baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 18})
+    baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 18})
+  
+    map = L.map map_id,
+      center: [24.5, 54]
+      zoom: 9
+      layers: [baseMap, baseSatellite]
+
+    # Layers
+    baseMaps =
+      'Map': baseMap
+      'Satellite': baseSatellite
+    
+    overlayMaps =
+      'Mangroves': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM algalmat').addTo(map)
+      'Seagrass': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM algalmat').addTo(map)
+
+    L.control.layers(baseMaps, overlayMaps).addTo(map)
 
     drawnItems = new L.LayerGroup()
 

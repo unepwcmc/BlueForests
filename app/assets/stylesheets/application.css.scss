@@ -1,0 +1,31 @@
+@import "leaflet";
+@import "leaflet.draw";
+@import "bootstrap-generators";
+
+.table {
+  color: #555;
+}
+
+.btn-group {
+  width: 100%;
+
+  & > .btn {
+    width: 33.333333333%;
+  }
+}
+
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+  margin-bottom: 0;
+  
+  input {
+    margin-top: 0;
+  }
+}
+
+::selection {
+	background: #acb251; /* Safari */
+}
+
+::-moz-selection {
+	background: #acb251; /* Firefox */
+}
