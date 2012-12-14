@@ -2,7 +2,7 @@
 @import "leaflet.draw";
 @import "bootstrap-generators";
 
-.container-static {
+#validations {
   #map {
     position: fixed;
     top: $navbarHeight;
@@ -55,6 +55,12 @@
 
   footer .navbar-inner {
     min-height: 150px;
+    
+    p {
+      padding-top: 10px;
+      font-weight: bold;
+      color: $white;
+    }
   }
 }
 

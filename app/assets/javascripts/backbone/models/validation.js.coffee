@@ -10,7 +10,7 @@ class BlueCarbon.Models.Validation extends Backbone.Model
     habitat: null
     density: null
     age: null
-    name: null
+    notes: null
 
 
   # Can't update record; Can't mass-assign protected attributes: id
