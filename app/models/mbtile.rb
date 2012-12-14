@@ -63,7 +63,7 @@ class Mbtile < ActiveRecord::Base
   def generate_geojson
     require 'open-uri'
 
-    "#{layers_path}/polygons.geojson".tap do |path|
+    "#{layers_path}/polygons.kml".tap do |path|
       File.open(path, "w") do |f|
         f.write(open(cartodb_query).read)
       end
@@ -136,6 +136,6 @@ class Mbtile < ActiveRecord::Base
   end
 
   def cartodb_query
-    "http://carbon-tool.cartodb.com/api/v2/sql?format=kml&q=SELECT%20*%20FROM%20algalmat"
+    "http://carbon-tool.cartodb.com/api/v2/sql?format=kml&q=SELECT%20*%20FROM%20cb_mangroves"
   end
 end

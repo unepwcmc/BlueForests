@@ -32,14 +32,14 @@ $purple:                #7a43b6 !default;
 
 // Scaffolding
 // -------------------------
-$bodyBackground:        #384756 !default;
+$bodyBackground:        #384658 !default;
 $textColor:             $white !default;
 
 
 // Links
 // -------------------------
-$linkColor:             #acb251 !default;
-$linkColorHover:        darken($linkColor, 15%) !default;
+$linkColor:             #bdd455 !default;
+$linkColorHover:        #9eb436 !default;
 
 
 // Typography
@@ -89,7 +89,7 @@ $btnBackgroundHighlight:            darken($white, 10%) !default;
 $btnBorder:                         #86a1b3 !default;
 
 $btnPrimaryBackground:              $linkColor !default;
-$btnPrimaryBackgroundHighlight:     adjust-hue($btnPrimaryBackground, 20%) !default;
+$btnPrimaryBackgroundHighlight:     #9eb436 !default;
 
 $btnInfoBackground:                 #5bc0de !default;
 $btnInfoBackgroundHighlight:        #2f96b4 !default;
@@ -103,8 +103,8 @@ $btnWarningBackgroundHighlight:     $orange !default;
 $btnDangerBackground:               #ee5f5b !default;
 $btnDangerBackgroundHighlight:      #bd362f !default;
 
-$btnInverseBackground:              #444 !default;
-$btnInverseBackgroundHighlight:     $grayDarker !default;
+$btnInverseBackground:              #f2964c !default;
+$btnInverseBackgroundHighlight:     #d2752c !default;
 
 
 // Forms
@@ -180,10 +180,10 @@ $wellBackground:                  #f5f5f5 !default;
 $navbarCollapseWidth:             979px !default;
 $navbarCollapseDesktopWidth:      $navbarCollapseWidth + 1;
 
-$navbarHeight:                    40px !default;
-$navbarBackgroundHighlight:       #2C3239 !default;
-$navbarBackground:                darken($navbarBackgroundHighlight, 5%) !default;
-$navbarBorder:                    darken($navbarBackground, 12%) !default;
+$navbarHeight:                    100px !default;
+$navbarBackgroundHighlight:       #2b3038 !default;
+$navbarBackground:                $navbarBackgroundHighlight !default;
+$navbarBorder:                    $white !default;
 
 $navbarText:                      #777 !default;
 $navbarLinkColor:                 $white !default;

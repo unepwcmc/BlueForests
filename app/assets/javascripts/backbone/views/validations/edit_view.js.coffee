@@ -45,8 +45,8 @@ class BlueCarbon.Views.Validations.EditView extends Backbone.View
     this.$("form").backboneLink(@model)
 
     # Action btn-group
-    this.$(".btn-group button[data-action='#{@model.get('action')}']").addClass('active')
-    
+    this.$(".btn-group button[data-action='#{@model.get('action')}']").removeClass('btn-primary').addClass('btn-inverse active')
+
     this.$(".btn-group button").click (e) ->
       $("#action").val($(e.target).data('action')).trigger('change')
 

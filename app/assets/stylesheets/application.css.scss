@@ -2,16 +2,70 @@
 @import "leaflet.draw";
 @import "bootstrap-generators";
 
-.table {
-  color: #555;
+.container-static {
+  #map {
+    position: fixed;
+    top: $navbarHeight;
+    right: 360px;
+    bottom: 150px;
+    left: 0;
+  }
+
+  #sidebar {
+    overflow: auto;
+
+    position: fixed;
+    top: $navbarHeight;
+    right: 0;
+    bottom: 150px;
+    width: 360px;
+
+    &.shadow {
+      background: image-url('shadow.png') no-repeat center -50px;
+    }
+
+    h5 {
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    #draw-a-polygon {
+      &:before {
+        content: '';
+        background: image-url('draw_a_polygon.png') no-repeat center center;
+        display: block;
+        height: 116px;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    .btn-group {
+      width: 100%;
+
+      & > .btn {
+        width: 33.333333333%;
+        font-size: 12px;
+      }
+    }
+  }
+
+  footer .navbar-inner {
+    min-height: 150px;
+  }
 }
 
-.btn-group {
-  width: 100%;
+.btn {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+}
 
-  & > .btn {
-    width: 33.333333333%;
-  }
+.table {
+  color: #555;
 }
 
 .leaflet-control-layers-expanded .leaflet-control-layers-list {
@@ -23,9 +77,9 @@
 }
 
 ::selection {
-	background: #acb251; /* Safari */
+	background: #bdd455; /* Safari */
 }
 
 ::-moz-selection {
-	background: #acb251; /* Firefox */
+	background: #bdd455; /* Firefox */
 }
