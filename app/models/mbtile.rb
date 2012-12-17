@@ -136,10 +136,8 @@ class Mbtile < ActiveRecord::Base
   end
 
   def cartodb_query
-    require 'uri'
-
     habitat_model = Habitat.find(habitat)
-    geom = URI.escape("ST_GeomFromText(ST_AsText(ST_GeomFromGeoJson('#{area.geo_json}')),4326)")
+    geom = "ST_GeomFromText(ST_AsText(ST_GeomFromGeoJson('#{area.geo_json}')),4326)"
 
     "http://carbon-tool.cartodb.com/api/v2/sql?format=kml&q=SELECT%20*%20FROM%20#{habitat_model.table_name}%20WHERE%20ST_Intersects(#{geom},the_geom)"
   end
