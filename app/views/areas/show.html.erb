@@ -13,31 +13,33 @@
             <dd><%= @area.title %></dd>
           </dl>
 
-          <h2>MBTiles</h2>
+          <h5>MBTiles</h5>
 
-          <table class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th>Habitat</th>
-                <th>Last generation started at</th>
-                <th>Last generated at</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-            </thead>
+          <div class="accordion" id="accordion">
+            <% @mbtiles.each do |mbtile| %>
+              <div class="accordion-group">
+                <div class="accordion-heading">
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse_<%= mbtile.habitat %>">
+                    <%= mbtile.habitat.humanize %>
+                  </a>
+                </div>
+                <div id="collapse_<%= mbtile.habitat %>" class="accordion-body collapse">
+                  <div class="accordion-inner">
+                    <dl>
+                      <dt>Last generation started at:</dt>
+                      <dd><%= mbtile.last_generation_started_at %></dd>
 
-            <tbody>
-          <% @mbtiles.each do |mbtile| %>
-              <tr>
-                <td><%= mbtile.habitat.humanize %></td>
-                <td><%= mbtile.last_generation_started_at %></td>
-                <td><%= mbtile.last_generated_at %></td>
-                <td><%= mbtile.status %></td>
-                <td><%= link_to_if mbtile.completed?, 'Download', area_mbtile_path(@area, mbtile.habitat) %></td>
-              </tr>
-          <% end %>
-            </tbody>
-          </table>
+                      <dt>Last generated at:</dt>
+                      <dd><%= mbtile.last_generated_at %></dd>
+
+                      <dt>Status:</dt>
+                      <dd><%= mbtile.status %></dd>
+                    </dl>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
