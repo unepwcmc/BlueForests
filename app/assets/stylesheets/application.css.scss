@@ -2,7 +2,7 @@
 @import "leaflet.draw";
 @import "bootstrap-generators";
 
-#validations {
+.static {
   #map {
     position: fixed;
     top: $navbarHeight;

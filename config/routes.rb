@@ -10,7 +10,6 @@ BlueCarbon::Application.routes.draw do
   resources :areas do
     resources :mbtiles, only: :show
   end
-  resources :habitats, only: [:index, :show]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

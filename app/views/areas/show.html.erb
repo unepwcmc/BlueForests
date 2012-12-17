@@ -1,48 +1,53 @@
-<div class="page-header">
-  <%= link_to areas_path, :class => 'btn' do %>
-    <i class="icon-list-alt"></i>
-    Back
-  <% end %>
-  <%= link_to edit_area_path(@area), :class => 'btn btn-primary' do %>
-    <i class="icon-pencil icon-white"></i>
-    Edit
-  <% end %>
-  <h1>Area</h1>
+<div class="static">
+  <%= javascript_tag "window.areaCoordinates = #{@area.coordinates}" %>
+  <div id="map"></div>
+
+  <div id="sidebar" class="shadow">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <h5>Area</h5>
+
+          <dl>
+            <dt>Title:</dt>
+            <dd><%= @area.title %></dd>
+          </dl>
+
+          <h2>MBTiles</h2>
+
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Habitat</th>
+                <th>Last generation started at</th>
+                <th>Last generated at</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+          <% @mbtiles.each do |mbtile| %>
+              <tr>
+                <td><%= mbtile.habitat.humanize %></td>
+                <td><%= mbtile.last_generation_started_at %></td>
+                <td><%= mbtile.last_generated_at %></td>
+                <td><%= mbtile.status %></td>
+                <td><%= link_to_if mbtile.completed?, 'Download', area_mbtile_path(@area, mbtile.habitat) %></td>
+              </tr>
+          <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="navbar navbar-fixed-bottom">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <p>&copy; UNEP-WCMC 2012</p>
+      </div>
+    </div>
+  </footer>
 </div>
-
-<dl>
-  <dt>Title:</dt>
-  <dd><%= @area.title %></dd>
-
-  <dt>Coordinates:</dt>
-  <dd><%= @area.coordinates %></dd>
-</dl>
-
-<%= javascript_tag "window.areaCoordinates = #{@area.coordinates}" %>
-<div id="map" style="height: 380px;"></div>
-
-<h2>MBTiles</h2>
-
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Habitat</th>
-      <th>Last generation started at</th>
-      <th>Last generated at</th>
-      <th>Status</th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-<% @mbtiles.each do |mbtile| %>
-    <tr>
-      <td><%= mbtile.habitat.humanize %></td>
-      <td><%= mbtile.last_generation_started_at %></td>
-      <td><%= mbtile.last_generated_at %></td>
-      <td><%= mbtile.status %></td>
-      <td><%= link_to_if mbtile.completed?, 'Download', area_mbtile_path(@area, mbtile.habitat) %></td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
