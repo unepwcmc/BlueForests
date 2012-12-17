@@ -18,4 +18,8 @@ class Habitat
   def to_param
     @name
   end
+  
+  def table_name
+    "bc_#{name}"
+  end
 end

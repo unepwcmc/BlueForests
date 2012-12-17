@@ -104,4 +104,4 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     false
 
   latLngsToString: (latLngs) ->
-    "[#{_.map(latLngs, (ll) -> "[#{ll.lat},#{ll.lng}]")}]"
+    "[#{_.map(latLngs, (ll) -> "[#{ll.lng},#{ll.lat}]")}]"

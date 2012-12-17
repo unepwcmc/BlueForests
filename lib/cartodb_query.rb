@@ -1,33 +1,27 @@
 class CartodbQuery
-  def self.add(table_name, coordinates)
-    geom_sql = "ST_GeomFromText('MULTIPOLYGON(((#{coordinates})))', 4326)"
+  def self.query(validation)
+    habitat = Habitat.find(validation.habitat)
+    geom = "ST_GeomFromText(ST_AsText(ST_GeomFromGeoJson('#{validation.geo_json}')),4326)"
+    uniq_id = (Time.now.to_f * 1000.0).to_i
 
     <<-SQL
-      INSERT INTO #{table_name} (the_geom) VALUES (#{geom_sql});
-    SQL
-  end
+      UPDATE #{habitat.table_name} AS t SET toggle = NULL WHERE ST_Intersects(#{geom},t.the_geom) AND t.toggle = true;
 
-  def self.deactivate_intersecting_polygons(table_name, coordinates)
-    geom_sql = "ST_GeomFromText('MULTIPOLYGON(((#{coordinates})))', 4326)"
+      INSERT INTO #{habitat.table_name}
+        (the_geom, action, admin_id, age, area_id, density, knowledge, notes, phase, phase_id, prev_phase, toggle)
+        SELECT ST_Multi(ST_Intersection(#{geom}, t.the_geom)) as the_geom, '#{validation.action}', '#{validation.admin_id}', '#{validation.age}', '#{validation.area_id}', '#{validation.density}', '#{validation.knowledge}', '#{validation.notes}', #{uniq_id}, 1, t.phase AS prev_phase, true
+          FROM #{habitat.table_name} t
+          WHERE ST_Intersects(#{geom},t.the_geom) AND t.toggle IS NULL
+        UNION ALL
+        SELECT ST_Multi(ST_Difference(t.the_geom, ST_Collect(#{geom}))) as the_geom, t.action, t.admin_id, t.age, t.area_id, t.density, t.knowledge, t.notes, #{uniq_id}, t.phase_id, t.prev_phase, true
+          FROM #{habitat.table_name} t
+          GROUP BY t.the_geom, t.action, t.admin_id, t.age, t.area_id, t.density, t.knowledge, t.notes, t.phase, t.phase_id, t.prev_phase, true
+        UNION ALL
+        SELECT ST_Multi(ST_Difference(#{geom}, ST_Collect(t.the_geom))) as the_geom, '#{validation.action}', '#{validation.admin_id}', '#{validation.age}', '#{validation.area_id}', '#{validation.density}', '#{validation.knowledge}', '#{validation.notes}', #{uniq_id}, 1, t.phase AS prev_phase, true
+          FROM #{habitat.table_name} t
+          GROUP BY t.phase;
 
-    <<-SQL
-      UPDATE #{table_name} SET toggle = false WHERE ST_Intersects(#{table_name}.the_geom, #{geom_sql});
-    SQL
-  end
-
-  def self.add_broken_polygons(table_name, coordinates)
-    geom_sql = "ST_GeomFromText('MULTIPOLYGON(((#{coordinates})))', 4326)"
-
-    <<-SQL
-      INSERT INTO #{table_name} (the_geom, author, display, phase, phase_id, prev_phase, toggle, value)
-        SELECT ST_Multi(ST_Intersection(#{geom_sql}, t.the_geom)) AS the_geom, 'Miguel' AS author, true AS display, 1 AS phase, 1 AS phase_id, 1 AS prev_phase, true AS toggle, 1 AS value
-          FROM #{table_name} t WHERE ST_Intersects(#{geom_sql}, t.the_geom)
-      UNION
-        SELECT ST_Multi(ST_Difference(t.the_geom, #{geom_sql})) AS the_geom, 'Miguel' AS author, true AS display, 1 AS phase, 1 AS phase_id, 1 AS prev_phase, true AS toggle, 1 AS value
-          FROM #{table_name} t WHERE ST_Intersects(#{geom_sql}, t.the_geom)
-      UNION
-        SELECT ST_Multi(ST_Difference(#{geom_sql}, t.the_geom)) AS the_geom, 'Miguel' AS author, true AS display, 1 AS phase, 1 AS phase_id, 1 AS prev_phase, true AS toggle, 1 AS value
-          FROM #{table_name} t;
+      UPDATE #{habitat.table_name} SET toggle = false WHERE toggle IS NULL;
     SQL
   end
 end

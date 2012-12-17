@@ -15,13 +15,22 @@ class Validation < ActiveRecord::Base
 
   before_create :cartodb
 
+  def geo_json
+    json_coordinates = JSON.parse(coordinates)
+    json_coordinates << json_coordinates.first
+
+    "{\"type\":\"MultiPolygon\",\"coordinates\":[[#{json_coordinates}]]}"
+  end
+
   after_save do
     Mbtile.delay.generate(area_id, habitat) if area_id
   end
 
   def cartodb
     # SQL CartoDB
-    sql = CartodbQuery.add(APP_CONFIG['cartodb_table'], coordinates)
+    sql = CartodbQuery.query(self)
+
+    puts sql
 
     CartoDB::Connection.query(sql)
   rescue CartoDB::Client::Error
