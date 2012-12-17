@@ -5,11 +5,20 @@ class CreateGeometries < ActiveRecord::Migration
     unless Rails.env.production?
       create_table :geometries do |t|
         t.geometry  :the_geom
+
+        t.string    :action
+        t.integer   :admin_id
+        t.integer   :age
+        t.integer   :area_id
+        t.integer   :density
+        t.string    :knowledge
+        t.text      :notes
+
         t.string    :author
         t.boolean   :display
-        t.integer   :phase
-        t.integer   :phase_id
-        t.integer   :prev_phase
+        t.integer   :phase,       limit: 8
+        t.integer   :phase_id,    limit: 8
+        t.integer   :prev_phase,  limit: 8
         t.boolean   :toggle
         t.float     :value
       end

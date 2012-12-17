@@ -28,9 +28,7 @@ class Validation < ActiveRecord::Base
 
   def cartodb
     # SQL CartoDB
-    sql = CartodbQuery.query(self)
-
-    puts sql
+    sql = CartodbQuery.query(Habitat.find(validation.habitat).table_name, "ST_GeomFromText(ST_AsText(ST_GeomFromGeoJson('#{geo_json}')),4326)")
 
     CartoDB::Connection.query(sql)
   rescue CartoDB::Client::Error

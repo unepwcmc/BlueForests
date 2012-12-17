@@ -2,29 +2,60 @@ require 'spec_helper'
 require_relative '../../lib/cartodb_query'
 
 describe CartodbQuery do
-  describe '.deactivate_intersecting_polygons' do
-    it 'should toggle to false intersecting polygons' do
-      add_query = CartodbQuery.add('geometries', '-18 9, 18 9, 18 -9, -18 -9, -18 9')
-      update_query = CartodbQuery.deactivate_intersecting_polygons('geometries', '-18 9, 18 9, 18 -9, -18 -9, -18 9')
+  describe '.query' do
+    describe 'when the table is empty' do
+      it 'creates one geometry' do
+        query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((-2 2, 2 2, 2 -2, -2 -2, -2 2)))',4326)")
+        ActiveRecord::Base.connection.execute(query)
 
-      ActiveRecord::Base.connection.execute(add_query)
-      ActiveRecord::Base.connection.execute(update_query)
-
-      check_toggle = ActiveRecord::Base.connection.select_one("SELECT COUNT(1) AS count FROM geometries WHERE toggle = false;")
-      Integer(check_toggle['count']).should ==(1)
+        check = ActiveRecord::Base.connection.select_one("SELECT COUNT(1) AS count FROM geometries;")
+        Integer(check['count']).should ==(1)
+      end
     end
-  end
-  
-  describe '.add_broken_polygons' do
-    it 'should create three polygons plus the initial one' do
-      add_query = CartodbQuery.add('geometries', '-18 9, 18 9, 18 -9, -18 -9, -18 9')
-      add_broken_query = CartodbQuery.add_broken_polygons('geometries', '0 0, 36 0, 36 -18, 0 -18, 0 0')
 
-      ActiveRecord::Base.connection.execute(add_query)
-      ActiveRecord::Base.connection.execute(add_broken_query)
+    describe 'when there is one geometry that does NOT intersect' do
+      before(:each) do
+        add_query = "INSERT INTO geometries (the_geom, toggle) VALUES (ST_GeomFromText('MULTIPOLYGON(((-2 2, 2 2, 2 -2, -2 -2, -2 2)))', 4326), true);"
+        ActiveRecord::Base.connection.execute(add_query)
 
-      check = ActiveRecord::Base.connection.select_one("SELECT COUNT(1) AS count FROM geometries;")
-      Integer(check['count']).should ==(4)
+        query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((0 0, 4 0, 4 -4, 0 -4, 0 0)))',4326)")
+        ActiveRecord::Base.connection.execute(query)
+      end
+
+      it 'creates 1 more geometry (total of 2)' do
+        check = ActiveRecord::Base.connection.select_one("SELECT COUNT(1) AS count FROM geometries;")
+        Integer(check['count']).should ==(2)
+      end
+
+      it 'keeps both with toggle => true' do
+        check = ActiveRecord::Base.connection.select_one("SELECT COUNT(1) AS count FROM geometries WHERE toggle = true;")
+        Integer(check['count']).should ==(2)
+      end
+    end
+
+    describe 'when there is one geometry that intersects' do
+      before(:each) do
+        add_query = "INSERT INTO geometries (the_geom, toggle) VALUES (ST_GeomFromText('MULTIPOLYGON(((-12 -8, -8 -8, -8 -12, -12 -12, -12 -8)))', 4326), true);"
+        ActiveRecord::Base.connection.execute(add_query)
+
+        query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((0 0, 4 0, 4 -4, 0 -4, 0 0)))',4326)")
+        ActiveRecord::Base.connection.execute(query)
+      end
+
+      it 'creates 3 more geometries (total of 4)' do
+        check = ActiveRecord::Base.connection.select_one("SELECT COUNT(1) AS count FROM geometries;")
+        Integer(check['count']).should ==(4)
+      end
+
+      it 'changes 1 geometry to toggle => false' do
+        check = ActiveRecord::Base.connection.select_one("SELECT COUNT(1) AS count FROM geometries WHERE toggle = false;")
+        Integer(check['count']).should ==(1)
+      end
+
+      it 'adds the 3 new geometries with toggle => true' do
+        check = ActiveRecord::Base.connection.select_one("SELECT COUNT(1) AS count FROM geometries WHERE toggle = true;")
+        Integer(check['count']).should ==(3)
+      end
     end
   end
 end

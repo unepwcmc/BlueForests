@@ -1,27 +1,29 @@
 class CartodbQuery
-  def self.query(validation)
-    habitat = Habitat.find(validation.habitat)
-    geom = "ST_GeomFromText(ST_AsText(ST_GeomFromGeoJson('#{validation.geo_json}')),4326)"
+  def self.query(table_name, geom)
     uniq_id = (Time.now.to_f * 1000.0).to_i
 
-    <<-SQL
-      UPDATE #{habitat.table_name} AS t SET toggle = NULL WHERE ST_Intersects(#{geom},t.the_geom) AND t.toggle = true;
+    require 'ostruct'
+    validation = OpenStruct.new(action: 'validate', admin_id: 1, age: 1, area_id: 1, density: 1, knowledge: 'local_data', notes: 'test')
 
-      INSERT INTO #{habitat.table_name}
+    <<-SQL
+      UPDATE #{table_name} AS t SET toggle = NULL WHERE ST_Intersects(#{geom},t.the_geom) AND t.toggle = true;
+
+      INSERT INTO #{table_name}
         (the_geom, action, admin_id, age, area_id, density, knowledge, notes, phase, phase_id, prev_phase, toggle)
-        SELECT ST_Multi(ST_Intersection(#{geom}, t.the_geom)) as the_geom, '#{validation.action}', '#{validation.admin_id}', '#{validation.age}', '#{validation.area_id}', '#{validation.density}', '#{validation.knowledge}', '#{validation.notes}', #{uniq_id}, 1, t.phase AS prev_phase, true
-          FROM #{habitat.table_name} t
-          WHERE ST_Intersects(#{geom},t.the_geom) AND t.toggle IS NULL
+        SELECT ST_Multi(ST_Intersection(#{geom}, t.the_geom)) as the_geom, '#{validation.action}', #{validation.admin_id}, #{validation.age}, #{validation.area_id}, #{validation.density}, '#{validation.knowledge}', '#{validation.notes}', #{uniq_id}, 1, t.phase AS prev_phase, true
+          FROM #{table_name} t
+          WHERE t.toggle IS NULL
         UNION ALL
         SELECT ST_Multi(ST_Difference(t.the_geom, ST_Collect(#{geom}))) as the_geom, t.action, t.admin_id, t.age, t.area_id, t.density, t.knowledge, t.notes, #{uniq_id}, t.phase_id, t.prev_phase, true
-          FROM #{habitat.table_name} t
+          FROM #{table_name} t
+          WHERE t.toggle IS NULL
           GROUP BY t.the_geom, t.action, t.admin_id, t.age, t.area_id, t.density, t.knowledge, t.notes, t.phase, t.phase_id, t.prev_phase, true
         UNION ALL
         SELECT ST_Multi(ST_Difference(#{geom}, ST_Collect(t.the_geom))) as the_geom, '#{validation.action}', '#{validation.admin_id}', '#{validation.age}', '#{validation.area_id}', '#{validation.density}', '#{validation.knowledge}', '#{validation.notes}', #{uniq_id}, 1, t.phase AS prev_phase, true
-          FROM #{habitat.table_name} t
+          FROM #{table_name} t
           GROUP BY t.phase;
 
-      UPDATE #{habitat.table_name} SET toggle = false WHERE toggle IS NULL;
+      UPDATE #{table_name} SET toggle = false WHERE toggle IS NULL;
     SQL
   end
 end
