@@ -28,12 +28,26 @@ class Validation < ActiveRecord::Base
 
   def cartodb
     # SQL CartoDB
-    sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText(ST_AsText(ST_GeomFromGeoJson('#{geo_json}')),4326)")
+    #sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText(ST_AsText(ST_GeomFromGeoJson('#{geo_json}')),4326)")
+
+    # SQL CartoDB #2
+    json_coordinates = JSON.parse(coordinates)
+    json_coordinates << json_coordinates.first
+
+    json_coordinates = json_coordinates.to_s.gsub(", ", " ")
+    json_coordinates = json_coordinates.gsub("] [", ", ")
+    json_coordinates = json_coordinates.gsub(/(\[)|(\])/, "")
+
+    sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText('MultiPolygon(((#{json_coordinates})))',4326)")
+
+    # Encode & symbols for the URL call
+    sql.gsub!("&", "%26")
 
     CartoDB::Connection.query("BEGIN; #{sql} COMMIT;")
-  rescue CartoDB::Client::Error
+  rescue CartoDB::Client::Error => e
     errors.add :base, 'There was an error trying to render the layers.'
     logger.info "There was an error trying to execute the following query:\n#{sql}"
+    p e
   end
 
   private
