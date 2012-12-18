@@ -68,10 +68,10 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       'Satellite': baseSatellite
 
     overlayMaps =
-      'Mangroves': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM bc_mangroves').addTo(map)
-      'Seagrass': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM bc_seagrass').addTo(map)
-      'Sabkha': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM bc_sabkha').addTo(map)
-      'Salt marshes': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM bc_saltmarsh').addTo(map)
+      'Mangroves': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM bc_mangrove WHERE toggle = true AND action <> \'delete\'').addTo(map)
+      'Seagrass': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM bc_seagrass WHERE toggle = true AND action <> \'delete\'').addTo(map)
+      'Sabkha': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM bc_sabkha WHERE toggle = true AND action <> \'delete\'').addTo(map)
+      'Salt marshes': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM bc_salt_marsh WHERE toggle = true AND action <> \'delete\'').addTo(map)
 
     L.control.layers(baseMaps, overlayMaps).addTo(map)
 
