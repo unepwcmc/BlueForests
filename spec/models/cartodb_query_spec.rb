@@ -3,9 +3,14 @@ require_relative '../../lib/cartodb_query'
 
 describe CartodbQuery do
   describe '.query' do
+    before(:all) do
+      require 'ostruct'
+      @validation = OpenStruct.new(action: 'validate', admin_id: 1, age: 1, area_id: 1, density: 1, knowledge: 'local_data', notes: 'test')
+    end
+  
     describe 'when the table is empty' do
       it 'creates one geometry' do
-        query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((-2 2, 2 2, 2 -2, -2 -2, -2 2)))',4326)")
+        query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((-2 2, 2 2, 2 -2, -2 -2, -2 2)))',4326)", @validation)
         ActiveRecord::Base.connection.execute(query)
 
         check = ActiveRecord::Base.connection.select_one("SELECT COUNT(1) AS count FROM geometries;")
@@ -18,7 +23,7 @@ describe CartodbQuery do
         add_query = "INSERT INTO geometries (the_geom, toggle) VALUES (ST_GeomFromText('MULTIPOLYGON(((-12 -8, -8 -8, -8 -12, -12 -12, -12 -8)))', 4326), true);"
         ActiveRecord::Base.connection.execute(add_query)
 
-        query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((0 0, 4 0, 4 -4, 0 -4, 0 0)))',4326)")
+        query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((0 0, 4 0, 4 -4, 0 -4, 0 0)))',4326)", @validation)
         ActiveRecord::Base.connection.execute(query)
       end
 
@@ -38,7 +43,7 @@ describe CartodbQuery do
         add_query = "INSERT INTO geometries (the_geom, toggle) VALUES (ST_GeomFromText('MULTIPOLYGON(((-2 2, 2 2, 2 -2, -2 -2, -2 2)))', 4326), true);"
         ActiveRecord::Base.connection.execute(add_query)
 
-        query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((0 0, 4 0, 4 -4, 0 -4, 0 0)))',4326)")
+        query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((0 0, 4 0, 4 -4, 0 -4, 0 0)))',4326)", @validation)
         ActiveRecord::Base.connection.execute(query)
       end
 

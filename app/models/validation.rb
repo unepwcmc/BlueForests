@@ -38,7 +38,7 @@ class Validation < ActiveRecord::Base
     json_coordinates = json_coordinates.gsub("] [", ", ")
     json_coordinates = json_coordinates.gsub(/(\[)|(\])/, "")
 
-    sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText('MultiPolygon(((#{json_coordinates})))',4326)")
+    sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText('MultiPolygon(((#{json_coordinates})))',4326)", self)
 
     # Encode & symbols for the URL call
     sql.gsub!("&", "%26")
