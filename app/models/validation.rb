@@ -30,7 +30,7 @@ class Validation < ActiveRecord::Base
     # SQL CartoDB
     sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText(ST_AsText(ST_GeomFromGeoJson('#{geo_json}')),4326)")
 
-    CartoDB::Connection.query(sql)
+    CartoDB::Connection.query("BEGIN; #{sql} COMMIT;")
   rescue CartoDB::Client::Error
     errors.add :base, 'There was an error trying to render the layers.'
     logger.info "There was an error trying to execute the following query:\n#{sql}"
