@@ -30,9 +30,9 @@ class Mbtile < ActiveRecord::Base
 
     generate_style
     generate_geojson
-    generate_mml(10, 11)
+    generate_mml(15, 19)
 
-    config_file = generate_config(10, 11)
+    config_file = generate_config(15, 19)
 
     system "#{APP_CONFIG['projectmill_path']}/index.js --mill --render -p #{tilemill_path}/ -c #{config_file} -t #{APP_CONFIG['tilemill_path']}"
 

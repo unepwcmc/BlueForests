@@ -32,7 +32,7 @@ initializeMap = (map_id) ->
   if findAreaCoordinates()
     initialRectangle = new L.rectangle(findAreaCoordinates())
     drawnItems.addLayer(initialRectangle)
-    map.panTo(initialRectangle.getBounds().getCenter())
+    map.fitBounds(initialRectangle.getBounds())
 
   editableMap(map, drawnItems) if $('#area_coordinates').length > 0
 
