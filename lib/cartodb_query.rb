@@ -20,13 +20,13 @@ INSERT INTO #{table_name} (the_geom, action, admin_id, age, area_id, density, kn
     WHERE ST_Overlaps(t.the_geom, dt.polygon)
     GROUP BY t.phase, dt.polygon;
 
-UPDATE #{table_name} SET toggle = false WHERE toggle IS NULL;
-
 INSERT INTO #{table_name}
   (the_geom, action, admin_id, age, area_id, density, knowledge, notes, phase, phase_id, toggle)
   SELECT ST_Multi(dt.polygon) AS the_geom, '#{validation.action}', #{validation.admin_id}, #{validation.age}, #{validation.area_id}, #{validation.density}, '#{validation.knowledge}', '#{validation.notes}', #{uniq_id}, 1, true
     FROM (SELECT #{geom} AS polygon) dt
-    WHERE (SELECT COUNT(1) FROM #{table_name} t, (SELECT #{geom} AS polygon) dt WHERE ST_Overlaps(t.the_geom, dt.polygon) AND toggle = true) = 0;
+    WHERE (SELECT COUNT(1) FROM #{table_name} t, (SELECT #{geom} AS polygon) dt WHERE ST_Overlaps(t.the_geom, dt.polygon) AND toggle IS NULL) = 0;
+
+UPDATE #{table_name} SET toggle = false WHERE toggle IS NULL;
     SQL
   end
 end
