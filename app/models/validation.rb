@@ -31,7 +31,11 @@ class Validation < ActiveRecord::Base
     #sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText(ST_AsText(ST_GeomFromGeoJson('#{geo_json}')),4326)")
 
     # SQL CartoDB #2
-    json_coordinates = JSON.parse(coordinates)
+    if coordinates.is_a?(Array)
+      json_coordinates = coordinates
+    else
+      json_coordinates = JSON.parse(coordinates)
+    end
     json_coordinates << json_coordinates.first
 
     json_coordinates = json_coordinates.to_s.gsub(", ", " ")
