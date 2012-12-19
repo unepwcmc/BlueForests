@@ -5,7 +5,7 @@ describe CartodbQuery do
   describe '.query' do
     before(:all) do
       require 'ostruct'
-      @validation = OpenStruct.new(action: 'validate', admin_id: 1, age: 1, area_id: 1, density: 1, knowledge: 'local_data', notes: 'test')
+      @validation = OpenStruct.new(action: 'add', admin_id: 1, age: 1, area_id: 1, density: 1, knowledge: 'local_data', notes: 'test')
     end
   
     describe 'when the table is empty' do
