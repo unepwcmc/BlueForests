@@ -40,9 +40,6 @@ class Validation < ActiveRecord::Base
 
     sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText('MultiPolygon(((#{json_coordinates})))',4326)", self)
 
-    # Encode & symbols for the URL call
-    sql.gsub!("&", "%26")
-
     CartoDB::Connection.query("BEGIN; #{sql} COMMIT;")
   rescue CartoDB::Client::Error => e
     errors.add :base, 'There was an error trying to render the layers.'
