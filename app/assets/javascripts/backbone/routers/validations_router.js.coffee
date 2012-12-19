@@ -78,8 +78,10 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     drawnItems = new L.LayerGroup()
 
     if coordinates
-      initialPolygon = new L.polygon(coordinates)
+      latLngCoordinates = _.map(coordinates, (arr) -> [arr[1], arr[0]])
+      initialPolygon = new L.polygon(latLngCoordinates)
       drawnItems.addLayer(initialPolygon)
+      map.panTo(initialPolygon.getBounds().getCenter())
 
     @editableMap(map, drawnItems) if $('#coordinates').length > 0
 

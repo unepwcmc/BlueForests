@@ -6,18 +6,33 @@ $ ->
   initializeMap('map') if $('#map').length > 0
 
 initializeMap = (map_id) ->
-  map = L.map(map_id,
-    scrollWheelZoom: false
-  ).setView([24.5, 54], 9)
-  L.tileLayer 'http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png'
-    maxZoom: 18
-  .addTo(map)
+  baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 18})
+  baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 18})
+
+  map = L.map map_id,
+    center: [24.5, 54]
+    zoom: 9
+    layers: [baseSatellite]
+
+  # Layers
+  baseMaps =
+    'Map': baseMap
+    'Satellite': baseSatellite
+
+  overlayMaps =
+    'Mangroves': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM bc_mangrove WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
+    'Seagrass': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM bc_seagrass WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
+    'Sabkha': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM bc_sabkha WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
+    'Salt marshes': L.tileLayer('https://carbon-tool.cartodb.com/tiles/country_boundaries/{z}/{x}/{y}.png?sql=SELECT * FROM bc_salt_marsh WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
+
+  L.control.layers(baseMaps, overlayMaps).addTo(map)
 
   drawnItems = new L.LayerGroup()
 
   if findAreaCoordinates()
     initialRectangle = new L.rectangle(findAreaCoordinates())
     drawnItems.addLayer(initialRectangle)
+    map.panTo(initialRectangle.getBounds().getCenter())
 
   editableMap(map, drawnItems) if $('#area_coordinates').length > 0
 

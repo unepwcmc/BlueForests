@@ -67,6 +67,7 @@ class Mbtile < ActiveRecord::Base
 
     "#{layers_path}/polygons.kml".tap do |path|
       File.open(path, "w") do |f|
+        p cartodb_query
         f.write(open(cartodb_query).read)
       end
     end
@@ -141,8 +142,6 @@ class Mbtile < ActiveRecord::Base
     require 'uri'
 
     habitat_model = Habitat.find(habitat)
-    geom = "ST_GeomFromText(ST_AsText(ST_GeomFromGeoJson('#{area.geo_json}')),4326)"
-
-    URI.escape("http://carbon-tool.cartodb.com/api/v2/sql?format=kml&q=SELECT * FROM #{habitat_model.table_name} WHERE ST_Intersects(#{geom},the_geom)")
+    URI.escape("http://carbon-tool.cartodb.com/api/v2/sql?format=kml&q=SELECT the_geom FROM #{habitat_model.table_name}")
   end
 end

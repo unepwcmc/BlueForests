@@ -11,28 +11,8 @@
         </div>
 
         <dl>
-          <dt>Coordinates:</dt>
-          <dd><%= coordinates %></dd>
-        </dl>
-
-        <dl>
           <dt>Action:</dt>
           <dd><%= action %></dd>
-        </dl>
-
-        <dl>
-          <dt>Area:</dt>
-          <dd><%= area_id %></dd>
-        </dl>
-
-        <dl>
-          <dt>Recorded at:</dt>
-          <dd><%= recorded_at %></dd>
-        </dl>
-
-        <dl>
-          <dt>Knowledge:</dt>
-          <dd><%= knowledge %></dd>
         </dl>
 
         <dl>
@@ -40,21 +20,46 @@
           <dd><%= habitat %></dd>
         </dl>
 
-        <dl>
-          <dt>Density:</dt>
-          <dd><%= density %></dd>
-        </dl>
+        <% if(action == '') { %>
+          <dl>
+            <dt>Area:</dt>
+            <dd><%= area_id %></dd>
+          </dl>
 
-        <dl>
-          <dt>Age:</dt>
-          <dd><%= age %></dd>
-        </dl>
+          <dl>
+            <dt>Recorded at:</dt>
+            <dd><%= recorded_at %></dd>
+          </dl>
 
-        <dl>
-          <dt>Notes:</dt>
-          <dd><%= notes %></dd>
-        </dl>
+          <dl>
+            <dt>Knowledge:</dt>
+            <dd><%= knowledge %></dd>
+          </dl>
+
+          <dl>
+            <dt>Density:</dt>
+            <dd><%= density %></dd>
+          </dl>
+
+          <dl>
+            <dt>Age:</dt>
+            <dd><%= age %></dd>
+          </dl>
+
+          <dl>
+            <dt>Notes:</dt>
+            <dd><%= notes %></dd>
+          </dl>
+        <% } %>
       </div>
     </div>
   </div>
 </div>
+
+<footer class="navbar navbar-fixed-bottom">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <p>&copy; UNEP-WCMC 2012</p>
+    </div>
+  </div>
+</footer>
