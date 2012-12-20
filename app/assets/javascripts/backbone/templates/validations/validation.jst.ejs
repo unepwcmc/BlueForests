@@ -1,7 +1,7 @@
 <td><%= recorded_at %></td>
-<td><%= action %></td>
-<td><%= knowledge %></td>
-<td><%= habitat %></td>
+<td><%= action.charAt(0).toUpperCase() + action.slice(1) %></td>
+<td><%= {browser: "Underlying data in Browser", local_knowledge: "Local Knowledge", ground_truthing: "Ground Truthing"}[knowledge] %></td>
+<td><%= habitat.replace(/_/g, ' ').replace(/(\w+)/g, function(match) {return match.charAt(0).toUpperCase() + match.slice(1)}) %></td>
 
 <td><a href="#/<%= id %>">View</td>
 <td><a href="#/<%= id %>/destroy" class="destroy">Delete</a></td>

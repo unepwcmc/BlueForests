@@ -8,8 +8,8 @@ class Validation < ActiveRecord::Base
   validates :coordinates, presence: true
   validates :action, presence: true, inclusion: { in: %w(add delete validate) }
   validates :habitat, presence: true, inclusion: { in: Habitat.all.map { |h| h.to_param } }
-  validates :knowledge, presence: true, unless: :is_delete_action?
-  validates :condition, presence: true, unless: :is_delete_action?
+  validates :knowledge, presence: true, unless: Proc.new { |v| v.action == 'delete' }
+  validates :condition, presence: true, unless: Proc.new { |v| v.action == 'delete' || v.habitat == 'seagrass' || v.habitat == 'sabkha' || v.habitat == 'salt_marsh' }
   validates :admin, presence: true
 
   before_create :cartodb
@@ -23,7 +23,7 @@ class Validation < ActiveRecord::Base
   end
 
   def json_coordinates
-    json_coordinates = JSON.parse(coordinates)
+    json_coordinates = JSON.parse(coordinates.to_s)
     json_coordinates << json_coordinates.first
 
     json_coordinates = json_coordinates.to_s.gsub(", ", " ")
@@ -41,11 +41,5 @@ class Validation < ActiveRecord::Base
   rescue CartoDB::Client::Error => e
     errors.add :base, 'There was an error trying to render the layers.'
     logger.info "There was an error trying to execute the following query:\n#{sql}\nError details: #{e.inspect}"
-  end
-
-  private
-
-  def is_delete_action?
-    action == 'delete'
   end
 end

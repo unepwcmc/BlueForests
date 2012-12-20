@@ -26,7 +26,25 @@ class BlueCarbon.Models.Validation extends Backbone.Model
   secureAttributes: ['admin_id', 'created_at', 'updated_at']
 
   toJSON: ->
-    @_cloneAttributes()
+    model_json = @_cloneAttributes()
+
+    switch @get('habitat')
+      when 'mangrove'
+        delete model_json.species
+      when 'seagrass'
+        delete model_json.condition
+        delete model_json.age
+      when 'sabkha'
+        delete model_json.density
+        delete model_json.condition
+        delete model_json.age
+        delete model_json.species
+      when 'salt_marsh'
+        delete model_json.condition
+        delete model_json.age
+        delete model_json.species
+
+    return model_json
 
   _cloneAttributes: ->
     attributes = _.clone(@attributes)

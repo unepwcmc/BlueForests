@@ -38,8 +38,8 @@ $textColor:             $white !default;
 
 // Links
 // -------------------------
-$linkColor:             #bdd455 !default;
-$linkColorHover:        #9eb436 !default;
+$linkColor:             #6A8DAB !default;
+$linkColorHover:        darken($linkColor, 10%) !default;
 
 
 // Typography
@@ -88,7 +88,7 @@ $btnBackground:                     $white !default;
 $btnBackgroundHighlight:            darken($white, 10%) !default;
 $btnBorder:                         #86a1b3 !default;
 
-$btnPrimaryBackground:              $linkColor !default;
+$btnPrimaryBackground:              #bdd455 !default;
 $btnPrimaryBackgroundHighlight:     #9eb436 !default;
 
 $btnInfoBackground:                 #5bc0de !default;

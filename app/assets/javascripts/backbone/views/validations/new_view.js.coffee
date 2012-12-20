@@ -45,6 +45,11 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
 
     this.$("form").backboneLink(@model)
 
+    # Habitat selection
+    this.$("#habitat").change (e) ->
+      $(".show-with-mangrove, .show-with-seagrass, .show-with-sabkha, .show-with-salt_marsh").addClass('hidden')
+      $(".show-with-#{$(e.target).val()}").removeClass('hidden')
+
     # Action btn-group
     this.$(".btn-group button").click (e) ->
       $(e.target).removeClass('btn-primary').addClass('btn-inverse')

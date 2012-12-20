@@ -27,10 +27,10 @@
                   <div class="accordion-inner">
                     <dl>
                       <dt>Last generation started at:</dt>
-                      <dd><%= mbtile.last_generation_started_at %></dd>
+                      <dd><%= mbtile.last_generation_started_at || '-' %></dd>
 
                       <dt>Last generated at:</dt>
-                      <dd><%= mbtile.last_generated_at %></dd>
+                      <dd><%= mbtile.last_generated_at || '-' %></dd>
 
                       <dt>Status:</dt>
                       <dd><%= mbtile.status %></dd>
