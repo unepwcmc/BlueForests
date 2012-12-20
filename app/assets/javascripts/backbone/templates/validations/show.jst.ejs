@@ -4,11 +4,7 @@
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
-        <div class="page-header">
-          <a href="#/index" class="btn"><i class="icon-list-alt"></i> Back</a>
-          <a href="#/<%= id %>/edit" class="btn btn-primary"><i class="icon-pencil icon-white"></i> Edit</a>
-          <h1>Validation</h1>
-        </div>
+        <h5>Habitat area</h5>
 
         <dl>
           <dt>Action:</dt>
@@ -20,7 +16,7 @@
           <dd><%= habitat %></dd>
         </dl>
 
-        <% if(action == '') { %>
+        <% if(action != 'delete') { %>
           <dl>
             <dt>Area:</dt>
             <dd><%= area_id %></dd>

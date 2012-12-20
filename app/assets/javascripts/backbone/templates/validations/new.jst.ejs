@@ -68,7 +68,7 @@
                 </div>
               </div>
 
-              <div class="control-group density">
+              <div class="control-group density hidden show-with-mangrove show-with-seagrass show-with-salt_marsh">
                 <label class="control-label" for="density">Density of habitat</label>
                 <div class="controls">
                   <select class="span12" name="density" id="density">
@@ -81,7 +81,7 @@
                 </div>
               </div>
 
-              <div class="control-group condition">
+              <div class="control-group condition hidden show-with-mangrove">
                 <label class="control-label" for="condition">Condition</label>
                 <div class="controls">
                   <select class="span12" name="condition" id="condition">
@@ -94,7 +94,7 @@
                 </div>
               </div>
 
-              <div class="control-group age">
+              <div class="control-group age hidden show-with-mangrove">
                 <label class="control-label" for="age">Age of habitat</label>
                 <div class="controls">
                   <select class="span12" name="age" id="age">
@@ -107,8 +107,8 @@
                 </div>
               </div>
 
-              <div class="control-group species">
-                <label class="control-label" for="species">Age of habitat</label>
+              <div class="control-group species hidden show-with-seagrass">
+                <label class="control-label" for="species">Species</label>
                 <div class="controls">
                   <select class="span12" name="species" id="species">
                     <option value="">Unknown</option>
@@ -124,13 +124,13 @@
                 <label class="control-label" for="recorded_at">Recorded at</label>
                 <div class="controls row-fluid">
                   <div class="span4">
-                    <input class="span12" type="number" name="recorded_at(1i)" value="2012">
+                    <input class="span12" type="number" min="1970" max="2050" name="recorded_at(1i)" value="<%= validation["recorded_at(1i)"] %>">
                   </div>
                   <div class="span4">
-                    <input class="span12" type="number" name="recorded_at(2i)" value="12">
+                    <input class="span12" type="number" min="1" max="12" name="recorded_at(2i)" value="<%= validation["recorded_at(2i)"] %>">
                   </div>
                   <div class="span4">
-                    <input class="span12" type="number" name="recorded_at(3i)" value="20">
+                    <input class="span12" type="number" min="1" max="31" name="recorded_at(3i)" value="<%= validation["recorded_at(3i)"] %>">
                   </div>
                 </div>
               </div>
@@ -141,11 +141,9 @@
                   <textarea class="span12" type="text" name="notes" id="notes"><%= validation.name %></textarea>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <div class="form-actions hidden">
-            <input class="btn btn-primary" type="submit" value="Create Validation" />
+              <input class="btn btn-primary width-100-percent" type="submit" value="Create Validation" />
+            </div>
           </div>
         </form>
       </div>

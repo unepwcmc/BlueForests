@@ -1,14 +1,18 @@
 class BlueCarbon.Models.Validation extends Backbone.Model
   paramRoot: 'validation'
 
+  initialize: ->
+    now = new Date()
+    @set({"recorded_at(1i)": "#{now.getFullYear()}", "recorded_at(2i)": "#{now.getMonth() + 1}", "recorded_at(3i)": "#{now.getDate()}"})
+
   defaults:
     coordinates: null
     action: null
     habitat: null
     area_id: null
-    knowledge: null
+    knowledge: "browser"
+    condition: "1"
     density: null
-    condition: null
     age: null
     species: null
     "recorded_at(1i)": null
