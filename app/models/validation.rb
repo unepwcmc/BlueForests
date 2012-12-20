@@ -25,6 +25,10 @@ class Validation < ActiveRecord::Base
     "{\"type\":\"MultiPolygon\",\"coordinates\":[[#{json_coordinates}]]}"
   end
 
+  before_save do
+    coordinates = coordinates.to_s if coordinates.is_a?(Array)
+  end
+
   after_save do
     Mbtile.delay.generate(area_id, habitat) if area_id
   end
