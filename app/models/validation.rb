@@ -2,6 +2,8 @@ class Validation < ActiveRecord::Base
   attr_accessible :coordinates, :action, :habitat, :area_id, :knowledge,
     :density, :condition, :age, :species, :recorded_at, :notes
 
+  serialize :coordinates
+
   belongs_to :area
   belongs_to :admin
 
@@ -14,16 +16,12 @@ class Validation < ActiveRecord::Base
 
   before_create :cartodb
 
-  before_save do
-    coordinates = coordinates.to_s if coordinates.is_a?(Array)
-  end
-
   after_save do
     Mbtile.delay.generate(area_id, habitat) if area_id
   end
 
   def json_coordinates
-    json_coordinates = JSON.parse(coordinates.to_s)
+    json_coordinates = JSON.parse(coordinates)
     json_coordinates << json_coordinates.first
 
     json_coordinates = json_coordinates.to_s.gsub(", ", " ")
