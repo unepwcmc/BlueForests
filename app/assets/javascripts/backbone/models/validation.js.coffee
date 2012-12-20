@@ -4,14 +4,17 @@ class BlueCarbon.Models.Validation extends Backbone.Model
   defaults:
     coordinates: null
     action: null
-    area_id: null
-    recorded_at: null
-    knowledge: null
     habitat: null
+    area_id: null
+    knowledge: null
     density: null
+    condition: null
     age: null
+    species: null
+    "recorded_at(1i)": null
+    "recorded_at(2i)": null
+    "recorded_at(3i)": null
     notes: null
-
 
   # Can't update record; Can't mass-assign protected attributes: id
   # (https://github.com/codebrew/backbone-rails/issues/38)

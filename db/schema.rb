@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121214153125) do
+ActiveRecord::Schema.define(:version => 20121220110332) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -45,6 +45,10 @@ ActiveRecord::Schema.define(:version => 20121214153125) do
     t.integer  "role_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "bazinga", :id => false, :force => true do |t|
+    t.spatial "the_geom", :limit => {:srid=>0, :type=>"geometry"}
   end
 
   create_table "delayed_jobs", :force => true do |t|
@@ -81,6 +85,36 @@ ActiveRecord::Schema.define(:version => 20121214153125) do
     t.spatial "the_geom",   :limit => {:srid=>0, :type=>"geometry"}
   end
 
+  create_table "geometries2", :primary_key => "gid", :force => true do |t|
+    t.string  "action",     :limit => 80
+    t.string  "admin_id",   :limit => 80
+    t.decimal "age"
+    t.decimal "area"
+    t.decimal "area_id"
+    t.string  "capturesou", :limit => 80
+    t.decimal "density"
+    t.string  "ecoregion",  :limit => 80
+    t.integer "existence",  :limit => 2
+    t.string  "interpolat", :limit => 80
+    t.string  "knowledge",  :limit => 80
+    t.string  "notes",      :limit => 80
+    t.decimal "objectid",                                                    :precision => 10, :scale => 0
+    t.decimal "perimeter"
+    t.decimal "phase"
+    t.decimal "phase_id"
+    t.decimal "prev_phase"
+    t.string  "soil_geolo", :limit => 80
+    t.integer "toggle",     :limit => 2
+    t.string  "vegclass",   :limit => 80
+    t.string  "vegetation", :limit => 80
+    t.decimal "cartodb_id",                                                  :precision => 10, :scale => 0
+    t.date    "created_at"
+    t.date    "updated_at"
+    t.spatial "geom",       :limit => {:srid=>4326, :type=>"multi_polygon"}
+  end
+
+  add_index "geometries2", ["geom"], :name => "geometries2_geom_gist", :spatial => true
+
   create_table "mbtiles", :force => true do |t|
     t.string   "status",                     :default => "pending"
     t.datetime "last_generation_started_at"
@@ -110,6 +144,8 @@ ActiveRecord::Schema.define(:version => 20121214153125) do
     t.float    "density"
     t.float    "age"
     t.text     "notes"
+    t.integer  "condition"
+    t.string   "species"
   end
 
 end

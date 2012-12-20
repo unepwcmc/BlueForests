@@ -1,16 +1,19 @@
 class Validation < ActiveRecord::Base
-  attr_accessible :action, :coordinates, :recorded_at, :area_id,
-    :knowledge, :notes, :habitat, :density, :age
+  attr_accessible :coordinates, :action, :habitat, :area_id, :knowledge,
+    :density, :condition, :age, :species, :recorded_at, :notes
 
   belongs_to :area
   belongs_to :admin
 
+  validates :coordinates, presence: true
   validates :action, presence: true, inclusion: { in: %w(add delete validate) }
   validates :habitat, presence: true, inclusion: { in: Habitat.all.map { |h| h.to_param } }
-  validates :coordinates, presence: true
+
   validates :knowledge, presence: true, unless: :is_delete_action?
   validates :density, presence: true, unless: :is_delete_action?
+  validates :condition, presence: true, unless: :is_delete_action?
   validates :age, presence: true, unless: :is_delete_action?
+  validates :species, presence: true, unless: :is_delete_action?
   validates :admin, presence: true
 
   before_create :cartodb
