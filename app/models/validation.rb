@@ -31,6 +31,10 @@ class Validation < ActiveRecord::Base
     json_coordinates
   end
 
+  def as_json(options = {})
+    { action: action, admin_id: admin_id, age: age, area_id: area_id, condition: condition, coordinates: coordinates, density: density, habitat: habitat, id: id, knowledge: knowledge, notes: notes, recorded_at: recorded_at.strftime('%Y-%m-%d'), species: species }
+  end
+
   def cartodb
     # SQL CartoDB
     sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText('MultiPolygon(((#{json_coordinates})))',4326)", self)
