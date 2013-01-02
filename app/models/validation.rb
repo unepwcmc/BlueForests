@@ -20,7 +20,7 @@ class Validation < ActiveRecord::Base
   end
 
   def json_coordinates
-    json_coordinates = JSON.parse(coordinates)  unless coordinates.kind_of?(Array)
+    json_coordinates = JSON.parse(coordinates)
     json_coordinates << json_coordinates.first
 
     json_coordinates = json_coordinates.to_s.gsub(", ", " ")
