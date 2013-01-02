@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20121221131343) do
 
   create_table "areas", :force => true do |t|
     t.string   "title"
-    t.string   "coordinates"
+    t.text     "coordinates"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

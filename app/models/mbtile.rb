@@ -74,7 +74,16 @@ class Mbtile < ActiveRecord::Base
   end
 
   def generate_mml(minzoom, maxzoom=22)
-    min_y, min_x, max_y, max_x = JSON.parse(area.coordinates).flatten
+    min_y, min_x, max_y, max_x = [90, 180, 0, 0]
+
+    JSON.parse(area.coordinates).each do |coordinate|
+      min_y = [min_y, coordinate[0]].min
+      min_x = [min_x, coordinate[1]].min
+      max_y = [max_y, coordinate[0]].max
+      max_x = [max_x, coordinate[1]].max
+    end
+
+    puts [min_y, min_x, max_y, max_x]
 
     mml = {
       bounds: [min_x, min_y, max_x, max_y],
