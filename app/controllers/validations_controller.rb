@@ -5,7 +5,12 @@ class ValidationsController < ApplicationController
   # GET /validations
   # GET /validations.json
   def index
-    @validations = Validation.all
+    # Admins can view all validations, users only their own
+    if current_admin.roles.find_by_name("admin")
+      @validations = Validation.all
+    else
+      @validations = current_admin.validations
+    end
     @areas = Area.all
 
     respond_to do |format|

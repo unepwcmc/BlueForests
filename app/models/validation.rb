@@ -10,7 +10,6 @@ class Validation < ActiveRecord::Base
   validates :coordinates, presence: true
   validates :action, presence: true, inclusion: { in: %w(add delete validate) }
   validates :habitat, presence: true, inclusion: { in: Habitat.all.map { |h| h.to_param } }
-  validates :knowledge, presence: true, unless: Proc.new { |v| v.action == 'delete' }
   validates :condition, presence: true, unless: Proc.new { |v| v.action == 'delete' || v.habitat == 'seagrass' || v.habitat == 'sabkha' || v.habitat == 'salt_marsh' }
   validates :admin, presence: true
 
@@ -21,7 +20,11 @@ class Validation < ActiveRecord::Base
   end
 
   def json_coordinates
-    json_coordinates = JSON.parse(coordinates)
+    if coordinates.kind_of?(Array)
+      json_coordinates = coordinates
+    else
+      json_coordinates = JSON.parse(coordinates)
+    end
     json_coordinates << json_coordinates.first
 
     json_coordinates = json_coordinates.to_s.gsub(", ", " ")

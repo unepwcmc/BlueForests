@@ -26,18 +26,6 @@
               <button type="button" class="btn btn-primary" data-action="delete">Clear</button>
             </div>
 
-            <div class="control-group area_id">
-              <label class="control-label" for="area_id">Area</label>
-              <div class="controls">
-                <select class="span12" name="area_id" id="area_id">
-                  <option value=""></option>
-                  <% for(var i = 0; i < areas.length; i++) { %>
-                    <option value="<%= areas.at(i).id %>"<% if(areas.at(i).id == validation.area_id) { %> selected="selected"<% } %>><%= areas.at(i).get('title') %></option>
-                  <% } %>
-                </select>
-              </div>
-            </div>
-
             <div class="control-group recorded_at">
               <label class="control-label" for="recorded_at">Recorded at</label>
               <div class="controls row">
@@ -50,16 +38,6 @@
                 <div class="span1">
                   <input class="span1" type="number" name="recorded_at(3i)" value="12">
                 </div>
-              </div>
-            </div>
-
-            <div class="control-group knowledge">
-              <label class="control-label" for="knowledge">Validation evidence type</label>
-              <div class="controls">
-                <select class="span3" name="knowledge" id="knowledge">
-                  <option value=""></option>
-                  <option value="local_data"<% if("local_data" == validation.knowledge) { %> selected="selected"<% } %>>Local data</option>
-                </select>
               </div>
             </div>
 

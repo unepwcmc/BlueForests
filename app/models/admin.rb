@@ -8,7 +8,11 @@ class Admin < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
   attr_accessible :role_ids
 
+  validates :role_ids, presence: true
+
   before_save :ensure_authentication_token
+
+  has_many :validations
 
   has_many :assignments, dependent: :destroy
   has_many :roles, through: :assignments
