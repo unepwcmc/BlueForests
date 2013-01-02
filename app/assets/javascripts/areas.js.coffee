@@ -30,7 +30,7 @@ initializeMap = (map_id) ->
   drawnItems = new L.LayerGroup()
 
   if findAreaCoordinates()
-    initialRectangle = new L.rectangle(findAreaCoordinates())
+    initialRectangle = new L.polygon(findAreaCoordinates())
     drawnItems.addLayer(initialRectangle)
     map.fitBounds(initialRectangle.getBounds())
 
@@ -39,24 +39,29 @@ initializeMap = (map_id) ->
   map.addLayer(drawnItems)
 
 editableMap = (map, drawnItems) ->
-  drawControl = new L.Control.Draw
+  @map = map
+  @drawControl = new L.Control.Draw
     polyline: false
-    polygon: false
     circle: false
     marker: false
-  map.addControl(drawControl)
+    rectangle: false
+  map.addControl(@drawControl)
 
-  map.on 'draw:rectangle-created', (e) ->
-    rectangle = [[180, 90], [-180, -90]]
+  map.on 'draw:poly-created', (e) =>
+    polygon = e.poly
 
-    for latLng in e.rect.getLatLngs()
-      rectangle[0][0] = (latLng.lat % 180) if (latLng.lat % 180) < rectangle[0][0]
-      rectangle[0][1] = (latLng.lng % 90) if (latLng.lng % 90) < rectangle[0][1]
-      rectangle[1][0] = (latLng.lat % 180) if (latLng.lat % 180) > rectangle[1][0]
-      rectangle[1][1] = (latLng.lng % 90) if (latLng.lng % 90) > rectangle[1][1]
+    points = for point in polygon.getLatLngs()
+      [point.lat, point.lng]
+    points.push points[0]
 
-    $('#area_coordinates').val("[[#{rectangle[0][0]},#{rectangle[0][1]}],[#{rectangle[1][0]},#{rectangle[1][1]}]]")
-    drawnItems.addLayer(e.rect)
+    $('#area_coordinates').val(JSON.stringify(points))
+
+    drawnItems.addLayer(polygon)
+
+    # Remove the current polygon from the map when the drawing tool is
+    # reenabled
+    map.on 'drawing', (e) =>
+      drawnItems.removeLayer(polygon)
 
 findAreaCoordinates = ->
   return window.areaCoordinates if window.areaCoordinates?

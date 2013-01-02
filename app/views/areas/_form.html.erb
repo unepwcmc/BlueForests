@@ -1,5 +1,12 @@
 <%= simple_form_for(@area, :defaults => { :input_html => { :class => 'span12' } }) do |f| %>
+
   <%= f.error_notification %>
+
+  <% unless @area.errors['coordinates'].empty? %>
+    <div class="alert alert-error">
+      A polygon must be drawn on to the map to define an area.
+    </div>
+  <% end %>
 
   <div class="form-inputs">
     <%= f.input :title %>
