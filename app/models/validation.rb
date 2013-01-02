@@ -10,7 +10,6 @@ class Validation < ActiveRecord::Base
   validates :coordinates, presence: true
   validates :action, presence: true, inclusion: { in: %w(add delete validate) }
   validates :habitat, presence: true, inclusion: { in: Habitat.all.map { |h| h.to_param } }
-  validates :knowledge, presence: true, unless: Proc.new { |v| v.action == 'delete' }
   validates :condition, presence: true, unless: Proc.new { |v| v.action == 'delete' || v.habitat == 'seagrass' || v.habitat == 'sabkha' || v.habitat == 'salt_marsh' }
   validates :admin, presence: true
 
