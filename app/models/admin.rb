@@ -12,6 +12,8 @@ class Admin < ActiveRecord::Base
 
   before_save :ensure_authentication_token
 
+  has_many :validations
+
   has_many :assignments, dependent: :destroy
   has_many :roles, through: :assignments
 end
