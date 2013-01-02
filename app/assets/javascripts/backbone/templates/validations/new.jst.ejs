@@ -45,29 +45,6 @@
             </div>
 
             <div id="other-fields" class="hidden">
-              <div class="control-group area_id">
-                <label class="control-label" for="area_id">Field Site</label>
-                <div class="controls">
-                  <select class="span12" name="area_id" id="area_id">
-                    <option value=""></option>
-                    <% for(var i = 0; i < areas.length; i++) { %>
-                      <option value="<%= areas.at(i).id %>"<% if(areas.at(i).id == validation.area_id) { %> selected="selected"<% } %>><%= areas.at(i).get('title') %></option>
-                    <% } %>
-                  </select>
-                </div>
-              </div>
-
-              <div class="control-group knowledge">
-                <label class="control-label" for="knowledge">Validation evidence type</label>
-                <div class="controls">
-                  <select class="span12" name="knowledge" id="knowledge">
-                    <option value="browser"<% if("browser" == validation.knowledge) { %> selected="selected"<% } %>>Underlying data in Browser</option>
-                    <option value="local_knowledge"<% if("local_knowledge" == validation.knowledge) { %> selected="selected"<% } %>>Local Knowledge</option>
-                    <option value="ground_truthing"<% if("ground_truthing" == validation.knowledge) { %> selected="selected"<% } %>>Ground Truthing</option>
-                  </select>
-                </div>
-              </div>
-
               <div class="control-group density hidden show-with-mangrove show-with-seagrass show-with-salt_marsh">
                 <label class="control-label" for="density">Density of habitat</label>
                 <div class="controls">

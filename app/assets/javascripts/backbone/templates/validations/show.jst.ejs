@@ -22,11 +22,6 @@
             <dd><%= validation.area_id && areas.get(validation.area_id).get('title') || '-' %></dd>
           </dl>
 
-          <dl>
-            <dt>Knowledge:</dt>
-            <dd><%= {browser: "Underlying data in Browser", local_knowledge: "Local Knowledge", ground_truthing: "Ground Truthing"}[validation.knowledge] %></dd>
-          </dl>
-
           <% if(validation.habitat === 'mangrove' || validation.habitat === 'seagrass' || validation.habitat === 'salt_marsh') { %>
             <dl>
               <dt>Density:</dt>
