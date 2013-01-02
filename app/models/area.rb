@@ -8,8 +8,18 @@ class Area < ActiveRecord::Base
   validates :coordinates, presence: true
 
   def geo_json
-    c = JSON.parse(coordinates)
-    "{\"type\":\"Polygon\",\"coordinates\":[#{[[c.first[1], c.first[0]], [c.first[1], c.last[0]], [c.last[1], c.last[0]], [c.last[1], c.first[0]], [c.first[1], c.first[0]]]}]}"
+    "{\"type\":\"Polygon\",\"coordinates\":#{coordinates}"
+  end
+
+  def json_coordinates
+    json_coordinates = JSON.parse(coordinates)
+    json_coordinates << json_coordinates.first
+
+    json_coordinates = json_coordinates.to_s.gsub(", ", " ")
+    json_coordinates = json_coordinates.gsub("] [", ", ")
+    json_coordinates = json_coordinates.gsub(/(\[)|(\])/, "")
+
+    json_coordinates
   end
 
   before_create do

@@ -83,8 +83,6 @@ class Mbtile < ActiveRecord::Base
       max_x = [max_x, coordinate[1]].max
     end
 
-    puts [min_y, min_x, max_y, max_x]
-
     mml = {
       bounds: [min_x, min_y, max_x, max_y],
       center: [min_x + ((max_x - min_x) / 2), min_y + ((max_y - min_y) / 2), minzoom],
@@ -148,9 +146,9 @@ class Mbtile < ActiveRecord::Base
   end
 
   def cartodb_query
-    require 'uri'
-
     habitat_model = Habitat.find(habitat)
-    URI.escape("http://carbon-tool.cartodb.com/api/v2/sql?format=kml&q=SELECT the_geom FROM #{habitat_model.table_name}")
+    query = Rack::Utils.escape("SELECT * FROM (SELECT ST_Intersection(t.the_geom, ST_GeomFromText('MultiPolygon(((#{area.json_coordinates})))', 4326)) AS the_geom FROM #{habitat_model.table_name} t WHERE ST_Intersects(t.the_geom, ST_GeomFromText('MultiPolygon(((#{area.json_coordinates})))', 4326)) AND toggle = true AND (action <> 'delete' OR action IS NULL)) AS intersected_geom UNION ALL SELECT ST_GeomFromEWKT('SRID=4326;POLYGON EMPTY') AS the_geom")
+
+    "http://carbon-tool.cartodb.com/api/v2/sql?format=kml&q=#{query}"
   end
 end

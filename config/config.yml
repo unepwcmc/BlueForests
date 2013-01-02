@@ -1,14 +1,11 @@
 development:
-  cartodb_table: 'algalmat'
   projectmill_path: '$HOME/Projects/ecoplotter/projectmill'
   tilemill_path: '/usr/share/tilemill'
 
 test:
-  cartodb_table: 'algalmat'
   projectmill_path: '$HOME/Projects/ecoplotter/projectmill'
   tilemill_path: '/usr/share/tilemill'
 
 production:
-  cartodb_table: 'algalmat'
   projectmill_path: '$HOME/mapbox/projectmill'
   tilemill_path: '/usr/share/tilemill'

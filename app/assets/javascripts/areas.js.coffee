@@ -51,7 +51,7 @@ editableMap = (map, drawnItems) ->
     polygon = e.poly
 
     points = for point in polygon.getLatLngs()
-      [point.lat, point.lng]
+      [point.lng, point.lat]
     points.push points[0]
 
     $('#area_coordinates').val(JSON.stringify(points))
@@ -64,8 +64,11 @@ editableMap = (map, drawnItems) ->
       drawnItems.removeLayer(polygon)
 
 findAreaCoordinates = ->
-  return window.areaCoordinates if window.areaCoordinates?
+  if window.areaCoordinates?
+    return _.map(window.areaCoordinates, (arr) -> [arr[1], arr[0]])
 
   try
-    return JSON.parse($('#area_coordinates').val()) if $('#area_coordinates').length > 0
+    if $('#area_coordinates').length > 0
+      coordinates = JSON.parse($('#area_coordinates').val())
+      return _.map(coordinates, (arr) -> [arr[1], arr[0]])
   false
