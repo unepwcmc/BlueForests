@@ -3,7 +3,7 @@
 <script type="text/javascript">
   $(function() {
       window.router = new BlueCarbon.Routers.ValidationsRouter({
-        validations: <%= @validations.to_json.html_safe -%>,
+        validations: <%= @validations.to_json(include: :admin).html_safe -%>,
         areas: <%= @areas.to_json.html_safe %>
       });
     Backbone.history.start();

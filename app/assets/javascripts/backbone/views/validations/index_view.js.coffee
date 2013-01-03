@@ -22,5 +22,13 @@ class BlueCarbon.Views.Validations.IndexView extends Backbone.View
       sPaginationType: "bootstrap"
       oLanguage:
         sLengthMenu: "_MENU_ records per page"
+      "aoColumns": [
+        null,
+        null,
+        null,
+        null,
+        { "bSearchable": false, "bSortable": false },
+        { "bSearchable": false, "bSortable": false }
+      ]
 
     return this
