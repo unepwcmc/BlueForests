@@ -55,6 +55,7 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
       $(e.target).removeClass('btn-primary').addClass('btn-inverse')
       $(e.target).siblings().removeClass('btn-inverse').addClass('btn-primary')
       $('#action').val($(e.target).data('action')).trigger('change')
+      $('input.submit-button').removeClass('hidden')
 
       if $(e.target).data('action') == 'delete'
         $('#other-fields').addClass('hidden')
