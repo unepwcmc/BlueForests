@@ -101,6 +101,28 @@ end
 after "deploy:setup", "cartodb:build_configuration"
 after "deploy:finalize_update", "cartodb:link_configuration_file"
 
+# Email
+
+namespace :mail do
+  desc 'Generate setup_mail.rb file'
+  task :setup do
+    address = Capistrano::CLI.ui.ask("Enter the smtp mail address: ")
+    password = Capistrano::CLI.ui.ask("Enter the smtp user password: ")
+
+    template = File.read("config/deploy/templates/setup_mail.rb.erb")
+    buffer = ERB.new(template).result(binding)
+
+    put(buffer, "#{shared_path}/config/initializers/setup_mail.rb")
+  end
+
+  desc "Links the mail folder"
+  task :link_folder do
+    run "ln -s #{shared_path}/config/initializers/setup_mail.rb #{latest_release}/config/initializers/setup_mail.rb"
+  end
+end
+after "deploy:setup", "mail:setup"
+after "deploy:update_code", "mail:link_folder"
+
 # Tilemill
 
 set(:shared_tilemill_path) {"#{shared_path}/tilemill"}
