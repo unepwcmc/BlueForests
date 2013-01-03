@@ -13,6 +13,12 @@ class Validation < ActiveRecord::Base
   validates :condition, presence: true, unless: Proc.new { |v| v.action == 'delete' || v.habitat == 'seagrass' || v.habitat == 'sabkha' || v.habitat == 'salt_marsh' }
   validates :admin, presence: true
 
+  before_create do
+    if coordinates.kind_of?(Array)
+      self.coordinates = "#{coordinates}"
+    end
+  end
+
   before_create :cartodb
 
   after_save do
