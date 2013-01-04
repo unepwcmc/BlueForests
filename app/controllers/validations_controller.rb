@@ -12,6 +12,8 @@ class ValidationsController < ApplicationController
       @validations = current_admin.validations
     end
     @areas = Area.all
+    
+    @photo = Photo.new
 
     respond_to do |format|
       format.html # index.html.erb

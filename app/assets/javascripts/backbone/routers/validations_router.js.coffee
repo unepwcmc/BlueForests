@@ -24,6 +24,33 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     else
       @initializeMap('map', @findCoordinates())
 
+    # Upload photo
+    new AjaxUpload 'upload-photo'
+      action: '/photos'
+      name: 'photo[attachment]'
+      data:
+        #property_id: property.id
+        authenticity_token: $("meta[name='csrf-token']").attr("content")
+      responseType: 'json'
+      onSubmit: (file, extension) ->
+        $('#upload-photo').hide()
+        $('#upload-photo-progress').show()
+        $('.alert-error').remove()
+      onComplete: (file, response) =>
+        if response.errors?
+          $('#upload-photo').show()
+          $('#upload-photo-progress').hide()
+          errors = for key, message of response.errors
+            message
+          $('#upload-photo-progress').after("<div class=\"alert alert-error\">Image #{errors[0]}</div>")
+        else
+          $("input[name=#{property.id}].image_id").val(response['_id']).change()
+          $("input[name=#{property.id}].image").val(response['banner_url']).change()
+
+          $('#upload-photo-progress').hide()
+          $('#remove-photo').show()
+          $('#upload-photo-thumbnail').html("<img src='#{response.thumbnail_url}' />").show()
+
   index: ->
     @view = new BlueCarbon.Views.Validations.IndexView(validations: @validations)
     $("#validations").html(@view.render().el)

@@ -19,3 +19,6 @@
 
 # Tilemill mbtiles generation
 /lib/tilemill
+
+# Uploads
+/public/system

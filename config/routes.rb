@@ -11,6 +11,8 @@ BlueCarbon::Application.routes.draw do
     resources :mbtiles, only: :show
   end
 
+  resources :photos, only: :create
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
