@@ -15,7 +15,6 @@ class AdminsController < ApplicationController
   # GET /admins
   # GET /admins.json
   def index
-    TestMailer.welcome_email.deliver
     @admins = Admin.all
 
     respond_to do |format|
