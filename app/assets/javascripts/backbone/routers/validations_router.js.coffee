@@ -7,18 +7,22 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     @areas.reset options.areas
 
   routes:
-    "new"      : "newValidation"
-    "index"    : "index"
-    ":id/edit" : "edit"
-    ":id"      : "show"
-    ".*"        : "index"
+    "new"           : "newValidation"
+    "new/:z/:y/:x"  : "newValidation"
+    "index"         : "index"
+    ":id/edit"      : "edit"
+    ":id"           : "show"
+    ".*"            : "index"
 
-  newValidation: ->
+  newValidation: (z, y, x) ->
     @view = new BlueCarbon.Views.Validations.NewView(collection: @validations, areas: @areas)
     $("#validations").html(@view.render().el)
 
     # Map
-    @initializeMap('map', @findCoordinates())
+    if z && y && x
+      @initializeMap('map', @findCoordinates(), [y, x], z)
+    else
+      @initializeMap('map', @findCoordinates())
 
   index: ->
     @view = new BlueCarbon.Views.Validations.IndexView(validations: @validations)
@@ -42,13 +46,13 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     # Map
     @initializeMap('map', @findCoordinates())
 
-  initializeMap: (map_id, coordinates) ->
+  initializeMap: (map_id, coordinates, center = [24.5, 54], zoom = 9) ->
     baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 18})
     baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 18})
 
     map = L.map map_id,
-      center: [24.5, 54]
-      zoom: 9
+      center: center
+      zoom: zoom
       layers: [baseSatellite]
 
     # Action draw a polygon
@@ -80,8 +84,12 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     if coordinates
       latLngCoordinates = _.map(coordinates, (arr) -> [arr[1], arr[0]])
       initialPolygon = new L.polygon(latLngCoordinates)
+      bounds = initialPolygon.getBounds()
       drawnItems.addLayer(initialPolygon)
-      map.fitBounds(initialPolygon.getBounds())
+      map.fitBounds(bounds)
+
+      # Show view: new nearby validation
+      $('#new-nearby-validation').attr('href', "#/new/#{map.getBoundsZoom(bounds)}/#{bounds.getCenter().lat}/#{bounds.getCenter().lng}")
 
     @editableMap(map, drawnItems) if $('#coordinates').length > 0
 
