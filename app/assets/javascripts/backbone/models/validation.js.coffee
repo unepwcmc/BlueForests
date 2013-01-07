@@ -7,6 +7,8 @@ class BlueCarbon.Models.Validation extends Backbone.Model
       "recorded_at(1i)": "#{now.getFullYear()}"
       "recorded_at(2i)": "#{now.getMonth() + 1}"
       "recorded_at(3i)": "#{now.getDate()}"
+      "recorded_at(4i)": "#{now.getUTCHours()}"
+      "recorded_at(5i)": "#{now.getUTCMinutes()}"
       "recorded_at": @recorded_at_formatted()
 
   defaults:
@@ -35,6 +37,9 @@ class BlueCarbon.Models.Validation extends Backbone.Model
 
   toJSON: ->
     model_json = @_cloneAttributes()
+
+    if /Z$/.test(model_json.recorded_at)
+      model_json.recorded_at = @recorded_at_formatted()
 
     switch @get('habitat')
       when 'mangrove'

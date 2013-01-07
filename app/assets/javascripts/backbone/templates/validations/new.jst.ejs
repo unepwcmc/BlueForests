@@ -100,14 +100,21 @@
               <div class="control-group recorded_at">
                 <label class="control-label" for="recorded_at">Recorded at</label>
                 <div class="controls row-fluid">
-                  <div class="span4">
-                    <input class="span12" type="number" min="1970" max="2050" name="recorded_at(1i)" value="<%= validation["recorded_at(1i)"] %>">
+                  <div class="span2">
+                    <input class="span12" type="number" min="1" max="31" name="recorded_at(3i)" value="<%= validation["recorded_at(3i)"] %>">
                   </div>
-                  <div class="span4">
+                  <div class="span2">
                     <input class="span12" type="number" min="1" max="12" name="recorded_at(2i)" value="<%= validation["recorded_at(2i)"] %>">
                   </div>
-                  <div class="span4">
-                    <input class="span12" type="number" min="1" max="31" name="recorded_at(3i)" value="<%= validation["recorded_at(3i)"] %>">
+                  <div class="span3">
+                    <input class="span12" type="number" min="1970" max="2050" name="recorded_at(1i)" value="<%= validation["recorded_at(1i)"] %>">
+                  </div>
+                  <div class="span1">&nbsp;</div>
+                  <div class="span2">
+                    <input class="span12" type="number" min="0" max="23" name="recorded_at(4i)" value="<%= validation["recorded_at(4i)"] %>">
+                  </div>
+                  <div class="span2">
+                    <input class="span12" type="number" min="0" max="59" name="recorded_at(5i)" value="<%= validation["recorded_at(5i)"] %>">
                   </div>
                 </div>
               </div>
