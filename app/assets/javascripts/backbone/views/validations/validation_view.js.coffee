@@ -9,8 +9,9 @@ class BlueCarbon.Views.Validations.ValidationView extends Backbone.View
   tagName: "tr"
 
   destroy: () ->
-    @model.destroy()
-    this.remove()
+    if confirm("Are you sure?")
+      @model.destroy()
+      this.remove()
 
     return false
 
