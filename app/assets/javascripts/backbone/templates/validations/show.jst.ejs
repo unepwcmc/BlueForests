@@ -56,6 +56,16 @@
           </dl>
         <% } %>
 
+        <ul class="thumbnails">
+          <% for(var i=0; i < validation.photos.length; i++) { %>
+            <li class="span6">
+              <a href="<%= validation.photos[i].attachment_url %>" class="thumbnail">
+                <img src="<%= validation.photos[i].thumbnail_url %>" />
+              </a>
+            </li>
+          <% } %>
+        </ul>
+
         <a id="new-nearby-validation" href="#/new" class="btn btn-primary"><i class="icon-plus icon-white"></i> New Nearby Validation</a>
       </div>
     </div>
