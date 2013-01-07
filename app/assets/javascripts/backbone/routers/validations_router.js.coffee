@@ -44,6 +44,10 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
           photo_ids = photo_ids.concat(response['id'])
           @view.model.set('photo_ids', photo_ids)
 
+          #photos = @view.model.get('photos')
+          #photos = photos.concat(response)
+          #@view.model.set('photos', photos)
+
           tr_content = $("<td><img src='#{response.thumbnail_url}' /></td><td><a href='#' class='btn'>Remove</a></td>")
           tr_content.find('a').click (e) =>
             photo_ids = @view.model.get('photo_ids')

@@ -26,6 +26,7 @@ class BlueCarbon.Models.Validation extends Backbone.Model
     "recorded_at(3i)": null
     notes: null
     photo_ids: []
+    photos: []
 
   recorded_at_formatted: ->
     d = new Date(@get('recorded_at'))
@@ -34,7 +35,7 @@ class BlueCarbon.Models.Validation extends Backbone.Model
   # Can't update record; Can't mass-assign protected attributes: id
   # (https://github.com/codebrew/backbone-rails/issues/38)
 
-  secureAttributes: ['admin_id', 'created_at', 'updated_at']
+  secureAttributes: ['photos', 'admin_id', 'created_at', 'updated_at']
 
   toJSON: ->
     model_json = @_cloneAttributes()

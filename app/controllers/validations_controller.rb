@@ -57,7 +57,7 @@ class ValidationsController < ApplicationController
     respond_to do |format|
       if @validation.save
         format.html { redirect_to @validation, notice: 'Validation was successfully created.' }
-        format.json { render json: @validation, status: :created, location: @validation }
+        format.json { render json: @validation.to_json(include: [:admin, photos: {only: :id, methods: [:attachment_url, :thumbnail_url]}]), status: :created, location: @validation }
       else
         format.html { render action: "new" }
         format.json { render json: @validation.errors, status: :unprocessable_entity }

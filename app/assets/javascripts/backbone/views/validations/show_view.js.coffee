@@ -17,5 +17,8 @@ class BlueCarbon.Views.Validations.ShowView extends Backbone.View
     @areas = options.areas
 
   render: ->
-    $(@el).html(@template({validation: @model.toJSON(), areas: @areas }))
+    validation_json = @model.toJSON()
+    validation_json['photos'] = @model.get('photos')
+
+    $(@el).html(@template({validation: validation_json, areas: @areas }))
     return this
