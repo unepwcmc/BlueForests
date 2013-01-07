@@ -3,7 +3,13 @@ class BlueCarbon.Models.Validation extends Backbone.Model
 
   initialize: ->
     now = new Date()
-    @set({"recorded_at(1i)": "#{now.getFullYear()}", "recorded_at(2i)": "#{now.getMonth() + 1}", "recorded_at(3i)": "#{now.getDate()}"})
+    @set
+      "recorded_at(1i)": "#{now.getFullYear()}"
+      "recorded_at(2i)": "#{now.getMonth() + 1}"
+      "recorded_at(3i)": "#{now.getDate()}"
+      "recorded_at(4i)": "#{now.getUTCHours()}"
+      "recorded_at(5i)": "#{now.getUTCMinutes()}"
+      "recorded_at": @recorded_at_formatted()
 
   defaults:
     coordinates: null
@@ -21,6 +27,10 @@ class BlueCarbon.Models.Validation extends Backbone.Model
     notes: null
     photo_ids: []
 
+  recorded_at_formatted: ->
+    d = new Date(@get('recorded_at'))
+    "#{(d.getDate()<10 && '0' || '')}#{d.getDate()}-#{((d.getMonth()+1)<10 && '0' || '')}#{d.getMonth() + 1}-#{d.getFullYear()} #{(d.getUTCHours()<10 && '0' || '')}#{d.getUTCHours()}:#{(d.getUTCMinutes()<10 && '0' || '')}#{d.getUTCMinutes()}"
+
   # Can't update record; Can't mass-assign protected attributes: id
   # (https://github.com/codebrew/backbone-rails/issues/38)
 
@@ -28,6 +38,9 @@ class BlueCarbon.Models.Validation extends Backbone.Model
 
   toJSON: ->
     model_json = @_cloneAttributes()
+
+    if /Z$/.test(model_json.recorded_at)
+      model_json.recorded_at = @recorded_at_formatted()
 
     switch @get('habitat')
       when 'mangrove'
