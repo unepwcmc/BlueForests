@@ -19,6 +19,7 @@ class BlueCarbon.Models.Validation extends Backbone.Model
     "recorded_at(2i)": null
     "recorded_at(3i)": null
     notes: null
+    photo_ids: []
 
   # Can't update record; Can't mass-assign protected attributes: id
   # (https://github.com/codebrew/backbone-rails/issues/38)

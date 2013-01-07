@@ -120,9 +120,17 @@
               </div>
             </div>
 
-            <div class="button-wrapper"><a href="#" id="upload-photo" class="btn">Upload</a></div>
-            <div id="upload-photo-thumbnail" class="thumbnail" style="display:none"></div>
-            <div class="button-wrapper"><a href="#" id="remove-photo" class="btn btn-danger" style="display:none">Remove Image</a></div>
+            <table id="photos-table" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>
+                    <div class="button-wrapper"><a href="#" id="upload-photo" class="btn">Upload</a></div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
 
             <input class="btn btn-primary width-100-percent submit-button hidden" type="submit" value="Save Validation" />
           </div>

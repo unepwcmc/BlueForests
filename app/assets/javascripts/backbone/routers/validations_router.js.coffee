@@ -29,27 +29,30 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       action: '/photos'
       name: 'photo[attachment]'
       data:
-        #property_id: property.id
         authenticity_token: $("meta[name='csrf-token']").attr("content")
       responseType: 'json'
       onSubmit: (file, extension) ->
         $('#upload-photo').hide()
-        $('#upload-photo-progress').show()
-        $('.alert-error').remove()
+        $("#photos-table tbody").append('<tr><td colspan="2"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></td></td></tr>')
       onComplete: (file, response) =>
         if response.errors?
-          $('#upload-photo').show()
-          $('#upload-photo-progress').hide()
-          errors = for key, message of response.errors
-            message
-          $('#upload-photo-progress').after("<div class=\"alert alert-error\">Image #{errors[0]}</div>")
+          #errors = for key, message of response.errors
+          #  message
+          #$('#upload-photo-progress').after("<div class=\"alert alert-error\">Image #{errors[0]}</div>")
         else
-          $("input[name=#{property.id}].image_id").val(response['_id']).change()
-          $("input[name=#{property.id}].image").val(response['banner_url']).change()
+          photo_ids = @view.model.get('photo_ids')
+          photo_ids = photo_ids.concat(response['id'])
+          @view.model.set('photo_ids', photo_ids)
 
-          $('#upload-photo-progress').hide()
-          $('#remove-photo').show()
-          $('#upload-photo-thumbnail').html("<img src='#{response.thumbnail_url}' />").show()
+          tr_content = $("<td><img src='#{response.thumbnail_url}' /></td><td><a href='#' class='btn'>Remove</a></td>")
+          tr_content.find('a').click (e) =>
+            photo_ids = @view.model.get('photo_ids')
+            @view.model.set('photo_ids', _.without(photo_ids, response['id']))
+            $(e.target).closest('tr').remove()
+            return false
+          $("#photos-table tbody tr:last-child").html(tr_content)
+
+        $('#upload-photo').show()
 
   index: ->
     @view = new BlueCarbon.Views.Validations.IndexView(validations: @validations)

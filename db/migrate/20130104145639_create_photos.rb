@@ -1,7 +1,8 @@
-class AddAttachmentAttachmentToPhotos < ActiveRecord::Migration
+class CreatePhotos < ActiveRecord::Migration
   def self.up
     create_table :photos do |t|
       t.attachment :attachment
+      t.integer :validation_id
 
       t.timestamps
     end

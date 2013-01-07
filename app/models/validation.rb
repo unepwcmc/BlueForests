@@ -1,11 +1,14 @@
 class Validation < ActiveRecord::Base
   attr_accessible :coordinates, :action, :habitat, :area_id, :knowledge,
-    :density, :condition, :age, :species, :recorded_at, :notes
+    :density, :condition, :age, :species, :recorded_at, :notes, :photo_ids
+  attr_accessor :photo_ids
 
   serialize :coordinates
 
   belongs_to :area
   belongs_to :admin
+
+  has_many :photos
 
   validates :coordinates, presence: true
   validates :action, presence: true, inclusion: { in: %w(add delete validate) }
@@ -23,6 +26,9 @@ class Validation < ActiveRecord::Base
 
   after_save do
     Mbtile.delay.generate(area_id, habitat) if area_id
+
+    # Associate uploaded photos
+    Photo.update_all(["validation_id = ?", id], ["id IN (?)", photo_ids])
   end
 
   def json_coordinates
