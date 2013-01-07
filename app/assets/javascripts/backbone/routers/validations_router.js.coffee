@@ -55,6 +55,9 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       zoom: zoom
       layers: [baseSatellite]
 
+    # Clean polygonDraw
+    delete @polygonDraw
+
     # Action draw a polygon
     $('#draw-a-polygon .btn').click (e) =>
       $(e.target).toggleClass('btn-inverse btn-primary')
