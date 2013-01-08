@@ -59,7 +59,7 @@
         <ul class="thumbnails">
           <% for(var i=0; i < validation.photos.length; i++) { %>
             <li class="span6">
-              <a href="<%= validation.photos[i].attachment_url %>" class="thumbnail">
+              <a target="_blank" href="<%= validation.photos[i].attachment_url %>" class="thumbnail">
                 <img src="<%= validation.photos[i].thumbnail_url %>" />
               </a>
             </li>
