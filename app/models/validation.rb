@@ -22,7 +22,7 @@ class Validation < ActiveRecord::Base
     end
   end
 
-  before_create :cartodb
+  after_create :cartodb
 
   after_save do
     Mbtile.delay.generate(area_id, habitat) if area_id
