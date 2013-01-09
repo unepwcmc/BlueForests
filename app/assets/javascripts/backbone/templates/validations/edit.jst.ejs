@@ -8,77 +8,102 @@
 
         <form id="edit-validation" name="validation">
           <div class="form-inputs">
-            <div class="control-group hidden">
-              <div class="controls">
-                <input class="hidden" type="hidden" name="coordinates" id="coordinates" value="<%= validation.coordinates %>">
-              </div>
-            </div>
-
-            <div class="control-group hidden">
-              <div class="controls">
-                <input class="hidden" type="hidden" name="action" id="action" value="<%= validation.action %>">
-              </div>
-            </div>
-
-            <div id="control-group-action" class="control-group btn-group" data-toggle="buttons-radio">
-              <button type="button" class="btn btn-primary" data-action="validate">Validate</button>
-              <button type="button" class="btn btn-primary" data-action="add">Add</button>
-              <button type="button" class="btn btn-primary" data-action="delete">Clear</button>
-            </div>
-
-            <div class="control-group recorded_at">
-              <label class="control-label" for="recorded_at">Recorded at</label>
-              <div class="controls row">
-                <div class="span1">
-                  <input class="span1" type="number" name="recorded_at(1i)" value="2012">
-                </div>
-                <div class="span2">
-                  <input class="span2" type="number" name="recorded_at(2i)" value="12">
-                </div>
-                <div class="span1">
-                  <input class="span1" type="number" name="recorded_at(3i)" value="12">
+            <div id="other-fields">
+              <div class="control-group density <%= validation.habitat %> show-with-mangrove show-with-seagrass show-with-salt_marsh">
+                <label class="control-label" for="density">Density of habitat</label>
+                <div class="controls">
+                  <select class="span12" name="density" id="density">
+                    <option value="">Unknown</option>
+                    <option value="1"<% if(1 == validation.density) { %> selected="selected"<% } %>>Sparse (<20% cover)</option>
+                    <option value="2"<% if(2 == validation.density) { %> selected="selected"<% } %>>Moderate (20-50% cover)</option>
+                    <option value="3"<% if(3 == validation.density) { %> selected="selected"<% } %>>Dense (50-80% cover)</option>
+                    <option value="4"<% if(4 == validation.density) { %> selected="selected"<% } %>>Very dense (>80% cover)</option>
+                  </select>
                 </div>
               </div>
-            </div>
 
-            <div class="control-group habitat">
-              <label class="control-label" for="habitat">Habitat</label>
-              <div class="controls">
-                <select class="span3" name="habitat" id="habitat">
-                  <option value=""></option>
-                  <option value="mangrove"<% if("mangrove" == validation.habitat) { %> selected="selected"<% } %>>Mangrove</option>
-                  <option value="seagrass"<% if("seagrass" == validation.habitat) { %> selected="selected"<% } %>>Seagrass</option>
-                  <option value="sabkha"<% if("sabkha" == validation.habitat) { %> selected="selected"<% } %>>Sabkha</option>
-                  <option value="salt_marsh"<% if("salt_marsh" == validation.habitat) { %> selected="selected"<% } %>>Salt Marsh</option>
-                </select>
+              <div class="control-group condition <%= validation.habitat %> show-with-mangrove">
+                <label class="control-label" for="condition">Condition</label>
+                <div class="controls">
+                  <select class="span12" name="condition" id="condition">
+                    <option value="1"<% if(1 == validation.condition) { %> selected="selected"<% } %>>Undisturbed / Intact</option>
+                    <option value="2"<% if(2 == validation.condition) { %> selected="selected"<% } %>>Degraded</option>
+                    <option value="3"<% if(3 == validation.condition) { %> selected="selected"<% } %>>Restored / Rehabilitating</option>
+                    <option value="4"<% if(4 == validation.condition) { %> selected="selected"<% } %>>Afforested/ Created</option>
+                    <option value="5"<% if(5 == validation.condition) { %> selected="selected"<% } %>>Cleared</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="control-group age <%= validation.habitat %> show-with-mangrove">
+                <label class="control-label" for="age">Age of habitat</label>
+                <div class="controls">
+                  <select class="span12" name="age" id="age">
+                    <option value="">Unknown</option>
+                    <option value="1"<% if(1 == validation.age) { %> selected="selected"<% } %>>Natural Mangrove</option>
+                    <option value="2"<% if(2 == validation.age) { %> selected="selected"<% } %>>2-10 yrs old</option>
+                    <option value="3"<% if(3 == validation.age) { %> selected="selected"<% } %>>10-25 yrs old</option>
+                    <option value="4"<% if(4 == validation.age) { %> selected="selected"<% } %>>25-50 yrs old</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="control-group species <%= validation.habitat %> show-with-seagrass">
+                <label class="control-label" for="species">Species</label>
+                <div class="controls">
+                  <select class="span12" name="species" id="species">
+                    <option value="">Unknown</option>
+                    <option value="Halodule uninervis"<% if("Halodule uninervis" == validation.species) { %> selected="selected"<% } %>>Halodule uninervis</option>
+                    <option value="Halophila ovalis"<% if("Halophila ovalis" == validation.species) { %> selected="selected"<% } %>>Halophila ovalis</option>
+                    <option value="Halophila stipulacea"<% if("Halophila stipulacea" == validation.species) { %> selected="selected"<% } %>>Halophila stipulacea</option>
+                    <option value="Mixed species"><% if("Mixed species" == validation.species) { %> selected="selected"<% } %>Mixed species</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="control-group recorded_at">
+                <label class="control-label" for="recorded_at">Recorded at</label>
+                <div class="controls row-fluid">
+                  <div class="span2">
+                    <input class="span12" type="number" min="1" max="31" name="recorded_at(3i)" value="<%= validation["recorded_at(3i)"] %>">
+                  </div>
+                  <div class="span2">
+                    <input class="span12" type="number" min="1" max="12" name="recorded_at(2i)" value="<%= validation["recorded_at(2i)"] %>">
+                  </div>
+                  <div class="span3">
+                    <input class="span12" type="number" min="1970" max="2050" name="recorded_at(1i)" value="<%= validation["recorded_at(1i)"] %>">
+                  </div>
+                  <div class="span1">&nbsp;</div>
+                  <div class="span2">
+                    <input class="span12" type="number" min="0" max="23" name="recorded_at(4i)" value="<%= validation["recorded_at(4i)"] %>">
+                  </div>
+                  <div class="span2">
+                    <input class="span12" type="number" min="0" max="59" name="recorded_at(5i)" value="<%= validation["recorded_at(5i)"] %>">
+                  </div>
+                </div>
+              </div>
+
+              <div class="control-group name">
+                <label class="control-label" for="notes">Notes</label>
+                <div class="controls">
+                  <textarea class="span12" type="text" name="notes" id="notes"><%= validation.notes %></textarea>
+                </div>
               </div>
             </div>
 
-            <div class="control-group density">
-              <label class="control-label" for="density">Density of habitat</label>
-              <div class="controls">
-                <input class="span3" type="number" name="density" id="density" value="<%= validation.density %>">
-              </div>
-            </div>
+            <table id="photos-table" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>
+                    <div class="button-wrapper"><a href="#" id="upload-photo" class="btn">Upload</a></div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
 
-            <div class="control-group age">
-              <label class="control-label" for="age">Age of habitat</label>
-              <div class="controls">
-                <input class="span3" type="number" name="age" id="age" value="<%= validation.age %>">
-              </div>
-            </div>
-
-            <div class="control-group name">
-              <label class="control-label" for="name">Name your edit</label>
-              <div class="controls">
-                <input class="span3" type="text" name="name" id="name" value="<%= validation.name %>">
-              </div>
-            </div>
-          </div>
-
-          <div class="form-actions">
-            <input class="btn btn-primary" type="submit" value="Create Validation" />
-            <a href="#/index" class="btn"><i class="icon-list-alt"></i> Back</a>
+            <input class="btn btn-primary width-100-percent submit-button" type="submit" value="Save Validation" />
           </div>
         </form>
       </div>

@@ -14,7 +14,7 @@ class BlueCarbon.Views.Validations.IndexView extends Backbone.View
     @$("tbody").append(view.render().el)
 
   render: =>
-    $(@el).html(@template(validations: @options.validations.toJSON() ))
+    $(@el).html(@template(validations: @options.validations.toJSON(true) ))
     @addAll()
 
     @$("table").dataTable

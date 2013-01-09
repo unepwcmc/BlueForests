@@ -1,6 +1,6 @@
 class CartodbQuery
   def self.query(table_name, geom, validation)
-    uniq_id = (Time.now.to_f * 10000.0).to_i
+    uniq_id = validation.id
 
     if validation.action == 'delete'
       more_params = ""

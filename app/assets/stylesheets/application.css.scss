@@ -82,15 +82,27 @@
       min-height: 20px;
     }
     
-    #new-nearby-validation, #delete-validation {
+    #new-nearby-validation, #edit-validation.btn {
       float: right;
       margin-top: 20px;
       margin-bottom: 20px;
     }
     
-    #delete-validation {
+    #edit-validation.btn {
       padding-left: 40px;
       padding-right: 40px;
+    }
+
+    .mangrove, .seagrass, .sabkha, .salt_marsh {
+      display: none;
+    }
+    
+    .mangrove.show-with-mangrove, .seagrass.show-with-seagrass, .sabkha.show-with-sabkha, .salt_marsh.show-with-salt_marsh {
+      display: block;
+    }
+
+    ul.thumbnails {
+      margin-top: 10px;
     }
   }
 

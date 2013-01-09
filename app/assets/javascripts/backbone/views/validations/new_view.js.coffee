@@ -33,7 +33,9 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
 
     @collection.create(@model.toJSON(),
       success: (validation) =>
+        photos = @model.get('photos')
         @model = validation
+        @model.set('photos', photos)
         window.location.hash = "/#{@model.id}"
 
       error: (validation, jqXHR) =>
