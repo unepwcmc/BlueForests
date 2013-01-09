@@ -47,7 +47,7 @@ class Mbtile < ActiveRecord::Base
   private
 
   def generate_style
-    colors = {mangrove: '008b00', seagrass: '9b1dea', sabkha: 'f38417', saltmarsh: '007dff'}
+    colors = {mangrove: '008b00', seagrass: '9b1dea', sabkha: 'f38417', saltmarsh: '007dff', algal_mat: 'ffe048', other: '1dcbea'}
 
     "#{habitat_path}/style.mss".tap do |path|
       File.open(path, "w") do |f|
