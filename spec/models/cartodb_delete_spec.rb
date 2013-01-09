@@ -5,8 +5,8 @@ describe CartodbQuery do
   describe '.query' do
     before(:all) do
       require 'ostruct'
-      @addition = OpenStruct.new(action: 'add', admin_id: 1, age: 1, area_id: 1, density: 1, knowledge: 'local_data', notes: 'test')
-      @exclusion = OpenStruct.new(action: 'delete', admin_id: 1, age: 1, area_id: 1, density: 1, knowledge: 'local_data', notes: 'test')
+      @addition = OpenStruct.new(id: 1, action: 'add', admin_id: 1, age: 1, area_id: 1, density: 1, knowledge: 'local_data', notes: 'test')
+      @exclusion = OpenStruct.new(id: 2, action: 'delete', admin_id: 1, age: 1, area_id: 1, density: 1, knowledge: 'local_data', notes: 'test')
     end
 
     describe 'when the table is empty' do
