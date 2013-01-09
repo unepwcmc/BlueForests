@@ -9,7 +9,7 @@ class BlueCarbon.Views.Validations.EditView extends Backbone.View
 
     @model.bind "change:errors", (model, errors) =>
       if errors?
-        $("form#edit-validation").prepend("<div class='alert alert-error'>Oh snap! Change a few things up and try submitting again.</div>")
+        $("form#edit-validation").prepend("<div class='alert alert-error'>Something went wrong. Please check the form before submitting again.</div>")
 
         _.each @model.get('errors'), (errors, name) ->
           if name == 'action'
