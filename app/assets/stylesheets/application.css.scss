@@ -93,11 +93,11 @@
       padding-right: 40px;
     }
 
-    .mangrove, .seagrass, .sabkha, .salt_marsh {
+    .mangrove, .seagrass, .sabkha, .saltmarsh, .algal_mat, .other {
       display: none;
     }
     
-    .mangrove.show-with-mangrove, .seagrass.show-with-seagrass, .sabkha.show-with-sabkha, .salt_marsh.show-with-salt_marsh {
+    .mangrove.show-with-mangrove, .seagrass.show-with-seagrass, .sabkha.show-with-sabkha, .salt_marsh.show-with-saltmarsh, .algal_mat.show-with-algal_mat, .other.show-with-other {
       display: block;
     }
 

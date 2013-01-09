@@ -24,7 +24,7 @@
             <dd><%= validation.area_id && areas.get(validation.area_id).get('title') || '-' %></dd>
           </dl>
 
-          <% if(validation.habitat === 'mangrove' || validation.habitat === 'seagrass' || validation.habitat === 'salt_marsh') { %>
+          <% if(validation.habitat === 'mangrove' || validation.habitat === 'seagrass' || validation.habitat === 'saltmarsh') { %>
             <dl>
               <dt>Density:</dt>
               <dd><%= (validation.density == '' || validation.density === null && 'Unknown') || {1: "Sparse (&lt;20% cover)", 2: "Moderate (20-50% cover)", 3: "Dense (50-80% cover)", 4: "Very dense (&gt;80% cover)"}[validation.density] %></dd>

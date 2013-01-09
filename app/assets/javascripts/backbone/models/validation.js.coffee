@@ -61,7 +61,7 @@ class BlueCarbon.Models.Validation extends Backbone.Model
         delete model_json.condition
         delete model_json.age
         delete model_json.species
-      when 'salt_marsh'
+      when 'saltmarsh'
         delete model_json.condition
         delete model_json.age
         delete model_json.species
