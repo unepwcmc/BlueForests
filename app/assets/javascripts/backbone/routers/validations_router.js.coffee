@@ -161,10 +161,10 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       'Satellite': baseSatellite
 
     overlayMaps =
-      'Mangroves': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_mangrove/{z}/{x}/{y}.png?sql=SELECT * FROM bc_mangrove WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
+      'Mangrove': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_mangrove/{z}/{x}/{y}.png?sql=SELECT * FROM bc_mangrove WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
       'Seagrass': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_seagrass/{z}/{x}/{y}.png?sql=SELECT * FROM bc_seagrass WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
       'Sabkha': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_sabkha/{z}/{x}/{y}.png?sql=SELECT * FROM bc_sabkha WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
-      'Salt marshes': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_salt_marsh/{z}/{x}/{y}.png?sql=SELECT * FROM bc_saltmarsh WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
+      'Saltmarsh': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_saltmarsh/{z}/{x}/{y}.png?sql=SELECT * FROM bc_saltmarsh WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
       'Algal Mat': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_algal_mat/{z}/{x}/{y}.png?sql=SELECT * FROM bc_algal_mat WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
       'Other': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_other/{z}/{x}/{y}.png?sql=SELECT * FROM bc_other WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
 
@@ -189,6 +189,15 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
   editableMap: (map, drawnItems) ->
     map.on 'draw:poly-created', (e) =>
       latLngs = e.poly.getLatLngs()
+
+      # Check if polygon self intersects
+      format = new OpenLayers.Format.WKT()
+      op_poly = format.read("POLYGON(#{ _.map(latLngs, (point) -> "#{point.lng} #{point.lat}").join(',') })")
+
+      if checkSelfIntersection(op_poly.geometry)
+        alert("Invalid self intersecting polygon detected...")
+        $('#draw-a-polygon .btn').toggleClass('btn-inverse active btn-primary')
+        return false
 
       $('#coordinates').val(@latLngsToString(e.poly.getLatLngs())).trigger('change')
       drawnItems.clearLayers()
