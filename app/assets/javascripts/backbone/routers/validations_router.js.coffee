@@ -152,6 +152,9 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       else
         @polygonDraw.enable()
 
+    # Scale
+    L.control.scale().addTo(map)
+
     # Layers
     baseMaps =
       'Map': baseMap
