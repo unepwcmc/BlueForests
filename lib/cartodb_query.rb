@@ -111,4 +111,8 @@ UPDATE #{table_name} AS t SET toggle = false WHERE toggle IS NULL;
 SQL
     end
   end
+
+  def self.query_update(table_name, geom, validation)
+    "SELECT * FROM #{table_name}"
+  end
 end

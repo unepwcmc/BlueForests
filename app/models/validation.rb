@@ -23,6 +23,7 @@ class Validation < ActiveRecord::Base
   end
 
   after_create :cartodb
+  after_update :cartodb_update
 
   after_save do
     Mbtile.delay.generate(area_id, habitat) if area_id
@@ -52,6 +53,16 @@ class Validation < ActiveRecord::Base
   def cartodb
     # SQL CartoDB
     sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText('MultiPolygon(((#{json_coordinates})))',4326)", self)
+
+    CartoDB::Connection.query("BEGIN; #{sql} COMMIT;")
+  rescue CartoDB::Client::Error => e
+    errors.add :base, 'There was an error trying to render the layers.'
+    logger.info "There was an error trying to execute the following query:\n#{sql}\nError details: #{e.inspect}"
+  end
+
+  def cartodb_update
+    # SQL CartoDB
+    sql = CartodbQuery.query_update(Habitat.find(habitat).table_name, "ST_GeomFromText('MultiPolygon(((#{json_coordinates})))',4326)", self)
 
     CartoDB::Connection.query("BEGIN; #{sql} COMMIT;")
   rescue CartoDB::Client::Error => e
