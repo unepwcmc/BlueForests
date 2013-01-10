@@ -55,13 +55,8 @@ class Mbtile < ActiveRecord::Base
 ##{habitat} {
   line-color: #fff;
   line-width: 0.5;
+  polygon-opacity: 0.5;
   polygon-fill: ##{colors[habitat.intern]};
-}
-##{habitat} [action='add'] {
-  polygon-opacity: 0.4;
-}
-##{habitat} [action='validate'] {
-  polygon-opacity: 0.7;
 }
         MSS
       end
