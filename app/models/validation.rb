@@ -29,7 +29,9 @@ class Validation < ActiveRecord::Base
     Mbtile.delay.generate(area_id, habitat) if area_id
 
     # Reset associated photos
-    Photo.update_all("validation_id = NULL", ["id IN (?)", (photos.map(&:id) - photo_ids)])
+    unless photo_ids.nil?
+      Photo.update_all("validation_id = NULL", ["id IN (?)", (photos.map(&:id) - photo_ids)])
+    end
 
     # Associate uploaded photos
     Photo.update_all(["validation_id = ?", id], ["id IN (?)", photo_ids])
