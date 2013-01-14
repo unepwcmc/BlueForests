@@ -15,5 +15,5 @@
   <dd><%= @admin.email %></dd>
 
   <dt>Roles:</dt>
-  <dd><%= @admin.roles.map(&:name).join(', ') %></dd>
+  <dd><%= @admin.roles.any? && @admin.roles.map(&:name).join(', ') || '-' %></dd>
 </dl>

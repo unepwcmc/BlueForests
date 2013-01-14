@@ -29,6 +29,7 @@ class Ability
     @admin.roles.each { |role| send(role.name) }
 
     if @admin.roles.size == 0
+      can :read, Validation
     end
   end
 

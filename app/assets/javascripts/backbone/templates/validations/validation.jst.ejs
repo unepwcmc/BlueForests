@@ -1,5 +1,5 @@
 <td><%= recorded_at %></td>
-<td><a href="/admins/<%= admin.id %>"><%= admin.email %></td>
+<td><% if(typeof admin !== 'undefined') { %><a href="/admins/<%= admin.id %>"><%= admin.email %><% } else { %>-<% } %></td>
 <td><%= action.charAt(0).toUpperCase() + action.slice(1) %></td>
 <td><%= habitat.replace(/_/g, ' ').replace(/(\w+)/g, function(match) {return match.charAt(0).toUpperCase() + match.slice(1)}) %></td>
 
