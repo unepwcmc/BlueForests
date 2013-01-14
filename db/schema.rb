@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20130104145639) do
     t.integer "phase",      :limit => 8
     t.integer "phase_id",   :limit => 8
     t.integer "prev_phase", :limit => 8
+    t.integer "edit_phase", :limit => 8
     t.boolean "toggle"
     t.float   "value"
     t.spatial "the_geom",   :limit => {:srid=>0, :type=>"geometry"}
