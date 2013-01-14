@@ -15,18 +15,21 @@ class CartodbQuery
     if validation.action == 'validate'
 
       <<-SQL
+      
 UPDATE #{table_name} AS t SET toggle = FALSE, notes = 'null at #{uniq_id}'  WHERE t.toggle IS NULL;
 UPDATE #{table_name} AS t SET toggle = NULL WHERE ST_Intersects(#{geom},t.the_geom) AND t.toggle = true AND (t.action != 'delete' OR t.action IS NULL);
 
-INSERT INTO #{table_name} (the_geom, action, admin_id#{more_params}, phase, phase_id, prev_phase, toggle)
- SELECT ST_Multi(ST_Intersection(#{geom}, t.the_geom)) AS the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1, t.phase AS prev_phase, true
+INSERT INTO #{table_name} (the_geom, action, admin_id#{more_params}, phase, phase_id, prev_phase, edit_phase, toggle)
+ SELECT ST_Multi(ST_Intersection(#{geom}, t.the_geom)) AS the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1, t.phase AS prev_phase, #{uniq_id} as edit_phase, true
     FROM #{table_name} t
     WHERE t.toggle IS NULL
   UNION ALL
-  SELECT ST_Multi(ST_Difference(t.the_geom, ST_Buffer(ST_Collect(#{geom}),0))) AS the_geom, t.action, t.admin_id#{more_groups}, #{uniq_id}, t.phase_id,  #{uniq_id}, true
+  SELECT * FROM(
+  SELECT ST_Multi(ST_Difference(t.the_geom, ST_Buffer(ST_Collect(#{geom}),0))) AS the_geom, t.action, t.admin_id#{more_groups}, #{uniq_id}, t.phase_id,  #{uniq_id}, t.phase as edit_phase, true
     FROM #{table_name} t
     WHERE t.toggle IS NULL
-    GROUP BY t.the_geom, t.action, t.admin_id#{more_groups}, t.phase, t.phase_id, t.prev_phase;
+    GROUP BY t.the_geom, t.action, t.admin_id#{more_groups}, t.phase, t.phase_id, t.prev_phase) a
+    WHERE ST_IsEmpty(a.the_geom) = false;
 
 UPDATE #{table_name} AS t SET toggle = false WHERE toggle IS NULL;
 
@@ -38,24 +41,28 @@ SQL
 UPDATE #{table_name} AS t SET toggle = FALSE, notes = 'null at #{uniq_id}'  WHERE t.toggle IS NULL;
 UPDATE #{table_name} AS t SET toggle = NULL WHERE ST_Intersects(#{geom},t.the_geom) AND t.toggle = true;
 
-INSERT INTO #{table_name} (the_geom, action, admin_id#{more_params}, phase, phase_id, prev_phase, toggle)
-   SELECT ST_Multi(ST_Intersection(#{geom}, t.the_geom)) AS the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1, t.phase AS prev_phase, true
+INSERT INTO #{table_name} (the_geom, action, admin_id#{more_params}, phase, phase_id, prev_phase, edit_phase, toggle)
+   SELECT ST_Multi(ST_Intersection(#{geom}, t.the_geom)) AS the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1, t.phase as prev_phase, #{uniq_id} as edit_phase, true
     FROM #{table_name} t
     WHERE t.toggle IS NULL AND (t.action != 'validate' OR t.action IS NULL)
   UNION ALL
-  SELECT ST_Multi(ST_Difference(t.the_geom, ST_Buffer(ST_Collect(#{geom}),0))) AS the_geom, t.action, t.admin_id#{more_groups}, #{uniq_id}, t.phase_id, t.phase AS prev_phase, true
+  SELECT * FROM
+  (SELECT ST_Multi(ST_Difference(t.the_geom, ST_Buffer(ST_Collect(#{geom}),0))) AS the_geom, t.action, t.admin_id#{more_groups}, #{uniq_id}, t.phase_id, t.phase as prev_phase, t.phase as edit_phase, true
     FROM #{table_name} t
     WHERE t.toggle IS NULL AND (t.action != 'validate' OR t.action IS NULL)
-    GROUP BY t.the_geom, t.action, t.admin_id#{more_groups}, t.phase, t.phase_id, t.prev_phase
+    GROUP BY t.the_geom, t.action, t.admin_id#{more_groups}, t.phase, t.phase_id, t.prev_phase) a
+    WHERE ST_IsEmpty(a.the_geom) = false 
     UNION ALL
-  SELECT ST_Multi(ST_Difference(dt.polygon, ST_Buffer(ST_Collect(t.the_geom),0))) AS the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1, #{uniq_id}, true
-    FROM #{table_name} t, (SELECT #{geom} AS polygon) dt
+  SELECT the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1, #{uniq_id} as prev_phase, #{uniq_id} as edit_phase, true 
+  FROM (SELECT ST_Multi(ST_Difference(dt.polygon, ST_Buffer(ST_Collect(t.the_geom),0))) AS the_geom    
+  FROM #{table_name} t, (SELECT #{geom} AS polygon) dt
     WHERE ST_Intersects(t.the_geom, dt.polygon) AND t.toggle IS NULL
-    GROUP BY dt.polygon;
+    GROUP BY dt.polygon) a
+    WHERE ST_IsEmpty(a.the_geom) = false;
 
 INSERT INTO #{table_name}
-  (the_geom, action, admin_id#{more_params}, phase, phase_id, toggle)
-  SELECT ST_Multi(dt.polygon) AS the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1, true
+  (the_geom, action, admin_id#{more_params}, phase, phase_id, prev_phase, edit_phase, toggle)
+  SELECT ST_Multi(dt.polygon) AS the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1, #{uniq_id}, #{uniq_id}, true
     FROM (SELECT #{geom} AS polygon) dt
     WHERE (SELECT COUNT(1) FROM #{table_name} t, (SELECT #{geom} AS polygon) dt WHERE ST_Intersects(t.the_geom, dt.polygon) AND toggle IS NULL) = 0;
 
@@ -65,45 +72,34 @@ UPDATE #{table_name} AS t SET toggle = false WHERE toggle IS NULL;
 
     SQL
 
-    elsif validation.action == 'undo'
-
-      <<-SQL
-
-UPDATE #{table_name} as t SET toggle = true FROM (SELECT b.the_geom FROM 
-    (SELECT max(phase) as max_phase, prev_phase, the_geom FROM #{table_name}  WHERE toggle = true GROUP BY prev_phase, the_geom HAVING max(phase) = (SELECT max(phase) FROM #{table_name})) a, 
-    (SELECT phase, the_geom FROM #{table_name}  WHERE toggle = false) b
-    WHERE a.prev_phase = b.phase AND ST_Intersects(a.the_geom, b.the_geom) GROUP by b.the_geom
-    ) c
-  WHERE t.the_geom = c.the_geom AND toggle = false ;
-DELETE FROM #{table_name} AS t
-  WHERE t.phase
-IN (SELECT max(phase) as max_phase FROM #{table_name}) AND toggle = true;
-
-      SQL
-
     else
       <<-SQL
 UPDATE #{table_name} AS t SET toggle = FALSE, notes = 'null at #{uniq_id}'  WHERE t.toggle IS NULL;
 UPDATE #{table_name} AS t SET toggle = NULL WHERE ST_Intersects(#{geom},t.the_geom) AND t.toggle = true;
 
-INSERT INTO #{table_name} (the_geom, action, admin_id#{more_params}, phase, phase_id, prev_phase, toggle)
-  SELECT ST_Multi(ST_Intersection(#{geom}, t.the_geom)) AS the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1, t.phase AS prev_phase, true
+INSERT INTO #{table_name} (the_geom, action, admin_id#{more_params}, phase, phase_id, prev_phase, edit_phase, toggle)
+  SELECT ST_Multi(ST_Intersection(#{geom}, t.the_geom)) AS the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1, t.phase AS prev_phase, #{uniq_id} as edit_phase, true
     FROM #{table_name} t
     WHERE t.toggle IS NULL
   UNION ALL
-  SELECT ST_Multi(ST_Difference(t.the_geom, ST_Buffer(ST_Collect(#{geom}),0))) AS the_geom, t.action, t.admin_id#{more_groups}, #{uniq_id}, t.phase_id, t.prev_phase, true
+  SELECT * FROM(
+  SELECT ST_Multi(ST_Difference(t.the_geom, ST_Buffer(ST_Collect(#{geom}),0))) AS the_geom, t.action, t.admin_id#{more_groups}, t.phase, t.phase_id, t.prev_phase, t.phase as edit_phase, true
     FROM #{table_name} t
     WHERE t.toggle IS NULL
-    GROUP BY t.the_geom, t.action, t.admin_id#{more_groups}, t.phase, t.phase_id, t.prev_phase
+    GROUP BY t.the_geom, t.action, t.admin_id#{more_groups}, t.phase, t.phase_id, t.prev_phase) A
+    WHERE ST_IsEmpty(a.the_geom) = false  
     UNION ALL
-  SELECT ST_Multi(ST_Difference(dt.polygon, ST_Buffer(ST_Collect(t.the_geom),0))) AS the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1,  #{uniq_id}, true
+  SELECT a.the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id} as prev_phase, 1, #{uniq_id}, #{uniq_id} as edit_phase, true
+ FROM(
+  SELECT ST_Multi(ST_Difference(dt.polygon, ST_Buffer(ST_Collect(t.the_geom),0))) AS the_geom
     FROM #{table_name} t, (SELECT #{geom} AS polygon) dt
     WHERE ST_Intersects(t.the_geom, dt.polygon) AND t.toggle IS NULL
-    GROUP BY t.phase, dt.polygon;
+    GROUP BY dt.polygon) a
+    WHERE ST_IsEmpty(a.the_geom) = false ;
 
 INSERT INTO #{table_name}
-  (the_geom, action, admin_id#{more_params}, phase, phase_id, toggle)
-  SELECT ST_Multi(dt.polygon) AS the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1, true
+  (the_geom, action, admin_id#{more_params}, phase, phase_id, prev_phase, edit_phase, toggle)
+  SELECT ST_Multi(dt.polygon) AS the_geom, '#{validation.action}', #{validation.admin_id}#{more_fields}, #{uniq_id}, 1, #{uniq_id}, #{uniq_id}, true
     FROM (SELECT #{geom} AS polygon) dt
     WHERE (SELECT COUNT(1) FROM #{table_name} t, (SELECT #{geom} AS polygon) dt WHERE ST_Intersects(t.the_geom, dt.polygon) AND toggle IS NULL) = 0;
 
@@ -112,7 +108,10 @@ SQL
     end
   end
 
-  def self.query_update(table_name, geom, validation)
-    "SELECT * FROM #{table_name}"
+  def self.editing(table_name, validation)
+    <<-SQL
+      UPDATE  #{table_name} AS t SET age = #{validation.age || '0'}, area_id = #{validation.area_id || '0'}, density = #{validation.density || '0'}, knowledge = '#{validation.knowledge}', notes = '#{validation.notes}'
+      WHERE edit_phase = #{validation.id}
+    SQL
   end
 end

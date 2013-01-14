@@ -19,6 +19,7 @@ class CreateGeometries < ActiveRecord::Migration
         t.integer   :phase,       limit: 8
         t.integer   :phase_id,    limit: 8
         t.integer   :prev_phase,  limit: 8
+        t.integer   :edit_phase,  limit: 8
         t.boolean   :toggle
         t.float     :value
       end
