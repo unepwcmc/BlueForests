@@ -5,7 +5,7 @@ end
 
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -15,7 +15,7 @@ gem 'bootstrap-generators', '~> 2.1', :git => 'git://github.com/decioferreira/bo
 gem 'simple_form'
 gem 'devise'
 gem 'rack-cors', :require => 'rack/cors'
-gem 'cartodb-rb-client'
+gem 'cartodb-rb-client', :git => 'https://github.com/Vizzuality/cartodb-rb-client.git'
 gem 'cancan'
 
 gem 'rails-backbone'
