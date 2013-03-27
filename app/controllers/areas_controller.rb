@@ -1,4 +1,4 @@
-class AreasController < ApplicationController
+class AreasController < AdminController
   before_filter :authenticate_admin!
   load_and_authorize_resource
 

@@ -1,4 +1,4 @@
-class ValidationsController < ApplicationController
+class ValidationsController < AdminController
   before_filter :authenticate_admin!
   load_and_authorize_resource
 

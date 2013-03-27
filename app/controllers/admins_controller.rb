@@ -1,4 +1,4 @@
-class AdminsController < ApplicationController
+class AdminsController < AdminController
   before_filter :authenticate_admin!, except: :me
   load_and_authorize_resource except: :me
 

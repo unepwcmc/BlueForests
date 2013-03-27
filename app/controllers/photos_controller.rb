@@ -1,4 +1,4 @@
-class PhotosController < ApplicationController
+class PhotosController < AdminController
   def create
     @photo = Photo.new(params[:photo])
 

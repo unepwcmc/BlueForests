@@ -19,8 +19,7 @@
 
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "analysis" %>
-  <%= javascript_include_tag "https://raw.github.com/unepwcmc/pica.js/server-mocking/dist/pica.js" %>
+  <%= javascript_include_tag "admin" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -35,9 +34,23 @@
         <%= link_to "BlueCarbon", root_path, :class => "brand" %>
         <div class="nav-collapse">
           <ul class="nav">
+            <%= content_tag(:li, link_to("Field Sites", areas_path), class: params[:controller] == 'areas' ? 'active' : nil) if can? :read, Area %>
+            <%= content_tag(:li, link_to("Validations", validations_path), class: params[:controller] == 'validations' ? 'active' : nil) if can? :read, Validation %>
+            <%= content_tag(:li, link_to("Users", admins_path), class: params[:controller] == 'admins' ? 'active' : nil) if can? :manage, Admin %>
           </ul>
           <ul class="nav pull-right">
-            <li><%= link_to 'About', '' %></li>
+            <% if admin_signed_in? %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= truncate("#{current_admin.email}") %> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "My Account", edit_admin_path(current_admin) %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to "Logout", destroy_admin_session_path, method: :delete %></li>
+                </ul>
+              </li>
+            <% else %>
+              <li><%= link_to 'Login', new_admin_session_path %></li>
+            <% end %>
           </ul>
         </div>
       </div>

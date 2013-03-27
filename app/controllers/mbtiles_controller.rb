@@ -1,4 +1,4 @@
-class MbtilesController < ApplicationController
+class MbtilesController < AdminController
   def show
     @area = Area.find(params[:area_id])
     @mbtile = @area.mbtiles.find_by_habitat(params[:id])
