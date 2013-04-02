@@ -5,9 +5,9 @@ class Backbone.Views.TabsView extends Backbone.View
   template: JST['tabs']
 
   events:
-    'click .tabs': 'changeTab'
-    'click .add-area': 'addArea'
-    'click .delete-area': 'deleteArea'
+    'click .tabs li': 'changeTab'
+    'click #add-area': 'addArea'
+    'click #delete-area': 'deleteArea'
 
   initialize: (options) ->
     @currentTab = new Backbone.Diorama.ManagedRegion()
@@ -46,6 +46,6 @@ class Backbone.Views.TabsView extends Backbone.View
 
     areaView = new Backbone.Views.AreaView(area: @workspace.currentArea)
     @currentTab.showView(areaView)
-    @$el.find('#stats').html(@currentTab.$el)
+    @$el.find('#area').html(@currentTab.$el)
 
     return @

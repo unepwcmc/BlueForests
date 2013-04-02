@@ -24,9 +24,9 @@
     TabsView.prototype.template = JST['tabs'];
 
     TabsView.prototype.events = {
-      'click .tabs': 'changeTab',
-      'click .add-area': 'addArea',
-      'click .delete-area': 'deleteArea'
+      'click .tabs li': 'changeTab',
+      'click #add-area': 'addArea',
+      'click #delete-area': 'deleteArea'
     };
 
     TabsView.prototype.initialize = function(options) {
@@ -78,7 +78,7 @@
         area: this.workspace.currentArea
       });
       this.currentTab.showView(areaView);
-      this.$el.find('#stats').html(this.currentTab.$el);
+      this.$el.find('#area').html(this.currentTab.$el);
       return this;
     };
 
@@ -105,8 +105,8 @@
     AreaView.prototype.template = JST['area'];
 
     AreaView.prototype.events = {
-      'click .delete-area': 'deleteArea',
-      'click .new-polygon': 'toggleDrawing'
+      'click #delete-area': 'deleteArea',
+      'click #new-polygon': 'toggleDrawing'
     };
 
     AreaView.prototype.initialize = function(options) {

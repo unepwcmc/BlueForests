@@ -21,7 +21,6 @@
   <%= stylesheet_link_tag    "analysis" %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "analysis" %>
-  <%= javascript_include_tag "https://raw.github.com/unepwcmc/pica.js/master/dist/pica.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -55,5 +54,12 @@
     <% end %>
     <%= yield %>
   </div>
+  <footer class="navbar navbar-fixed-bottom">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <p>© UNEP-WCMC 2012</p>
+    </div>
+  </div>
+  </footer>
 </body>
 </html>

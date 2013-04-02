@@ -5,8 +5,8 @@ class Backbone.Views.AreaView extends Backbone.View
   template: JST['area']
 
   events:
-    'click .delete-area': 'deleteArea'
-    'click .new-polygon': 'toggleDrawing'
+    'click #delete-area': 'deleteArea'
+    'click #new-polygon': 'toggleDrawing'
 
   initialize: (options) ->
     @area = options.area
