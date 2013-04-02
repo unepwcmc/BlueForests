@@ -1,0 +1,52 @@
+.tabs {
+  overflow: visible;
+  margin: 0;
+  padding-left: 0;
+  height: 37px;
+
+  li {
+    cursor: pointer;
+    list-style-type: none;
+    float:left;
+    padding: 7px;
+    font-weight: bold;
+    margin-top: 1px;
+
+    &.active {
+      border: 1px solid #CCC;
+      border-bottom: 0px;
+      margin-top: 0;
+      a {
+        color: #333;
+      }
+    }
+  }
+
+  a {
+    color: #666;
+    text-decoration: none;
+  }
+
+  input {
+    border: 0;
+    max-width: 90px;
+  }
+}
+
+#stats {
+  .btn {
+    text-transform: capitalize;
+  }
+}
+
+.delete-area {
+  float: right;
+}
+
+.new-polygon-container {
+  width: 100%;
+  text-align: center;
+  display: block;
+  clear: both;
+  padding: 60px 0 60px 0;
+}

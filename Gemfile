@@ -62,8 +62,8 @@ gem 'capistrano-ext'
 # To use debugger
 # gem 'debugger'
 
-gem 'rspec-rails', '~> 2.0', group: [:test, :development]
-gem 'database_cleaner', group: :test
+gem 'rspec-rails', '~> 2.0', :group => [:test, :development]
+gem 'database_cleaner', :group => :test
 
 group :development do
   gem 'guard-rspec'
