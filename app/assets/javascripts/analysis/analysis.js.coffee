@@ -30,6 +30,5 @@ $(document).ready ->
 
   window.pica.newWorkspace()
 
-  tileLayerView = window.pica.showTileLayers()
   tabsView = new Backbone.Views.TabsView().render()
   $('#sidebar').html(tabsView.el)
