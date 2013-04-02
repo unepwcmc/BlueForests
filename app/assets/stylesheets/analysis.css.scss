@@ -1,52 +1,156 @@
+$border: #4f6580 !default;
+
+#sidebar {
+  background-color: #334657;
+}
+
 .tabs {
+  background-color: #24323F;
   overflow: visible;
   margin: 0;
   padding-left: 0;
-  height: 37px;
+  height: 41px;
+  border-bottom: 1px solid $border;
 
   li {
+    text-transform: uppercase;
     cursor: pointer;
     list-style-type: none;
     float:left;
-    padding: 7px;
+    padding: 10px;
     font-weight: bold;
-    margin-top: 1px;
+    border: 1px solid $border;
+    color: #546a85;
+
+    &:nth-child(2) {
+      border-left: 0;
+      border-right: 0;
+    }
+
+    &#add-area {
+      border-right: 1px solid $border;
+
+      &:hover {
+        background-color: #DDFD48;
+        color: #526986;
+      }
+    }
 
     &.active {
-      border: 1px solid #CCC;
-      border-bottom: 0px;
-      margin-top: 0;
-      a {
-        color: #333;
-      }
+      color: white;
+      background: #334657;
+      border-bottom: 1px solid #334657;
+    }
+  }
+}
+
+#area {
+  position: fixed;
+  bottom: 150px;
+  top: 140px;
+  width: 340px;
+  padding: 10px;
+  padding-top: 5px;
+
+  #new-polygon {
+    text-transform: capitalize;
+  }
+
+  .btn {
+    &.export {
+      position: absolute;
+      left: 27%;
+      bottom: 0;
+      margin: 50px 0 50px 0;
     }
   }
 
-  a {
-    color: #666;
-    text-decoration: none;
+  #delete-area {
+    font-weight: bold;
+    font-size: 0.9em;
+    float: right;
+    color: white;
   }
 
-  input {
+  .new-polygon-container {
+    width: 100%;
+    text-align: center;
+    display: block;
+    clear: both;
+    padding: 50px 0 50px 0;
+  }
+}
+
+.navbar {
+  border-bottom: 1px solid $border;
+
+  .nav.pull-right {
+    text-transform: uppercase;
+  }
+}
+
+footer {
+  .navbar-inner {
     border: 0;
-    max-width: 90px;
+    min-height: 150px;
+    border-top: 1px solid $border;
   }
 }
 
-#stats {
-  .btn {
-    text-transform: capitalize;
+table.table {
+  background: none;
+  color: white;
+
+  thead {
+    border-bottom: 1px solid #C1DDF3;
+
+    th {
+      padding-bottom: 3px;
+      font-weight: normal;
+      text-transform: uppercase;
+      font-size: 0.8em;
+    }
   }
-}
 
-.delete-area {
-  float: right;
-}
+  td {
+    border: none;
+  }
 
-.new-polygon-container {
-  width: 100%;
-  text-align: center;
-  display: block;
-  clear: both;
-  padding: 60px 0 60px 0;
+  &.polygon-stats {
+    tbody {
+      tr {
+        &:first-child {
+          td {
+            border: none;
+          }
+
+          background: #546476;
+        }
+      }
+    }
+
+    td {
+      border-top: 1px solid #4D617A;
+    }
+  }
+
+  &.total-stats {
+    tbody {
+      td {
+        &:last-child {
+          font-size: 1.8em;
+          line-height: 1.2em;
+        }
+
+        span {
+          font-size: 0.7rem;
+          font-weight: normal;
+        }
+
+        font-size: 2.4em;
+        padding-top: 15px;
+        font-weight: bold;
+      }
+    }
+  }
 }
