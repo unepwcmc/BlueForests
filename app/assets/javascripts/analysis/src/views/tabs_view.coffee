@@ -39,6 +39,9 @@ class Backbone.Views.TabsView extends Backbone.View
 
     @addArea() if @workspace.areas.length == 0
 
+    lastArea = @workspace.areas[@workspace.areas.length - 1]
+    @workspace.setCurrentArea(lastArea)
+
     @render()
 
   render: ->

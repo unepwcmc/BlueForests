@@ -7,7 +7,7 @@
 
   window.JST || (window.JST = {});
 
-  window.JST['tabs'] = _.template("<ul class=\"tabs\">\n  <% _.each(workspace.areas, function(area, index) { %>\n    <% current_class = (area == workspace.currentArea) ? 'active' : '' %>\n    <li data-area-id=\"<%= index %>\" class=\"<%= current_class %>\"><%= area.get('name') %></li>\n  <% }); %>\n\n  <% if (workspace.areas.length < 3) { %>\n    <li class=\"add-area\">+</li>\n  <% } %>\n</ul>\n\n<div id=\"stats\">\n</div>");
+  window.JST['tabs'] = _.template("<ul class=\"tabs\">\n  <% _.each(workspace.areas, function(area, index) { %>\n    <% current_class = (area == workspace.currentArea) ? 'active' : '' %>\n    <li data-area-id=\"<%= index %>\" class=\"<%= current_class %>\"><%= area.get('name') %></li>\n  <% }); %>\n\n  <% if (workspace.areas.length < 3) { %>\n    <li id=\"add-area\">+</li>\n  <% } %>\n</ul>\n\n<div id=\"area\">\n</div>");
 
   window.Backbone || (window.Backbone = {});
 
@@ -58,13 +58,15 @@
     };
 
     TabsView.prototype.deleteArea = function(event) {
-      var area;
+      var area, lastArea;
 
       area = this.workspace.currentArea;
       this.workspace.removeArea(area);
       if (this.workspace.areas.length === 0) {
         this.addArea();
       }
+      lastArea = this.workspace.areas[this.workspace.areas.length - 1];
+      this.workspace.setCurrentArea(lastArea);
       return this.render();
     };
 
@@ -88,7 +90,7 @@
 
   window.JST || (window.JST = {});
 
-  window.JST['area'] = _.template("<a href=\"#\" class=\"delete-area\">Delete</a>\n\n<div class=\"new-polygon-container\">\n  <% if (area.polygons.length > 0) { %>\n    <a href=\"#\" class=\"btn btn-primary new-polygon\">Draw another polygon</a>\n  <% } else { %>\n    <a href=\"#\" class=\"btn btn-primary new-polygon\">Draw a polygon</a>\n  <% } %>\n</div>");
+  window.JST['area'] = _.template("<a href=\"#\" id=\"delete-area\">Delete this area</a>\n\n<div class=\"new-polygon-container\">\n  <% if (area.polygons.length > 0) { %>\n    <a href=\"#\" class=\"btn btn-primary\" id=\"new-polygon\">Draw another polygon</a>\n  <% } else { %>\n    <a href=\"#\" class=\"btn btn-primary\" id=\"new-polygon\">Draw a polygon</a>\n  <% } %>\n</div>\n\n<table class=\"table total-stats\">\n  <thead>\n    <tr>\n      <th>Total Carbon Sequ.</th>\n      <th>Total Area</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>11600 <span>T</span></td>\n      <td>11600 <span>KM2</span></td>\n    </tr>\n  </tbody>\n</table>\n\n<table class=\"table polygon-stats\">\n  <thead>\n    <tr>\n      <th>Polygons in this area</th>\n      <th></th>\n      <th></th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Habitat</td>\n      <td>Area</td>\n      <td>Carbon Seq.</td>\n    </tr>\n    <tr>\n      <td>Mangrove</td>\n      <td>200 KM</td>\n      <td>200 T</td>\n    </tr>\n    <tr>\n      <td>Mangrove</td>\n      <td>200 KM</td>\n      <td>200 T</td>\n    </tr>\n    <tr>\n      <td>Mangrove</td>\n      <td>200 KM</td>\n      <td>200 T</td>\n    </tr>\n    <tr>\n      <td>Mangrove</td>\n      <td>200 KM</td>\n      <td>200 T</td>\n    </tr>\n  </tbody>\n</table>\n\n\n<% if (area.polygons.length > 0) { %>\n  <a href=\"<%= window.pica.config.magpieUrl %>/areas_of_interest/<%= area.get('id') %>.csv\" class=\"btn btn-primary export\">Export your report</a>\n<% } %>");
 
   window.Backbone || (window.Backbone = {});
 
