@@ -16,10 +16,10 @@ development:
   adapter: postgis
   encoding: unicode
   database: bluecarbon_development
+  host: localhost
   pool: 5
-  username: postgres
+  username: adammulligan
   password:
-  script_dir: /usr/share/postgresql/9.1/contrib/postgis-2.0
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -44,14 +44,15 @@ test:
   encoding: unicode
   database: bluecarbon_test
   pool: 5
-  username: postgres
+  username: adammulligan
   password:
-  script_dir: /usr/share/postgresql/9.1/contrib/postgis-2.0
+  host: localhost
 
 production:
-  adapter: postgresql
+  adapter: postgis
   encoding: unicode
   database: bluecarbon_production
   pool: 5
-  username: postgres
+  username: adammulligan
   password:
+  host: localhost
