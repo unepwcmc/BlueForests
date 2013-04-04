@@ -1,4 +1,12 @@
-@import "bootstrap-generators";
+.page-header {
+  a.btn {
+    float: right;
+  }
+
+  a.btn + a.btn {
+    margin-right: 8px;
+  }
+}
 
 #sidebar {
   overflow: auto;

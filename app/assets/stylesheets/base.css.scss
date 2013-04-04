@@ -1,0 +1,67 @@
+@import "bootstrap-variables";
+@import "bootstrap.scss";
+
+@import "leaflet";
+@import "leaflet.draw";
+
+body {
+  padding-top: 100px;
+}
+
+#map,
+#map_analysis {
+  position: fixed;
+  top: $navbarHeight;
+  right: 360px;
+  bottom: 150px;
+  left: 0;
+}
+
+.navbar {
+  border-bottom: 1px solid #4f6580;
+
+  p {
+    padding-top: 10px;
+    font-weight: bold;
+    color: $white;
+  }
+
+  .nav.pull-right {
+    text-transform: uppercase;
+  }
+
+  .navbar-inner {
+    border: 0;
+  }
+}
+
+.btn {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+  margin-bottom: 0;
+
+  input {
+    margin-top: 0;
+  }
+}
+
+::selection {
+  background: #384658; /* Safari */
+}
+
+::-moz-selection {
+  background: #384658; /* Firefox */
+}
+
+
+footer {
+  .navbar-inner {
+    border: 0;
+    min-height: 150px;
+    border-top: 1px solid #4f6580;
+  }
+}
