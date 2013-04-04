@@ -144,7 +144,7 @@
 
   window.JST || (window.JST = {});
 
-  window.JST['area'] = _.template("<a href=\"#\" id=\"delete-area\">Delete this area</a>\n\n<div class=\"new-polygon-container\">\n  <% if (area.polygons.length > 0) { %>\n    <a href=\"#\" class=\"btn btn-primary\" id=\"new-polygon\">Draw another polygon</a>\n  <% } else { %>\n    <a href=\"#\" class=\"btn btn-primary\" id=\"new-polygon\">Draw a polygon</a>\n  <% } %>\n</div>\n\n<table class=\"table total-stats\">\n  <thead>\n    <tr>\n      <th>Total Carbon Sequ.</th>\n      <th>Total Area</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>11600 <span>T</span></td>\n      <td>11600 <span>KM2</span></td>\n    </tr>\n  </tbody>\n</table>\n\n<table class=\"table polygon-stats\">\n  <thead>\n    <tr>\n      <th>Polygons in this area</th>\n      <th></th>\n      <th></th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Habitat</td>\n      <td>Area</td>\n      <td>Carbon Seq.</td>\n    </tr>\n    <tr>\n      <td>Mangrove</td>\n      <td>200 KM</td>\n      <td>200 T</td>\n    </tr>\n    <tr>\n      <td>Mangrove</td>\n      <td>200 KM</td>\n      <td>200 T</td>\n    </tr>\n    <tr>\n      <td>Mangrove</td>\n      <td>200 KM</td>\n      <td>200 T</td>\n    </tr>\n    <tr>\n      <td>Mangrove</td>\n      <td>200 KM</td>\n      <td>200 T</td>\n    </tr>\n  </tbody>\n</table>\n\n\n<% if (area.polygons.length > 0) { %>\n  <a href=\"<%= window.pica.config.magpieUrl %>/areas_of_interest/<%= area.get('id') %>.csv\" class=\"btn btn-primary export\">Export your report</a>\n<% } %>");
+  window.JST['area'] = _.template("<a href=\"#\" id=\"delete-area\">Delete this area</a>\n\n<div class=\"new-polygon-container\">\n  <% if (area.polygons.length > 0) { %>\n    <a href=\"#\" class=\"btn btn-primary\" id=\"new-polygon\">Draw another polygon</a>\n  <% } else { %>\n    <a href=\"#\" class=\"btn btn-primary\" id=\"new-polygon\">Draw a polygon</a>\n  <% } %>\n</div>\n\n<% if (!_.isEmpty(results)) { %>\n  <table class=\"table total-stats\">\n    <thead>\n      <tr>\n        <th>Total Carbon Sequ.</th>\n        <th>Total Area</th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>11600 <span>T</span></td>\n        <td>11600 <span>KM2</span></td>\n      </tr>\n    </tbody>\n  </table>\n\n  <table class=\"table polygon-stats\">\n    <thead>\n      <tr>\n        <th>Polygons in this area</th>\n        <th></th>\n        <th></th>\n      </tr>\n    </thead>\n    <tbody>\n      <tr>\n        <td>Habitat</td>\n        <td>Area</td>\n        <td>Carbon Seq.</td>\n      </tr>\n      <% _.each(results, function(attributes, key) { %>\n        <tr>\n          <td><%= key %></td>\n          <td>200 KM</td>\n          <td><%= roundToDecimals(attributes.carbon, 2) %> KG</td>\n        </tr>\n      <% }) %>\n    </tbody>\n  </table>\n\n  <a href=\"<%= window.pica.config.magpieUrl %>/areas_of_interest/<%= area.get('id') %>.csv\" class=\"btn btn-primary export\">Export your report</a>\n<% } %>");
 
   window.Backbone || (window.Backbone = {});
 
@@ -169,12 +169,7 @@
       this.area = options.area;
       this.area.on('sync', this.render);
       this.showAreaPolygonsView = window.pica.currentWorkspace.currentArea.newShowAreaPolygonsView();
-      this.showAreaPolygonsView.on("polygonClick", function(polygon, event) {
-        return new Backbone.Views.PolyActionsView({
-          polygon: polygon,
-          event: event
-        });
-      });
+      this.showAreaPolygonsView.on("polygonClick", this.handlePolygonClick);
       return this.render();
     };
 
@@ -205,17 +200,42 @@
       }
     };
 
+    AreaView.prototype.handlePolygonClick = function(polygon, event) {
+      return new Backbone.Views.PolyActionsView({
+        polygon: polygon,
+        event: event
+      });
+    };
+
     AreaView.prototype.deleteArea = function(event) {};
 
+    AreaView.prototype.resultsToObj = function() {
+      var keyedResults, results;
+
+      keyedResults = {};
+      if (this.area.get('results') != null) {
+        results = this.area.get('results')[0].value_json.rows;
+        _.each(results, function(result, index) {
+          return keyedResults[result.habitat] = {
+            carbon: result.carbon
+          };
+        });
+      }
+      return keyedResults;
+    };
+
     AreaView.prototype.render = function() {
+      this.resultsToObj();
       this.$el.html(this.template({
-        area: this.area
+        area: this.area,
+        results: this.resultsToObj()
       }));
       return this;
     };
 
     AreaView.prototype.onClose = function() {
       this.removeNewPolygonView();
+      this.showAreaPolygonsView.off("polygonClick", this.handlePolygonClick);
       this.showAreaPolygonsView.close();
       return this.area.off('sync', this.render);
     };

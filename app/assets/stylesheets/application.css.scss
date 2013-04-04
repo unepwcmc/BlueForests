@@ -2,118 +2,118 @@
 @import "leaflet.draw";
 @import "bootstrap-generators";
 
-.static {
-  #map {
-    position: fixed;
-    top: $navbarHeight;
-    right: 360px;
-    bottom: 150px;
-    left: 0;
+body {
+  padding-top: 100px;
+}
+
+#map {
+  position: fixed;
+  top: $navbarHeight;
+  right: 360px;
+  bottom: 150px;
+  left: 0;
+}
+
+#sidebar {
+  overflow: auto;
+
+  float: right;
+  top: $navbarHeight;
+  width: 360px;
+
+  &.shadow {
+    background: image-url('shadow.png') no-repeat center -50px;
   }
 
-  #sidebar {
-    overflow: auto;
+  h5 {
+    text-transform: uppercase;
+    text-align: center;
+  }
 
-    position: fixed;
-    top: $navbarHeight;
-    right: 0;
-    bottom: 150px;
-    width: 360px;
-
-    &.shadow {
-      background: image-url('shadow.png') no-repeat center -50px;
-    }
-
-    h5 {
-      text-transform: uppercase;
-      text-align: center;
-    }
-
-    #draw-a-polygon {
-      &:before {
-        content: '';
-        background: image-url('draw_a_polygon.png') no-repeat center center;
-        display: block;
-        height: 116px;
-        width: 100%;
-      }
-
-      .btn {
-        width: 100%;
-      }
-    }
-
-    .btn-group {
-      width: 100%;
-
-      & > .btn {
-        width: 33.333333333%;
-        font-size: 12px;
-      }
-    }
-
-    .width-100-percent {
-      width: 100%;
-    }
-    
-    table {
-      .progress {
-        margin-bottom: 0;
-      }
-    }
-
-    dl {
-      &:nth-child(odd) {
-        background: #313b48;
-      }
-
-      dt {
-        float: left;
-        margin-right: 5px;
-      }
-      
-      dd {
-        margin-left: 0px;
-      }
-
-      margin: 0;
-      padding: 5px;
-      clear: both;
-      min-height: 20px;
-    }
-    
-    #new-nearby-validation, #edit-validation.btn {
-      float: right;
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-    
-    #edit-validation.btn {
-      padding-left: 40px;
-      padding-right: 40px;
-    }
-
-    .mangrove, .seagrass, .sabkha, .saltmarsh, .algal_mat, .other {
-      display: none;
-    }
-    
-    .mangrove.show-with-mangrove, .seagrass.show-with-seagrass, .sabkha.show-with-sabkha, .saltmarsh.show-with-saltmarsh, .algal_mat.show-with-algal_mat, .other.show-with-other {
+  #draw-a-polygon {
+    &:before {
+      content: '';
+      background: image-url('draw_a_polygon.png') no-repeat center center;
       display: block;
+      height: 116px;
+      width: 100%;
     }
 
-    ul.thumbnails {
-      margin-top: 10px;
+    .btn {
+      width: 100%;
     }
   }
 
-  footer .navbar-inner {
-    min-height: 150px;
-    
-    p {
-      padding-top: 10px;
-      font-weight: bold;
-      color: $white;
+  .btn-group {
+    width: 100%;
+
+    & > .btn {
+      width: 33.333333333%;
+      font-size: 12px;
     }
+  }
+
+  .width-100-percent {
+    width: 100%;
+  }
+  
+  table {
+    .progress {
+      margin-bottom: 0;
+    }
+  }
+
+  dl {
+    &:nth-child(odd) {
+      background: #313b48;
+    }
+
+    dt {
+      float: left;
+      margin-right: 5px;
+    }
+    
+    dd {
+      margin-left: 0px;
+    }
+
+    margin: 0;
+    padding: 5px;
+    clear: both;
+    min-height: 20px;
+  }
+  
+  #new-nearby-validation, #edit-validation.btn {
+    float: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  #edit-validation.btn {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .mangrove, .seagrass, .sabkha, .saltmarsh, .algal_mat, .other {
+    display: none;
+  }
+  
+  .mangrove.show-with-mangrove, .seagrass.show-with-seagrass, .sabkha.show-with-sabkha, .saltmarsh.show-with-saltmarsh, .algal_mat.show-with-algal_mat, .other.show-with-other {
+    display: block;
+  }
+
+  ul.thumbnails {
+    margin-top: 10px;
+  }
+}
+
+footer .navbar-inner {
+  min-height: 150px;
+  
+  p {
+    padding-top: 10px;
+    font-weight: bold;
+    color: $white;
   }
 }
 

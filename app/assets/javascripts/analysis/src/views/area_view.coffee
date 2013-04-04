@@ -43,8 +43,20 @@ class Backbone.Views.AreaView extends Backbone.View
   deleteArea: (event) ->
     
 
+  resultsToObj: ->
+    keyedResults = {}
+
+    if @area.get('results')?
+      results = @area.get('results')[0].value_json.rows
+      _.each(results, (result, index) ->
+        keyedResults[result.habitat] = {carbon: result.carbon}
+      )
+
+    return keyedResults
+
   render: =>
-    @$el.html(@template(area: @area))
+    @resultsToObj()
+    @$el.html(@template(area: @area, results: @resultsToObj()))
     return @
 
   onClose: ->
