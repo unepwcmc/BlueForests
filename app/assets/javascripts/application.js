@@ -29,6 +29,11 @@
 //= require ./analysis/analysis.js.coffee
 //= require pica
 
+var roundToDecimals = function(number, places) {
+  places = Math.pow(10, places);
+  return Math.round(number * places) / places;
+};
+
 // Check if polygon self intersects (using openLayers)
 // http://gis.stackexchange.com/questions/23755/determine-if-a-polygon-intersects-itself-in-openlayers
 
