@@ -2,7 +2,7 @@ $(document).ready ->
   baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 18})
   baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 18})
 
-  map = L.map 'map',
+  map = L.map 'map_analysis',
     center: [24.5, 54]
     zoom: 9
     layers: [baseSatellite]
