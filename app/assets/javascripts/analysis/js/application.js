@@ -196,7 +196,7 @@
     AreaView.prototype.removeNewPolygonView = function() {
       if (this.polygonView != null) {
         this.polygonView.close();
-        return delete this.polygonViewView;
+        return delete this.polygonView;
       }
     };
 

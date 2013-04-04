@@ -32,7 +32,7 @@ class Backbone.Views.AreaView extends Backbone.View
   removeNewPolygonView: ->
     if @polygonView?
       @polygonView.close()
-      delete @polygonViewView
+      delete @polygonView
 
   handlePolygonClick: (polygon, event) ->
     new Backbone.Views.PolyActionsView(
