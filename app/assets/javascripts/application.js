@@ -25,7 +25,8 @@
 //= require OpenLayers
 //= require areas
 //= require_tree ./analysis/js/lib
-//= require ./analysis/js/application.js
+//= require_tree ./analysis/src/templates/
+//= require_tree ./analysis/src/views/
 //= require ./analysis/analysis.js.coffee
 //= require pica
 

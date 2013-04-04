@@ -1,4 +1,4 @@
-$(document).ready ->
+initializeMap = () ->
   baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 18})
   baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 18})
 
@@ -22,6 +22,9 @@ $(document).ready ->
 
   L.control.layers(baseMaps, overlayMaps).addTo(map)
 
+  return map
+
+initializePica = (map) ->
   window.pica = new Pica.Application(
     magpieUrl: "http://magpie.unepwcmc-005.vm.brightbox.net"
     projectId: 4
@@ -32,3 +35,7 @@ $(document).ready ->
 
   tabsView = new Backbone.Views.TabsView().render()
   $('#sidebar').html(tabsView.el)
+
+$(document).ready ->
+  map = initializeMap() if $('#map_analysis').length > 0
+  initializePica(map) if map?
