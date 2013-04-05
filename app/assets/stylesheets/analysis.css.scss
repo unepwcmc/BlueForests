@@ -39,11 +39,22 @@ $border: #4f6580 !default;
 
       &#add-area {
         border-right: 1px solid $border;
+        height: 20px;
+        width: 26px;
+        background-position: 9px 6px;
 
-        &:hover {
-          background-color: #DDFD48;
-          color: #526986;
+        background-image: image-url("add_area.png");
+        @media (min--moz-device-pixel-ratio: 1.3),
+          (-o-min-device-pixel-ratio: 2.6/2),
+          (-webkit-min-device-pixel-ratio: 1.3),
+          (min-device-pixel-ratio: 1.3),
+          (min-resolution: 1.3dppx) {
+          /* on retina, use image
+           * that's scaled by 2 */
+          background-size: 28px 27px;
+          background-image: image-url("add_area@2x.png");
         }
+        background-repeat: no-repeat;
       }
 
       &.active {
@@ -75,6 +86,8 @@ $border: #4f6580 !default;
 
     &.polygon-stats {
       tbody {
+        font-family: Arial, "Helvetica Neue", sans-serif;
+
         tr {
           &:first-child {
             td {
@@ -82,6 +95,7 @@ $border: #4f6580 !default;
             }
 
             background: #546476;
+            text-transform: uppercase;
           }
         }
       }
@@ -96,17 +110,16 @@ $border: #4f6580 !default;
         td {
           &:last-child {
             font-size: 1.8em;
-            line-height: 1.2em;
+            line-height: 1.1em;
           }
 
           span {
             font-size: 0.7rem;
-            font-weight: normal;
           }
 
           font-size: 2.4em;
           padding-top: 15px;
-          font-weight: bold;
+          font-weight: normal;
         }
       }
     }
@@ -122,6 +135,7 @@ $border: #4f6580 !default;
   top: 140px;
   bottom: 150px;
   border-left: 1px solid $border;
+  font-family: 'Montserrat', sans-serif;
 
   #new-polygon {
     text-transform: capitalize;
@@ -138,6 +152,21 @@ $border: #4f6580 !default;
     font-size: 0.9em;
     float: right;
     color: white;
+    padding-left: 18px;
+    background-position-y: 3px;
+
+    background-image: image-url("trash.png");
+    @media (min--moz-device-pixel-ratio: 1.3),
+    (-o-min-device-pixel-ratio: 2.6/2),
+    (-webkit-min-device-pixel-ratio: 1.3),
+    (min-device-pixel-ratio: 1.3),
+    (min-resolution: 1.3dppx) {
+      /* on retina, use image
+       * that's scaled by 2 */
+      background-size: 14px 17px;
+      background-image: image-url("trash@2x.png");
+    }
+    background-repeat: no-repeat;
   }
 
   .new-polygon-container {

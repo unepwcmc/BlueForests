@@ -8,7 +8,7 @@ window.JST['tabs'] = _.template("""
     <% }); %>
 
     <% if (workspace.areas.length < 3) { %>
-      <li id="add-area">+</li>
+      <li id="add-area"></li>
     <% } %>
   </ul>
 
