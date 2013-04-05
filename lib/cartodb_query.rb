@@ -8,7 +8,7 @@ class CartodbQuery
       more_groups = ""
     else
       more_params = ", age, area_id, density, knowledge, notes"
-      more_fields = ", #{validation.age || '0'}, #{validation.area_id || '0'}, #{validation.density || '0'}, '#{validation.knowledge}', '#{validation.notes}'"
+      more_fields = ", #{validation.age || '0'}, #{validation.area_id || '0'}, #{validation.density || '0'}, #{validation.condition || '0'}, '#{validation.knowledge}', '#{validation.notes}'"
       more_groups = ", t.age, t.area_id, t.density, t.knowledge, t.notes"
     end
 
@@ -110,7 +110,7 @@ SQL
 
   def self.editing(table_name, validation)
     <<-SQL
-      UPDATE  #{table_name} AS t SET age = #{validation.age || '0'}, area_id = #{validation.area_id || '0'}, density = #{validation.density || '0'}, knowledge = '#{validation.knowledge}', notes = '#{validation.notes}'
+      UPDATE  #{table_name} AS t SET age = #{validation.age || '0'}, area_id = #{validation.area_id || '0'}, density = #{validation.density || '0'}, knowledge = '#{validation.knowledge}', notes = '#{validation.notes}', condition = #{validation.condition}
       WHERE edit_phase = #{validation.id}
     SQL
   end
