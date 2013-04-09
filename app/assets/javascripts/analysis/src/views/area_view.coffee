@@ -20,13 +20,16 @@ class Backbone.Views.AreaView extends Backbone.View
   toggleDrawing: (event) ->
     if @polygonView?
       @removeNewPolygonView()
+      Pica.config.map.off('draw:poly-created', @renderLoadingSpinner)
     else
-      @polygonView = @area.drawNewPolygonView(@area,
+      Pica.config.map.on('draw:poly-created', @renderLoadingSpinner)
+      @polygonView = @area.drawNewPolygonView(
         success: () =>
           @removeNewPolygonView()
+          @template = JST['area']
           @render()
-          error: (xhr, textStatus, errorThrown) =>
-            alert("Can't save polygon: #{errorThrown}")
+        error: (xhr, textStatus, errorThrown) =>
+          alert("Can't save polygon: #{errorThrown}")
       )
 
   removeNewPolygonView: ->
@@ -54,6 +57,10 @@ class Backbone.Views.AreaView extends Backbone.View
 
     return keyedResults
 
+  renderLoadingSpinner: (e) =>
+    @template = JST['area_loading']
+    @render()
+
   render: =>
     @resultsToObj()
     @$el.html(@template(area: @area, results: @resultsToObj()))
@@ -61,6 +68,7 @@ class Backbone.Views.AreaView extends Backbone.View
 
   onClose: ->
     @removeNewPolygonView()
+    Pica.config.map.off('draw:poly-created', @renderLoadingSpinner)
     @showAreaPolygonsView.off("polygonClick", @handlePolygonClick)
     @showAreaPolygonsView.close()
     @area.off('sync', @render)
