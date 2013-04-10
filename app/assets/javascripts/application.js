@@ -21,6 +21,7 @@
 //= require backbone_datalink
 //= require backbone/blue_carbon
 //= require jquery.dataTables
+//= require data_tables_bootstrap
 //= require ajaxupload
 //= require OpenLayers
 //= require areas
