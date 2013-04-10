@@ -2,4 +2,5 @@
 *= require 'base'
 *= require 'admin'
 *= require 'analysis'
+*= require 'iframe'
 */

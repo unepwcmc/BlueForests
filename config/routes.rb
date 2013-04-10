@@ -1,5 +1,6 @@
 BlueCarbon::Application.routes.draw do
   root :to => 'analysis#index'
+  match "/layout/:layout" => 'analysis#index'
 
   match "/delayed_job" => DelayedJobWeb, :anchor => false
 
