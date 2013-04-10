@@ -45,15 +45,17 @@
       </div>
     </div>
   </div>
-  <% flash.each do |name, msg| %>
-    <% if msg.is_a?(String) %>
-      <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-        <button type="button" class="close" data-dismiss="alert">×</button>
-        <%= content_tag :div, msg, :id => "flash_#{name}" %>
-      </div>
+  <div class="container">
+    <% flash.each do |name, msg| %>
+      <% if msg.is_a?(String) %>
+        <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-  <%= yield %>
+    <%= yield %>
+  </div>
   <footer class="navbar navbar-fixed-bottom">
   <div class="navbar-inner">
     <div class="container-fluid">
