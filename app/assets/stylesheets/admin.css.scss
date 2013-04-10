@@ -11,8 +11,10 @@
 #sidebar {
   overflow: auto;
   position: fixed;
+  bottom: 152px;
   right: 0;
-  bottom: 150px;
+  top: 101px;
+  width: 360px;
 
   &.shadow {
     background: image-url('shadow.png') no-repeat center -50px;
