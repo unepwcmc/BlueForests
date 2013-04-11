@@ -13,12 +13,12 @@ initializeMap = () ->
     'Satellite': baseSatellite
 
   overlayMaps =
-    'Mangrove': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_mangrove/{z}/{x}/{y}.png?sql=SELECT * FROM bc_mangrove WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
-    'Seagrass': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_seagrass/{z}/{x}/{y}.png?sql=SELECT * FROM bc_seagrass WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
-    'Sabkha': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_sabkha/{z}/{x}/{y}.png?sql=SELECT * FROM bc_sabkha WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
-    'Saltmarsh': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_saltmarsh/{z}/{x}/{y}.png?sql=SELECT * FROM bc_saltmarsh WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
-    'Algal Mat': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_algal_mat/{z}/{x}/{y}.png?sql=SELECT * FROM bc_algal_mat WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
-    'Other': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_other/{z}/{x}/{y}.png?sql=SELECT * FROM bc_other WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
+    'Mangrove': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_mangrove/{z}/{x}/{y}.png?sql=SELECT ST_Transform(st_union(the_geom), 3857) AS the_geom_webmercator, habitat FROM bc_mangrove WHERE (action <> \'delete\' OR action IS NULL) AND toggle = true GROUP BY habitat;').addTo(map)
+    'Seagrass': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_seagrass/{z}/{x}/{y}.png?sql=SELECT ST_Transform(st_union(the_geom), 3857) AS the_geom_webmercator, habitat FROM bc_seagrass WHERE (action <> \'delete\' OR action IS NULL) AND toggle = true GROUP BY habitat;').addTo(map)
+    'Sabkha': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_sabkha/{z}/{x}/{y}.png?sql=SELECT ST_Transform(st_union(the_geom), 3857) AS the_geom_webmercator, habitat FROM bc_sabkha WHERE (action <> \'delete\' OR action IS NULL) AND toggle = true GROUP BY habitat;').addTo(map)
+    'Saltmarsh': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_saltmarsh/{z}/{x}/{y}.png?sql=SELECT ST_Transform(st_union(the_geom), 3857) AS the_geom_webmercator, habitat FROM bc_saltmarsh WHERE (action <> \'delete\' OR action IS NULL) AND toggle = true GROUP BY habitat;').addTo(map)
+    'Algal Mat': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_algal_mat/{z}/{x}/{y}.png?sql=SELECT ST_Transform(st_union(the_geom), 3857) AS the_geom_webmercator, habitat FROM bc_algal_mat WHERE (action <> \'delete\' OR action IS NULL) AND toggle = true GROUP BY habitat;').addTo(map)
+    'Other': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_other/{z}/{x}/{y}.png?sql=SELECT ST_Transform(st_union(the_geom), 3857) AS the_geom_webmercator, habitat FROM bc_other WHERE (action <> \'delete\' OR action IS NULL) AND toggle = true GROUP BY habitat;').addTo(map)
 
   L.control.layers(baseMaps, overlayMaps).addTo(map)
 
