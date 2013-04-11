@@ -15,7 +15,7 @@ window.JST['area'] = _.template("""
     <table class="table total-stats">
       <thead>
         <tr>
-          <th>Total Carbon Stock</th>
+          <th>Total CO<sub>2</sub> Stock</th>
           <th>Total Area</th>
         </tr>
       </thead>
@@ -27,14 +27,19 @@ window.JST['area'] = _.template("""
       </tbody>
     </table>
 
-    <table class="table polygon-stats">
-      <thead>
+    <h4>Equivalent to</h4>
+    <table class="table human-stats">
+      <tbody>
         <tr>
-          <th>Polygons in this area</th>
-          <th></th>
-          <th></th>
+          <td>
+            <span>3</span> years emissions of an avg. person
+          </td>
         </tr>
-      </thead>
+      </tbody>
+    </table>
+
+    <h4>Polygons in this area</h4>
+    <table class="table polygon-stats">
       <tbody>
         <tr>
           <td>Habitat</td>

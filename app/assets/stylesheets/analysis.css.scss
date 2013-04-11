@@ -79,6 +79,14 @@ $border: #4f6580 !default;
     }
   }
 
+  h4 {
+    font-size: 0.8em;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-left: 7px;
+    margin-bottom: 3px;
+  }
+
   table.table {
     background: none;
     color: white;
@@ -98,6 +106,26 @@ $border: #4f6580 !default;
       border: none;
     }
 
+    &.human-stats {
+      tbody {
+        font-family: Arial, "Helvetica Neue", sans-serif;
+
+        tr {
+          td {
+            padding-top: 20px;
+            border: none;
+            border-top: 1px solid #C1DDf3;
+
+            span {
+              line-height: 10px;
+              font-family: Montserrat, "Helvetica Neue", sans-serif;
+              font-size: 2.4em;
+            }
+          }
+        }
+      }
+    }
+
     &.polygon-stats {
       tbody {
         font-family: Arial, "Helvetica Neue", sans-serif;
@@ -106,6 +134,7 @@ $border: #4f6580 !default;
           &:first-child {
             td {
               border: none;
+              border-top: 1px solid #C1DDF3;
             }
 
             background: #546476;
@@ -115,6 +144,10 @@ $border: #4f6580 !default;
       }
 
       td {
+        &:first-child {
+          width: 85px;
+        }
+
         border-top: 1px solid #4D617A;
       }
     }
