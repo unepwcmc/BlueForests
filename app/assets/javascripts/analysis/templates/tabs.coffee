@@ -10,6 +10,8 @@ window.JST['tabs'] = _.template("""
     <% if (workspace.areas.length < 3) { %>
       <li id="add-area"></li>
     <% } %>
+
+    <li class="help">Help</li>
   </ul>
 
   <div id="area">

@@ -5,9 +5,10 @@ class Backbone.Views.TabsView extends Backbone.View
   template: JST['tabs']
 
   events:
-    'click .tabs li': 'changeTab'
-    'click #add-area': 'addArea'
+    'click .tabs li':     'changeTab'
+    'click #add-area':    'addArea'
     'click #delete-area': 'deleteArea'
+    'click .tabs li.help': 'showHelp'
 
   initialize: (options) ->
     @currentTab = new Backbone.Diorama.ManagedRegion()
@@ -23,6 +24,10 @@ class Backbone.Views.TabsView extends Backbone.View
 
     @workspace.setCurrentArea(area)
     @render()
+
+  showHelp: ->
+    helpView = new Backbone.Views.HelpView()
+    @render(helpView)
 
   addArea: (event) ->
     if pica.currentWorkspace.areas.length <= 3
@@ -44,11 +49,13 @@ class Backbone.Views.TabsView extends Backbone.View
 
     @render()
 
-  render: ->
+  render: (view = null) ->
     @$el.html(@template(workspace: @workspace))
 
-    areaView = new Backbone.Views.AreaView(area: @workspace.currentArea)
-    @currentTab.showView(areaView)
+    if !view?
+      view = new Backbone.Views.AreaView(area: @workspace.currentArea)
+
+    @currentTab.showView(view)
     @$el.find('#area').html(@currentTab.$el)
 
     return @

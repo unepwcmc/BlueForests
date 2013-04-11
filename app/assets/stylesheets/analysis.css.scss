@@ -71,6 +71,10 @@ $border: #4f6580 !default;
         background-repeat: no-repeat;
       }
 
+      &.help {
+        float: right;
+      }
+
       &.active {
         color: white;
         background: #334657;
