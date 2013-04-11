@@ -18,8 +18,11 @@ class Backbone.Views.PolyActionsView extends Backbone.View
     )
 
   render: =>
+    $('.delete-polygon').remove()
     @$el.html(@template(coords: {x: @event.containerPoint.x, y: @event.containerPoint.y}))
+
     $('body').append(@$el)
+    $('body').on('click', @onClose)
 
     return @
 

@@ -47,15 +47,26 @@ class Backbone.Views.AreaView extends Backbone.View
     
 
   resultsToObj: ->
-    keyedResults = {}
-
     if @area.get('results')?
+      resultsByHabitat = {}
+      sumByResult = {carbon: 0, area: 0}
+
       results = @area.get('results')[0].value_json.rows
       _.each(results, (result, index) ->
-        keyedResults[result.habitat] = {carbon: result.carbon}
+        resultsByHabitat[result.habitat] =
+          carbon: result.carbon
+          area:   result.area
+
+        sumByResult.carbon += result.carbon
+        sumByResult.area   += result.area
       )
 
-    return keyedResults
+      return {
+        sum: sumByResult
+        habitats: resultsByHabitat
+      }
+    else
+      return {}
 
   renderLoadingSpinner: (e) =>
     @template = JST['area_loading']

@@ -15,14 +15,14 @@ window.JST['area'] = _.template("""
     <table class="table total-stats">
       <thead>
         <tr>
-          <th>Total Carbon Sequ.</th>
+          <th>Total Carbon Stock</th>
           <th>Total Area</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>11600 <span>T</span></td>
-          <td>11600 <span>KM2</span></td>
+          <td><%= roundToDecimals(results.sum.carbon, 2) %> <span>T</span></td>
+          <td><%= roundToDecimals(results.sum.area, 2) %> <span>KM2</span></td>
         </tr>
       </tbody>
     </table>
@@ -39,18 +39,20 @@ window.JST['area'] = _.template("""
         <tr>
           <td>Habitat</td>
           <td>Area</td>
-          <td>Carbon Seq.</td>
+          <td>Carbon Stock</td>
         </tr>
-        <% _.each(results, function(attributes, key) { %>
+        <% _.each(results.habitats, function(attributes, key) { %>
           <tr>
             <td><%= key %></td>
-            <td>200 KM</td>
+            <td><%= roundToDecimals(attributes.area, 2) %> KM<sup>2</sup></td>
             <td><%= roundToDecimals(attributes.carbon, 2) %> KG</td>
           </tr>
         <% }) %>
       </tbody>
     </table>
 
-    <a href="<%= window.pica.config.magpieUrl %>/areas_of_interest/<%= area.get('id') %>.csv" class="btn btn-primary export">Export your report</a>
+    <div class="footer">
+      <a href="<%= window.pica.config.magpieUrl %>/areas_of_interest/<%= area.get('id') %>.csv" class="btn btn-primary export">Export your report</a>
+    </div>
   <% } %>
 """)
