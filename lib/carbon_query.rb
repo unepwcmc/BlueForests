@@ -44,8 +44,6 @@ class CarbonQuery
           UNION ALL
           SELECT the_geom, habitat FROM bc_saltmarsh WHERE action <> 'delete' AND toggle = true
           UNION ALL
-          SELECT the_geom, habitat FROM bc_sabkha WHERE action <> 'delete' AND toggle = true
-          UNION ALL
           SELECT the_geom, habitat FROM bc_algal_mat WHERE action <> 'delete' AND toggle = true
           UNION ALL
           SELECT the_geom, habitat FROM bc_other WHERE action <> 'delete' AND toggle = true
@@ -72,8 +70,6 @@ class CarbonQuery
           SELECT cartodb_id, the_geom, habitat FROM bc_seagrass WHERE action <> 'delete' AND toggle = true
           UNION ALL
           SELECT cartodb_id, the_geom, habitat FROM bc_saltmarsh WHERE action <> 'delete' AND toggle = true
-          UNION ALL
-          SELECT cartodb_id, the_geom, habitat FROM bc_sabkha WHERE action <> 'delete' AND toggle = true
           UNION ALL
           SELECT cartodb_id, the_geom, habitat FROM bc_algal_mat WHERE action <> 'delete' AND toggle = true
           UNION ALL
