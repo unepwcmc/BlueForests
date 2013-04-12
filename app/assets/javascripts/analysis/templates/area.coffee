@@ -12,52 +12,56 @@ window.JST['area'] = _.template("""
   </div>
 
   <% if (!_.isEmpty(results)) { %>
-    <table class="table total-stats">
-      <thead>
-        <tr>
-          <th>Total CO<sub>2</sub> Stock</th>
-          <th>Total Area</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= roundToDecimals(results.sum.carbon, 2) %> <span>T</span></td>
-          <td><%= roundToDecimals(results.sum.area, 2) %> <span>KM2</span></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>Equivalent to</h4>
-    <table class="table human-stats">
-      <tbody>
-        <tr>
-          <td>
-            <span><%= roundToDecimals(results.sum.human_emissions, 2) %></span> years emissions of an avg. person
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h4>Polygons in this area</h4>
-    <table class="table polygon-stats">
-      <tbody>
-        <tr>
-          <td>Habitat</td>
-          <td>Area</td>
-          <td>Carbon Stock</td>
-        </tr>
-        <% _.each(results.habitats, function(attributes, key) { %>
+    <% if (_.isEmpty(results.habitats)) { %>
+      Your AOI doesn't intersect with any known habitats.
+    <% } else { %>
+      <table class="table total-stats">
+        <thead>
           <tr>
-            <td><%= key %></td>
-            <td><%= roundToDecimals(attributes.area, 2) %> KM<sup>2</sup></td>
-            <td><%= roundToDecimals(attributes.carbon, 2) %> KG</td>
+            <th>Total CO<sub>2</sub> Stock</th>
+            <th>Total Area</th>
           </tr>
-        <% }) %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= roundToDecimals(results.sum.carbon, 2) %> <span>T</span></td>
+            <td><%= roundToDecimals(results.sum.area, 2) %> <span>KM2</span></td>
+          </tr>
+        </tbody>
+      </table>
 
-    <div class="footer">
-      <a href="<%= window.pica.config.magpieUrl %>/areas_of_interest/<%= area.get('id') %>.csv" class="btn btn-primary export">Export your report</a>
-    </div>
+      <h4>Equivalent to</h4>
+      <table class="table human-stats">
+        <tbody>
+          <tr>
+            <td>
+              <span><%= roundToDecimals(results.sum.human_emissions, 2) %></span> years emissions of an avg. person
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4>Polygons in this area</h4>
+      <table class="table polygon-stats">
+        <tbody>
+          <tr>
+            <td>Habitat</td>
+            <td>Area</td>
+            <td>Carbon Stock</td>
+          </tr>
+          <% _.each(results.habitats, function(attributes, key) { %>
+            <tr>
+              <td><%= key %></td>
+              <td><%= roundToDecimals(attributes.area, 2) %> KM<sup>2</sup></td>
+              <td><%= roundToDecimals(attributes.carbon, 2) %> KG</td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <div class="footer">
+        <a href="<%= window.pica.config.magpieUrl %>/areas_of_interest/<%= area.get('id') %>.csv" class="btn btn-primary export">Export your report</a>
+      </div>
+    <% } %>
   <% } %>
 """)
