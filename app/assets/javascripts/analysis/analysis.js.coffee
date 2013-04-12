@@ -12,15 +12,41 @@ initializeMap = () ->
     'Map': baseMap
     'Satellite': baseSatellite
 
-  overlayMaps =
-    'Mangrove': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_mangrove/{z}/{x}/{y}.png?sql=SELECT ST_Transform(st_union(the_geom), 3857) AS the_geom_webmercator, habitat FROM bc_mangrove WHERE (action <> \'delete\' OR action IS NULL) AND toggle = true GROUP BY habitat;').addTo(map)
-    'Seagrass': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_seagrass/{z}/{x}/{y}.png?sql=SELECT ST_Transform(st_union(the_geom), 3857) AS the_geom_webmercator, habitat FROM bc_seagrass WHERE (action <> \'delete\' OR action IS NULL) AND toggle = true GROUP BY habitat;').addTo(map)
-    'Sabkha': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_sabkha/{z}/{x}/{y}.png?sql=SELECT ST_Transform(st_union(the_geom), 3857) AS the_geom_webmercator, habitat FROM bc_sabkha WHERE (action <> \'delete\' OR action IS NULL) AND toggle = true GROUP BY habitat;').addTo(map)
-    'Saltmarsh': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_saltmarsh/{z}/{x}/{y}.png?sql=SELECT ST_Transform(st_union(the_geom), 3857) AS the_geom_webmercator, habitat FROM bc_saltmarsh WHERE (action <> \'delete\' OR action IS NULL) AND toggle = true GROUP BY habitat;').addTo(map)
-    'Algal Mat': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_algal_mat/{z}/{x}/{y}.png?sql=SELECT ST_Transform(st_union(the_geom), 3857) AS the_geom_webmercator, habitat FROM bc_algal_mat WHERE (action <> \'delete\' OR action IS NULL) AND toggle = true GROUP BY habitat;').addTo(map)
-    'Other': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_other/{z}/{x}/{y}.png?sql=SELECT ST_Transform(st_union(the_geom), 3857) AS the_geom_webmercator, habitat FROM bc_other WHERE (action <> \'delete\' OR action IS NULL) AND toggle = true GROUP BY habitat;').addTo(map)
+  overlayMaps = {}
+  habitats = {
+    mangrove: '#008b00'
+    seagrass: '#9b1dea'
+    saltmarsh: '#007dff'
+    algal_mat: '#ffe048'
+    other: '#1dcbea'
+  }
 
-  L.control.layers(baseMaps, overlayMaps).addTo(map)
+  _.each habitats, (polygon_fill, habitat) ->
+    query = "SELECT * FROM {{table_name}} WHERE toggle = true AND (action <> 'delete' OR action IS NULL)"
+    cartodb.createLayer(map,
+      type: 'cartodb'
+      options:
+        table_name: "bc_#{habitat}"
+        user_name:  "carbon-tool"
+        query:      query
+        tile_style: """
+          \#{{table_name}}{
+            line-color: #FFF;
+            line-width: 0.5;
+            polygon-fill: #{polygon_fill};
+            polygon-opacity: 0.4
+          }
+        """
+    ).on('done', (layer) => map.addLayer(layer))
+
+  #L.control.layers(baseMaps, overlayMaps).addTo(map)
+
+  attribution = L.control.attribution(
+    position: 'bottomleft'
+    prefix: ''
+  )
+  attribution.addAttribution('Developed for the Abu Dhabi Blue Carbon Demonstration Project')
+  attribution.addTo(map)
 
   return map
 
