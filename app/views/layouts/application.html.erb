@@ -35,13 +35,9 @@
 
         <h1>Abu Dhabi Blue Carbon Assessment Tool</h1>
 
-        <div class="nav-collapse">
-          <ul class="nav">
-          </ul>
-          <ul class="nav pull-right">
-            <li><%= link_to 'About', '' %></li>
-          </ul>
-        </div>
+        <ul class="nav pull-right">
+          <li><%= link_to 'About', '' %></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -59,7 +55,12 @@
   <footer class="navbar navbar-fixed-bottom">
   <div class="navbar-inner">
     <div class="container-fluid">
-      <p>© UNEP-WCMC 2012</p>
+      <div class="logos">
+        © UNEP-WCMC 2012
+      </div>
+      <div class="links pull-right">
+        <%= link_to 'Sign In', new_admin_session_path %>
+      </div>
     </div>
   </div>
   </footer>
