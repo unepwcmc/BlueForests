@@ -48,23 +48,25 @@ class Backbone.Views.AreaView extends Backbone.View
 
   resultsToObj: ->
     if @area.get('results')?
-      resultsByHabitat = {}
-      sumByResult = {carbon: 0, area: 0}
+      results =
+        sum: {}
+        habitats: {}
 
-      results = @area.get('results')[0].value_json.rows
-      _.each(results, (result, index) ->
-        resultsByHabitat[result.habitat] =
-          carbon: result.carbon
-          area:   result.area
+      values =
+        carbon: @area.get('results')[0].value_json.rows
+        area: @area.get('results')[1].value_json.rows
 
-        sumByResult.carbon += result.carbon
-        sumByResult.area   += result.area
-      )
+      _.each values, (habitats, operation) ->
+        _.each habitats, (habitat) ->
+          results.habitats[habitat.habitat] ||= {}
+          results.habitats[habitat.habitat][operation] = habitat[operation]
 
-      return {
-        sum: sumByResult
-        habitats: resultsByHabitat
-      }
+          results.sum[operation] ||= 0
+          results.sum[operation]  += habitat[operation]
+
+      results.sum.human_emissions = @area.get('results')[2].value || 0
+
+      return results
     else
       return {}
 

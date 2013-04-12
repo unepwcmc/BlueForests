@@ -32,7 +32,7 @@ window.JST['area'] = _.template("""
       <tbody>
         <tr>
           <td>
-            <span>3</span> years emissions of an avg. person
+            <span><%= roundToDecimals(results.sum.human_emissions, 2) %></span> years emissions of an avg. person
           </td>
         </tr>
       </tbody>
