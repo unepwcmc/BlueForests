@@ -62,7 +62,7 @@ SELECT a.the_geom, a.habitat, c_mg_ha FROM (
         FROM bc_mangrove mngr
         LEFT JOIN carbon_values b
     ON (mngr.habitat = b.habitat AND mngr.density = b.density_code AND mngr.age = b.age_code AND mngr.condition = b.condition_code)
-    WHERE toggle = true and action <> 'delete' and mngr.density IS NOT NULL AND mngr.age IS NOT NULL AND mngr.condition IS NOT NULL
+    WHERE toggle = true and action <> 'delete' and phase <> 0 AND mngr.density IS NOT NULL AND mngr.density <> 0 AND mngr.age IS NOT NULL AND mngr.age <> 0 AND mngr.condition IS NOT NULL AND mngr.density <> 0 
    UNION ALL
 
     -- Saltmarsh edited values with density
@@ -71,7 +71,7 @@ SELECT a.the_geom, a.habitat, c_mg_ha FROM (
         FROM bc_saltmarsh sltm
         LEFT JOIN carbon_values b
     ON (sltm.habitat = b.habitat AND sltm.density = b.density_code)
-    WHERE toggle = true and action <> 'delete' AND sltm.density IS NOT NULL
+    WHERE toggle = true and action <> 'delete' AND phase <> 0 AND sltm.density IS NOT NULL
       UNION ALL
 
     -- Seagrass edited values with density
@@ -80,11 +80,9 @@ SELECT a.the_geom, a.habitat, c_mg_ha FROM (
       FROM bc_seagrass sgrs
     LEFT JOIN carbon_values b
     ON (sgrs.habitat = b.habitat AND sgrs.density = b.density_code)
-    WHERE toggle = true AND action <> 'delete' AND sgrs.density IS NOT NULL
+    WHERE toggle = true AND action <> 'delete' AND phase <> 0 AND sgrs.density IS NOT NULL
   ) a
 
-  -- All edited Values
-  WHERE a.phase <> 0 AND standard_value_habitat = FALSE
   UNION ALL
   
   -- Mangrove, Saltmarsh and Seagrass previous polygons
@@ -93,19 +91,19 @@ SELECT a.the_geom, a.habitat, c_mg_ha FROM (
   FROM bc_mangrove mngr
   LEFT JOIN carbon_values b
   ON mngr.habitat = b.habitat
-  WHERE  (toggle = true AND action <> 'delete' AND phase = 0) AND (mngr.density IS NULL OR mngr.age IS NULL OR mngr.condition IS NULL) AND b.standard_value_habitat = TRUE
+  WHERE  (toggle = true AND action <> 'delete') AND (phase = 0 OR mngr.density IS NULL OR mngr.density = 0 OR mngr.age IS NULL OR mngr.age = 0 OR mngr.condition IS NULL or mngr.condition = 0) AND b.standard_value_habitat = TRUE
   UNION ALL
   SELECT sltm.the_geom, sltm.habitat, c_mg_ha
     FROM bc_saltmarsh sltm
     LEFT JOIN carbon_values b
   ON sltm.habitat = b.habitat
-  WHERE  toggle = true AND action <> 'delete' AND sltm.density IS NULL AND b.standard_value_habitat = TRUE AND phase = 0
+  WHERE  toggle = true AND action <> 'delete' AND (phase = 0 OR sltm.density IS NULL) AND b.standard_value_habitat = TRUE
   UNION ALL
   SELECT sgrs.the_geom, sgrs.habitat, c_mg_ha
   FROM bc_seagrass sgrs
   LEFT JOIN carbon_values b
   ON sgrs.habitat = b.habitat
-  WHERE  toggle = true and action <> 'delete' AND sgrs.density IS NULL AND b.standard_value_habitat = TRUE  AND phase = 0
+  WHERE  toggle = true and action <> 'delete' AND (sgrs.density IS NULL OR phase = 0) AND b.standard_value_habitat = TRUE
   UNION ALL
   -- Algalmat (all)
 
@@ -114,12 +112,8 @@ SELECT a.the_geom, a.habitat, c_mg_ha FROM (
   LEFT JOIN carbon_values b
   ON (algm.habitat = b.habitat)
   WHERE toggle = true AND action <> 'delete'
-  UNION ALL
 
-    -- Sabkha (all)
 
-  SELECT sbkh.the_geom, sbkh.habitat, b.c_mg_ha
-  FROM bc_sabkha sbkh
-  LEFT JOIN carbon_values b
-  ON (sbkh.habitat = b.habitat)
-  WHERE toggle = true AND action <> 'delete'
+SELECT * FROM INFORMATION_SCHEMA.views
+
+http://carbon-tool.cartodb.com/api/v2/sql?format=shp
