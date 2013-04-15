@@ -71,7 +71,8 @@ UPDATE #{table_name} AS t SET toggle = true WHERE toggle IS NULL AND action = 'v
 UPDATE #{table_name} AS t SET toggle = false WHERE toggle IS NULL;
 
     SQL
-
+    
+ 
     else
       <<-SQL
 UPDATE #{table_name} AS t SET toggle = FALSE, notes = 'null at #{uniq_id}'  WHERE t.toggle IS NULL;
@@ -112,6 +113,13 @@ SQL
     <<-SQL
       UPDATE  #{table_name} AS t SET age = #{validation.age || '0'}, area_id = #{validation.area_id || '0'}, density = #{validation.density || '0'}, knowledge = '#{validation.knowledge}', notes = '#{validation.notes}', condition = #{validation.condition}
       WHERE edit_phase = #{validation.id}
+    SQL
+  end
+
+  def self.remove(table_name)
+
+    <<-SQL
+      DELETE FROM #{table_name} a USING (SELECT MAX(a.phase) as max FROM #{table_name} a) b WHERE a.phase = b.max;
     SQL
   end
 end
