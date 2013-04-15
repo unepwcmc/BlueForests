@@ -6,6 +6,8 @@ initializeMap = () ->
     center: [24.5, 54]
     zoom: 9
     layers: [baseSatellite]
+    minZoom: 2
+    maxZoom: 18
 
   # Layers
   baseMaps =
