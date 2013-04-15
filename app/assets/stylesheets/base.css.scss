@@ -132,6 +132,18 @@ footer.navbar {
     }
   }
 
+  ul.nav > li > a {
+    padding: 0;
+  }
+
+  ul.dropdown-menu a {
+    color: black;
+
+    &:hover {
+      color: white;
+    }
+  }
+
   .navbar-inner {
     border: 0;
     min-height: 120px;

@@ -52,17 +52,31 @@
     <% end %>
     <%= yield %>
   </div>
+
   <footer class="navbar navbar-fixed-bottom">
-  <div class="navbar-inner">
-    <div class="container-fluid">
-      <div class="logos">
-        © UNEP-WCMC 2012
-      </div>
-      <div class="links pull-right">
-        <%= link_to 'Sign In', new_admin_session_path %>
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <div class="logos">
+          © UNEP-WCMC 2012
+        </div>
+        <div class="links pull-right">
+          <ul class="nav">
+            <% if admin_signed_in? %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= truncate("#{current_admin.email}") %> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "My Account", edit_admin_path(current_admin) %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to "Logout", destroy_admin_session_path, method: :delete %></li>
+                </ul>
+              </li>
+            <% else %>
+              <%= link_to 'Sign In', new_admin_session_path %>
+            <% end %>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
   </footer>
 </body>
 </html>
