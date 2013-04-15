@@ -24,6 +24,14 @@ class CarbonQuery
       SQL
   end
 
+  def self.polygon_area_km2(the_geom)
+
+     <<-SQL
+     SELECT ST_AREA(ST_Transform(ST_SetSRID(#{the_geom}, 4326),27040))/100000
+     SQL
+  end
+
+
   def self.global_percent_area(the_geom, table_name)
 
     <<-SQL
