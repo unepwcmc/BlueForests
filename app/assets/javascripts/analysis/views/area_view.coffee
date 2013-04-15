@@ -52,9 +52,14 @@ class Backbone.Views.AreaView extends Backbone.View
         sum: {}
         habitats: {}
 
+      compareByName = (name) ->
+        (obj) ->
+          obj.display_name == name
+
       values =
-        carbon: @area.get('results')[0].value_json.rows
-        area: @area.get('results')[1].value_json.rows
+        carbon: _.find(@area.get('results'), compareByName("Carbon")).value_json.rows
+        area: _.find(@area.get('results'), compareByName("Area")).value_json.rows
+        percentage: _.find(@area.get('results'), compareByName("Percentage")).value_json.rows
 
       _.each values, (habitats, operation) ->
         _.each habitats, (habitat) ->
@@ -64,7 +69,7 @@ class Backbone.Views.AreaView extends Backbone.View
           results.sum[operation] ||= 0
           results.sum[operation]  += habitat[operation]
 
-      results.sum.human_emissions = @area.get('results')[2].value || 0
+      results.sum.human_emissions = _.find(@area.get('results'), compareByName("Emissions")).value_json.time
 
       return results
     else

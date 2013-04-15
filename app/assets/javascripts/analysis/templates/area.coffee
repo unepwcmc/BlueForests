@@ -44,7 +44,7 @@ window.JST['area'] = _.template("""
         <tbody>
           <tr>
             <td>
-              <span><%= roundToDecimals(results.sum.human_emissions, 2) %></span> years
+              <span><%= results.sum.human_emissions %></span>
             </td>
           </tr>
         </tbody>
@@ -63,7 +63,7 @@ window.JST['area'] = _.template("""
             <tr>
               <td><%= key %></td>
               <td><%= roundToDecimals(attributes.area, 2) %></td>
-              <td><%= roundToDecimals(attributes.area, 2) %></td>
+              <td><%= roundToDecimals(attributes.percentage, 2) %></td>
               <td><%= roundToDecimals(attributes.carbon, 2) %></td>
             </tr>
           <% }) %>

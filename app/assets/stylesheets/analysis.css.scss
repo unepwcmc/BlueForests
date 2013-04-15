@@ -143,6 +143,10 @@ $border: #4f6580 !default;
               border-top: 1px solid #C1DDF3;
               padding-bottom: 0;
 
+              &:nth-of-type(3) {
+                width: 80px;
+              }
+
               &:last-child {
                 width: 70px;
               }
