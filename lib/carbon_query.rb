@@ -46,7 +46,7 @@ class CarbonQuery
           )
           a 
           INNER JOIN 
-          (SELECT #{the_geom}) b 
+          (SELECT #{the_geom} as the_geom) b 
           ON ST_Intersects(a.the_geom, b.the_geom)) a
           GROUP BY habitat) a INNER JOIN (
           SELECT the_geom, habitat FROM bc_mangrove
