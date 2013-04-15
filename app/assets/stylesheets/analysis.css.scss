@@ -6,7 +6,7 @@ $border: #4f6580 !default;
   overflow: auto;
   float: right;
   top: $navbarHeight;
-  width: 300px;
+  width: 320px;
   background-color: #334657;
   right: 0;
   bottom: 120px;
@@ -84,6 +84,7 @@ $border: #4f6580 !default;
   }
 
   h4 {
+    color: #E3E6E9;
     font-size: 0.8em;
     font-weight: normal;
     text-transform: uppercase;
@@ -97,6 +98,7 @@ $border: #4f6580 !default;
 
     thead {
       border-bottom: 1px solid #C1DDF3;
+      color: #E3E6E9;
 
       th {
         padding-bottom: 3px;
@@ -139,6 +141,20 @@ $border: #4f6580 !default;
             td {
               border: none;
               border-top: 1px solid #C1DDF3;
+              padding-bottom: 0;
+
+              &:last-child {
+                width: 70px;
+              }
+
+              span {
+                display: block;
+                font-size: 0.7em;
+                text-transform: none;
+                color: #A8B6C4;
+                top: -7px;
+                position: relative;
+              }
             }
 
             background: #546476;
@@ -159,11 +175,6 @@ $border: #4f6580 !default;
     &.total-stats {
       tbody {
         td {
-          &:last-child {
-            font-size: 1.8em;
-            line-height: 1.1em;
-          }
-
           span {
             font-size: 0.7rem;
           }
@@ -179,7 +190,7 @@ $border: #4f6580 !default;
 
 #area {
   position: fixed;
-  width: 280px;
+  width: 300px;
   padding: 10px;
   padding-top: 5px;
   overflow: scroll;

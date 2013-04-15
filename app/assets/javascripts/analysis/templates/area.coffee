@@ -18,24 +18,33 @@ window.JST['area'] = _.template("""
       <table class="table total-stats">
         <thead>
           <tr>
-            <th>Total CO<sub>2</sub> Stock</th>
-            <th>Total Area</th>
+            <th>Total Carbon Stock</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><%= roundToDecimals(results.sum.carbon, 2) %> <span>T</span></td>
-            <td><%= roundToDecimals(results.sum.area, 2) %> <span>KM2</span></td>
           </tr>
         </tbody>
       </table>
 
-      <h4>Equivalent to</h4>
+      <table class="table total-stats">
+        <thead>
+          <tr>
+            <th>Total Area</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td><%= roundToDecimals(results.sum.area, 2) %> <span>KM<sup>2</sup></span></td>
+        </tbody>
+      </table>
+
+      <h4>Avg. Person CO<sup>2</sup> Emissions EQV.</h4>
       <table class="table human-stats">
         <tbody>
           <tr>
             <td>
-              <span><%= roundToDecimals(results.sum.human_emissions, 2) %></span> years emissions of an avg. person
+              <span><%= roundToDecimals(results.sum.human_emissions, 2) %></span> years
             </td>
           </tr>
         </tbody>
@@ -46,14 +55,16 @@ window.JST['area'] = _.template("""
         <tbody>
           <tr>
             <td>Habitat</td>
-            <td>Area</td>
-            <td>Carbon Stock</td>
+            <td>Area <span>KM<sup>2</sup></span></td>
+            <td>Area <span>% of Tot.</span></td>
+            <td title="Carbon Stock">C-Stock <span>KG</span></td>
           </tr>
           <% _.each(results.habitats, function(attributes, key) { %>
             <tr>
               <td><%= key %></td>
-              <td><%= roundToDecimals(attributes.area, 2) %> KM<sup>2</sup></td>
-              <td><%= roundToDecimals(attributes.carbon, 2) %> KG</td>
+              <td><%= roundToDecimals(attributes.area, 2) %></td>
+              <td><%= roundToDecimals(attributes.area, 2) %></td>
+              <td><%= roundToDecimals(attributes.carbon, 2) %></td>
             </tr>
           <% }) %>
         </tbody>
