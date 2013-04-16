@@ -9,7 +9,6 @@ initializeMap = () ->
     minZoom: 2
     maxZoom: 18
 
-  # Layers
   baseMaps =
     'Map': baseMap
     'Satellite': baseSatellite
@@ -39,9 +38,17 @@ initializeMap = () ->
             polygon-opacity: 0.4
           }
         """
-    ).on('done', (layer) => map.addLayer(layer))
+    ).on('done', (layer) =>
+      map.addLayer(layer)
 
-  #L.control.layers(baseMaps, overlayMaps).addTo(map)
+      prettyName = habitat.replace("_", " ")
+      prettyName = prettyName.replace(/\w\S*/g, (t) -> t.charAt(0).toUpperCase() + t.substr(1).toLowerCase())
+      overlayMaps[prettyName] = layer
+    )
+
+  setTimeout(() ->
+    L.control.layers(baseMaps, overlayMaps).addTo(map)
+  ,200)
 
   attribution = L.control.attribution(
     position: 'bottomleft'
