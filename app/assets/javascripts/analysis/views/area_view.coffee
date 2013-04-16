@@ -10,7 +10,7 @@ class Backbone.Views.AreaView extends Backbone.View
 
   initialize: (options) ->
     @area = options.area
-    @area.on('sync', @render)
+    @area.on('change', @render)
 
     @showAreaPolygonsView = window.pica.currentWorkspace.currentArea.newShowAreaPolygonsView()
     @showAreaPolygonsView.on("polygonClick", @handlePolygonClick)
@@ -27,7 +27,6 @@ class Backbone.Views.AreaView extends Backbone.View
         success: () =>
           @removeNewPolygonView()
           @template = JST['area']
-          @render()
         error: (xhr, textStatus, errorThrown) =>
           alert("Can't save polygon: #{errorThrown}")
       )
@@ -80,7 +79,6 @@ class Backbone.Views.AreaView extends Backbone.View
     @render()
 
   render: =>
-    @resultsToObj()
     @$el.html(@template(area: @area, results: @resultsToObj()))
     return @
 
