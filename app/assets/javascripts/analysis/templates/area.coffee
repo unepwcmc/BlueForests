@@ -35,7 +35,7 @@ window.JST['area'] = _.template("""
           </tr>
         </thead>
         <tbody>
-          <td><%= roundToDecimals(results.sum.area, 2) %> <span>KM<sup>2</sup></span></td>
+          <td><%= roundToDecimals(results.sum.area, 2) %> <span>km<sup>2</sup></span></td>
         </tbody>
       </table>
 
@@ -55,9 +55,9 @@ window.JST['area'] = _.template("""
         <tbody>
           <tr>
             <td>Habitat</td>
-            <td>Area <span>KM<sup>2</sup></span></td>
+            <td>Area <span>km<sup>2</sup></span></td>
             <td>Area <span>% of Tot.</span></td>
-            <td title="Carbon Stock">C-Stock <span>KG</span></td>
+            <td title="Carbon Stock">C-Stock <span>kg</span></td>
           </tr>
           <% _.each(results.habitats, function(attributes, key) { %>
             <tr>
