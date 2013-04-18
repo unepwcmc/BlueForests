@@ -45,6 +45,14 @@ class Backbone.Views.AreaView extends Backbone.View
   deleteArea: (event) ->
     
 
+  humanEmissionsAsTime: (timeInYears) ->
+    timeInYears = roundToDecimals(timeInYears, 2)
+
+    if timeInYears < 1
+      return "#{timeInYears * 365} <span>days</span>"
+
+    return "#{timeInYears} <span>years</span>"
+
   resultsToObj: ->
     if @area.get('results')?
       results =
@@ -55,20 +63,22 @@ class Backbone.Views.AreaView extends Backbone.View
         (obj) ->
           obj.display_name == name
 
+      getResultByName = (name) =>
+        _.find(@area.get('results'), compareByName(name)).value
+
       values =
-        carbon: _.find(@area.get('results'), compareByName("Carbon")).value_json.rows
-        area: _.find(@area.get('results'), compareByName("Area")).value_json.rows
-        percentage: _.find(@area.get('results'), compareByName("Percentage")).value_json.rows
+        carbon: getResultByName("Carbon").rows
+        area: getResultByName("Area").rows
+        percentage: getResultByName("Percentage").rows
 
       _.each values, (habitats, operation) ->
         _.each habitats, (habitat) ->
           results.habitats[habitat.habitat] ||= {}
           results.habitats[habitat.habitat][operation] = habitat[operation]
 
-          results.sum[operation] ||= 0
-          results.sum[operation]  += habitat[operation]
-
-      results.sum.human_emissions = _.find(@area.get('results'), compareByName("Emissions")).value_json.time
+      results.sum.area = getResultByName("Total Area")
+      results.sum.carbon = getResultByName("Total Carbon")
+      results.sum.human_emissions = @humanEmissionsAsTime(getResultByName("Emissions"))
 
       return results
     else

@@ -118,14 +118,19 @@ $border: #4f6580 !default;
 
         tr {
           td {
-            padding-top: 20px;
+            background-image: image-url("human_emissions.png");
+            background-repeat: no-repeat;
+            background-position: 9px 10px;
+            padding-top: 15px;
+            padding-left: 45px;
             border: none;
             border-top: 1px solid #C1DDf3;
+            font-size: 2.4em;
+            font-family: Montserrat, "Helvetica Neue", sans-serif;
 
             span {
               line-height: 10px;
-              font-family: Montserrat, "Helvetica Neue", sans-serif;
-              font-size: 2.4em;
+              font-size: 0.7rem;
             }
           }
         }
@@ -144,7 +149,7 @@ $border: #4f6580 !default;
               padding-bottom: 0;
 
               &:nth-of-type(3) {
-                width: 80px;
+                width: 70px;
               }
 
               &:last-child {
@@ -194,13 +199,15 @@ $border: #4f6580 !default;
 
 #area {
   position: fixed;
-  width: 300px;
+  width: 298px;
   padding: 10px;
   padding-top: 5px;
   overflow: scroll;
   top: 142px;
   bottom: 120px;
-  border-left: 1px solid $border;
+  border: 1px solid $border;
+  border-top: 0;
+  border-bottom: 0;
   font-family: 'Montserrat', sans-serif;
 
   #new-polygon {

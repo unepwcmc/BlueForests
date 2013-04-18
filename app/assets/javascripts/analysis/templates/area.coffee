@@ -44,7 +44,7 @@ window.JST['area'] = _.template("""
         <tbody>
           <tr>
             <td>
-              <span><%= results.sum.human_emissions %></span>
+              <%= results.sum.human_emissions %>
             </td>
           </tr>
         </tbody>
