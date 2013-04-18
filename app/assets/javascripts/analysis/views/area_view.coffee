@@ -67,9 +67,9 @@ class Backbone.Views.AreaView extends Backbone.View
         _.find(@area.get('results'), compareByName(name)).value
 
       values =
-        carbon: getResultByName("Carbon").rows
-        area: getResultByName("Area").rows
-        percentage: getResultByName("Percentage").rows
+        carbon: getResultByName("Carbon")
+        area: getResultByName("Area")
+        percentage: getResultByName("Percentage")
 
       _.each values, (habitats, operation) ->
         _.each habitats, (habitat) ->
