@@ -57,14 +57,14 @@ window.JST['area'] = _.template("""
             <td>Habitat</td>
             <td>Area <span>km<sup>2</sup></span></td>
             <td>Area <span>% of Tot.</span></td>
-            <td title="Carbon Stock">C-Stock <span>kg</span></td>
+            <td title="Carbon Stock">C-Stock <span>T</span></td>
           </tr>
           <% _.each(results.habitats, function(attributes, key) { %>
             <tr>
               <td><%= key %></td>
               <td><%= roundToDecimals(attributes.area, 2) %></td>
               <td><%= roundToDecimals(attributes.habitat_percentage, 2) %></td>
-              <td><%= roundToDecimals(attributes.carbon, 2) %></td>
+              <td><%= Math.ceil(attributes.carbon) %></td>
             </tr>
           <% }) %>
         </tbody>
