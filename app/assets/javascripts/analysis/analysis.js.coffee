@@ -1,13 +1,13 @@
 initializeMap = () ->
-  baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 18})
-  baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 18})
+  baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 17})
+  baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 17})
 
   map = L.map 'map_analysis',
     center: [24.5, 54]
     zoom: 9
     layers: [baseSatellite]
-    minZoom: 2
-    maxZoom: 18
+    minZoom: 8
+    maxZoom: 17
 
   baseMaps =
     'Map': baseMap
