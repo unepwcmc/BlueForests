@@ -63,7 +63,7 @@ window.JST['area'] = _.template("""
             <tr>
               <td><%= key %></td>
               <td><%= roundToDecimals(attributes.area, 2) %></td>
-              <td><%= roundToDecimals(attributes.percentage, 2) %></td>
+              <td><%= roundToDecimals(attributes.habitat_percentage, 2) %></td>
               <td><%= roundToDecimals(attributes.carbon, 2) %></td>
             </tr>
           <% }) %>
