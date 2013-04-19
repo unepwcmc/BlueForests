@@ -39,7 +39,7 @@ window.JST['area'] = _.template("""
         </tbody>
       </table>
 
-      <h4>Avg. Person CO<sup>2</sup> Emissions EQV.</h4>
+      <h4>Equivalent per capita CO<sup>2</sup> emissions</h4>
       <table class="table human-stats">
         <tbody>
           <tr>
