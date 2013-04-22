@@ -23,32 +23,22 @@ initializeMap = () ->
   }
 
   _.each habitats, (polygon_fill, habitat) ->
-    query = "SELECT * FROM {{table_name}} WHERE toggle = true AND (action <> 'delete' OR action IS NULL)"
-    cartodb.createLayer(map,
-      type: 'cartodb'
-      options:
-        table_name: "bc_#{habitat}"
-        user_name:  "carbon-tool"
-        query:      query
-        tile_style: """
-          \#{{table_name}}{
-            line-color: #FFF;
-            line-width: 0.5;
-            polygon-fill: #{polygon_fill};
-            polygon-opacity: 0.4
-          }
-        """
-    ).on('done', (layer) =>
-      map.addLayer(layer)
+    query = "SELECT * FROM bc_#{habitat} WHERE toggle = true AND (action <> 'delete' OR action IS NULL)"
+    style = """
+      #bc_#{habitat} {
+        line-color: #FFF;
+        line-width: 0.5;
+        polygon-fill: #{polygon_fill};
+        polygon-opacity: 0.4
+      }
+    """
+    url   = "http://carbon-tool.cartodb.com/tiles/bc_#{habitat}/{z}/{x}/{y}.png?sql=#{query}&style=#{style}"
 
-      prettyName = habitat.replace("_", " ")
-      prettyName = prettyName.replace(/\w\S*/g, (t) -> t.charAt(0).toUpperCase() + t.substr(1).toLowerCase())
-      overlayMaps[prettyName] = layer
-    )
+    prettyName = habitat.replace("_", " ")
+    prettyName = prettyName.replace(/\w\S*/g, (t) -> t.charAt(0).toUpperCase() + t.substr(1).toLowerCase())
+    overlayMaps[prettyName] = L.tileLayer(url).addTo(map)
 
-  setTimeout(() ->
-    L.control.layers(baseMaps, overlayMaps).addTo(map)
-  ,200)
+  L.control.layers(baseMaps, overlayMaps).addTo(map)
 
   attribution = L.control.attribution(
     position: 'bottomleft'

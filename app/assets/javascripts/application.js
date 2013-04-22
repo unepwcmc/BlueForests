@@ -8,7 +8,6 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/blue_carbon
-//= require cartodb.nojquery
 //= require jquery.dataTables
 //= require data_tables_bootstrap
 //= require ajaxupload
