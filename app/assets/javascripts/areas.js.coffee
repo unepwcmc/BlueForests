@@ -11,7 +11,9 @@ initializeMap = (map_id) ->
 
   map = L.map map_id,
     center: [24.5, 54]
-    zoom: 8
+    zoom: 9
+    minZoom: 8
+    maxZoom: 17
     layers: [baseSatellite]
 
   # Layers
