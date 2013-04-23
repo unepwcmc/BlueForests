@@ -76,7 +76,7 @@ class Backbone.Views.AreaView extends Backbone.View
     return "#{timeInYears} <span>years</span>"
 
   resultsToObj: ->
-    if @area.get('results')?
+    if @area.get('results')? && @area.get('results').length > 0
       results =
         sum: {}
         habitats: {}
