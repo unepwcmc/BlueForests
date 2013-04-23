@@ -35,6 +35,10 @@
 
     .btn {
       width: 100%;
+
+      &.with-undo {
+        width: 92%;
+      }
     }
   }
 

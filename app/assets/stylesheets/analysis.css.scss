@@ -199,6 +199,43 @@ $border: #4f6580 !default;
   }
 }
 
+.undo {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+
+  &.btn,
+  &.btn:active {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    background-position: 0;
+    width: 16px !important;
+    padding: 0;
+
+    &:hover {
+      webkit-transition: none;
+      -moz-transition: none;
+      -o-transition: none;
+      transition: none;
+      background-position: 0;
+    }
+
+    background-repeat: no-repeat;
+    background-image: image-url("undo_selected.png");
+    @media (min--moz-device-pixel-ratio: 1.3),
+    (-o-min-device-pixel-ratio: 2.6/2),
+    (-webkit-min-device-pixel-ratio: 1.3),
+    (min-device-pixel-ratio: 1.3),
+    (min-resolution: 1.3dppx) {
+      /* on retina, use image
+       * that's scaled by 2 */
+      background-size: 16px 16px;
+      background-image: image-url("undo_selected@2x.png");
+    }
+  }
+}
+
 #area {
   position: fixed;
   width: 298px;

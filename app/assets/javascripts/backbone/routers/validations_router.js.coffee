@@ -129,6 +129,29 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
         return false
       $("#photos-table tbody").append(tr_content)
 
+  renderUndoButton: () =>
+    undoButtonSelector = $('#draw-a-polygon').find("#undo-draw-vertex")
+
+    if @polygonDraw?
+      markerCount = @polygonDraw._markers.length
+
+      if markerCount > 0
+        unless undoButtonSelector.length > 0
+          undoButton = $('<a id="undo-draw-vertex" class="btn undo">')
+          undoButton.click (e) =>
+            @removeLastMarker()
+
+          $('#draw-a-polygon').append(undoButton)
+          $('#draw-a-polygon .btn:first').addClass('with-undo')
+        return
+
+    undoButtonSelector.remove()
+    $('#draw-a-polygon .btn').removeClass('with-undo')
+
+  removeLastMarker: ->
+    @polygonDraw.removeLastMarker()
+    @renderUndoButton()
+
   initializeMap: (map_id, coordinates, center = [24.5, 54], zoom = 9) ->
     baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 18})
     baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 18})
@@ -136,6 +159,8 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     map = L.map map_id,
       center: center
       zoom: zoom
+      minZoom: 8
+      maxZoom: 17
       layers: [baseSatellite]
 
     # Clean polygonDraw
@@ -146,6 +171,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       $(e.target).toggleClass('btn-inverse btn-primary')
 
       @polygonDraw = new L.Polygon.Draw(map, {shapeOptions: {color: '#bdd455'}}) unless @polygonDraw?
+      map.on('draw:polygon:add-vertex', @renderUndoButton)
 
       if $(e.target).hasClass('active')
         @polygonDraw.disable()
@@ -207,6 +233,10 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
 
       $('#draw-a-polygon').addClass('hidden')
       $('#habitat-and-action').removeClass('hidden')
+
+      if @polygonDraw?
+        delete @polygonDraw
+        @renderUndoButton()
 
   findCoordinates: ->
     try

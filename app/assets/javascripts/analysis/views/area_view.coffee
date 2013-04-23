@@ -7,6 +7,7 @@ class Backbone.Views.AreaView extends Backbone.View
   events:
     'click #delete-area': 'deleteArea'
     'click #new-polygon': 'toggleDrawing'
+    'click #undo-vertex': 'removeLastMarker'
 
   initialize: (options) ->
     @area = options.area
@@ -20,9 +21,13 @@ class Backbone.Views.AreaView extends Backbone.View
   toggleDrawing: (event) ->
     if @polygonView?
       @removeNewPolygonView()
+      @renderUndoButton()
       Pica.config.map.off('draw:poly-created', @renderLoadingSpinner)
+      Pica.config.map.off('draw:polygon:add-vertex', @renderUndoButton)
     else
       Pica.config.map.on('draw:poly-created', @renderLoadingSpinner)
+      Pica.config.map.on('draw:polygon:add-vertex', @renderUndoButton)
+
       @polygonView = @area.drawNewPolygonView(
         success: () =>
           @removeNewPolygonView()
@@ -30,6 +35,23 @@ class Backbone.Views.AreaView extends Backbone.View
         error: (xhr, textStatus, errorThrown) =>
           alert("Can't save polygon: #{errorThrown}")
       )
+
+  renderUndoButton: () =>
+    undoButtonSelector = $('.new-polygon-container').find("#undo-vertex")
+
+    if @polygonView?
+      markerCount = @polygonView.polygonDraw._markers.length
+
+      if markerCount > 0
+        unless undoButtonSelector.length > 0
+          $('.new-polygon-container').append($('<a id="undo-vertex" class="btn undo">'))
+        return
+
+    undoButtonSelector.remove()
+
+  removeLastMarker: ->
+    @polygonView.polygonDraw.removeLastMarker()
+    @renderUndoButton()
 
   removeNewPolygonView: ->
     if @polygonView?
@@ -95,6 +117,7 @@ class Backbone.Views.AreaView extends Backbone.View
   onClose: ->
     @removeNewPolygonView()
     Pica.config.map.off('draw:poly-created', @renderLoadingSpinner)
+    Pica.config.map.off('draw:polygon:add-vertex', @renderUndoButton)
     @showAreaPolygonsView.off("polygonClick", @handlePolygonClick)
     @showAreaPolygonsView.close()
     @area.off('sync', @render)

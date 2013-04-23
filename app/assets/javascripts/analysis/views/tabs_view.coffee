@@ -38,6 +38,17 @@ class Backbone.Views.TabsView extends Backbone.View
       @workspace.setCurrentArea(area)
       @render()
 
+  setAreaById: (id) ->
+    area = new Pica.Models.Area()
+    area.set('id', id)
+
+    area.fetch(
+      success: (area) =>
+        @workspace.areas[0] = area
+        @workspace.setCurrentArea(area)
+        @render()
+    )
+
   deleteArea: (event) ->
     area = @workspace.currentArea
     @workspace.removeArea(area)
