@@ -7,6 +7,13 @@
     <i class="icon-info-sign icon-white"></i>
     Show
   <% end %>
+
+  <% if can? :manage, Admin %>
+    <%= link_to admin_path(@admin), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' do %>
+      <i class="icon-remove icon-white"></i>
+      Delete
+    <% end %>
+  <% end %>
   <h1>Editing admin</h1>
 </div>
 
