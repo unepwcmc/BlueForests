@@ -31,6 +31,11 @@
             </dl>
           <% } %>
 
+          <dl>
+            <dt>Evidence type:</dt>
+            <dd><%= {"Underlying imagery in browser": "Underlying imagery in browser", "Local knowledge": "Local knowledge", "Field visit": "Field visit"}[validation.knowledge] %></dd>
+          </dl>
+
           <% if(validation.habitat === 'mangrove') { %>
             <dl>
               <dt>Condition:</dt>

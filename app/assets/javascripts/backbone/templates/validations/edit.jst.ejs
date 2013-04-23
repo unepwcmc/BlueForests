@@ -9,6 +9,7 @@
         <form id="edit-validation" name="validation">
           <div class="form-inputs">
             <div id="other-fields">
+              
               <div class="control-group density <%= validation.habitat %> show-with-mangrove show-with-seagrass show-with-saltmarsh">
                 <label class="control-label" for="density">Density of habitat</label>
                 <div class="controls">
@@ -18,6 +19,17 @@
                     <option value="2"<% if(2 == validation.density) { %> selected="selected"<% } %>>Moderate (20-50% cover)</option>
                     <option value="3"<% if(3 == validation.density) { %> selected="selected"<% } %>>Dense (50-80% cover)</option>
                     <option value="4"<% if(4 == validation.density) { %> selected="selected"<% } %>>Very dense (>80% cover)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="control-group knowledge <%= validation.habitat %> show-with-mangrove">
+                <label class="control-label" for="knowledge">Evidence type</label>
+                <div class="controls">
+                  <select class="span12" name="knowledge" id="knowledge">
+                    <option value="Underlying imagery in browser"<% if("Underlying imagery in browser" == validation.knowledge) { %> selected="selected"<% } %>>Underlying imagery in browser</option>
+                    <option value="Local knowledge"<% if("Local knowledge" == validation.knowledge) { %> selected="selected"<% } %>>Local knowledge</option>
+                    <option value="Field visit"<% if("Field visit" == validation.knowledge) { %> selected="selected"<% } %>>Field visit</option>
                   </select>
                 </div>
               </div>
