@@ -92,4 +92,9 @@ class ValidationsController < AdminController
       format.json { head :no_content }
     end
   end
+
+  def export
+    url = Habitat.shapefile_export_url
+    redirect_to url
+  end
 end
