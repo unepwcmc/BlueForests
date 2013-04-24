@@ -2,8 +2,7 @@ window.JST ||= {}
 
 window.JST['help'] = _.template("""
 
-
-<section class="help">
+<section class="help" id="help_top">
 
 <p>The Blue Carbon Assessment Tool enables users to explore the blue carbon stocks of Abu Dhabi by defining areas of interest</p>
 
@@ -16,7 +15,7 @@ window.JST['help'] = _.template("""
 </ul>
 
 
-<h3><a name="chapter1">Using the tool</a></h3>
+<h3><a name="chapter1" href="#help_top" title="Back to top">Using the tool</a></h3>
 <p>On launch, the tool shows a view of Abu Dhabi and all the blue carbon habitats including an ‘other’ classification. Users can zoom in to features using the standard zoom interface on the top left hand side of the map. </p>
 
 <p>Habitat layers can be ‘toggled’ between visible and not visible via the layers icon on the top right hand side of the map. This feature also allows a user to switch between a satellite view and a map view which includes place names and roads. </p>
@@ -39,11 +38,11 @@ window.JST['help'] = _.template("""
 <h4>Exporting a report</h4>
 <p>It is possible to export a report of your results per area, in a CSV format by clicking on the green “Export your Report” button underneath the habitat breakdown table. </p>
 
-<h3><a name="chapter2">About the Data</h3>
+<h3><a name="chapter2" href="#help_top" title="Back to top">About the Data</h3>
 
 
 
-<h3><a name="chapter3">How the Calculations are made</h3>
+<h3><a name="chapter3" href="#help_top" title="Back to top">How the Calculations are made</h3>
 
 <h4>Calculating the carbon stocks within an AOI</h4>
 
@@ -52,7 +51,6 @@ window.JST['help'] = _.template("""
 
 
 </section>
-
 
 
 """)
