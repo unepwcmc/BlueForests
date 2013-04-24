@@ -8,13 +8,20 @@ class Backbone.Views.PolyActionsView extends Backbone.View
     'click .delete-polygon': 'deletePolygon'
 
   initialize: (options) ->
+    @area = options.area
     @polygon = options.polygon
     @event   = options.event
+    @callback = options.success || () ->
+
     @render()
 
   deletePolygon: (event) ->
     @polygon.destroy(
-      success: @onClose
+      success: () =>
+        @onClose()
+        @area.sync(
+          success: @callback
+        )
     )
 
   render: =>

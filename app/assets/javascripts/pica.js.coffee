@@ -38,6 +38,7 @@ class Pica.Model extends Pica.Events
     @trigger('change')
 
   sync: (options = {}) ->
+    @set('_loading', true)
     callback = options.success || () ->
 
     # Extend callback to add returned data as model attributes
@@ -45,12 +46,15 @@ class Pica.Model extends Pica.Events
       #data = JSON.parse(data) unless 'object' == typeof data 
       if data.id?
         @parse(data)
+        @set('_loading', false)
         @trigger('sync', @)
 
       callback(@, textStatus, jqXHR)
 
+
     if options.type == 'post' or options.type == 'put'
       data = @attributes
+      delete data['_loading']
       data = JSON.stringify(data) if options.type == 'post'
 
     # Send nothing for delete, and set contentType, otherwise JQuery will try to parse it on return
@@ -146,6 +150,7 @@ class Pica.Models.Area extends Pica.Model
     @polygons = []
 
     @set('name', 'My Lovely Area')
+    @set('_loading', false)
 
   setName: (name) ->
     @set('name', name)
