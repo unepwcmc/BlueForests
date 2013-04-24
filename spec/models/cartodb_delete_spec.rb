@@ -423,8 +423,6 @@ describe CartodbQuery do
         check = ActiveRecord::Base.connection.select_one("SELECT COUNT(1) AS count FROM geometries WHERE toggle = true AND (action != 'delete' OR action IS NULL);")
         Integer(check['count']).should ==(9)
       end
-
     end
-
   end
 end
