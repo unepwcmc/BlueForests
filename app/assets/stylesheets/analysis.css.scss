@@ -200,8 +200,8 @@ $border: #4f6580 !default;
 }
 
 .undo {
-  width: 16px;
-  height: 16px;
+  width: 43px;
+  height: 30px;
   display: inline-block;
 
   &.btn,
@@ -210,7 +210,7 @@ $border: #4f6580 !default;
     border: none;
     box-shadow: none;
     background-position: 0;
-    width: 16px !important;
+    width: 43px !important;
     padding: 0;
 
     &:hover {
@@ -230,7 +230,7 @@ $border: #4f6580 !default;
     (min-resolution: 1.3dppx) {
       /* on retina, use image
        * that's scaled by 2 */
-      background-size: 16px 16px;
+      background-size: 43px 30px;
       background-image: image-url("undo_selected@2x.png");
     }
   }

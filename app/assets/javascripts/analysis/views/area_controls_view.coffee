@@ -13,9 +13,6 @@ class Backbone.Views.AreaControlsView extends Backbone.View
     @area = options.area
     @area.on('change', @render)
 
-    @showAreaPolygonsView = window.pica.currentWorkspace.currentArea.newShowAreaPolygonsView()
-    @showAreaPolygonsView.on("polygonClick", @handlePolygonClick)
-
     @render()
 
   toggleDrawing: (event) ->
@@ -55,14 +52,6 @@ class Backbone.Views.AreaControlsView extends Backbone.View
       @polygonView.close()
       delete @polygonView
 
-  handlePolygonClick: (polygon, event) =>
-    new Backbone.Views.PolyActionsView(
-      polygon: polygon
-      event: event
-      success: @render
-      area: @area
-    )
-
   deleteArea: (event) ->
     
 
@@ -77,6 +66,4 @@ class Backbone.Views.AreaControlsView extends Backbone.View
   onClose: ->
     @removeNewPolygonView()
     Pica.config.map.off('draw:polygon:add-vertex', @renderUndoButton)
-    @showAreaPolygonsView.off("polygonClick", @handlePolygonClick)
-    @showAreaPolygonsView.close()
-    @area.off('change', @renderResults)
+    @area.off('change', @render)
