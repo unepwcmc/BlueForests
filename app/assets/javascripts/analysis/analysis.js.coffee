@@ -58,8 +58,8 @@ initializePica = (map) ->
 
   window.pica.newWorkspace()
 
-  tabsView = new Backbone.Views.TabsView().render()
-  $('#sidebar').html(tabsView.el)
+  window.router = new Backbone.Routers.AnalysisRouter()
+  Backbone.history.start()
 
 $(document).ready ->
   map = initializeMap() if $('#map_analysis').length > 0

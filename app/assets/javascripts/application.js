@@ -16,6 +16,7 @@
 //= require_tree ./analysis/lib
 //= require_tree ./analysis/templates/
 //= require_tree ./analysis/views/
+//= require_tree ./analysis/routers/
 //= require ./analysis/analysis.js.coffee
 //= require pica
 
