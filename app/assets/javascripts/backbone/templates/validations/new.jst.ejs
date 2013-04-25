@@ -4,7 +4,7 @@
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
-        <h5>Edit habitat area</h5>
+        <h5>New validation</h5>
 
         <form id="new-validation" name="validation">
           <div class="form-inputs">
@@ -59,6 +59,19 @@
                   </select>
                 </div>
               </div>
+
+
+              <div class="control-group knowledge">
+                <label class="control-label" for="knowledge">Evidence type</label>
+                <div class="controls">
+                  <select class="span12" name="knowledge" id="knowledge">
+                    <option value="Underlying imagery in browser"<% if("Underlying imagery in browser" == validation.knowledge) { %> selected="selected"<% } %>>Underlying imagery in browser</option>
+                    <option value="Local knowledge"<% if("Local knowledge" == validation.knowledge) { %> selected="selected"<% } %>>Local knowledge</option>
+                    <option value="Field visit"<% if("Field visit" == validation.knowledge) { %> selected="selected"<% } %>>Field visit</option>
+                  </select>
+                </div>
+              </div>
+
 
               <div class="control-group condition hidden show-with-mangrove">
                 <label class="control-label" for="condition">Condition</label>
@@ -129,7 +142,7 @@
               </div>
             </div>
 
-            <table id="photos-table" class="table table-bordered table-striped">
+            <table id="photos-table" class="table">
               <thead>
                 <tr>
                   <th>Photo</th>

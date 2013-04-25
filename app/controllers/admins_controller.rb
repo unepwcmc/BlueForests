@@ -66,6 +66,20 @@ class AdminsController < AdminController
     end
   end
 
+  def destroy
+    @admin = Admin.find(params[:id])
+
+    respond_to do |format|
+      if @admin.destroy
+        format.html { redirect_to admins_path, notice: 'Admin account deleted.' }
+        format.json { render json: @admin, status: :deleted, location: @admin }
+      else
+        format.html { redirect_to admins_path, notice: 'Admin account could not be deleted.' }
+        format.json { render json: @admin, status: :unprocessable_entity, location: @admin }
+      end
+    end
+  end
+
   # PUT /admins/1
   # PUT /admins/1.json
   def update

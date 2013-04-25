@@ -7,22 +7,27 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     @areas.reset options.areas
 
   routes:
-    "new"           : "newValidation"
-    "new/:z/:y/:x"  : "newValidation"
-    "index"         : "index"
-    ":id/edit"      : "edit"
-    ":id"           : "show"
-    ".*"            : "index"
+    "new"                                : "newValidation"
+    "new/:z/:y/:x"                       : "newValidation"
+    "new/:z/:y/:x/:prev_validation_id"   : "newValidation"
+    "index"                              : "index"
+    ":id/edit"                           : "edit"
+    ":id"                                : "show"
+    ".*"                                 : "index"
 
-  newValidation: (z, y, x) ->
+  newValidation: (z, y, x, prev_validation_id) ->
     @view = new BlueCarbon.Views.Validations.NewView(collection: @validations, areas: @areas)
     $("#validations").html(@view.render().el)
 
     # Map
+    args = 
+      map_id: 'map'
+      coordinates: @findCoordinates()
+      prev_validation_id: prev_validation_id
     if z && y && x
-      @initializeMap('map', @findCoordinates(), [y, x], z)
+      @initializeMap _.extend( {center: [y, x], zoom: z }, args )
     else
-      @initializeMap('map', @findCoordinates())
+      @initializeMap args
 
     # Upload photo
     new AjaxUpload 'upload-photo'
@@ -72,7 +77,11 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     $("#validations").html(@view.render().el)
 
     # Map
-    @initializeMap('map', JSON.parse(validation.get('coordinates')))
+    args = 
+      map_id: 'map'
+      coordinates: JSON.parse(validation.get('coordinates'))
+      validation_id: id
+    @initializeMap args
 
   edit: (id) ->
     validation = @validations.get(id)
@@ -81,7 +90,11 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     $("#validations").html(@view.render().el)
 
     # Map
-    @initializeMap('map', JSON.parse(validation.get('coordinates')))
+    args = 
+      map_id: 'map'
+      coordinates: JSON.parse(validation.get('coordinates'))
+      validation_id: id
+    @initializeMap args
 
     # Upload photo
     new AjaxUpload 'upload-photo'
@@ -129,13 +142,44 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
         return false
       $("#photos-table tbody").append(tr_content)
 
-  initializeMap: (map_id, coordinates, center = [24.5, 54], zoom = 9) ->
+  renderUndoButton: () =>
+    undoButtonSelector = $('#draw-a-polygon').find("#undo-draw-vertex")
+
+    if @polygonDraw?
+      markerCount = @polygonDraw._markers.length
+
+      if markerCount > 0
+        unless undoButtonSelector.length > 0
+          undoButton = $('<a id="undo-draw-vertex" class="btn undo">')
+          undoButton.click (e) =>
+            @removeLastMarker()
+
+          $('#draw-a-polygon').append(undoButton)
+          $('#draw-a-polygon .btn:first').addClass('with-undo')
+        return
+
+    undoButtonSelector.remove()
+    $('#draw-a-polygon .btn').removeClass('with-undo')
+
+  removeLastMarker: ->
+    @polygonDraw.removeLastMarker()
+    @renderUndoButton()
+
+  initializeMap: (args) ->
+    map_id = args.map_id
+    prev_validation_id = args.prev_validation_id
+    coordinates = args.coordinates
+    center = args.center || [24.5, 54]
+    zoom = args.zoom || 9
+
     baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 18})
     baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 18})
 
     map = L.map map_id,
       center: center
       zoom: zoom
+      minZoom: 8
+      maxZoom: 17
       layers: [baseSatellite]
 
     # Clean polygonDraw
@@ -146,6 +190,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       $(e.target).toggleClass('btn-inverse btn-primary')
 
       @polygonDraw = new L.Polygon.Draw(map, {shapeOptions: {color: '#bdd455'}}) unless @polygonDraw?
+      map.on('draw:polygon:add-vertex', @renderUndoButton)
 
       if $(e.target).hasClass('active')
         @polygonDraw.disable()
@@ -172,6 +217,14 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
 
     drawnItems = new L.LayerGroup()
 
+    # If we have a previous validation, then show it on the map.
+    if prev_validation_id
+      validation = @validations.get prev_validation_id
+      coords = JSON.parse(validation.get "coordinates")
+      latLngCoordinates = _.map(coords, (arr) -> [arr[1], arr[0]])
+      p = new L.polygon(latLngCoordinates)
+      map.addLayer(p)
+
     if coordinates
       latLngCoordinates = _.map(coordinates, (arr) -> [arr[1], arr[0]])
       initialPolygon = new L.polygon(latLngCoordinates)
@@ -179,8 +232,15 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       drawnItems.addLayer(initialPolygon)
       map.fitBounds(bounds)
 
-      # Show view: new nearby validation
-      $('#new-nearby-validation').attr('href', "#/new/#{map.getBoundsZoom(bounds)}/#{bounds.getCenter().lat}/#{bounds.getCenter().lng}")
+      # Show view: new validation
+      current_id = @view.model.id  # passing in current validation reference
+      # Updating the new validation link with the current map state:
+      setNewValidationLink = (evt) ->
+        $('#new-validation').attr('href', "#/new/#{map.getZoom()}/#{map.getCenter().lat}/#{map.getCenter().lng}/#{current_id}")
+      # Old code, delete once safe about the above new code.
+      #$('#new-validation').attr('href', "#/new/#{map.getBoundsZoom(bounds)}/#{bounds.getCenter().lat}/#{bounds.getCenter().lng}/#{current_id}")
+      setNewValidationLink()
+      map.on('moveend', setNewValidationLink)
 
     @editableMap(map, drawnItems) if $('#coordinates').length > 0
 
@@ -207,6 +267,10 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
 
       $('#draw-a-polygon').addClass('hidden')
       $('#habitat-and-action').removeClass('hidden')
+
+      if @polygonDraw?
+        delete @polygonDraw
+        @renderUndoButton()
 
   findCoordinates: ->
     try

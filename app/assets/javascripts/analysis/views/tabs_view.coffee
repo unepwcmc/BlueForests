@@ -10,10 +10,11 @@ class Backbone.Views.TabsView extends Backbone.View
     'click #delete-area': 'deleteArea'
     'click .tabs li.help': 'showHelp'
 
-  initialize: (options) ->
+  initialize: (options = {}) ->
     @currentTab = new Backbone.Diorama.ManagedRegion()
     @workspace = window.pica.currentWorkspace
 
+    @setAreaById(options.areaId) if options.areaId?
     @workspace.areas[0].setName('Area #1')
 
     @render()
@@ -29,7 +30,7 @@ class Backbone.Views.TabsView extends Backbone.View
     helpView = new Backbone.Views.HelpView()
     @render(helpView)
 
-  addArea: (event) ->
+  addArea: ->
     if pica.currentWorkspace.areas.length <= 3
       area = new Pica.Models.Area()
       area.setName("Area ##{pica.currentWorkspace.areas.length + 1}")
@@ -37,6 +38,17 @@ class Backbone.Views.TabsView extends Backbone.View
       @workspace.addArea(area)
       @workspace.setCurrentArea(area)
       @render()
+
+  setAreaById: (id) ->
+    area = new Pica.Models.Area()
+    area.set('id', id)
+
+    area.fetch(
+      success: (area) =>
+        @workspace.areas[0] = area
+        @workspace.setCurrentArea(area)
+        @render()
+    )
 
   deleteArea: (event) ->
     area = @workspace.currentArea
@@ -52,10 +64,13 @@ class Backbone.Views.TabsView extends Backbone.View
   render: (view = null) ->
     @$el.html(@template(workspace: @workspace))
 
-    if !view?
+    unless view?
       view = new Backbone.Views.AreaView(area: @workspace.currentArea)
 
     @currentTab.showView(view)
     @$el.find('#area').html(@currentTab.$el)
 
     return @
+
+  onClose: ->
+    @currentTab.currentView.close()

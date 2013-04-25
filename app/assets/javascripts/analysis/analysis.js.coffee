@@ -1,13 +1,14 @@
 initializeMap = () ->
-  baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 18})
-  baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 18})
+  baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 17})
+  baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 17})
 
   map = L.map 'map_analysis',
     center: [24.5, 54]
     zoom: 9
     layers: [baseSatellite]
+    minZoom: 8
+    maxZoom: 17
 
-  # Layers
   baseMaps =
     'Map': baseMap
     'Satellite': baseSatellite
@@ -22,24 +23,22 @@ initializeMap = () ->
   }
 
   _.each habitats, (polygon_fill, habitat) ->
-    query = "SELECT * FROM {{table_name}} WHERE toggle = true AND (action <> 'delete' OR action IS NULL)"
-    cartodb.createLayer(map,
-      type: 'cartodb'
-      options:
-        table_name: "bc_#{habitat}"
-        user_name:  "carbon-tool"
-        query:      query
-        tile_style: """
-          \#{{table_name}}{
-            line-color: #FFF;
-            line-width: 0.5;
-            polygon-fill: #{polygon_fill};
-            polygon-opacity: 0.4
-          }
-        """
-    ).on('done', (layer) => map.addLayer(layer))
+    query = "SELECT * FROM bc_#{habitat} WHERE toggle = true AND (action <> 'delete' OR action IS NULL)"
+    style = """
+      #bc_#{habitat} {
+        line-color: #FFF;
+        line-width: 0.5;
+        polygon-fill: #{polygon_fill};
+        polygon-opacity: 0.4
+      }
+    """
+    url   = "http://carbon-tool.cartodb.com/tiles/bc_#{habitat}/{z}/{x}/{y}.png?sql=#{query}&style=#{style}"
 
-  #L.control.layers(baseMaps, overlayMaps).addTo(map)
+    prettyName = habitat.replace("_", " ")
+    prettyName = prettyName.replace(/\w\S*/g, (t) -> t.charAt(0).toUpperCase() + t.substr(1).toLowerCase())
+    overlayMaps[prettyName] = L.tileLayer(url).addTo(map)
+
+  L.control.layers(baseMaps, overlayMaps).addTo(map)
 
   attribution = L.control.attribution(
     position: 'bottomleft'
@@ -59,8 +58,8 @@ initializePica = (map) ->
 
   window.pica.newWorkspace()
 
-  tabsView = new Backbone.Views.TabsView().render()
-  $('#sidebar').html(tabsView.el)
+  window.router = new Backbone.Routers.AnalysisRouter()
+  Backbone.history.start()
 
 $(document).ready ->
   map = initializeMap() if $('#map_analysis').length > 0

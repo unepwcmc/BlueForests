@@ -33,9 +33,9 @@
         <%= link_to "BlueCarbon", root_path, :class => "brand" %>
         <div class="nav-collapse">
           <ul class="nav">
-            <%= content_tag(:li, link_to("Field Sites", areas_path), class: params[:controller] == 'areas' ? 'active' : nil) if can? :read, Area %>
             <%= content_tag(:li, link_to("Validations", validations_path), class: params[:controller] == 'validations' ? 'active' : nil) if can? :read, Validation %>
             <%= content_tag(:li, link_to("Users", admins_path), class: params[:controller] == 'admins' ? 'active' : nil) if can? :manage, Admin %>
+            <%= content_tag(:li, link_to("iPad Admin", areas_path), class: params[:controller] == 'areas' ? 'active' : nil) if can? :read, Area %>
           </ul>
           <ul class="nav pull-right">
             <% if admin_signed_in? %>

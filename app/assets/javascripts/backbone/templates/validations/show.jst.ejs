@@ -31,6 +31,11 @@
             </dl>
           <% } %>
 
+          <dl>
+            <dt>Evidence type:</dt>
+            <dd><%= {"Underlying imagery in browser": "Underlying imagery in browser", "Local knowledge": "Local knowledge", "Field visit": "Field visit"}[validation.knowledge] %></dd>
+          </dl>
+
           <% if(validation.habitat === 'mangrove') { %>
             <dl>
               <dt>Condition:</dt>
@@ -66,7 +71,7 @@
           <% } %>
         </ul>
 
-        <a id="new-nearby-validation" href="#/new" class="btn btn-primary"><i class="icon-plus icon-white"></i> New Nearby Validation</a>
+        <a id="new-validation" href="#/new" class="btn btn-primary"><i class="icon-plus icon-white"></i>New Validation</a>
       </div>
     </div>
   </div>

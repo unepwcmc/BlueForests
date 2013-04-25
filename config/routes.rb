@@ -10,6 +10,7 @@ BlueCarbon::Application.routes.draw do
   resources :admins
 
   resources :validations
+  match '/export' => 'validations#export'
   resources :photos, only: :create
   resources :areas do
     resources :mbtiles, only: :show

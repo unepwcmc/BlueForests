@@ -8,7 +8,6 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/blue_carbon
-//= require cartodb.nojquery
 //= require jquery.dataTables
 //= require data_tables_bootstrap
 //= require ajaxupload
@@ -17,6 +16,7 @@
 //= require_tree ./analysis/lib
 //= require_tree ./analysis/templates/
 //= require_tree ./analysis/views/
+//= require_tree ./analysis/routers/
 //= require ./analysis/analysis.js.coffee
 //= require pica
 

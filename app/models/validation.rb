@@ -64,7 +64,7 @@ class Validation < ActiveRecord::Base
 
   def cartodb_update
     # SQL CartoDB
-    sql = CartodbQuery.query_update(Habitat.find(habitat).table_name, "ST_GeomFromText('MultiPolygon(((#{json_coordinates})))',4326)", self)
+    sql = CartodbQuery.editing(Habitat.find(habitat).table_name, self)
 
     CartoDB::Connection.query("BEGIN; #{sql} COMMIT;")
   rescue CartoDB::Client::Error => e
