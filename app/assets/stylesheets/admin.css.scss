@@ -59,6 +59,16 @@
     .progress {
       margin-bottom: 0;
     }
+
+    &#photos-table {
+      background: none;
+      color: white;
+
+      th:first-child {
+        width: 40px;
+        line-height: 29px;
+      }
+    }
   }
 
   dl {
