@@ -4,6 +4,9 @@ window.Backbone.Views ||= {}
 class Backbone.Views.AreaResultsView extends Backbone.View
   template: JST['area_results_view']
 
+  events:
+    'click .share': 'toggleSharePopover'
+
   initialize: (options) ->
     @area = options.area
     @area.on('change', @render)
@@ -49,6 +52,14 @@ class Backbone.Views.AreaResultsView extends Backbone.View
       return results
     else
       return {}
+
+  toggleSharePopover: ->
+    $('.permalink').toggle()
+
+    $('body').on('click', (e) ->
+      $('.permalink').hide() unless $(e.target).hasClass('share')
+    )
+
 
   render: =>
     @$el.html(@template(area: @area, results: @resultsToObj()))

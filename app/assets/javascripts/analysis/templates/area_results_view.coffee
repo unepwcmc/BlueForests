@@ -62,6 +62,11 @@ window.JST['area_results_view'] = _.template("""
         </table>
 
         <div class="footer">
+          <div class="permalink">
+            <h5>Share your work with this link</h5>
+            <input type="text" value="http://bluecarbon.unep-wcmc.org/#/analysis/<%= area.get('id') %>">
+          </div>
+          <a class="btn btn-primary share">Share your work</a>
           <a href="<%= window.pica.config.magpieUrl %>/areas_of_interest/<%= area.get('id') %>.csv" class="btn btn-primary export">Export your report</a>
         </div>
       <% } %>
