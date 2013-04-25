@@ -5,9 +5,9 @@ window.JST['area_controls'] = _.template("""
 
   <div class="new-polygon-container">
     <% if (area.polygons.length > 0) { %>
-      <a class="btn btn-primary" id="new-polygon">Draw another polygon</a>
+      <button type="button" class="btn btn-primary" id="new-polygon">Draw another polygon</button>
     <% } else { %>
-      <a class="btn btn-primary" id="new-polygon">Draw a polygon</a>
+      <button type="button" class="btn btn-primary" id="new-polygon">Draw a polygon</button>
     <% } %>
   </div>
 

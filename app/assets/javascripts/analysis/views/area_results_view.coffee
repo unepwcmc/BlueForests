@@ -11,10 +11,11 @@ class Backbone.Views.AreaResultsView extends Backbone.View
     @render()
 
   humanEmissionsAsTime: (timeInYears) ->
+    timeInDays = roundToDecimals(timeInYears * 365, 2)
     timeInYears = roundToDecimals(timeInYears, 2)
 
     if timeInYears < 1
-      return "#{timeInYears * 365} <span>days</span>"
+      return "#{timeInDays} <span>days</span>"
 
     return "#{timeInYears} <span>years</span>"
 
