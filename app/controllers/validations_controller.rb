@@ -95,6 +95,8 @@ class ValidationsController < AdminController
 
   def export
     url = Habitat.shapefile_export_url
-    redirect_to url
+
+    data = open(url).read
+    send_data data, :filename => 'BlueCarbon_Download.zip'
   end
 end
