@@ -37,6 +37,24 @@ class Validation < ActiveRecord::Base
     Photo.update_all(["validation_id = ?", id], ["id IN (?)", photo_ids])
   end
 
+  def self.undo_most_recent_by_habitat(habitat)
+    habitat = Habitat.find(habitat)
+    validation = Validation.most_recent(habitat.to_param)
+
+    if !validation.nil? && validation.destroy
+      # Undo the most recent validation
+      sql = CartodbQuery.remove(habitat.table_name)
+      Validation.cartodb_query(sql)
+    end
+  end
+
+  def self.most_recent(habitat)
+    Validation.
+      where(["habitat = ?", habitat]).
+      order("id DESC").
+      first
+  end
+
   def json_coordinates
     if coordinates.kind_of?(Array)
       json_coordinates = coordinates
@@ -53,19 +71,16 @@ class Validation < ActiveRecord::Base
   end
 
   def cartodb
-    # SQL CartoDB
     sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText('MultiPolygon(((#{json_coordinates})))',4326)", self)
-
-    CartoDB::Connection.query("BEGIN; #{sql} COMMIT;")
-  rescue CartoDB::Client::Error => e
-    errors.add :base, 'There was an error trying to render the layers.'
-    logger.info "There was an error trying to execute the following query:\n#{sql}\nError details: #{e.inspect}"
+    Validation.cartodb_query(sql)
   end
 
   def cartodb_update
-    # SQL CartoDB
     sql = CartodbQuery.editing(Habitat.find(habitat).table_name, self)
+    Validation.cartodb_query(sql)
+  end
 
+  def self.cartodb_query(sql)
     CartoDB::Connection.query("BEGIN; #{sql} COMMIT;")
   rescue CartoDB::Client::Error => e
     errors.add :base, 'There was an error trying to render the layers.'
