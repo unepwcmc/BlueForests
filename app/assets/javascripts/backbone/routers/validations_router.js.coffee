@@ -16,7 +16,8 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     ".*"                                 : "index"
 
   newValidation: (z, y, x, prev_validation_id) ->
-    @view = new BlueCarbon.Views.Validations.NewView(collection: @validations, areas: @areas)
+    @view = new BlueCarbon.Views.Validations.NewView(
+      collection: @validations, areas: @areas)
     $("#validations").html(@view.render().el)
 
     # Map

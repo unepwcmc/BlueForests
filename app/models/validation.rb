@@ -44,7 +44,7 @@ class Validation < ActiveRecord::Base
     if !validation.nil? && validation.destroy
       # Undo the most recent validation
       sql = CartodbQuery.remove(habitat.table_name)
-      Validation.cartodb_query(sql)
+      validation.cartodb_query(sql)
     end
   end
 
@@ -72,15 +72,15 @@ class Validation < ActiveRecord::Base
 
   def cartodb
     sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText('MultiPolygon(((#{json_coordinates})))',4326)", self)
-    Validation.cartodb_query(sql)
+    self.cartodb_query(sql)
   end
 
   def cartodb_update
     sql = CartodbQuery.editing(Habitat.find(habitat).table_name, self)
-    Validation.cartodb_query(sql)
+    self.cartodb_query(sql)
   end
 
-  def self.cartodb_query(sql)
+  def cartodb_query(sql)
     CartoDB::Connection.query("BEGIN; #{sql} COMMIT;")
   rescue CartoDB::Client::Error => e
     errors.add :base, 'There was an error trying to render the layers.'
