@@ -20,7 +20,10 @@ class Habitat
   end
 
   def table_name
-    "bc_#{name}"
+    table_str = "bc_#{name}"
+    unless Rails.env == "production"
+      table_str += "_#{Rails.env}"
+    end
   end
 
   # Returns a link to CartoDB to retrieve a shapefile download of the

@@ -68,7 +68,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
         $('#upload-photo').show()
 
   index: ->
-    @view = new BlueCarbon.Views.Validations.IndexView(validations: @validations)
+    @view = new BlueCarbon.Views.Validations.IndexView(validations: @validations, collection: @validations)
     $("#validations").html(@view.render().el)
 
   show: (id) ->
@@ -280,3 +280,4 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
 
   latLngsToString: (latLngs) ->
     "[#{_.map(latLngs, (ll) -> "[#{ll.lng},#{ll.lat}]")}]"
+
