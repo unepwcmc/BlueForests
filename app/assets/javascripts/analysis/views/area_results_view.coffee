@@ -42,6 +42,8 @@ class Backbone.Views.AreaResultsView extends Backbone.View
 
       _.each values, (habitats, operation) ->
         _.each habitats, (habitat) ->
+          # TODO actually remove other from calculations
+          return if "#{habitat.habitat}" is 'null' or "#{habitat.habitat}" is 'other'
           results.habitats[habitat.habitat] ||= {}
           results.habitats[habitat.habitat][operation] = habitat[operation]
 

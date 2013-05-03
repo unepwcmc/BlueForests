@@ -50,16 +50,14 @@ window.JST['area_results_view'] = _.template("""
               <td>Area <span>% of Tot.</span></td>
               <td title="Carbon Stock">C-Stock <span>T</span></td>
             </tr>
-            <% _.each(results.habitats, function(attributes, key) { 
-              if (""+key !== 'null'){ %>
-                <tr>
-                  <td><%= key %></td>
-                  <td><%= roundToDecimals(attributes.area_km2, 2) %></td>
-                  <td><%= roundToDecimals(attributes.habitat_percentage, 2) %></td>
-                  <td><%= Math.ceil(attributes.carbon) %></td>
-                </tr>
-              <% }
-              }) %>
+            <% _.each(results.habitats, function(attributes, key) { %>
+              <tr>
+                <td><%= key %></td>
+                <td><%= roundToDecimals(attributes.area_km2, 2) %></td>
+                <td><%= roundToDecimals(attributes.habitat_percentage, 2) %></td>
+                <td><%= Math.ceil(attributes.carbon) %></td>
+              </tr>
+            <% }) %>
           </tbody>
         </table>
 
