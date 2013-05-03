@@ -5,11 +5,6 @@ class BlueCarbon.Views.Validations.ValidationView extends Backbone.View
 
   tagName: "tr"
 
-  #initialize: -> 
-  #  @model.on "destroy", =>
-  #    console.log 'xxxxxxxxxxx'
-  #    @render()
-
   render: ->
     @$el.html @template( @model.toJSON(true) )
     return this

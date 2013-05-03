@@ -4,7 +4,7 @@ class BlueCarbon.Views.Validations.IndexView extends Backbone.View
   template: JST["backbone/templates/validations/index"]
 
   events: 
-    "click .delete": "delete"
+    "click .deleteme": "delete"
 
   initialize: () ->
     @options.validations.bind('reset', @addAll)
@@ -13,7 +13,6 @@ class BlueCarbon.Views.Validations.IndexView extends Backbone.View
     @options.validations.each(@addOne)
 
   addOne: (validation) =>
-    #console.log @collection.isLatest(validation)
     view = new BlueCarbon.Views.Validations.ValidationView(
       model: validation
       collection: @collection
@@ -37,7 +36,7 @@ class BlueCarbon.Views.Validations.IndexView extends Backbone.View
         null,
         { "bSearchable": false, "bSortable": false },
         { "bSearchable": false, "bSortable": false }
-        { "bSearchable": false, "bSortable": false }
+        { "bSearchable": false, "bSortable": true }
       ]
 
     return this

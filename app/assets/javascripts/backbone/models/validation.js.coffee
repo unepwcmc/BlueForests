@@ -78,11 +78,16 @@ class BlueCarbon.Collections.ValidationsCollection extends Backbone.Collection
   model: BlueCarbon.Models.Validation
   url: '/validations'
 
+  # Get the latest validation for a specific habitat.
+  getLatest: (habitat) =>
+    all = @.filter (m) -> m.get("habitat") == habitat
+    _.last( _.sortBy all, (m) -> m.get("id") )
+
   # Check if the passed model is the latest validation for its specific habitat.
   isLatest: (model) ->
     habitat = model.get("habitat")
-    all = @.filter (m) -> m.get("habitat") == habitat
-    latest = _.last _.sortBy all, (m) -> m.get("id")
+    getLatest = _.memoize @getLatest
+    latest = getLatest habitat
     model.get("id") == latest.get("id")
 
 
