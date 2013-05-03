@@ -24,6 +24,7 @@ class Habitat
     unless Rails.env == "production"
       table_str += "_#{Rails.env}"
     end
+    table_str
   end
 
   # Returns a link to CartoDB to retrieve a shapefile download of the
