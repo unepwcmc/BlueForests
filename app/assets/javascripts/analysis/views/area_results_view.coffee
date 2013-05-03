@@ -57,7 +57,8 @@ class Backbone.Views.AreaResultsView extends Backbone.View
     $('.permalink').toggle()
 
     $('body').on('click', (e) ->
-      $('.permalink').hide() unless $(e.target).hasClass('share')
+      unless $(e.target).hasClass('share') or $('.permalink').has(e.target).length > 0
+        $('.permalink').hide() 
     )
 
 
