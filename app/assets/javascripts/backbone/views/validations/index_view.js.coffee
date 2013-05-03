@@ -3,6 +3,9 @@ BlueCarbon.Views.Validations ||= {}
 class BlueCarbon.Views.Validations.IndexView extends Backbone.View
   template: JST["backbone/templates/validations/index"]
 
+  events: 
+    "click .deleteme": "delete"
+
   initialize: () ->
     @options.validations.bind('reset', @addAll)
 
@@ -10,7 +13,10 @@ class BlueCarbon.Views.Validations.IndexView extends Backbone.View
     @options.validations.each(@addOne)
 
   addOne: (validation) =>
-    view = new BlueCarbon.Views.Validations.ValidationView({model : validation})
+    view = new BlueCarbon.Views.Validations.ValidationView(
+      model: validation
+      collection: @collection
+    )
     @$("tbody").append(view.render().el)
 
   render: =>
@@ -30,6 +36,14 @@ class BlueCarbon.Views.Validations.IndexView extends Backbone.View
         null,
         { "bSearchable": false, "bSortable": false },
         { "bSearchable": false, "bSortable": false }
+        { "bSearchable": false, "bSortable": true }
       ]
 
     return this
+
+  delete: (e) ->
+    id = $(e.target).attr("id").split("_")[0]
+    validation = @collection.get(id)
+    validation.destroy({wait: true})
+    validation.on "sync", =>
+      @render()

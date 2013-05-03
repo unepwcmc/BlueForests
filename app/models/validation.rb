@@ -41,7 +41,7 @@ class Validation < ActiveRecord::Base
     habitat = Habitat.find(habitat)
     validation = Validation.most_recent(habitat.to_param)
 
-    if !validation.nil? && validation.destroy
+    if validation.present? && validation.destroy
       # Undo the most recent validation
       sql = CartodbQuery.remove(habitat.table_name)
       validation.cartodb_query(sql)

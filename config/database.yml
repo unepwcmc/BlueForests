@@ -47,6 +47,7 @@ test:
   username: postgres
   password: postgres
   host: localhost
+  template: template_postgis
 
 production:
   adapter: postgis
