@@ -119,19 +119,10 @@ SQL
   def self.remove(table_name)
 
     <<-SQL
-    UPDATE #{table_name} SET toggle = true
-    FROM (
-      SELECT prev_phase, the_geom
-      FROM #{table_name} max_edits
-      INNER JOIN (
-        SELECT MAX(phase) as max_phase_id FROM #{table_name}
-      ) max_phase on max_edits.phase = max_phase.max_phase_id
-    ) current_edits
-    WHERE #{table_name}.phase = current_edits.prev_phase
-    AND #{table_name}.toggle = false
-    AND ST_Intersects(#{table_name}.the_geom, current_edits.the_geom);
-
-    DELETE FROM #{table_name} WHERE phase = (SELECT MAX(phase) from #{table_name});
+    UPDATE #{table_name} SET toggle = true FROM 
+(SELECT prev_phase, the_geom from #{table_name} g inner join (SELECT MAX(phase) as max_phase from #{table_name} g) a on g.phase = a.max_phase) a 
+        WHERE #{table_name}.phase = a.prev_phase and #{table_name}.toggle = false AND ST_Intersects(#{table_name}.the_geom, a.the_geom);
+      DELETE FROM #{table_name} WHERE phase = (SELECT MAX(phase) from #{table_name});
     SQL
   end
 end
