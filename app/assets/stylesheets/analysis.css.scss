@@ -350,7 +350,6 @@ $border: #4f6580 !default;
   border: 1px solid $border;
   border-top: 0;
   border-bottom: 0;
-  font-family: 'Montserrat', sans-serif;
 
   #new-polygon {
     text-transform: capitalize;
@@ -363,6 +362,7 @@ $border: #4f6580 !default;
     color: white;
     padding-left: 18px;
     background-position-y: 3px;
+    line-height: 22px;
 
     background-image: image-url("trash.png");
     @media (min--moz-device-pixel-ratio: 1.3),
