@@ -30,7 +30,7 @@ class BlueCarbon.Views.Validations.IndexView extends Backbone.View
         sLengthMenu: "_MENU_ records per page"
       aaSorting: [[0, 'desc']]
       aoColumns: [
-        null,
+        { "sType": "date-euro"},
         null,
         null,
         null,
