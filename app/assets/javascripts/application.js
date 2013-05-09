@@ -9,6 +9,7 @@
 //= require backbone_datalink
 //= require backbone/blue_carbon
 //= require jquery.dataTables
+//= require jquery.dataTables.dateSorter
 //= require data_tables_bootstrap
 //= require ajaxupload
 //= require OpenLayers
