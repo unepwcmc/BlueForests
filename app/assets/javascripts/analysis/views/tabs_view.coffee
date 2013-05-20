@@ -17,7 +17,6 @@ class Backbone.Views.TabsView extends Backbone.View
     @setAreaById(options.areaId) if options.areaId?
     @workspace.areas[0].setName('Area #1')
 
-    @render()
 
   changeTab: (event) ->
     area_index = $(event.target).data('area-id')
@@ -32,7 +31,8 @@ class Backbone.Views.TabsView extends Backbone.View
 
   addArea: ->
     if pica.currentWorkspace.areas.length <= 3
-      area = new Pica.Models.Area()
+      app = window.pica
+      area = new Pica.Models.Area(window.pica)
       area.setName("Area ##{pica.currentWorkspace.areas.length + 1}")
 
       @workspace.addArea(area)
@@ -70,7 +70,7 @@ class Backbone.Views.TabsView extends Backbone.View
     @currentTab.showView(view)
     @$el.find('#area').html(@currentTab.$el)
 
-    return @
+    this
 
   onClose: ->
     @currentTab.currentView.close()

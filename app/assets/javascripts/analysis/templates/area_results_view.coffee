@@ -1,7 +1,9 @@
 window.JST ||= {}
 
 window.JST['area_results_view'] = _.template("""
-  <% if (!area.get('_loading')) { %>
+  <% if (area.app.syncsInProgress == 1) { %>
+    <img src="/assets/loading-spinner.gif" class="loading">
+    <% } else { %>
     <% if (!_.isEmpty(results)) { %>
       <% if (_.isEmpty(results.habitats)) { %>
         Your AOI doesn't intersect with any known habitats.
@@ -9,7 +11,7 @@ window.JST['area_results_view'] = _.template("""
         <table class="table total-stats">
           <thead>
             <tr>
-              <th>Total Carbon Stock</th>
+              <th>Total Carbon Stock <sup class="tip" id="ca_stock_tip"></sup></th>
             </tr>
           </thead>
           <tbody>
@@ -22,7 +24,7 @@ window.JST['area_results_view'] = _.template("""
         <table class="table total-stats">
           <thead>
             <tr>
-              <th>Total Area</th>
+              <th>Total Area <sup class="tip" id="tot_area_tip"></sup></th>
             </tr>
           </thead>
           <tbody>
@@ -30,7 +32,7 @@ window.JST['area_results_view'] = _.template("""
           </tbody>
         </table>
 
-        <h4>Equivalent per capita CO<sup>2</sup> emissions</h4>
+        <h4>Equivalent per capita CO<sup>2</sup> emissions  <sup class="tip" id="co2_pc_emis_tip"></sup></h4>
         <table class="table human-stats">
           <tbody>
             <tr>
@@ -45,7 +47,7 @@ window.JST['area_results_view'] = _.template("""
         <table class="table polygon-stats">
           <tbody>
             <tr>
-              <td>Habitat</td>
+              <td>Habitat<span class="tip" id="habitat_tip"></span></td>
               <td>Area <span>km<sup>2</sup></span></td>
               <td>Area <span>% of Tot.</span></td>
               <td title="Carbon Stock">C-Stock <span>T</span></td>
@@ -71,7 +73,6 @@ window.JST['area_results_view'] = _.template("""
         </div>
       <% } %>
     <% } %>
-  <% } else { %>
-    <img src="/assets/loading-spinner.gif" class="loading">
+
   <% } %>
 """)

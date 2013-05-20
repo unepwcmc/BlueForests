@@ -7,11 +7,20 @@ class Backbone.Views.AreaResultsView extends Backbone.View
   events:
     'click .share': 'toggleSharePopover'
 
-  initialize: (options) ->
-    @area = options.area
-    @area.on('change', @render)
+  TOOLTIP_DATA: 
+    tot_area_tip: "The total size of your Area of Interest in km2."
+    ca_stock_tip: "The total above and below ground carbon stock of all project habitats with your Area of Interest."
+    co2_pc_emis_tip: "A conversion of the Total Carbon Stock value of your Area of Interest to CO2, which is then represented as days/years CO2 emissions of an average UAE citizen." #,  based on (XXXXX Global Earth Initiative ?)
+    habitat_tip: "Size of each habitat within your Area of Interest listed out in km2 and as a percentage of the overall habitat. Carbon stock per habitat in metric tonnes."
 
-    @render()
+
+  initialize: (options) ->
+    "I am in the AreaResultsView initializer!"
+    @area = options.area
+    #@area.on('change', @render) ##
+    @area.app.on('syncStarted', @render)
+    @area.app.on('syncFinished', @render)
+
 
   humanEmissionsAsTime: (timeInYears) ->
     timeInDays = roundToDecimals(timeInYears * 365, 2)
@@ -66,7 +75,18 @@ class Backbone.Views.AreaResultsView extends Backbone.View
 
   render: =>
     @$el.html(@template(area: @area, results: @resultsToObj()))
-    return @
+    if @$el.find("#tot_area_tip").length > 0 then @initializeTooltips()
+    this
 
   onClose: ->
     @area.off('change', @render)
+
+
+  initializeTooltips: ->
+    _.each @TOOLTIP_DATA, (value, key, list) =>
+      el = @$el.find("##{key}")
+      options =
+        tipJoint: "bottom"
+        fixed: true
+      new Opentip(el, value, options)
+
