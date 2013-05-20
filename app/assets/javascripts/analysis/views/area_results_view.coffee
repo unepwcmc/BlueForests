@@ -31,6 +31,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
 
     return "#{timeInYears} <span>years</span>"
 
+
   resultsToObj: ->
     if @area.get('results')? && @area.get('results').length > 0
       results =
@@ -64,6 +65,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
     else
       return {}
 
+
   toggleSharePopover: ->
     $('.permalink').toggle()
 
@@ -78,6 +80,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
     if @$el.find("#tot_area_tip").length > 0 then @initializeTooltips()
     this
 
+
   onClose: ->
     @area.off('change', @render)
 
@@ -88,5 +91,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
       options =
         tipJoint: "bottom"
         fixed: true
+        background: "#fff"
+        borderColor: "#384658"
       new Opentip(el, value, options)
 
