@@ -11,7 +11,6 @@
 //= require jquery.dataTables
 //= require jquery.dataTables.dateSorter
 //= require opentip-jquery
-//= require jquery.tipsy
 //= require data_tables_bootstrap
 //= require ajaxupload
 //= require OpenLayers
