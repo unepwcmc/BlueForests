@@ -26,6 +26,10 @@ class Pica.Events
         callback.apply(@, [].concat(args))
 
 class Pica.Model extends Pica.Events
+  throwIfNoApp: ->
+    unless @app?
+      throw "Cannot create a Pica.Model without specifying a Pica.Application"
+
   url: () ->
 
   get: (attribute) ->
@@ -38,28 +42,35 @@ class Pica.Model extends Pica.Events
     @trigger('change')
 
   sync: (options = {}) ->
-    @set('_loading', true)
-    callback = options.success || () ->
+    successCallback = options.success || () ->
 
-    # Extend callback to add returned data as model attributes
+    # Extend callback to add returned data as model attributes.
     options.success = (data, textStatus, jqXHR) =>
-      #data = JSON.parse(data) unless 'object' == typeof data 
-      if data.id?
+      #data = JSON.parse(data) unless 'object' == typeof data
+      if data?.id?
         @parse(data)
-        @set('_loading', false)
         @trigger('sync', @)
 
-      callback(@, textStatus, jqXHR)
+      @app.notifySyncFinished()
+      successCallback(@, textStatus, jqXHR)
 
+    errorCallback = options.error || () ->
+
+    # Extend callback to add returned data as model attributes.
+    options.error = (data, textStatus, jqXHR) =>
+      @app.notifySyncFinished()
+      errorCallback(@, textStatus, jqXHR)
 
     if options.type == 'post' or options.type == 'put'
       data = @attributes
-      delete data['_loading']
       data = JSON.stringify(data) if options.type == 'post'
 
-    # Send nothing for delete, and set contentType, otherwise JQuery will try to parse it on return
+    # Send nothing for delete, and set contentType,
+    # otherwise JQuery will try to parse it on return.
     if options.type == 'delete'
       data = null
+
+    @app.notifySyncStarted()
 
     $.ajax(
       $.extend(
@@ -70,7 +81,7 @@ class Pica.Model extends Pica.Events
       )
     )
   
-  # Parse the data that is returned from the server
+  # Parse the data that is returned from the server.
   parse: (data) ->
     for attr, val of data
       @set(attr, val)
@@ -127,13 +138,17 @@ class Pica.Application extends Pica.Events
     @layers = []
     @fetch()
 
+    # If Leaflet LayerControl activation is delegated
+    # to pica, then show Tile Layers by default.
+    if @config.delegateLayerControl then @showTileLayers()
+
   newWorkspace: ->
-    @currentWorkspace = new Pica.Models.Workspace()
+    @currentWorkspace = new Pica.Models.Workspace(@)
 
   showTileLayers: ->
     new Pica.Views.ShowLayersView(app:@)
 
-  fetch: () ->
+  fetch: ->
     $.ajax(
       url: "#{Pica.config.magpieUrl}/projects/#{Pica.config.projectId}.json"
       type: 'get'
@@ -145,12 +160,26 @@ class Pica.Application extends Pica.Events
       @[attr] = val
     @trigger('sync')
 
+  notifySyncStarted: ->
+    @syncsInProgress or= 0
+    @syncsInProgress = @syncsInProgress + 1
+
+    if @syncsInProgress is 1
+      @trigger('syncStarted')
+
+  notifySyncFinished: ->
+    @syncsInProgress or= 0
+    @syncsInProgress = @syncsInProgress - 1
+
+    if @syncsInProgress is 0
+      @trigger('syncFinished')
+
 class Pica.Models.Area extends Pica.Model
-  constructor: (options) ->
+  constructor: (@app) ->
+    @throwIfNoApp()
     @polygons = []
 
     @set('name', 'My Lovely Area')
-    @set('_loading', false)
 
   setName: (name) ->
     @set('name', name)
@@ -172,8 +201,7 @@ class Pica.Models.Area extends Pica.Model
 
   # Create a new Pica.Views.NewPolygonView for this area
   drawNewPolygonView: (callbacks) ->
-    @currentPolygon = new Pica.Models.Polygon()
-    @addPolygon(@currentPolygon)
+    @createPolygon()
     new Pica.Views.NewPolygonView(
       callbacks: callbacks
       polygon: @currentPolygon
@@ -181,12 +209,15 @@ class Pica.Models.Area extends Pica.Model
 
   # Create a new Pica.Views.NewCircleView for this area
   drawNewCircleView: (callbacks) ->
-    @currentPolygon = new Pica.Models.Polygon()
-    @addPolygon(@currentPolygon)
+    @createPolygon()
     new Pica.Views.NewCircleView(
       callbacks: callbacks
       polygon: @currentPolygon
     )
+
+  createPolygon: ->
+    @currentPolygon = new Pica.Models.Polygon(@app)
+    @addPolygon(@currentPolygon)
 
   # Create a new Pica.Views.UploadPolygonView for this area
   newUploadFileView: (callbacks) ->
@@ -202,14 +233,15 @@ class Pica.Models.Area extends Pica.Model
     )
 
   url: () ->
-    create: "#{Pica.config.magpieUrl}/workspaces/#{@get('workspace_id')}/areas_of_interest.json"
-    read:   "#{Pica.config.magpieUrl}/areas_of_interest/#{@get('id')}.json"
+    url = Pica.config.magpieUrl
+    create: "#{url}/workspaces/#{@get('workspace_id')}/areas_of_interest.json"
+    read:   "#{url}/areas_of_interest/#{@get('id')}.json"
 
   parse: (data) ->
     if data.polygons?
-      @polygons = [] 
+      @polygons = []
       for polygonAttributes in data.polygons
-        polygon = new Pica.Models.Polygon(attributes:polygonAttributes)
+        polygon = new Pica.Models.Polygon(@app, attributes:polygonAttributes)
         @addPolygon(polygon)
       delete data.polygons
     else
@@ -233,18 +265,30 @@ class Pica.Models.Area extends Pica.Model
           if @get('workspace_id')
             @save options
           else
-            options.error(@, {error: "Could not save workspace, so cannot save area"}, jqXHR)
+            options.error(
+              @,
+              {error: "Could not save workspace, so cannot save area"},
+              jqXHR
+            )
         error: (jqXHR, textStatus, errorThrown) =>
           console.log "Unable to save area:"
           console.log arguments
           console.log jqXHR.status
           console.log jqXHR.statusText
           console.log jqXHR.responseText
-          options.error(jqXHR, textStatus, {error: "Unable to obtain workspaceId, cannot save area", parentError: errorThrown}) if options.error?
+          options.error(
+            jqXHR,
+            textStatus,
+            {
+              error: "Unable to obtain workspaceId, cannot save area",
+              parentError: errorThrown
+            }
+          ) if options.error?
       )
 
 class Pica.Models.Polygon extends Pica.Model
-  constructor: (options = {}) ->
+  constructor: (@app, options = {}) ->
+    @throwIfNoApp()
     @attributes = if options.attributes? then options.attributes else {}
     @attributes['geometry'] ||= {type: 'Polygon'}
 
@@ -288,8 +332,9 @@ class Pica.Models.Polygon extends Pica.Model
     return args
 
   url: () ->
-    read: "#{Pica.config.magpieUrl}/polygons/#{@get('id')}.json"
-    create: "#{Pica.config.magpieUrl}/areas_of_interest/#{@get('area_id')}/polygons.json"
+    url = Pica.config.magpieUrl
+    read: "#{url}/polygons/#{@get('id')}.json"
+    create: "#{url}/areas_of_interest/#{@get('area_id')}/polygons.json"
 
   save: (options) =>
     options ||= {}
@@ -303,22 +348,34 @@ class Pica.Models.Polygon extends Pica.Model
           if @get('area_id')
             @save options
           else
-            options.error(@, {error: "Unable to get area id, so cannot save polygon"}, jqXHR) if options.error?
+            options.error(
+              @,
+              {error: "Unable to get area id, so cannot save polygon"},
+              jqXHR
+            ) if options.error?
         error: (jqXHR, textStatus, errorThrown) =>
           console.log "Unable to save polygon:"
           console.log arguments
           console.log jqXHR.status
           console.log jqXHR.statusText
           console.log jqXHR.responseText
-          options.error(jqXHR, textStatus, {error: "Unable to obtain areaId, cannot save polygon", parentError: errorThrown}) if options.error?
+          options.error(
+            jqXHR,
+            textStatus,
+            {
+              error: "Unable to obtain areaId, cannot save polygon",
+              parentError: errorThrown
+            }
+          ) if options.error?
       )
 
 class Pica.Models.Workspace extends Pica.Model
-  constructor: () ->
+  constructor: (@app, options) ->
+    @throwIfNoApp()
     @attributes = {}
     @areas = []
 
-    @currentArea = new Pica.Models.Area()
+    @currentArea = new Pica.Models.Area(@app)
     @addArea(@currentArea)
 
   url: () ->
@@ -434,9 +491,9 @@ class Pica.Views.ShowAreaPolygonsView extends Pica.Events
         Wrapper = (args) ->
           return theConstructor.apply(@, args)
         Wrapper:: = theConstructor::
-
         return new Wrapper(args)
-      mapPolygon = newObject(L[polygon.get('geometry').type], polygon.asLeafletArguments()).addTo(Pica.config.map)
+      mapPolygon = newObject(L[polygon.get('geometry').type],
+        polygon.asLeafletArguments()).addTo(Pica.config.map)
 
       polygon.on('delete', (=>
         thatMapPolygon = mapPolygon
@@ -452,7 +509,7 @@ class Pica.Views.ShowAreaPolygonsView extends Pica.Events
       )())
 
       @mapPolygons.push(mapPolygon)
-  
+
   addPolygon: (polygon) =>
     polygon.on('change', @render)
     @polysObserved.push(polygon)
@@ -479,22 +536,49 @@ class Pica.Views.ShowLayersView
   constructor: (options) ->
     @app = options.app
     @app.on('sync', @render)
-    @tileLayers = []
-    @render()
+    @tileLayers = {}
+    @layerControl = no
 
+  # For every layer in @app.layers,
+  # we build a @tileLayers object, compatible with the arguments to
+  # L.control.layers, and, if we are not delegating the Layer Control 
+  # functionality to Pica, we simply add every layer to the map in order.
   render: =>
     @removeTileLayers()
+    @removeLayerControl()
     for layer in @app.layers
-      tileLayer = new L.TileLayer(layer.tile_url)
-      @tileLayers.push(tileLayer)
-      tileLayer.addTo(@app.config.map)
+      tileLayer = L.tileLayer(layer.tile_url)
+      @tileLayers[layer.display_name] = tileLayer
+      if not @app.config.delegateLayerControl
+        tileLayer.addTo(@app.config.map)
+    if @app.config.delegateLayerControl
+      @layerControl = @renderLayerControl @app.config.map
 
+  # If we are delegating the Layer Control functionality to Pica:
+  # first we merge optional extra overlays from the config into 
+  # @tileLayers and then we show the first layer in the Layer Control.
+  renderLayerControl: (map) ->
+    extraOverlays = @app.config.extraOverlays or {}
+    layers = $.extend @tileLayers, extraOverlays
+    @showFirstOverlay(layers, map)
+    L.control.layers({}, layers).addTo map
+
+  showFirstOverlay: (layers, map) ->
+    for name, layer of layers
+      layer.addTo map
+      return
+ 
   removeTileLayers: =>
-    for tileLayer in @tileLayers
+    for name, tileLayer of @tileLayers
       @app.map.removeLayer(tileLayer)
+
+  removeLayerControl: ->
+    if @layerControl
+      @layerControl.removeFrom @app.map
 
   close: ->
     @removeTileLayers()
+    @removeLayerControl()
     @app.off('sync', @render)
 
 class Pica.Views.UploadFileView extends Pica.Events

@@ -14,7 +14,6 @@ class Backbone.Views.AreaView extends Backbone.View
     @showAreaPolygonsView = window.pica.currentWorkspace.currentArea.newShowAreaPolygonsView()
     @showAreaPolygonsView.on("polygonClick", @handlePolygonClick)
 
-    @render()
 
   deleteArea: (event) ->
     
@@ -28,12 +27,11 @@ class Backbone.Views.AreaView extends Backbone.View
     )
 
   render: =>
+    console.log "I am in the areaView render!"
     @$el.html(@template())
-
     area_controls_view = new Backbone.Views.AreaControlsView(area: @area).render().$el
     @$el.find('#area_controls').html(area_controls_view)
-
-    return @
+    this
 
   onClose: ->
     @showAreaPolygonsView.off("polygonClick", @handlePolygonClick)

@@ -13,8 +13,6 @@ class Backbone.Views.AreaControlsView extends Backbone.View
     @area = options.area
     @area.on('change', @render)
 
-    @render()
-
   toggleDrawing: (event) ->
     if @polygonView?
       @removeNewPolygonView()
@@ -54,14 +52,11 @@ class Backbone.Views.AreaControlsView extends Backbone.View
 
   deleteArea: (event) ->
     
-
   render: =>
     @$el.html(@template(area: @area))
-
     area_results_view = new Backbone.Views.AreaResultsView(area: @area).render().$el
     @$el.find('#area_results').html(area_results_view)
-
-    return @
+    this
 
   onClose: ->
     @removeNewPolygonView()
