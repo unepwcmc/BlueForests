@@ -43,11 +43,11 @@ window.JST['area_results_view'] = _.template("""
           </tbody>
         </table>
 
-        <h4>Polygons in this area</h4>
+        <h4>Polygons in this area<sup class="tip" id="habitat_tip"></sup></h4>
         <table class="table polygon-stats">
           <tbody>
             <tr>
-              <td>Habitat<span class="tip" id="habitat_tip"></span></td>
+              <td>Habitat</td>
               <td>Area <span>km<sup>2</sup></span></td>
               <td>Area <span>% of Tot.</span></td>
               <td title="Carbon Stock">C-Stock <span>T</span></td>
