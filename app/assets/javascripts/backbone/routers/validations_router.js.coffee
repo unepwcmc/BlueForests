@@ -174,13 +174,13 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     zoom = args.zoom || 9
 
     baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 18})
-    baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 18})
+    baseSatellite =  new L.BingLayer("ApZALeudlU-OTm7Me2qekFHrstBXNdv3hft6qy3ZeTQWD6a460-QqCQyYnDigINc", {type: "Aerial", maxZoom: 19})
 
     map = L.map map_id,
       center: center
       zoom: zoom
       minZoom: 8
-      maxZoom: 17
+      maxZoom: 19
       layers: [baseSatellite]
 
     # Clean polygonDraw
