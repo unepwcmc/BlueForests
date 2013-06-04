@@ -7,9 +7,9 @@ class CartodbQuery
       more_fields = ""
       more_groups = ""
     else
-      more_params = ", age, area_id, density, condition, knowledge, notes"
-      more_fields = ", #{validation.age || '0'}, #{validation.area_id || '0'}, #{validation.density || '0'}, #{validation.condition || '0'}, '#{validation.knowledge}', '#{validation.notes}'"
-      more_groups = ", t.age, t.area_id, t.density, t.condition, t.knowledge, t.notes"
+      more_params = ", age, area_id, density, condition, knowledge, notes, habitat"
+      more_fields = ", #{validation.age || '0'}, #{validation.area_id || '0'}, #{validation.density || '0'}, #{validation.condition || '0'}, '#{validation.knowledge}', '#{validation.notes}', '#{validation.habitat}'"
+      more_groups = ", t.age, t.area_id, t.density, t.condition, t.knowledge, t.notes, t.habitat"
     end
 
     if validation.action == 'validate'

@@ -7,8 +7,8 @@ describe CartodbQuery do
     before(:all) do
       require 'ostruct'
       @time = (Time.now.to_f * 1000.0).to_i
-      @addition = OpenStruct.new(action: 'add', admin_id: 1, age: 1, area_id: 1, density: 1, condition: 4, knowledge: 'local_data', notes: 'test', id: @time + 1000)
-      @addition2 = OpenStruct.new(action: 'add', admin_id: 1, age: 1, area_id: 1, density: 1, condition: 4, knowledge: 'local_data', notes: 'test', id: @time + 2000)
+      @addition = OpenStruct.new(action: 'add', admin_id: 1, age: 1, area_id: 1, density: 1, condition: 4, knowledge: 'local_data', notes: 'test', habitat: 'mangrove', id: @time + 1000)
+      @addition2 = OpenStruct.new(action: 'add', admin_id: 1, age: 1, area_id: 1, density: 1, condition: 4, knowledge: 'local_data', notes: 'test', habitat: 'mangrove', id: @time + 2000)
     end
 
     describe 'when the table is empty' do
