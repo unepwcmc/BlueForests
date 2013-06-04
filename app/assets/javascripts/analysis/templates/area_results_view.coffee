@@ -48,7 +48,7 @@ window.JST['area_results_view'] = _.template("""
           <tbody>
             <tr>
               <td>Habitat</td>
-              <td>Area <span>km<sup>2</sup></span></td>
+              <td>Area <span>ha</sup></span></td>
               <td>Area <span>% of Tot.</span></td>
               <td title="Carbon Stock">C-Stock <span>T</span></td>
             </tr>
