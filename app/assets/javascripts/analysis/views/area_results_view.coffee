@@ -11,7 +11,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
     tot_area_tip: "The total size of your Area of Interest in km2."
     ca_stock_tip: "The total above and below ground carbon stock of all project habitats with your Area of Interest."
     co2_pc_emis_tip: "A conversion of the Total Carbon Stock value of your Area of Interest to CO2, which is then represented as days/years CO2 emissions of an average UAE citizen." #,  based on (XXXXX Global Earth Initiative ?)
-    habitat_tip: "Size of each habitat within your Area of Interest listed out in km2 and as a percentage of the overall habitat. Carbon stock per habitat in metric tonnes."
+    habitat_tip: "Size of each habitat within your Area of Interest listed out in hectares and as a percentage of the overall habitat. Carbon stock per habitat in metric tonnes."
 
 
   initialize: (options) ->
