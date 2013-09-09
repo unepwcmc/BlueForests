@@ -42,6 +42,10 @@ group :assets do
   gem 'libv8', '~> 3.11.8'
 
   gem 'uglifier', '>= 1.0.3'
+
+  gem "susy"
+  gem 'compass', '>= 0.12.2'
+  gem 'compass-rails', '>= 1.0.3'
 end
 
 gem 'jquery-rails'
