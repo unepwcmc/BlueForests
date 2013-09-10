@@ -2,7 +2,7 @@
 @import "sassy-buttons";
 
 $dark-blue: #2b3038;
-$light-blue: #384658;
+$light-blue: #259dd7; //#384658;
 $green-light: #bdd455;
 $green-dark: #9eb436;
 $orange-light: #f2964c;
@@ -52,10 +52,16 @@ body {
   //@include susy-grid-background;
 
   // Notice the title and footer sections are out of the 12 columns container
-  .banner, .content, header { @include container; }
+  .banner, .content { @include container; }
 
   header {
+    .inner { @include container; }
     padding-top: 1.5em;
+    padding-bottom: 1.2em;
+  }
+
+  header.white {
+    background-color: #fff;
   }
 
   .banner { 
@@ -77,7 +83,7 @@ body {
     h1 {
       font-size: 4.8em;
       padding-top: 1.8em;
-      margin-top: 0.3em;
+      margin-top: 0;
       margin-bottom: 0;
     }
     .inner { @include container; }
@@ -117,6 +123,18 @@ body {
     }
   }
 
+  // About page
+  .content-full {
+    .inner { @include container; }
+    .left {
+      @include span-columns(6,$total-columns);
+    }
+    .right {
+      @include span-columns(6 omega,$total-columns);
+    }
+    margin-top: 40px; 
+  }
+
   font-family: 'Montserrat', Arial, 'Helvetica Neue', sans-serif;
 
   button {
@@ -138,5 +156,27 @@ body {
   span.big {
     font-size: 1.2em;
   }
+
+  span.light-blue {
+    color: $light-blue;
+  }
+
+
+  #img-mangroves {
+    width: 462px;
+  }
+
+  #img-out-on-sea {
+    float: right;
+  }
+
+  #img-mangroves-nursery {
+    margin-top: 9px;
+  }
+
+  #img-in-the-field {
+    margin-top: 60px;
+  }
+
 }
 
