@@ -1,5 +1,132 @@
 @import "susy";
+@import "sassy-buttons";
+
+$dark-blue: #2b3038;
+$light-blue: #384658;
+$green-light: #bdd455;
+$green-dark: #9eb436;
+$orange-light: #f2964c;
+$orange-dark: #d2752c;
+$grey-background: #ededed;
+
+$total-columns  : 12;
+$column-width   : 4em;
+$gutter-width   : 1em;
+$grid-padding   : $gutter-width;
+$break: 12;
+$big: 10em;
+
+//$container-style: fluid;
+
+//div { border: 1px solid black }
+
+//.page {
+//  @include container($total-columns, $break);
+//  
+//}
+//
+//@include at-breakpoint($break) {
+//  .banner { @include prefix(2,$break); }
+//  .pagenav { @include span-columns(2,$break); }
+//}
+
+//.page {
+//  // Establish our default 4-column grid container.
+//  @include container;
+//
+//  // Create a media-query breakpoint at a min-width of 30em
+//  // And use a larger 8-column grid within that media-query.
+//  @include at-breakpoint(30em $break) {
+//    // Establish our new 8-column container.
+//    @include container;
+//  }
+//}
 
 body {
-  background-color: #384658;
+  background-color: $grey-background;
 }
+
+
+.page {
+  // For debugging!
+  //@include susy-grid-background;
+
+  // Notice the title and footer sections are out of the 12 columns container
+  .banner, .content, header { @include container; }
+
+  header {
+    padding-top: 1.5em;
+  }
+
+  .banner { 
+    @include span-columns(5,$total-columns);
+  }
+  .nav { 
+    @include span-columns(6 omega,$total-columns);
+    //@include prefix(4);
+    #help { 
+      @include prefix(1);
+      @include span-columns(3,12); 
+    }
+    #about { @include span-columns(3,12); }
+    #english { @include span-columns(5 omega,12); }
+    font-size: 1em;
+  }
+
+  div.title {
+    h1 {
+      font-size: 4.8em;
+      padding-top: 1.8em;
+      margin-top: 0.3em;
+      margin-bottom: 0;
+    }
+    .inner { @include container; }
+    height: 500px;
+    background-image: url(/assets/blue-marble-banner.jpg);
+    color: #fff;
+    text-align: center;
+  }
+
+  .content {
+    .left {
+      @include span-columns(6,$total-columns);
+    }
+    .right {
+      @include span-columns(6 omega,$total-columns);
+    }
+    margin-top: 40px;
+    margin-bottom: 30px;
+    h3 {
+      margin-top: 16px;
+    }
+  }
+
+  footer {
+    .inner { @include container; }
+    #attributions { @include span-columns(8,12); }
+    #sign-in { @include span-columns(2,12); }
+    #contact { @include span-columns(2 omega,12); }
+    height: 200px;
+    background-color: #fff;
+    padding-top: 1.5em;
+  }
+
+  font-family: 'Montserrat', Arial, 'Helvetica Neue', sans-serif;
+
+  button {
+    //@include sassy-button(gradient-style, border-radius, font-size, first-color, second-color, text-color, text-style, auto-states)
+    @include sassy-button("matte", 6px, 1em, $green-dark, $green-dark, #fff, "inset");
+  }
+
+  p.big-bold {
+    font-weight: bold;
+    font-size: 1.6em;
+    margin-top: 16px;
+    margin-bottom: 45px;
+  }
+
+  span.big {
+    font-size: 1.2em;
+  }
+}
+

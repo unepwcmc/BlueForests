@@ -46,6 +46,7 @@ group :assets do
   gem "susy"
   gem 'compass', '>= 0.12.2'
   gem 'compass-rails', '>= 1.0.3'
+  gem 'sassy-buttons'
 end
 
 gem 'jquery-rails'
