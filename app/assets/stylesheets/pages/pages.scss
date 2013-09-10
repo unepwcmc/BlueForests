@@ -103,12 +103,18 @@ body {
 
   footer {
     .inner { @include container; }
-    #attributions { @include span-columns(8,12); }
-    #sign-in { @include span-columns(2,12); }
+    #attributions { @include span-columns(6,12); }
+    #authentication { @include span-columns(4,12); }
     #contact { @include span-columns(2 omega,12); }
     height: 200px;
     background-color: #fff;
     padding-top: 1.5em;
+    a {
+      text-decoration: none;
+      //font-size: 14px;
+      text-transform: uppercase;
+      color: #000;
+    }
   }
 
   font-family: 'Montserrat', Arial, 'Helvetica Neue', sans-serif;
@@ -116,6 +122,10 @@ body {
   button {
     //@include sassy-button(gradient-style, border-radius, font-size, first-color, second-color, text-color, text-style, auto-states)
     @include sassy-button("matte", 6px, 1em, $green-dark, $green-dark, #fff, "inset");
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 
   p.big-bold {

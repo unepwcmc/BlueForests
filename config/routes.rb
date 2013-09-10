@@ -3,7 +3,7 @@ BlueCarbon::Application.routes.draw do
   
   match 'home' => 'pages#home'
 
-  match "/layout/:layout" => 'analysis#index'
+  match "/layout" => 'analysis#index'
 
   match "/delayed_job" => DelayedJobWeb, :anchor => false
 
