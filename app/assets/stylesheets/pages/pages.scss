@@ -8,6 +8,7 @@ $green-dark: #9eb436;
 $orange-light: #f2964c;
 $orange-dark: #d2752c;
 $grey-background: #ededed;
+$grey-logo: #f0f0f0;
 
 $total-columns  : 12;
 $column-width   : 4em;
@@ -117,7 +118,7 @@ body.matted {
   }
 
   .content.grey {
-    background-color: lighten($grey-background, 4%);
+    background-color: $grey-logo; //lighten($grey-background, 4%);
     padding-top: $grid-padding;
     border-radius: 12px;
   }
@@ -227,6 +228,10 @@ body.matted {
 
   #img-in-the-field {
     margin-top: 60px;
+  }
+
+  #img-footer-supporters {
+    padding-top: 10px;
   }
 
 }
