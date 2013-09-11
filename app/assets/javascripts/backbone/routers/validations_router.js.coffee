@@ -16,7 +16,8 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     ".*"                                 : "index"
 
   newValidation: (z, y, x, prev_validation_id) ->
-    @view = new BlueCarbon.Views.Validations.NewView(collection: @validations, areas: @areas)
+    @view = new BlueCarbon.Views.Validations.NewView(
+      collection: @validations, areas: @areas)
     $("#validations").html(@view.render().el)
 
     # Map
@@ -67,7 +68,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
         $('#upload-photo').show()
 
   index: ->
-    @view = new BlueCarbon.Views.Validations.IndexView(validations: @validations)
+    @view = new BlueCarbon.Views.Validations.IndexView(validations: @validations, collection: @validations)
     $("#validations").html(@view.render().el)
 
   show: (id) ->
@@ -172,14 +173,14 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     center = args.center || [24.5, 54]
     zoom = args.zoom || 9
 
-    baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 18})
-    baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 18})
+    baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 19})
+    baseSatellite =  new L.BingLayer("ApZALeudlU-OTm7Me2qekFHrstBXNdv3hft6qy3ZeTQWD6a460-QqCQyYnDigINc", {type: "Aerial", maxZoom: 19})
 
     map = L.map map_id,
       center: center
       zoom: zoom
       minZoom: 8
-      maxZoom: 17
+      maxZoom: 19
       layers: [baseSatellite]
 
     # Clean polygonDraw
@@ -208,7 +209,6 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     overlayMaps =
       'Mangrove': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_mangrove/{z}/{x}/{y}.png?sql=SELECT * FROM bc_mangrove WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
       'Seagrass': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_seagrass/{z}/{x}/{y}.png?sql=SELECT * FROM bc_seagrass WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
-      'Sabkha': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_sabkha/{z}/{x}/{y}.png?sql=SELECT * FROM bc_sabkha WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
       'Saltmarsh': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_saltmarsh/{z}/{x}/{y}.png?sql=SELECT * FROM bc_saltmarsh WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
       'Algal Mat': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_algal_mat/{z}/{x}/{y}.png?sql=SELECT * FROM bc_algal_mat WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
       'Other': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_other/{z}/{x}/{y}.png?sql=SELECT * FROM bc_other WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
@@ -279,3 +279,4 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
 
   latLngsToString: (latLngs) ->
     "[#{_.map(latLngs, (ll) -> "[#{ll.lng},#{ll.lat}]")}]"
+

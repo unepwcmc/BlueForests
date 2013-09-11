@@ -152,18 +152,15 @@ footer.navbar {
   }
 }
 
-section.help {
-  p {
-    font-size: 12px;
-    font-family: Arial, "Helvetica Neue", sans-serif;
-  }
+.form-actions {
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+}
 
-  h3 {
-    font-size: 18px;
-    line-height: 25px;
-  }
-
-  a {
-    cursor: pointer; cursor: hand;
-  }
+.deleteme {
+  color: #6a8dab;
+  cursor: pointer;
+  cursor: hand;
 }

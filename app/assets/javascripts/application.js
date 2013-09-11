@@ -3,12 +3,15 @@
 //= require bootstrap
 //= require leaflet
 //= require leaflet.draw
-//= require underscore
-//= require backbone
+//= require Leaflet.Bing
+////= require underscore.1.4.4
+////= require backbone.1.0.0
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/blue_carbon
 //= require jquery.dataTables
+//= require jquery.dataTables.dateSorter
+//= require opentip-jquery
 //= require data_tables_bootstrap
 //= require ajaxupload
 //= require OpenLayers
@@ -16,6 +19,7 @@
 //= require_tree ./analysis/lib
 //= require_tree ./analysis/templates/
 //= require_tree ./analysis/views/
+//= require_tree ./analysis/routers/
 //= require ./analysis/analysis.js.coffee
 //= require pica
 

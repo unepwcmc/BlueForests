@@ -5,7 +5,7 @@ describe CartodbQuery do
   describe '.query' do
     before(:all) do
       require 'ostruct'
-      @addition = OpenStruct.new(id: 1, action: 'add', admin_id: 1, age: 1, area_id: 1, density: 1, knowledge: 'local_data', notes: 'test')
+      @addition = OpenStruct.new(id: 1, action: 'add', admin_id: 1, age: 1, area_id: 1, density: 1, knowledge: 'local_data', notes: 'test', habitat: 'mangrove')
     end
 
 

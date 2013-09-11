@@ -37,7 +37,7 @@
       width: 100%;
 
       &.with-undo {
-        width: 92%;
+        width: 83%;
       }
     }
   }
@@ -58,6 +58,16 @@
   table {
     .progress {
       margin-bottom: 0;
+    }
+
+    &#photos-table {
+      background: none;
+      color: white;
+
+      th:first-child {
+        width: 40px;
+        line-height: 29px;
+      }
     }
   }
 
@@ -283,4 +293,10 @@ div.DTFC_LeftBodyWrapper tbody tr:first-child td {
 
 div.DTFC_LeftFootWrapper table {
   border-top: none;
+}
+
+#footer {
+  img {
+    margin-top: 15px;
+  }
 }

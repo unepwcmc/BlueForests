@@ -6,5 +6,5 @@ class BlueCarbon.Views.Validations.ValidationView extends Backbone.View
   tagName: "tr"
 
   render: ->
-    @$el.html(@template(@model.toJSON(true) ))
+    @$el.html @template( @model.toJSON(true) )
     return this

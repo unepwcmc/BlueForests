@@ -46,6 +46,7 @@ test:
   username: timwilkinson
   password: 
   host: localhost
+  template: template_postgis
 
 production:
   adapter: postgresql

@@ -85,6 +85,8 @@ class ValidationsController < AdminController
   # DELETE /validations/1.json
   def destroy
     @validation = Validation.find(params[:id])
+    habitat = @validation.habitat
+    Validation.undo_most_recent_by_habitat(habitat)
     @validation.destroy
 
     respond_to do |format|
@@ -95,6 +97,8 @@ class ValidationsController < AdminController
 
   def export
     url = Habitat.shapefile_export_url
-    redirect_to url
+
+    data = open(url).read
+    send_data data, :filename => 'BlueCarbon_Download.zip'
   end
 end

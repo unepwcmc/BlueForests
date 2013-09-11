@@ -1,13 +1,13 @@
 initializeMap = () ->
   baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 17})
-  baseSatellite = L.tileLayer('http://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {maxZoom: 17})
+  baseSatellite =  new L.BingLayer("ApZALeudlU-OTm7Me2qekFHrstBXNdv3hft6qy3ZeTQWD6a460-QqCQyYnDigINc", {type: "Aerial", maxZoom: 19})
 
   map = L.map 'map_analysis',
     center: [24.5, 54]
     zoom: 9
     layers: [baseSatellite]
     minZoom: 8
-    maxZoom: 17
+    maxZoom: 19
 
   baseMaps =
     'Map': baseMap
@@ -58,8 +58,8 @@ initializePica = (map) ->
 
   window.pica.newWorkspace()
 
-  tabsView = new Backbone.Views.TabsView().render()
-  $('#sidebar').html(tabsView.el)
+  window.router = new Backbone.Routers.AnalysisRouter()
+  Backbone.history.start()
 
 $(document).ready ->
   map = initializeMap() if $('#map_analysis').length > 0
