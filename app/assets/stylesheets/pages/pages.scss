@@ -100,13 +100,13 @@ body.matted {
   div.title {
     h1 {
       font-size: 4.8em;
-      padding-top: 1.8em;
+      padding-top: 1.6em;
       margin-top: 0;
       margin-bottom: 0;
     }
     .inner { @include container; }
     height: 500px;
-    background-image: url(/assets/blue-marble-banner.jpg);
+    background-image: url(/assets/pages/homepage-map.png);
     color: #fff;
     text-align: center;
   }
