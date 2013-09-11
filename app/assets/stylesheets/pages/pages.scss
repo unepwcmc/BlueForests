@@ -187,13 +187,9 @@ body.matted {
 
   font-family: 'Montserrat', Arial, 'Helvetica Neue', sans-serif;
 
-  button {
+  a.button {
     //@include sassy-button(gradient-style, border-radius, font-size, first-color, second-color, text-color, text-style, auto-states)
     @include sassy-button("matte", 6px, 1em, $green-dark, $green-dark, #fff, "inset");
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
   }
 
   h3 {
