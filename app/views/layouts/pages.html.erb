@@ -24,11 +24,13 @@
     <header class="<%= @bg_colour %>">
       <div class="inner">
         <div id="home" class="banner <%= @active %>">
-          <a href="/home"><img src="/assets/pages/banner_<%= @bg_colour %>.png"></a>
+        <%= link_to home_path do %>
+          <img src="/assets/pages/banner_<%= @bg_colour %>.png">
+        <% end %>
         </div>
         <div class="nav">
-          <div id="help" class="<%= @active %>"><a href="/help">HELP</a></div>
-          <div id="about" class="<%= @active %>"><a href="/about">ABOUT</a></div>
+          <div id="help" class="<%= @active %>"><%= link_to "HELP", help_path %></div>
+          <div id="about" class="<%= @active %>"><%= link_to "ABOUT", about_path %></div>
           <div id="english" class="<%= @active %>">ENGLISH &#8226; عربي/عربى</div>
         </div>
       </div>
