@@ -23,14 +23,13 @@
   <div class="page">
     <header class="<%= @bg_colour %>">
       <div class="inner">
-        <div class="banner">
-          <span class="big">THE WORLD OF BLUE CARBON</span><br>
-          The Blue Carbon Assessment Tool
+        <div id="home" class="banner <%= @active %>">
+          <a href="/home"><img src="/assets/pages/banner_<%= @bg_colour %>.png"></a>
         </div>
         <div class="nav">
-          <div id="help">HELP</div>
-          <div id="about">ABOUT</div>
-          <div id="english">ENGLISH &#8226; عربي/عربى</div>
+          <div id="help" class="<%= @active %>">HELP</div>
+          <div id="about" class="<%= @active %>"><a href="/about">ABOUT</a></div>
+          <div id="english" class="<%= @active %>">ENGLISH &#8226; عربي/عربى</div>
         </div>
       </div>
     </header>

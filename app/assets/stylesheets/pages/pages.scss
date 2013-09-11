@@ -68,6 +68,13 @@ body.matted {
     .inner { @include container; }
     padding-top: 1.5em;
     padding-bottom: 1.2em;
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+    #about.about a {
+      color: $green-dark;
+    }
   }
 
   header.white {
@@ -87,6 +94,7 @@ body.matted {
     #about { @include span-columns(3,12); }
     #english { @include span-columns(5 omega,12); }
     font-size: 1em;
+    margin-top: 29px;
   }
 
   div.title {
