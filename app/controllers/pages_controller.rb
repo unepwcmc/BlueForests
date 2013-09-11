@@ -3,10 +3,11 @@ class PagesController < ApplicationController
   
   def about
     @bg_colour = "white"
-    
+    @background = "matted"
   end
 
   def home
     @bg_colour = ""
+    @background = ""
   end
 end
