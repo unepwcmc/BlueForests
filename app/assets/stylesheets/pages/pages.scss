@@ -72,7 +72,7 @@ body.matted {
       text-decoration: none;
       color: #000;
     }
-    #about.about a {
+    #about.about a, #help.help a {
       color: $green-dark;
     }
   }
@@ -118,6 +118,15 @@ body.matted {
     .right {
       @include span-columns(6 omega,$total-columns);
     }
+    .content-three {
+      @include span-columns(3,$total-columns);
+    }
+    .content-three-centre {
+      @include span-columns(6,$total-columns);
+    }
+    .content-three-last {
+      @include span-columns(3 omega,$total-columns);
+    }
     margin-top: 40px;
     margin-bottom: 30px;
     h3 {
@@ -133,15 +142,15 @@ body.matted {
 
   footer {
     .inner { @include container; }
-    #attributions { @include span-columns(6,12); }
-    #authentication { @include span-columns(4,12); }
+    #attributions { @include span-columns(7,12); }
+    #authentication { @include span-columns(3,12); }
     #contact { @include span-columns(2 omega,12); }
     height: 200px;
     background-color: #fff;
     padding-top: 1.5em;
     a {
       text-decoration: none;
-      //font-size: 14px;
+      font-size: 11pt;
       text-transform: uppercase;
       color: #000;
     }
@@ -168,10 +177,7 @@ body.matted {
     }
     margin-top: 40px;
     p.light-blue {
-      padding-bottom: 20px;
-    }
-    p.light-blue.multi-line {
-      padding-bottom: 0;
+      padding-bottom: 4px;
     }
     
   }
@@ -190,6 +196,7 @@ body.matted {
   a.button {
     //@include sassy-button(gradient-style, border-radius, font-size, first-color, second-color, text-color, text-style, auto-states)
     @include sassy-button("matte", 6px, 1em, $green-dark, $green-dark, #fff, "inset");
+    margin: 16px 0;
   }
 
   h3 {
@@ -197,8 +204,16 @@ body.matted {
   }
 
   p {
-    font-size: 13pt;
-    font: 13pt Helvetica;
+    //font-size: 13pt;
+    font: 10pt Helvetica;
+  }
+
+  div.small p {
+    font-size: 10pt;
+  }
+
+  p.bold {
+    font-weight: bold;
   }
 
   p.big-bold {
@@ -231,11 +246,15 @@ body.matted {
   }
 
   #img-in-the-field {
-    margin-top: 60px;
+    margin-top: 16px;
   }
 
   #img-footer-supporters {
     padding-top: 10px;
+  }
+
+  #img-help-screenshot {
+    padding-top: 19px;
   }
 
 }

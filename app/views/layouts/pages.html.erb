@@ -27,7 +27,7 @@
           <a href="/home"><img src="/assets/pages/banner_<%= @bg_colour %>.png"></a>
         </div>
         <div class="nav">
-          <div id="help" class="<%= @active %>">HELP</div>
+          <div id="help" class="<%= @active %>"><a href="/help">HELP</a></div>
           <div id="about" class="<%= @active %>"><a href="/about">ABOUT</a></div>
           <div id="english" class="<%= @active %>">ENGLISH &#8226; عربي/عربى</div>
         </div>
@@ -36,10 +36,13 @@
   <%= yield %>
     <footer>
       <div class="inner">
-        <div id="attributions">Blue Carbon is a joint initiative by</div>
+        <div id="attributions">
+          Blue Carbon is a joint initiative by
+          <img src="/assets/pages/footer_logos.png" alt="Supporters" id="img-footer-supporters">
+        </div>
         <div id="authentication" class="navbar"><%= render "layouts/sign_in" %></div>
         <div id="contact">CONTACT</div>
-        <img src="/assets/pages/footer_logos.png" alt="Supporters" id="img-footer-supporters">
+        
       </div>
     </footer>
   </div>

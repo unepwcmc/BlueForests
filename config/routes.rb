@@ -3,6 +3,7 @@ BlueCarbon::Application.routes.draw do
   
   match 'home' => 'pages#home'
   match 'about' => 'pages#about'
+  match 'help' => 'pages#help'
 
   match "/layout" => 'analysis#index'
 
