@@ -204,8 +204,11 @@ body.matted {
   }
 
   p {
-    //font-size: 13pt;
     font: 10pt Helvetica;
+  }
+
+  p.footnote {
+    font-style: italic;
   }
 
   div.small p {
