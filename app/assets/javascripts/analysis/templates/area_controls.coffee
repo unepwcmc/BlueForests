@@ -5,9 +5,13 @@ window.JST['area_controls'] = _.template("""
 
   <div class="new-polygon-container">
     <% if (area.polygons.length > 0) { %>
-      <button type="button" class="btn btn-primary" id="new-polygon">Draw another polygon</button>
+      <button type="button" class="btn btn-primary" id="new-polygon">
+        <%= polyglot.t("analysis.buttons.draw_another_polygon") %>
+      </button>
     <% } else { %>
-      <button type="button" class="btn btn-primary" id="new-polygon">Draw a polygon</button>
+      <button type="button" class="btn btn-primary" id="new-polygon">
+        <%= polyglot.t("analysis.buttons.draw_polygon") %>
+      </button>
     <% } %>
   </div>
 

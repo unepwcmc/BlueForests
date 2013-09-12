@@ -249,3 +249,9 @@ ar:
   activerecord:
     errors:
       <<: *errors
+
+  # Blue Carbon stuff
+  analysis:
+    buttons:
+      draw_polygon: "رسم مضلع"
+      draw_another_polygon: "رسم مضلع آخر"

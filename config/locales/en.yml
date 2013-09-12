@@ -1,4 +1,4 @@
-en-GB:
+en:
   date:
     abbr_day_names:
     - Sun
@@ -203,3 +203,9 @@ en-GB:
   activerecord:
     errors:
       <<: *errors
+
+  # Blue Carbon stuff
+  analysis:
+    buttons:
+      draw_polygon: "Draw a polygon"
+      draw_another_polygon: "Draw another polygon"

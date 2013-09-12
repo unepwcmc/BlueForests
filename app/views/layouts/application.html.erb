@@ -77,5 +77,8 @@
       })
     }(window.jQuery)
   </script>
+  <script>
+    var polyglot = new Polyglot({phrases: <%= raw @phrases.to_json %>});
+  </script>
 </body>
 </html>
