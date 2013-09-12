@@ -7,8 +7,8 @@ $green-light: #bdd455;
 $green-dark: #9eb436;
 $orange-light: #f2964c;
 $orange-dark: #d2752c;
-$grey-background: #ededed;
-$grey-logo: #f0f0f0;
+$gray-background: #ededed;
+$gray-logo: #f0f0f0;
 
 $total-columns  : 12;
 $column-width   : 4em;
@@ -44,11 +44,11 @@ $big: 10em;
 //}
 
 body {
-  background-color: $grey-background;
+  background-color: $gray-background;
 }
 
 body.matted {
-  background-color: $grey-background;
+  background-color: $gray-background;
   background-image:
     linear-gradient(rgba(0,0,0,.015) 1px, transparent 1px),
     linear-gradient(0, rgba(0,0,0,.015) 1px, transparent 1px);
@@ -135,7 +135,7 @@ body.matted {
   }
 
   .content.grey {
-    background-color: $grey-logo; //lighten($grey-background, 4%);
+    background-color: $gray-logo; //lighten($gray-background, 4%);
     padding-top: $grid-padding;
     border-radius: 12px;
   }

@@ -1,13 +1,15 @@
 @import "bootstrap-variables";
 
-$border: #4f6580 !default;
+$border: lighten($gray, 10%) !default;
+$default-text-color: #353938;
+$default-text-color-light: #adadad;
 
 #sidebar.analysis {
   overflow: auto;
   float: right;
   top: $navbarHeight;
   width: 320px;
-  background-color: $grey-background;
+  background-color: $gray-background;
   right: 0;
   bottom: 120px;
 
@@ -89,7 +91,7 @@ $border: #4f6580 !default;
   }
 
   .tabs {
-    background-color: lighten($grey-background, 5%);
+    background-color: lighten($gray-background, 5%);
     overflow: visible;
     margin: 0;
     padding-left: 0;
@@ -138,15 +140,15 @@ $border: #4f6580 !default;
       }
 
       &.active {
-        color: white;
-        background: $grey-background;
-        border-bottom: 1px solid $grey-background;
+        color: $default-text-color;
+        background: $gray-background;
+        border-bottom: 1px solid $gray-background;
       }
     }
   }
 
   h4 {
-    color: #E3E6E9;
+    color: $default-text-color;
     font-size: 0.8em;
     font-weight: normal;
     text-transform: uppercase;
@@ -156,11 +158,11 @@ $border: #4f6580 !default;
 
   table.table {
     background: none;
-    color: white;
+    color: $default-text-color;
 
     thead {
-      border-bottom: 1px solid #C1DDF3;
-      color: #E3E6E9;
+      border-bottom: 1px solid lighten($gray, 20%);
+      color: $default-text-color;
 
       th {
         padding-bottom: 3px;
@@ -186,7 +188,7 @@ $border: #4f6580 !default;
             padding-top: 15px;
             padding-left: 45px;
             border: none;
-            border-top: 1px solid #C1DDf3;
+            border-top: 1px solid lighten($gray, 20%);
             font-size: 2.4em;
             font-family: Montserrat, "Helvetica Neue", sans-serif;
 
@@ -207,7 +209,7 @@ $border: #4f6580 !default;
           &:first-child {
             td {
               border: none;
-              border-top: 1px solid #C1DDF3;
+              border-top: 1px solid lighten($gray, 20%);
               padding-bottom: 0;
 
               &:nth-of-type(3) {
@@ -222,13 +224,13 @@ $border: #4f6580 !default;
                 display: block;
                 font-size: 0.7em;
                 text-transform: none;
-                color: #A8B6C4;
+                color: $default-text-color-light;
                 top: -7px;
                 position: relative;
               }
             }
 
-            background: #546476;
+            background: darken($gray-background, 6%);
             text-transform: uppercase;
           }
         }
@@ -292,7 +294,7 @@ $border: #4f6580 !default;
       line-height: 14px;
 
       a {
-        color: white;
+        color: $default-text-color;
       }
     }
 
@@ -359,7 +361,7 @@ $border: #4f6580 !default;
     font-weight: bold;
     font-size: 0.9em;
     float: right;
-    color: white;
+    color: $default-text-color-light;
     padding-left: 18px;
     background-position-y: 3px;
     line-height: 22px;

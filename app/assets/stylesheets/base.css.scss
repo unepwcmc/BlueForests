@@ -21,7 +21,7 @@ body {
 }
 
 .navbar {
-  border-bottom: 1px solid #4f6580;
+  border-bottom: 1px solid $gray;
   height: 100px;
 
   p {
@@ -111,7 +111,7 @@ body {
 
 footer.navbar {
   border: 0;
-  border-top: 1px solid #4f6580;
+  border-top: 1px solid $gray;
   height: 120px;
 
   .logos {
@@ -131,8 +131,6 @@ footer.navbar {
     font-size: 14px;
     //text-transform: uppercase;
     color: $black;
-
-
 
     a {
       color: $black;
@@ -154,7 +152,7 @@ footer.navbar {
     color: black;
 
     &:hover {
-      color: $black;
+      color: $white;
     }
   }
 
