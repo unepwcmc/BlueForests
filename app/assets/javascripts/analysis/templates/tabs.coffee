@@ -11,7 +11,6 @@ window.JST['tabs'] = _.template("""
       <li id="add-area"></li>
     <% } %>
 
-    <li class="help">Help</li>
   </ul>
 
   <div id="area">

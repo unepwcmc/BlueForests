@@ -8,7 +8,6 @@ class Backbone.Views.TabsView extends Backbone.View
     'click .tabs li':     'changeTab'
     'click #add-area':    'addArea'
     'click #delete-area': 'deleteArea'
-    'click .tabs li.help': 'showHelp'
 
   initialize: (options = {}) ->
     @currentTab = new Backbone.Diorama.ManagedRegion()
@@ -24,10 +23,6 @@ class Backbone.Views.TabsView extends Backbone.View
 
     @workspace.setCurrentArea(area)
     @render()
-
-  showHelp: ->
-    helpView = new Backbone.Views.HelpView()
-    @render(helpView)
 
   addArea: ->
     if pica.currentWorkspace.areas.length <= 3
