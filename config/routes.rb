@@ -1,11 +1,9 @@
 BlueCarbon::Application.routes.draw do
   root :to => 'pages#home'
   
-  match 'home' => 'pages#home'
-  match 'about' => 'pages#about'
-  match 'help' => 'pages#help'
-
-  match "/layout" => 'analysis#index'
+  
+  
+  #match "/layout" => 'analysis#index'
 
   match "/delayed_job" => DelayedJobWeb, :anchor => false
 
@@ -20,6 +18,15 @@ BlueCarbon::Application.routes.draw do
   resources :areas do
     resources :mbtiles, only: :show
   end
+
+  #match '/:locale' => 'pages#home'
+  scope "(:locale)", :locale => /en|ar/ do
+    match 'home' => 'pages#home'
+    match 'about' => 'pages#about'
+    match 'help' => 'pages#help'
+    match "layout" => 'analysis#index'
+  end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -31,7 +31,13 @@
         <div class="nav">
           <div id="help" class="<%= @active %>"><%= link_to "HELP", help_path %></div>
           <div id="about" class="<%= @active %>"><%= link_to "ABOUT", about_path %></div>
-          <div id="english" class="<%= @active %>">ENGLISH &#8226; عربي/عربى</div>
+          <div id="english" class="<%= @active %>">
+            <% if I18n.locale == I18n.default_locale %>
+              <%= link_to "عربي/عربى", :locale=>'ar'%>
+            <% else %>
+              <%= link_to "ENGLISH", :locale=>'en'%>
+            <%end%>
+          </div>
         </div>
       </div>
     </header>
