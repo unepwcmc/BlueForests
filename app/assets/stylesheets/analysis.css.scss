@@ -7,7 +7,7 @@ $border: #4f6580 !default;
   float: right;
   top: $navbarHeight;
   width: 320px;
-  background-color: #334657;
+  background-color: $grey-background;
   right: 0;
   bottom: 120px;
 
@@ -89,7 +89,7 @@ $border: #4f6580 !default;
   }
 
   .tabs {
-    background-color: #24323F;
+    background-color: lighten($grey-background, 5%);
     overflow: visible;
     margin: 0;
     padding-left: 0;
@@ -139,8 +139,8 @@ $border: #4f6580 !default;
 
       &.active {
         color: white;
-        background: #334657;
-        border-bottom: 1px solid #334657;
+        background: $grey-background;
+        border-bottom: 1px solid $grey-background;
       }
     }
   }
@@ -397,6 +397,8 @@ $border: #4f6580 !default;
   width: 10px;
   background-size: 10px 10px;
 }
+
+
 
 
 

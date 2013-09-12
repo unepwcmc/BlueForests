@@ -27,11 +27,11 @@ body {
   p {
     padding-top: 10px;
     font-weight: bold;
-    color: $white;
+    color: $black;
   }
 
   h1 {
-    color: white;
+    color: $black;
     font-size: 1em;
     margin: 0;
     padding: 0;
@@ -52,16 +52,18 @@ body {
       background-image: image-url("blue_carbon_logo@2x.png");
     }
     background-repeat: no-repeat;
-    padding-top: 25px;
+    padding-top: 50px;
     width: 400px;
   }
 
   li {
     line-height: 17px;
+    padding-left: 25px;
   }
 
   .nav > li > a {
     padding-top: 43px;
+    color: $black;
   }
 
   .nav.pull-right {
@@ -117,13 +119,23 @@ footer.navbar {
     margin-top: 15px;
   }
 
+  .pull-left {
+    margin-left: 48px;
+  }
+  .pull-right {
+    margin-right: 48px;
+  }
+
   .links {
     margin-top: 15px;
     font-size: 14px;
-    text-transform: uppercase;
+    //text-transform: uppercase;
+    color: $black;
+
+
 
     a {
-      color: white;
+      color: $black;
 
       &:hover {
         text-decoration: none;
@@ -142,7 +154,7 @@ footer.navbar {
     color: black;
 
     &:hover {
-      color: white;
+      color: $black;
     }
   }
 

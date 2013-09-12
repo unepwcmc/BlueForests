@@ -16,6 +16,7 @@ $gray:                  #555 !default;
 $grayLight:             #999 !default;
 $grayLighter:           #eee !default;
 $white:                 #fff !default;
+$grey-background:       #ededed;
 
 
 // Accent colors
@@ -32,13 +33,13 @@ $purple:                #7a43b6 !default;
 
 // Scaffolding
 // -------------------------
-$bodyBackground:        #384658 !default;
-$textColor:             $white !default;
+$bodyBackground:        $white !default;
+$textColor:             $black !default;
 
 
 // Links
 // -------------------------
-$linkColor:             #6A8DAB !default;
+$linkColor:             $black !default;
 $linkColorHover:        darken($linkColor, 10%) !default;
 
 
@@ -181,7 +182,7 @@ $navbarCollapseWidth:             979px !default;
 $navbarCollapseDesktopWidth:      $navbarCollapseWidth + 1;
 
 $navbarHeight:                    100px !default;
-$navbarBackgroundHighlight:       #2b3038 !default;
+$navbarBackgroundHighlight:       $white !default;
 $navbarBackground:                $navbarBackgroundHighlight !default;
 $navbarBorder:                    $white !default;
 

@@ -34,10 +34,18 @@
           <span class="icon-bar"></span>
         </a>
 
-        <h1><%= link_to "Abu Dhabi Blue Carbon Assessment Tool", home_path, :class =>"homepage-banner" %></h1>
+        <h1><%= link_to "The Blue Carbon Assessment Tool", home_path, :class =>"homepage-banner" %></h1>
 
         <ul class="nav pull-right">
+          <li><%= link_to "HELP", help_path %></li>
           <li><%= link_to "ABOUT", about_path %></li>
+          <li>
+            <% if I18n.locale == I18n.default_locale %>
+              <%= link_to "عربي/عربى", :locale=>'ar'%>
+            <% else %>
+              <%= link_to "ENGLISH", :locale=>'en'%>
+            <%end%>
+          </li>
         </ul>
       </div>
     </div>
@@ -57,9 +65,13 @@
 
   <footer class="navbar navbar-fixed-bottom">
     <div class="navbar-inner">
-      <div class="container-fluid">
-        <div class="links pull-right">
-        <%= render "layouts/sign_in" %>
+        <div class="links pull-left">
+          The Abu Dhabi Blue Carbon Geotoolkit was developed by <br>
+          <img src="/assets/pages/footer_logos.png" alt="Supporters" id="img-footer-supporters">
+        </div>
+        <ul class="nav pull-right">
+          <li><%= render "layouts/sign_in" %></li>
+          <li><a href="mailto:info@agedi.ae" target="_top">CONTACT</a></li>
         </div>
       </div>
     </div>
