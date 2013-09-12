@@ -169,17 +169,19 @@ body.matted {
     .right {
       @include span-columns(6 omega,$total-columns);
     }
-    #mangroves, #cyanobacterial_mats, #seagrass {
-      @include span-columns(3,$total-columns);
+    #mangroves, #cyanobacterial_mats, #seagrass, #saltmarshes {
+      @include span-columns(1,5);
     }
-    #saltmarshes {
-      @include span-columns(3 omega,$total-columns);
+    #sabkha {
+      @include span-columns(1 omega,5);
     }
     margin-top: 40px;
     p.light-blue {
-      padding-bottom: 4px;
+      padding-bottom: 15px;
     }
-    
+    p.light-blue.doubble {
+      padding-bottom: 0;
+    }
   }
 
   .content-full.white {
