@@ -83,6 +83,10 @@ body.matted {
 
   .banner { 
     @include span-columns(5,$total-columns);
+    font-size: 12pt;
+    font-weight: normal;
+    padding-left: 3px;
+    padding-top: 3px;
   }
   .nav { 
     @include span-columns(6 omega,$total-columns);

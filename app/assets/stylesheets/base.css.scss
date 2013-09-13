@@ -23,6 +23,15 @@ body {
 .navbar {
   border-bottom: 1px solid $gray;
   height: 100px;
+  font-family: 'Montserrat', Arial, 'Helvetica Neue', sans-serif;
+  font-size: 1em;
+
+  .homepage-banner {
+    font-size: 12pt;
+    font-weight: normal;
+    padding-left: 3px;
+    padding-top: 3px;
+  }
 
   p {
     padding-top: 10px;
@@ -113,6 +122,7 @@ footer.navbar {
   border: 0;
   border-top: 1px solid $gray;
   height: 120px;
+  font-size: 1em;
 
   .logos {
     float: left;
@@ -128,7 +138,7 @@ footer.navbar {
 
   .links {
     margin-top: 15px;
-    font-size: 14px;
+    
     //text-transform: uppercase;
     color: $black;
 

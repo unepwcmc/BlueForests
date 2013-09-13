@@ -67,7 +67,7 @@ $default-text-color-light: #adadad;
       input {
         background-color: #f2f2f3;
         border-radius: 0;
-        font-size: 0.9em;
+        font-size: 12pt;
         height: 11px;
         width: 284px;
         margin: 5px 0 0 0;
@@ -224,7 +224,7 @@ $default-text-color-light: #adadad;
                 display: block;
                 font-size: 0.7em;
                 text-transform: none;
-                color: $default-text-color-light;
+                color: darken($default-text-color-light, 20%);
                 top: -7px;
                 position: relative;
               }
@@ -241,7 +241,7 @@ $default-text-color-light: #adadad;
           width: 85px;
         }
 
-        border-top: 1px solid #4D617A;
+        border-top: 1px solid $border;
       }
     }
 
@@ -361,7 +361,7 @@ $default-text-color-light: #adadad;
     font-weight: bold;
     font-size: 0.9em;
     float: right;
-    color: $default-text-color-light;
+    color: darken($default-text-color-light, 10%);
     padding-left: 18px;
     background-position-y: 3px;
     line-height: 22px;

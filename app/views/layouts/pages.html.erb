@@ -24,8 +24,9 @@
     <header class="<%= @bg_colour %>">
       <div class="inner">
         <div id="home" class="banner <%= @active %>">
-        <%= link_to home_path do %>
-          <img src="/assets/pages/banner_<%= @bg_colour %>.png">
+        <%= link_to home_path, :class => 'homepage-banner' do %>
+          <img src="/assets/blue_carbon_logo.png">
+          The Blue Carbon Assessment Tool
         <% end %>
         </div>
         <div class="nav">
