@@ -61,6 +61,14 @@ initializePica = (map) ->
   window.router = new Backbone.Routers.AnalysisRouter()
   Backbone.history.start()
 
+setupTranslationLink = ->
+  $("#language > a").on "click", (e) ->
+    if window.pica.currentWorkspace.currentArea.get("id")
+      e.stopPropagation()
+      e.preventDefault()
+      window.location.href = $(".permalink :text").val()
+
 $(document).ready ->
   map = initializeMap() if $('#map_analysis').length > 0
   initializePica(map) if map?
+  setupTranslationLink()

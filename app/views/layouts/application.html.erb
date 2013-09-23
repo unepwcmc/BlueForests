@@ -39,7 +39,7 @@
         <ul class="nav pull-right">
           <li><%= link_to "HELP", help_path %></li>
           <li><%= link_to "ABOUT", about_path %></li>
-          <li>
+          <li id="language">
             <% if I18n.locale == I18n.default_locale %>
               <%= link_to "عربي/عربى", :locale=>'ar'%>
             <% else %>

@@ -97,7 +97,7 @@ body.matted {
       @include span-columns(3,12); 
     }
     #about { @include span-columns(3,12); }
-    #english { @include span-columns(3 omega,12); }
+    #language { @include span-columns(3 omega,12); }
     font-size: 1em;
     margin-top: 29px;
     text-align: right;
