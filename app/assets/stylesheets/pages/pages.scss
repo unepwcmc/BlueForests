@@ -147,9 +147,18 @@ body.matted {
 
   footer {
     .inner { @include container; }
-    #attributions { @include span-columns(7,12); }
-    #authentication { @include span-columns(3,12); }
-    #contact { @include span-columns(2 omega,12); }
+    #attributions { @include span-columns(8,12); }
+    #authentication { 
+      @include span-columns(3,12); 
+      text-align: right;
+      input[type=submit] {
+        margin-right: 21px;
+      }
+    }
+    #contact { 
+      @include span-columns(1 omega,12); 
+      text-align: right;
+    }
     height: 200px;
     background-color: #fff;
     padding-top: 1.5em;
