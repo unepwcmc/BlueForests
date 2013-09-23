@@ -160,7 +160,7 @@ body.matted {
       @include span-columns(1 omega,12); 
       text-align: right;
     }
-    height: 200px;
+    height: 150px;
     background-color: #fff;
     padding-top: 1.5em;
     a {
@@ -225,6 +225,7 @@ body.matted {
 
   p {
     font: 10pt Helvetica;
+		line-height: 1.5em;
   }
 
   p.footnote {
