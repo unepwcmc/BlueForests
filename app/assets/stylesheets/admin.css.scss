@@ -3,11 +3,11 @@
 }
 
 .page-header {
-  a.btn {
+  a.btn, div.btn-group {
     float: right;
   }
 
-  a.btn + a.btn {
+  a.btn + div.btn-group {
     margin-right: 8px;
   }
 }
