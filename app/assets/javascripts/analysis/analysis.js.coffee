@@ -81,4 +81,3 @@ $(document).ready ->
   map = initializeMap() if $('#map_analysis').length > 0
   initializePica(map) if map?
   setupTranslationLink()
-  console.log polyglot.locale()

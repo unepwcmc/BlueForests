@@ -1,6 +1,6 @@
+//= require polyglot
 //= require jquery
 //= require jquery_ujs
-//= require polyglot
 //= require bootstrap
 //= require leaflet
 //= require leaflet.draw

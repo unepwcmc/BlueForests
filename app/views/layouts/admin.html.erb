@@ -69,5 +69,11 @@
       <%= image_tag 'agedi_logo.png', size: "150x43" %>
     </div>
   </div>
+  <script>
+    var polyglot = new Polyglot({
+      phrases: <%= raw @phrases.to_json %>,
+      locale: "<%= I18n.locale %>"
+    });
+  </script>
 </body>
 </html>
