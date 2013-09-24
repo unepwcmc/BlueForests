@@ -1,9 +1,21 @@
 <div class="page-header">
   <a href="#/new" class="btn btn-primary"><i class="icon-plus icon-white"></i> New Validation</a>
-  <a href="/export" class="btn"><i class="icon-download-alt"></i> Export Data</a>
+    <div class="btn-group">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+        Export
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="/export/">All</a></li>
+        <li><a href="/export/algal_mat">Algal Mat</a></li>
+        <li><a href="/export/mangrove">Mangrove</a></li>
+        <li><a href="/export/sabkha">Sabkha</a></li>
+        <li><a href="/export/saltmarsh">Saltmarsh</a></li>
+        <li><a href="/export/other">Other</a></li>
+      </ul>
+    </div>
   <h1>Listing validations</h1>
 </div>
-
 <table id="validations-table" class="table table-bordered table-striped">
   <thead>
     <tr>

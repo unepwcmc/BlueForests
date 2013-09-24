@@ -29,15 +29,26 @@ class Habitat
 
   # Returns a link to CartoDB to retrieve a shapefile download of the
   # current state of the habitats
-  def self.shapefile_export_url
+  def self.shapefile_export_url table_name = ''
     api_key = CARTODB_CONFIG['api_key']
 
     query = []
-    Habitat.all.each do |habitat|
-      query << "SELECT the_geom, habitat FROM #{habitat.table_name}"
-    end
-    query = URI.encode(query.join(" UNION ALL "))
 
-    "http://carbon-tool.cartodb.com/api/v2/sql?q=#{query}&format=shp&api_key=#{api_key}"
+    if table_name.blank?
+      Habitat.all.each do |habitat|
+        query << generate_shapefile_export_query(habitat.table_name) 
+      end
+      query = query.join(" UNION ALL ")
+    else
+      query = generate_shapefile_export_query("bc_#{table_name}_development")
+    end
+    puts query
+    "http://carbon-tool.cartodb.com/api/v2/sql?q=#{URI.encode(query)}&format=shp&api_key=#{api_key}"
   end
+
+  def self.generate_shapefile_export_query table_name
+    "SELECT the_geom, habitat FROM #{table_name}"
+  end
+
+
 end
