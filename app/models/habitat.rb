@@ -40,7 +40,7 @@ class Habitat
       end
       query = query.join(" UNION ALL ")
     else
-      query = generate_shapefile_export_query("bc_#{table_name}_development")
+      query = generate_shapefile_export_query("bc_#{table_name}")
     end
     puts query
     "http://carbon-tool.cartodb.com/api/v2/sql?q=#{URI.encode(query)}&format=shp&api_key=#{api_key}"
