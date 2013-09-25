@@ -153,14 +153,17 @@ footer.navbar {
   }
 
   ul.nav > li > a {
-    text-transform: none;
+    text-transform: uppercase;
     padding: 0;
+  }
+
+  input[type=submit] {
+    margin-left: 19px;
   }
 
   ul.dropdown-menu a {
     text-transform: none;
     color: black;
-
     &:hover {
       color: $white;
     }

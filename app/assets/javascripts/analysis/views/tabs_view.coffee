@@ -35,7 +35,7 @@ class Backbone.Views.TabsView extends Backbone.View
       @render()
 
   setAreaById: (id) ->
-    area = new Pica.Models.Area()
+    area = new Pica.Models.Area(window.pica)
     area.set('id', id)
 
     area.fetch(

@@ -61,6 +61,23 @@ initializePica = (map) ->
   window.router = new Backbone.Routers.AnalysisRouter()
   Backbone.history.start()
 
+invertLocaleOnPermalink = (permalink) ->
+  currentLocale = polyglot.locale()
+  if currentLocale == "ar"
+    locale = "en"
+  else
+    locale = "ar"
+  permalink.replace "/#{currentLocale}/", "/#{locale}/"
+
+setupTranslationLink = ->
+  $("#language > a").on "click", (e) ->
+    if window.pica.currentWorkspace.currentArea.get("id")
+      e.stopPropagation()
+      e.preventDefault()
+      permalink = invertLocaleOnPermalink $(".permalink :text").val()
+      window.location.href = permalink
+
 $(document).ready ->
   map = initializeMap() if $('#map_analysis').length > 0
   initializePica(map) if map?
+  setupTranslationLink()
