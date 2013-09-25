@@ -39,7 +39,7 @@ function checkSelfIntersection(polygon) {
     var outer = polygon.components[0].components;
     var segments = [];
     for(var i=1;i<outer.length;i++) {
-      var segment= new OpenLayers.Geometry.LineString([outer[i-1].clone(),outer  [i].clone()]);
+      var segment= new OpenLayers.Geometry.LineString([outer[i-1].clone(),outer[i].clone()]);
       segments.push(segment);
     }
     for(var j=0;j<segments.length;j++) {
