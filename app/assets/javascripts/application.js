@@ -6,8 +6,8 @@
 //= require leaflet.draw
 //= require Leaflet.Bing
 //= require jQuery.XDomainRequest
-////= require underscore.1.4.4
-////= require backbone.1.0.0
+//= require underscore.1.4.4
+//= require backbone.1.0.0
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/blue_carbon
