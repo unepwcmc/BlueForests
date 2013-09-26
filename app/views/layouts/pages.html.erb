@@ -21,7 +21,7 @@
 </head>
 <body class="<%= @background %>">
   <div class="page">
-    <header class="<%= @bg_colour %>">
+    <header dir="ltr" class="<%= @bg_colour %>">
       <div class="inner">
         <div id="home" class="banner <%= @active %>">
           <img src="/assets/blue_carbon_logo.png">
@@ -43,7 +43,7 @@
       </div>
     </header>
   <%= yield %>
-    <footer>
+    <footer dir="ltr">
       <div class="inner">
         <div id="attributions">
           The Abu Dhabi Blue Carbon Geotoolkit was developed by

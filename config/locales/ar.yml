@@ -254,4 +254,34 @@ ar:
   analysis:
     buttons:
       draw_polygon: "رسم مضلع"
-      draw_another_polygon: "رسم مضلع آخر"
+      draw_another_polygon: "ارسم مُضلّع آخر"
+    delete_this_area: "احذف هذه المنطقة"
+    area: "المنطقة"
+    area_ha: "مساحة  (الموئل)"
+    area_percentage: "مساحة (نسبتها من إجمالي مساحة الموئل)"
+    c_stock: "مخزون الكربون"
+    total_area: "إجمالي المساحة"
+    total_carbon_stock: "إجمالي مخزون الكربون"
+    total_size_area_interest: "إجمالي مساحة المنطقة الواقعة ضمن دائرة اهتمامك بالكيلومتر المربّع"
+    equivalent_per_capita_CO2_emissions: "انبعاثات ثاني أكسيد الكربون المقابلة لكل فرد"
+    years: "الأعوام"
+    polygons_in_this_area: "المُضلّعات في هذه المنطقة"
+    habitat: "الموئل"
+    mangrove: "أشجار القرم"
+    algal_mat: "المسطحات الطحلبية"
+    seagrass: "الأعشاب البحرية"
+    saltmarsh: "السبخات الملحية"
+    sabkha: "سبخات"
+    share_your_work: "شارِك عملك"
+    export_your_report: "قدّم تقريرك"
+    tooltips:
+      tot_area_tip: "إجمالي مساحة المنطقة الواقعة ضمن دائرة اهتمامك بالكيلومتر المربّع."
+      ca_stock_tip: "The total above and below ground carbon stock of all project habitats with your Area of Interest."
+      co2_pc_emis_tip: "تحويل قيمة إجمالي مخزون الكربون في المنطقة الواقعة ضمن دائرة اهتمامك لثاني أكسيد الكربون، والذي سيتمّ تمثيله من خلال انبعاثات ثاني أكسيد الكربون الصادرة عن المواطن الإماراتي بالأيام أو السنين."
+      habitat_tip: "مقدار كل موئل ضمن المنطقة التي تقع ضمن  دائرة اهتمامك والمُعبّر عنها بالكيلومتر المربّع وبنسبة مئوية من إجمالي مساحة الموئل المُحدّد. أمّا مخزونات الكربون الموجودة في الموئل فسيشار إليها بالأطنان المترية."
+
+
+
+
+
+

@@ -19,8 +19,15 @@
 
   <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag "opentip.css" %>
+  <%= stylesheet_link_tag "application" %>
 
-  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "polyglot" %>
+  <script>
+    var polyglot = new Polyglot({
+      phrases: <%= raw @phrases.to_json %>,
+      locale: "<%= I18n.locale %>"
+    });
+  </script>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -89,11 +96,6 @@
       })
     }(window.jQuery)
   </script>
-  <script>
-    var polyglot = new Polyglot({
-      phrases: <%= raw @phrases.to_json %>,
-      locale: "<%= I18n.locale %>"
-    });
-  </script>
+
 </body>
 </html>

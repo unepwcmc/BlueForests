@@ -8,16 +8,20 @@ class Backbone.Views.AreaResultsView extends Backbone.View
     'click .share': 'toggleSharePopover'
 
   TOOLTIP_DATA: 
-    tot_area_tip: "The total size of your Area of Interest in km2."
-    ca_stock_tip: "The total above and below ground carbon stock of all project habitats with your Area of Interest."
-    co2_pc_emis_tip: "A conversion of the Total Carbon Stock value of your Area of Interest to CO2, which is then represented as days/years CO2 emissions of an average UAE citizen." #,  based on (XXXXX Global Earth Initiative ?)
-    habitat_tip: "Size of each habitat within your Area of Interest listed out in hectares and as a percentage of the overall habitat. Carbon stock per habitat in metric tonnes."
+    tot_area_tip: polyglot.t("analysis.tooltips.tot_area_tip")
+    ca_stock_tip: polyglot.t("analysis.tooltips.ca_stock_tip")
+    co2_pc_emis_tip: polyglot.t("analysis.tooltips.co2_pc_emis_tip")
+    habitat_tip: polyglot.t("analysis.tooltips.habitat_tip")
 
-
+  getTextDirection: ->
+    if polyglot.locale() == "en"
+      return "ltr"
+    "rtl"
+    
   initialize: (options) ->
     "I am in the AreaResultsView initializer!"
     @area = options.area
-    #@area.on('change', @render) ##
+    @textDirection = @getTextDirection()
     @area.app.on('syncStarted', @render)
     @area.app.on('syncFinished', @render)
 
@@ -54,8 +58,8 @@ class Backbone.Views.AreaResultsView extends Backbone.View
         _.each habitats, (habitat) ->
           # TODO actually remove other from calculations
           return if "#{habitat.habitat}" is 'null' or "#{habitat.habitat}" is 'other'
-          results.habitats[habitat.habitat] ||= {}
-          results.habitats[habitat.habitat][operation] = habitat[operation]
+          results.habitats[polyglot.t("analysis.#{habitat.habitat}")] ||= {}
+          results.habitats[polyglot.t("analysis.#{habitat.habitat}")][operation] = habitat[operation]
 
       results.sum.area = getResultByName("Total Area")
       results.sum.carbon = getResultByName("Total Carbon")
@@ -93,5 +97,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
         fixed: true
         background: "#fff"
         borderColor: "#384658"
+        #showOn: "creation"  # For debugging
+        className: @getTextDirection()
       new Opentip(el, value, options)
 

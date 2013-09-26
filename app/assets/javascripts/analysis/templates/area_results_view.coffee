@@ -11,7 +11,7 @@ window.JST['area_results_view'] = _.template("""
         <table class="table total-stats">
           <thead>
             <tr>
-              <th>Total Carbon Stock <sup class="tip" id="ca_stock_tip"></sup></th>
+              <th dir="<%= this.textDirection %>" ><%= polyglot.t("analysis.total_carbon_stock") %><sup class="tip" id="ca_stock_tip"></sup></th>
             </tr>
           </thead>
           <tbody>
@@ -24,7 +24,7 @@ window.JST['area_results_view'] = _.template("""
         <table class="table total-stats">
           <thead>
             <tr>
-              <th>Total Area <sup class="tip" id="tot_area_tip"></sup></th>
+              <th dir="<%= this.textDirection %>><%= polyglot.t("analysis.total_area") %> <sup class="tip" id="tot_area_tip"></sup></th>
             </tr>
           </thead>
           <tbody>
@@ -32,7 +32,7 @@ window.JST['area_results_view'] = _.template("""
           </tbody>
         </table>
 
-        <h4>Equivalent per capita CO<sup>2</sup> emissions  <sup class="tip" id="co2_pc_emis_tip"></sup></h4>
+        <h4 dir="<%= this.textDirection %>" ><%= polyglot.t("analysis.equivalent_per_capita_CO2_emissions") %> <sup class="tip" id="co2_pc_emis_tip"></sup></h4>
         <table class="table human-stats">
           <tbody>
             <tr>
@@ -43,18 +43,18 @@ window.JST['area_results_view'] = _.template("""
           </tbody>
         </table>
 
-        <h4>Polygons in this area<sup class="tip" id="habitat_tip"></sup></h4>
+        <h4 dir="<%= this.textDirection %>" ><%= polyglot.t("analysis.polygons_in_this_area") %> <sup class="tip" id="habitat_tip"></sup></h4>
         <table class="table polygon-stats">
           <tbody>
             <tr>
-              <td>Habitat</td>
-              <td>Area <span>ha</sup></span></td>
-              <td>Area <span>% of Tot.</span></td>
-              <td title="Carbon Stock">C-Stock <span>T</span></td>
+              <td><%= polyglot.t("analysis.habitat") %></td>
+              <td dir="<%= this.textDirection %>"><%= polyglot.t("analysis.area_ha") %></td>
+              <td dir="<%= this.textDirection %>"><%= polyglot.t("analysis.total_area") %></td>
+              <td dir="<%= this.textDirection %>" title="Carbon Stock"><%= polyglot.t("analysis.c_stock") %></td>
             </tr>
             <% _.each(results.habitats, function(attributes, key) { %>
               <tr>
-                <td><%= key %></td>
+                <td dir="<%= this.textDirection %>" ><%= key %></td>
                 <td><%= roundToDecimals(attributes.area_km2, 2) %></td>
                 <td><%= roundToDecimals(attributes.habitat_percentage, 2) %></td>
                 <td><%= Math.ceil(attributes.carbon) %></td>
@@ -68,8 +68,8 @@ window.JST['area_results_view'] = _.template("""
             <h5>Share your work with this link</h5>
             <input type="text" value="http://bluecarbon.unep-wcmc.org/<%= polyglot.locale() %>/layout/#/analysis/<%= area.get('id') %>">
           </div>
-          <a class="btn btn-primary share">Share your work</a>
-          <a href="<%= window.pica.config.magpieUrl %>/areas_of_interest/<%= area.get('id') %>.csv" class="btn btn-primary export">Export your report</a>
+          <a dir="<%= this.textDirection %>" class="btn btn-primary share"><%= polyglot.t("analysis.share_your_work") %></a>
+          <a dir="<%= this.textDirection %>" href="<%= window.pica.config.magpieUrl %>/areas_of_interest/<%= area.get('id') %>.csv" class="btn btn-primary export"><%= polyglot.t("analysis.export_your_report") %></a>
         </div>
       <% } %>
     <% } %>

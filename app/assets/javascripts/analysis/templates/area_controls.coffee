@@ -1,7 +1,7 @@
 window.JST ||= {}
 
 window.JST['area_controls'] = _.template("""
-  <a href="#" id="delete-area">Delete this area</a>
+  <a dir="<%= this.textDirection %>" href="#" id="delete-area"><%= polyglot.t("analysis.delete_this_area") %></a>
 
   <div class="new-polygon-container">
     <% if (area.polygons.length > 0) { %>
