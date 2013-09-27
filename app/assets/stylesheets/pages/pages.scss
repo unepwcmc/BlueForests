@@ -113,6 +113,8 @@ body.matted {
     .inner { @include container; }
     height: 500px;
     background-image: url(/assets/pages/homepage-map.jpg);
+    background-repeat: no-repeat;
+    background-position: center 10%;
     color: #fff;
     text-align: center;
   }
