@@ -197,7 +197,10 @@ body.matted {
     }
     margin-top: 40px;
     p.light-blue {
-      padding-bottom: 15px;
+      padding-bottom: 20px;
+    }
+    p.light-blue.ar {
+      padding-bottom: 37px;
     }
     p.light-blue.doubble {
       padding-bottom: 0;
@@ -255,6 +258,10 @@ body.matted {
 
   span.light-blue, p.light-blue {
     color: $light-blue;
+  }
+
+  .light-blue.ar {
+    font-size: 1.6em;
   }
 
 
