@@ -28,6 +28,8 @@ class AnalysisController < ApplicationController
         "analysis.equivalent_per_capita_CO2_emissions"),
       "analysis.years"=> I18n.t(
         "analysis.years"),
+      "analysis.days"=> I18n.t(
+        "analysis.days"),
       "analysis.polygons_in_this_area"=> I18n.t(
         "analysis.polygons_in_this_area"),
       "analysis.habitat"=> I18n.t(

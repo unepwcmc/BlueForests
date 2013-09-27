@@ -400,8 +400,9 @@ $default-text-color-light: #adadad;
   background-size: 10px 10px;
 }
 
-.style-rtl{
+.style-rtl, th.rtl, td.rtl {
   direction: rtl;
+  text-align: right;
 }
 
 

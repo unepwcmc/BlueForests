@@ -11,12 +11,12 @@ window.JST['area_results_view'] = _.template("""
         <table class="table total-stats">
           <thead>
             <tr>
-              <th dir="<%= this.textDirection %>" ><%= polyglot.t("analysis.total_carbon_stock") %><sup class="tip" id="ca_stock_tip"></sup></th>
+              <th class="<%= this.textDirection %>" ><%= polyglot.t("analysis.total_carbon_stock") %><sup class="tip" id="ca_stock_tip"></sup></th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><%= roundToDecimals(results.sum.carbon, 2) %> <span>T</span></td>
+              <td class="<%= this.textDirection %>"><%= roundToDecimals(results.sum.carbon, 2) %> <span>T</span></td>
             </tr>
           </tbody>
         </table>
@@ -24,11 +24,11 @@ window.JST['area_results_view'] = _.template("""
         <table class="table total-stats">
           <thead>
             <tr>
-              <th dir="<%= this.textDirection %>><%= polyglot.t("analysis.total_area") %> <sup class="tip" id="tot_area_tip"></sup></th>
+              <th class="<%= this.textDirection %>"><%= polyglot.t("analysis.total_area") %> <sup class="tip" id="tot_area_tip"></sup></th>
             </tr>
           </thead>
           <tbody>
-            <td><%= roundToDecimals(results.sum.area, 2) %> <span>km<sup>2</sup></span></td>
+            <td class="<%= this.textDirection %>"><%= roundToDecimals(results.sum.area, 2) %> <span>km<sup>2</sup></span></td>
           </tbody>
         </table>
 
@@ -36,7 +36,7 @@ window.JST['area_results_view'] = _.template("""
         <table class="table human-stats">
           <tbody>
             <tr>
-              <td>
+              <td class="<%= this.textDirection %>">
                 <%= results.sum.human_emissions %>
               </td>
             </tr>

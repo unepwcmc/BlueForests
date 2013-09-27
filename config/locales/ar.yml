@@ -265,6 +265,7 @@ ar:
     total_size_area_interest: "إجمالي مساحة المنطقة الواقعة ضمن دائرة اهتمامك بالكيلومتر المربّع"
     equivalent_per_capita_CO2_emissions: "انبعاثات ثاني أكسيد الكربون المقابلة لكل فرد"
     years: "الأعوام"
+    days: "أيام"
     polygons_in_this_area: "المُضلّعات في هذه المنطقة"
     habitat: "الموئل"
     mangrove: "أشجار القرم"
