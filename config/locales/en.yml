@@ -217,7 +217,7 @@ en:
     total_area: "Area <span>% of Tot.</span>"
     total_carbon_stock: "Total Carbon Stock"
     total_size_area_interest: "The total size of your Area of Interest in km2"
-    equivalent_per_capita_CO2_emissions: "Equivalent per capita CO2 emissions"
+    equivalent_per_capita_CO2_emissions: "Equivalent per capita CO<sub>2</sub> emissions"
     years: "years"
     days: "days"
     polygons_in_this_area: "Polygons in this area"
@@ -232,5 +232,5 @@ en:
     tooltips:
       tot_area_tip: "The total size of your Area of Interest in km2."
       ca_stock_tip: "The total above and below ground carbon stock of all project habitats with your Area of Interest."
-      co2_pc_emis_tip: "A conversion of the Total Carbon Stock value of your Area of Interest to CO2, which is then represented as days/years CO2 emissions of an average UAE citizen."
+      co2_pc_emis_tip: "A conversion of the Total Carbon Stock value of your Area of Interest to CO<sub>2</sub>, which is then represented as days/years CO2 emissions of an average UAE citizen."
       habitat_tip: "Size of each habitat within your Area of Interest listed out in hectares and as a percentage of the overall habitat. Carbon stock per habitat in metric tonnes."
