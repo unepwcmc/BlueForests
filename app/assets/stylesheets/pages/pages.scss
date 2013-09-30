@@ -2,9 +2,11 @@
 @import "sassy-buttons";
 
 $dark-blue: #2b3038;
+$dark-gray: #373737;
 $light-blue: #259dd7; //#384658;
 $green-light: #bdd455;
 $green-dark: #9eb436;
+$corporate-green: #6dad67;
 $orange-light: #f2964c;
 $orange-dark: #d2752c;
 $gray-background: #ededed;
@@ -65,22 +67,42 @@ body.matted {
   .banner, .content { @include container; }
 
   header {
-    .inner { @include container; }
-    padding-top: 1.5em;
-    padding-bottom: 1.2em;
+    background-color: $corporate-green;
+    .outer {
+      height: 1.3em;
+      background-color: #fff;
+    }
+    .inner { 
+      @include container; 
+      height: 84px;
+      position: relative;
+      img {
+        position: absolute;
+      }
+      img.one {
+        top: -13px;
+      }
+      img.two {
+        top: 0;
+      }
+    }
+    margin-top: 0;
+    margin-bottom: 0;
     a {
       text-decoration: none;
-      color: #000;
+      color: $dark-gray;
       padding-top: 25px;
     }
     #about.about a, #help.help a {
-      color: $green-dark;
+      color: #fff;
     }
   }
 
   header.white {
     background-color: #fff;
   }
+
+
 
   .banner { 
     @include span-columns(5,$total-columns);
@@ -220,7 +242,7 @@ body.matted {
 
   a.button {
     //@include sassy-button(gradient-style, border-radius, font-size, first-color, second-color, text-color, text-style, auto-states)
-    @include sassy-button("matte", 6px, 1em, $green-dark, $green-dark, #fff, "inset");
+    @include sassy-button("matte", 6px, 1em, $corporate-green, $corporate-green, #fff, "inset");
     margin: 16px 0;
   }
 

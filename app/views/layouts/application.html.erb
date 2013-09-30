@@ -41,7 +41,11 @@
           <span class="icon-bar"></span>
         </a>
 
-        <h1><%= link_to "The Blue Carbon Assessment Tool", home_path, :class =>"homepage-banner" %></h1>
+        
+          <%= link_to home_path, :class => 'homepage-banner' do %>
+            <img class="one" src="/assets/header-1.png">
+          <% end %>
+        
 
         <ul class="nav pull-right">
           <li><%= link_to "HELP", help_path %></li>

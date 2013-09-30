@@ -21,13 +21,13 @@
 </head>
 <body class="<%= @background %>">
   <div class="page">
-    <header dir="ltr" class="<%= @bg_colour %>">
+    <header dir="ltr">
+      <div class="outer"></div>
       <div class="inner">
         <div id="home" class="banner <%= @active %>">
-          <img src="/assets/blue_carbon_logo.png">
-        <%= link_to home_path, :class => 'homepage-banner' do %>
-          The Blue Carbon Assessment Tool
-        <% end %>
+          <%= link_to home_path, :class => 'homepage-banner' do %>
+            <img class="one" src="/assets/header-1.png">
+          <% end %>
         </div>
         <div class="nav">
           <div id="help" class="<%= @active %>"><%= link_to "HELP", help_path %></div>
@@ -39,6 +39,7 @@
               <%= link_to "ENGLISH", :locale=>'en'%>
             <%end%>
           </div>
+          <img class="two" src="/assets/header-2.png">
         </div>
       </div>
     </header>
