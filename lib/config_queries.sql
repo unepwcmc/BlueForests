@@ -62,7 +62,7 @@ SELECT a.the_geom, a.habitat, c_mg_ha FROM (
         FROM bc_mangrove mngr
         LEFT JOIN carbon_values b
     ON (mngr.habitat = b.habitat AND mngr.density = b.density_code AND mngr.age = b.age_code AND mngr.condition = b.condition_code)
-    WHERE toggle = true and action <> 'delete' and phase <> 0 AND mngr.density IS NOT NULL AND mngr.density <> 0 AND mngr.age IS NOT NULL AND mngr.age <> 0 AND mngr.condition IS NOT NULL AND mngr.density <> 0 
+    WHERE toggle = true and action <> 'delete' and phase <> 0 AND mngr.density IS NOT NULL AND mngr.age IS NOT NULL AND mngr.condition IS NOT NULL
    UNION ALL
 
     -- Saltmarsh edited values with density
@@ -91,7 +91,7 @@ SELECT a.the_geom, a.habitat, c_mg_ha FROM (
   FROM bc_mangrove mngr
   LEFT JOIN carbon_values b
   ON mngr.habitat = b.habitat
-  WHERE  (toggle = true AND action <> 'delete') AND (phase = 0 OR mngr.density IS NULL OR mngr.density = 0 OR mngr.age IS NULL OR mngr.age = 0 OR mngr.condition IS NULL or mngr.condition = 0) AND b.standard_value_habitat = TRUE
+  WHERE  (toggle = true AND action <> 'delete') AND (phase = 0 OR mngr.density IS NULL OR mngr.age IS NULL OR mngr.condition IS NULL ) AND b.standard_value_habitat = TRUE
   UNION ALL
   SELECT sltm.the_geom, sltm.habitat, c_mg_ha
     FROM bc_saltmarsh sltm
