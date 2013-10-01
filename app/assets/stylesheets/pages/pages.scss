@@ -105,6 +105,9 @@ body.matted {
       position: relative;
       z-index: 2;
     }
+    a:hover {
+      color: #fff;
+    }
     #about.about a, #help.help a {
       color: #fff;
     }
