@@ -1,8 +1,11 @@
 @import "bootstrap-variables";
+@import "sassy-buttons";
 
 $border: lighten($gray, 10%) !default;
 $default-text-color: #353938;
 $default-text-color-light: #adadad;
+$corporate-green: #6dad67;
+
 
 #sidebar.analysis {
   overflow: auto;
@@ -408,6 +411,14 @@ $default-text-color-light: #adadad;
   direction: rtl;
   text-align: right;
 }
+
+//button, a.button {
+//  $sb-padding: 0.1em 0.5em !default;
+//  //@include sassy-button(gradient-style, border-radius, font-size, first-color, second-color, text-color, text-style, auto-states)
+//  @include sassy-button("matte", 3px, 1em, $corporate-green-light, $corporate-green-dark, #fff, "None");
+//  @include sassy-button-structure(3px, 1em, 0.3em 1.1em);
+//}
+
 
 
 
