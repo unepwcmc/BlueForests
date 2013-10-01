@@ -30,6 +30,7 @@
           <% end %>
         </div>
         <div class="nav">
+          <div id="tool" class="<%= @active %>"><%= link_to "TOOL", layout_path %></div>
           <div id="help" class="<%= @active %>"><%= link_to "HELP", help_path %></div>
           <div id="about" class="<%= @active %>"><%= link_to "ABOUT", about_path %></div>
           <div id="language" class="<%= @active %>">
@@ -40,6 +41,7 @@
             <%end%>
           </div>
           <img class="two" src="/assets/header-2.png">
+          <a class="agedi" href="http://www.agedi.ae" target="_blank">AGEDI.ae</a>
         </div>
       </div>
     </header>

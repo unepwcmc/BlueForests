@@ -100,13 +100,21 @@ body {
     }
 
     img {
-      position: absolute;
+      position: absolute !important;
     }
     img.one {
       top: 3px;
     }
     img.two {
-      top: 0;
+      right: 2px;
+    }
+    a.agedi {
+      position: absolute;
+      right: 24px;
+      top: 10px;
+      color: $corporate-green;
+      font-size: 1.4em;
+      //font-weight: bold;
     }
 
   }
