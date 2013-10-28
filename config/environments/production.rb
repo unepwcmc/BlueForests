@@ -48,7 +48,7 @@ BlueCarbon::Application.configure do
   
   config.serve_static_assets = true
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( opentip.css leaflet.ie.css leaflet.draw.ie.css pages.css pages.js)
+  config.assets.precompile += %w( opentip.css leaflet.ie.css leaflet.draw.ie.css pages.css pages.js polyglot.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
