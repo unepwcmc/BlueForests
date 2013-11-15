@@ -74,6 +74,10 @@ body {
     padding-left: 25px;
   }
 
+  .dropdown li {
+    padding-left: 0;
+  }
+
   .nav > li > a {
     padding-top: 43px;
     color: $black;
@@ -156,8 +160,6 @@ footer.navbar {
 
   .links {
     margin-top: 15px;
-    
-    //text-transform: uppercase;
     color: $black;
 
     a {
@@ -180,7 +182,6 @@ footer.navbar {
   }
 
   ul.dropdown-menu a {
-    text-transform: none;
     color: black;
     &:hover {
       color: $white;

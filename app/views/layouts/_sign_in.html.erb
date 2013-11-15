@@ -5,8 +5,7 @@
       <li><%= link_to "Admin", validations_path %></li>
       <li><%= link_to "My Account", edit_admin_path(current_admin) %></li>
       <li class="divider"></li>
-      <%# see: http://archive.railsforum.com/viewtopic.php?id=38460 for use of button %>
-      <li><%= button_to "Logout", destroy_admin_session_path, method: :delete %></li>
+      <li><%= link_to "Logout", destroy_admin_session_path, method: :delete %></li>
     </ul>
   </li>
 <% else %>

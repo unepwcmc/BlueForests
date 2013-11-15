@@ -18,43 +18,43 @@
   <![endif]-->
 
   <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag "pages/bootstrap" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-fluid">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-        <%= link_to "BlueCarbon", root_path, :class => "brand" %>
-        <div class="nav-collapse">
-          <ul class="nav">
-            <%= content_tag(:li, link_to("Validations", validations_path), class: params[:controller] == 'validations' ? 'active' : nil) if can? :read, Validation %>
-            <%= content_tag(:li, link_to("Users", admins_path), class: params[:controller] == 'admins' ? 'active' : nil) if can? :manage, Admin %>
-            <%= content_tag(:li, link_to("iPad Admin", areas_path), class: params[:controller] == 'areas' ? 'active' : nil) if can? :read, Area %>
-          </ul>
-          <ul class="nav pull-right">
-            <% if admin_signed_in? %>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= truncate("#{current_admin.email}") %> <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "My Account", edit_admin_path(current_admin) %></li>
-                  <li class="divider"></li>
-                  <li><%= link_to "Logout", destroy_admin_session_path, method: :delete %></li>
-                </ul>
-              </li>
-            <% else %>
-              <li><%= link_to 'Login', new_admin_session_path %></li>
-            <% end %>
-          </ul>
-        </div>
+        <%= link_to home_path, :class => 'homepage-banner' do %>
+          <img class="one" src="/assets/header-1.png">
+        <% end %>
+
+        <ul class="nav pull-right">
+          <%= content_tag(:li, link_to("Validations", validations_path), class: params[:controller] == 'validations' ? 'active' : nil) if can? :read, Validation %>
+          <%= content_tag(:li, link_to("Users", admins_path), class: params[:controller] == 'admins' ? 'active' : nil) if can? :manage, Admin %>
+          <%= content_tag(:li, link_to("iPad Admin", areas_path), class: params[:controller] == 'areas' ? 'active' : nil) if can? :read, Area %>
+
+          <% if admin_signed_in? %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= truncate("#{current_admin.email}") %> <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "My Account", edit_admin_path(current_admin) %></li>
+                <li class="divider"></li>
+                <li><%= link_to "Logout", destroy_admin_session_path, method: :delete %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to 'Login', new_admin_session_path %></li>
+          <% end %>
+        </ul>
+        <img class="two" src="/assets/header-2.png">
+        <a class="agedi" href="http://www.agedi.ae" target="_blank">AGEDI.ae</a>
       </div>
     </div>
   </div>
+
   <div class="container">
     <% flash.each do |name, msg| %>
       <% if msg.is_a?(String) %>
@@ -64,11 +64,15 @@
         </div>
       <% end %>
     <% end %>
+
     <%= yield %>
+
     <div id='footer'>
       <%= image_tag 'agedi_logo.png', size: "150x43" %>
     </div>
   </div>
+
+  <%= javascript_include_tag "polyglot" %>
   <script>
     var polyglot = new Polyglot({
       phrases: <%= raw @phrases.to_json %>,

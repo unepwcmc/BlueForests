@@ -20,6 +20,7 @@
   <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag "opentip.css" %>
   <%= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "pages/bootstrap" %>
 
   <%= javascript_include_tag "polyglot" %>
   <script>
@@ -35,14 +36,10 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-fluid">
-        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </a>
-          <%= link_to home_path, :class => 'homepage-banner' do %>
-            <img class="one" src="/assets/header-1.png">
-          <% end %>
+        <%= link_to home_path, :class => 'homepage-banner' do %>
+          <img class="one" src="/assets/header-1.png">
+        <% end %>
+
         <ul class="nav pull-right">
           <li><%= link_to "HELP", help_path %></li>
           <li><%= link_to "ABOUT", about_path %></li>
