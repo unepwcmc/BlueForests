@@ -135,15 +135,6 @@ body {
   }
 }
 
-::selection {
-  background: #384658; /* Safari */
-}
-
-::-moz-selection {
-  background: #384658; /* Firefox */
-}
-
-
 footer.navbar {
   border: 0;
   border-top: 1px solid $gray;
