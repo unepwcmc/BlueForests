@@ -25,32 +25,6 @@ $grid-padding   : $gutter-width;
 $break: 12;
 $big: 10em;
 
-//$container-style: fluid;
-
-//div { border: 1px solid black }
-
-//.page {
-//  @include container($total-columns, $break);
-//  
-//}
-//
-//@include at-breakpoint($break) {
-//  .banner { @include prefix(2,$break); }
-//  .pagenav { @include span-columns(2,$break); }
-//}
-
-//.page {
-//  // Establish our default 4-column grid container.
-//  @include container;
-//
-//  // Create a media-query breakpoint at a min-width of 30em
-//  // And use a larger 8-column grid within that media-query.
-//  @include at-breakpoint(30em $break) {
-//    // Establish our new 8-column container.
-//    @include container;
-//  }
-//}
-
 body {
   background-color: $gray-background;
 }
@@ -75,7 +49,7 @@ body.matted {
   header {
     background-color: $corporate-green;
     .outer {
-      height: 1.3em;
+      height: 13px;
       background-color: #fff;
     }
     .inner { 
@@ -131,14 +105,13 @@ body.matted {
     padding-left: 3px;
     padding-top: 3px;
   }
-  .nav { 
-    //@include susy-grid-background;  // For debugging
+
+  .nav {
     @include span-columns(6 omega,$total-columns);
     #tool {
       @include span-columns(2,12);
     }
     #help { 
-      //@include prefix(3);
       @include span-columns(2,12);
     }
     #about { @include span-columns(2,12); }
@@ -146,8 +119,9 @@ body.matted {
       @include suffix(4);
       @include span-columns(2 omega,12);
     }
+
     font-size: 1em;
-    margin-top: 29px;
+    margin-top: 35px;
     text-align: right;
     text-align: center;
   }
@@ -271,7 +245,6 @@ body.matted {
   font-family: 'Montserrat', Arial, 'Helvetica Neue', sans-serif;
 
   a.button {
-    //@include sassy-button(gradient-style, border-radius, font-size, first-color, second-color, text-color, text-style, auto-states)
     @include sassy-button("matte", 6px, 1em, $corporate-green-light, $corporate-green-dark, #fff, "inset");
     margin: 16px 0;
   }
