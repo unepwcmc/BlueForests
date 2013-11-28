@@ -11,5 +11,5 @@ The app is deployed to a EC2 ubuntu instance. The deploy script is setup to depl
 
     Host raster-stats
     User <- server username ->
-    HostName blue-carbon.unep-wcmc.org
+    HostName bluecarbon.unep-wcmc.org
     IdentityFile <- EC2 pem key location ->
