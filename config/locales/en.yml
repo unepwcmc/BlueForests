@@ -232,6 +232,7 @@ en:
     days: "days"
     polygons_in_this_area: "Polygons in this area"
     habitat: "Habitat"
+    ecosystem: "Ecosystem"
     mangrove: "Mangroves"
     algal_mat: "Algal Mats"
     seagrass: "Seagrass"
@@ -251,4 +252,5 @@ en:
       start_drawing: "Click to start drawing shape"
       continue_drawing: "Click to continue drawing shape"
       close_shape: "Click first point to close this shape"
+    empty_result: "Your AOI doesn't intersect with any known ecosystems."
 

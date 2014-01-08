@@ -278,6 +278,7 @@ ar:
     days: "أيام"
     polygons_in_this_area: "المُضلّعات في هذه المنطقة"
     habitat: "الموئل"
+    ecosystem: "النظم الإيكولوجية"
     mangrove: "أشجار القرم"
     algal_mat: "المسطحات الطحلبية"
     seagrass: "الأعشاب البحرية"
@@ -297,6 +298,7 @@ ar:
       start_drawing: "انقر لبدء رسم شكل"
       continue_drawing: "انقر لمواصلة رسم الشكل"
       close_shape: "انقر على النقطة الأولى لإغلاق هذا الشكل"
+    empty_result: "Your AOI doesn't intersect with any known ecosystems."
 
 
 

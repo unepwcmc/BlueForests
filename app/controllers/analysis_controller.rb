@@ -40,6 +40,8 @@ class AnalysisController < ApplicationController
         "analysis.polygons_in_this_area"),
       "analysis.habitat"=> I18n.t(
         "analysis.habitat"),
+      "analysis.ecosystem"=> I18n.t(
+        "analysis.ecosystem"),
       "analysis.mangrove"=> I18n.t(
         "analysis.mangrove"),
       "analysis.algal_mat"=> I18n.t(
@@ -73,7 +75,10 @@ class AnalysisController < ApplicationController
       "analysis.click.continue_drawing"=> I18n.t(
         "analysis.click.continue_drawing"),
       "analysis.click.close_shape"=> I18n.t(
-        "analysis.click.close_shape")
+        "analysis.click.close_shape"),
+      "analysis.empty_result"=> I18n.t(
+        "analysis.empty_result")
+
     }
   end
 

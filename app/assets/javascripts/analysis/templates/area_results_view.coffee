@@ -6,7 +6,7 @@ window.JST['area_results_view'] = _.template("""
     <% } else { %>
     <% if (!_.isEmpty(results)) { %>
       <% if (_.isEmpty(results.habitats)) { %>
-        Your AOI doesn't intersect with any known habitats.
+        <%= polyglot.t("analysis.empty_result") %>
       <% } else { %>
         <table class="table total-stats">
           <thead>
@@ -47,7 +47,7 @@ window.JST['area_results_view'] = _.template("""
         <table class="table polygon-stats">
           <tbody>
             <tr>
-              <td><%= polyglot.t("analysis.habitat") %></td>
+              <td><%= polyglot.t("analysis.ecosystem") %></td>
               <td dir="<%= this.textDirection %>"><%= polyglot.t("analysis.area_ha") %></td>
               <td dir="<%= this.textDirection %>"><%= polyglot.t("analysis.total_area") %></td>
               <td dir="<%= this.textDirection %>" title="Carbon Stock"><%= polyglot.t("analysis.c_stock") %></td>
