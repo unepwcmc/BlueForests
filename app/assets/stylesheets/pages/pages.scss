@@ -209,6 +209,21 @@ body.matted {
       @include span-columns($total-columns,$total-columns);
       h3 { margin-bottom: 0; }
     }
+
+    .ecosystems h3 {
+      h3 { margin-bottom: 0; }
+    }
+
+    #blue-carbon-ecosystem {
+      @include span-columns(3, 5);
+    }
+    #associated-ecosystem {
+      @include span-columns(1,5);
+    }
+    #candidate-ecosystem {
+      @include span-columns(1 omega, 5);
+    }
+
     .left {
       @include span-columns(6,$total-columns);
     }
