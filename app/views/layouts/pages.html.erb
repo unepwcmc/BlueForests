@@ -30,9 +30,9 @@
           <% end %>
         </div>
         <div class="nav">
-          <div id="tool" class="<%= @active %>"><%= link_to "TOOL", layout_path %></div>
-          <div id="help" class="<%= @active %>"><%= link_to "HELP", help_path %></div>
-          <div id="about" class="<%= @active %>"><%= link_to "ABOUT", about_path %></div>
+          <div id="tool" class="<%= @active %>"><%= link_to t('tool'), layout_path %></div>
+          <div id="help" class="<%= @active %>"><%= link_to t('help'), help_path %></div>
+          <div id="about" class="<%= @active %>"><%= link_to t('about'), about_path %></div>
           <div id="language" class="<%= @active %>">
             <% if I18n.locale == I18n.default_locale %>
               <%= link_to "عربي/عربى", :locale=>'ar'%>
@@ -49,7 +49,7 @@
     <footer dir="ltr">
       <div class="inner">
         <div id="attributions">
-          The Abu Dhabi Blue Carbon Geotoolkit was developed by <br>
+          <%= t('developed_by') %> <br>
           <a href="http://www.agedi.ae">
             <img src="/assets/agedi_group_logo.png" alt="Supporters" class="img-footer-supporters">
           </a>
@@ -64,7 +64,7 @@
           </a>
         </div>
         <div id="authentication" class="navbar"><%= render "layouts/sign_in" %></div>
-        <div id="contact"><a href="mailto:info@agedi.ae" target="_top">CONTACT</a></div>
+        <div id="contact"><a href="mailto:info@agedi.ae" target="_top"><%= t('contact') %></a></div>
         
       </div>
     </footer>

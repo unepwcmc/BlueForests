@@ -251,6 +251,13 @@ ar:
       <<: *errors
 
   # Blue Carbon stuff
+  tool: الأداة
+  help: مساعدة
+  about: حول الأداة
+  developed_by: "تم تطوير أداة تخطيط الكربون الأزرق في أبوظبي بواسطة"
+  sign_in: "تسجيل الدخول"
+  contact: "تواصل معنا"
+  using_the_tool: "استخدام أداة"
   analysis:
     buttons:
       draw_polygon: "رسم مضلع"

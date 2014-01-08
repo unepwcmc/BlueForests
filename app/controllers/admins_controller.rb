@@ -1,6 +1,5 @@
 class AdminsController < AdminController
   before_filter :authenticate_admin!, except: :me
-  before_filter :set_locale
   load_and_authorize_resource except: :me
 
   # GET /admins/me
@@ -103,9 +102,5 @@ class AdminsController < AdminController
         format.json { render json: @admin.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
   end
 end
