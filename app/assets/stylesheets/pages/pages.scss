@@ -43,6 +43,10 @@ body.matted {
   // For debugging!
   //@include susy-grid-background;
 
+  .upper {
+    text-transform: uppercase;
+  }
+
   // Notice the title and footer sections are out of the 12 columns container
   .banner, .content { @include container; }
 
@@ -217,11 +221,19 @@ body.matted {
     #blue-carbon-ecosystem {
       @include span-columns(3, 5);
     }
+    #blue-carbon-ecosystem.right {
+      @include span-columns(3 omega, 5);
+    }
+
     #associated-ecosystem {
       @include span-columns(1,5);
     }
+    
     #candidate-ecosystem {
       @include span-columns(1 omega, 5);
+    }
+    #candidate-ecosystem.right {
+      @include span-columns(1, 5);
     }
 
     .left {
@@ -230,12 +242,20 @@ body.matted {
     .right {
       @include span-columns(6 omega,$total-columns);
     }
+
     #mangroves, #cyanobacterial_mats, #seagrass, #saltmarshes {
       @include span-columns(1,5);
+    }
+    #mangroves.right {
+      @include span-columns(1 omega,5);
     }
     #sabkha {
       @include span-columns(1 omega,5);
     }
+    #sabkha.right {
+      @include span-columns(1,5);
+    }
+
     margin-top: 40px;
     p.light-blue {
       padding-bottom: 20px;
