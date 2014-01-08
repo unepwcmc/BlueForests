@@ -94,13 +94,13 @@ class Pica.Model extends Pica.Events
       options.url = if @url().create? then @url().create else @url()
       options.type = 'post'
     sync = @sync(options)
-    sync.done => console.log("saving #{@constructor.name} #{@get('id')}")
+    #sync.done => console.log("saving #{@constructor.name} #{@get('id')}")
     sync
     
 
   fetch: (options = {}) =>
     options.url = if @url().read? then @url().read else @url()
-    console.log("fetching #{@constructor.name} #{@get('id')}")
+    #console.log("fetching #{@constructor.name} #{@get('id')}")
     @sync(options)
 
   destroy: (options = {}) =>
@@ -109,7 +109,7 @@ class Pica.Model extends Pica.Events
     originalCallback = options.success
     options.success = =>
       @trigger('delete')
-      console.log("deleted #{@constructor.name} #{@get('id')}")
+      #console.log("deleted #{@constructor.name} #{@get('id')}")
       originalCallback() if originalCallback
       @off()
     @sync(options)
