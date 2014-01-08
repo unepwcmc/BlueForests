@@ -14,7 +14,7 @@ class Backbone.Views.TabsView extends Backbone.View
     @workspace = window.pica.currentWorkspace
 
     @setAreaById(options.areaId) if options.areaId?
-    @workspace.areas[0].setName('Area #1')
+    @workspace.areas[0].setName(polyglot.t("analysis.area_1"))
 
 
   changeTab: (event) ->
@@ -28,8 +28,9 @@ class Backbone.Views.TabsView extends Backbone.View
     if pica.currentWorkspace.areas.length <= 3
       app = window.pica
       area = new Pica.Models.Area(window.pica)
-      area.setName("Area ##{pica.currentWorkspace.areas.length + 1}")
-
+      area.setName(
+        polyglot.t("analysis.area_#{pica.currentWorkspace.areas.length + 1}")
+      )
       @workspace.addArea(area)
       @workspace.setCurrentArea(area)
       @render()

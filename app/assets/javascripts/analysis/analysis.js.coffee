@@ -9,9 +9,9 @@ initializeMap = () ->
     minZoom: 8
     maxZoom: 19
 
-  baseMaps =
-    'Map': baseMap
-    'Satellite': baseSatellite
+  baseMaps = {}
+  baseMaps[polyglot.t('analysis.map')] = baseMap
+  baseMaps[polyglot.t('analysis.satellite')] = baseSatellite
 
   overlayMaps = {}
   habitats = {
@@ -34,8 +34,7 @@ initializeMap = () ->
     """
     url   = "http://carbon-tool.cartodb.com/tiles/bc_#{habitat}/{z}/{x}/{y}.png?sql=#{query}&style=#{style}"
 
-    prettyName = habitat.replace("_", " ")
-    prettyName = prettyName.replace(/\w\S*/g, (t) -> t.charAt(0).toUpperCase() + t.substr(1).toLowerCase())
+    prettyName = polyglot.t("analysis.#{habitat}")
     overlayMaps[prettyName] = L.tileLayer(url).addTo(map)
 
   L.control.layers(baseMaps, overlayMaps).addTo(map)

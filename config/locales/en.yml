@@ -218,6 +218,9 @@ en:
       draw_another_polygon: "Draw another polygon"
     delete_this_area: "Delete this area"
     area: "Area"
+    area_1: "Area # 1"
+    area_2: "Area # 2"
+    area_3: "Area # 3"
     area_ha: "Area <span>ha</sup></span>"
     area_percentage: "Area <span>% of Tot.</span>"
     c_stock: "C-Stock <span>T</span>"
@@ -234,6 +237,9 @@ en:
     seagrass: "Seagrass"
     saltmarsh: "Saltmarshes"
     sabkha: "Sabkha"
+    other: "Other"
+    satellite: "Satellite"
+    map: "Map"
     share_your_work: "Share Your Work"
     export_your_report: "Export Your Report"
     tooltips:
@@ -241,3 +247,8 @@ en:
       ca_stock_tip: "The total above and below ground carbon stock of all project habitats with your Area of Interest."
       co2_pc_emis_tip: "A conversion of the Total Carbon Stock value of your Area of Interest to CO<sub>2</sub>, which is then represented as days/years CO2 emissions of an average UAE citizen."
       habitat_tip: "Size of each habitat within your Area of Interest listed out in hectares and as a percentage of the overall habitat. Carbon stock per habitat in metric tonnes."
+    click:
+      start_drawing: "Click to start drawing shape"
+      continue_drawing: "Click to continue drawing shape"
+      close_shape: "Click first point to close this shape"
+
