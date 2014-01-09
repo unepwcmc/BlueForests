@@ -140,7 +140,6 @@ body.matted {
     @include with-grid-settings(12,4em,1em,1em) {
       .inner { 
         @include container;
-        @include susy-grid-background;
         //$container-style: magic;
   
         .banner { 
@@ -216,7 +215,6 @@ body.matted {
   }
 
   div.title {
-    .inner { @include container; }
     height: 500px;
     background-image: url(/assets/pages/homepage-map.jpg);
     background-repeat: no-repeat;
@@ -357,33 +355,37 @@ body.matted {
   }
 
   footer {
-    .inner { @include container; }
-    #attributions { 
-      //@include susy-grid-background;
-      @include span-columns(8,$break); 
-    }
-    #authentication { 
-      @include span-columns(3,$break); 
-      text-align: right;
-      input[type=submit] {
-        margin-right: 21px;
+    @include with-grid-settings(12,4em,1em,1em) {
+      .inner { 
+        @include container; 
+        @include susy-grid-background;
       }
-    }
-    #contact { 
-      @include span-columns(1 omega,$break); 
-      text-align: right;
-    }
-    height: 150px;
-    background-color: #fff;
-    padding-top: 1.5em;
-    a {
-      text-decoration: none;
-      font-size: 11pt;
-      text-transform: uppercase;
-      color: #000;
-    }
-    li {
-      list-style-type: none;
+      #attributions { 
+        @include span-columns(7,$break); 
+      }
+      #authentication { 
+        @include span-columns(3,$break); 
+        text-align: right;
+        input[type=submit] {
+          margin-right: 21px;
+        }
+      }
+      #contact { 
+        @include span-columns(2 omega,$break); 
+        text-align: right;
+      }
+      height: 150px;
+      background-color: #fff;
+      padding-top: 1.5em;
+      a {
+        text-decoration: none;
+        font-size: 11pt;
+        text-transform: uppercase;
+        color: #000;
+      }
+      li {
+        list-style-type: none;
+      }
     }
   }
 
