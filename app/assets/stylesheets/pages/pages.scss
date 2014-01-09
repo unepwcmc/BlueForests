@@ -255,10 +255,38 @@ body.matted {
 
   // About page
   .content-full {
+    $total-columns-e: 3;
+    $break-e:         5;
     .inner { @include container; }
+    .inner-e { @include container($total-columns, $break); }
     div.full {
       @include span-columns($total-columns,$total-columns);
       h3 { margin-bottom: 0; }
+    }
+
+    @include at-breakpoint(60em) {
+      .core-ecosystems {
+        @include span-columns(3, $break-e);
+        #blue-carbon-ecosystem {
+          @include span-columns(3, 3);
+        }
+        #blue-carbon-ecosystem.right {
+          @include span-columns(3 omega, 3);
+        }
+        #mangroves, #seagrass, #saltmarshes {
+          @include span-columns(1,3);
+        }
+        #mangroves.right {
+          @include span-columns(1 omega, 3);
+        }
+        #saltmarshes {
+          @include span-columns(1 omega, 3);
+        }
+      }
+      .other-ecosystems {
+        @include span-columns(1, $break-e);
+        @include nth-omega(2n);
+      }
     }
 
     .left {
@@ -266,44 +294,6 @@ body.matted {
     }
     .right {
       @include span-columns(6 omega,$total-columns);
-    }
-
-    #core-ecosystems {
-      @include span-columns(3, 5);
-      #blue-carbon-ecosystem {
-        @include span-columns(3, 3);
-      }
-      #blue-carbon-ecosystem.right {
-        @include span-columns(3 omega, 3);
-      }
-      #mangroves, #seagrass, #saltmarshes {
-        @include span-columns(1,3);
-      }
-      #mangroves.right {
-        @include span-columns(1 omega, 3);
-      }
-      #saltmarshes {
-        @include span-columns(1 omega, 3);
-      }
-    }
-    #other-ecosystems {
-      @include span-columns(2 omega, 5);
-      #associated-ecosystem {
-        @include span-columns(1,2);
-      }
-      #candidate-ecosystem {
-        @include span-columns(1 omega, 2);
-      }
-      #candidate-ecosystem.right {
-        @include span-columns(1, 2);
-      }
-      #cyanobacterial_mats, #sabkha {
-        @include span-columns(1,2);
-      }
-      #sabkha {
-        @include span-columns(1 omega,2);
-      }
-       
     }
 
     .ecosystems h3 {
