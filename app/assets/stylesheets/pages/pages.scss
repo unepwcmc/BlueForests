@@ -258,11 +258,15 @@ body.matted {
     $total-columns-e: 3;
     $break-e:         5;
     .inner { @include container; }
-    .inner-e { @include container($total-columns, $break); }
-    div.full {
-      @include span-columns($total-columns,$total-columns);
-      h3 { margin-bottom: 0; }
-    }
+    // with-grid-settings([$<columns>, $<width>, <$gutter>, <$padding>]) { <@content> }
+    @include with-grid-settings(5,12em,1.5em,1em) {
+      .inner-e { 
+        @include container($total-columns, $break); 
+        @include susy-grid-background;
+      }
+    };
+    
+    
 
     @include at-breakpoint(60em) {
       .core-ecosystems {
