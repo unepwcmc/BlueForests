@@ -27,6 +27,84 @@ $big: 10em;
 
 body {
   background-color: $gray-background;
+  font-family: 'Montserrat', Arial, 'Helvetica Neue', sans-serif;
+
+  a.button {
+    @include sassy-button("matte", 6px, 1em, $corporate-green-light, $corporate-green-dark, #fff, "inset");
+    margin: 16px 0;
+  }
+
+  h3 {
+    border-bottom: 1px solid black; 
+  }
+
+  p {
+    font: 10pt Helvetica;
+    line-height: 1.5em;
+  }
+
+  p.footnote, span.i {
+    font-style: italic;
+  }
+
+  div.small p {
+    font-size: 10pt;
+  }
+
+  p.bold {
+    font-weight: bold;
+  }
+
+  p.big-bold {
+    font-weight: bold;
+    font-size: 1.6em;
+    margin-top: 16px;
+    margin-bottom: 45px;
+  }
+
+  span.big {
+    font-size: 1.2em;
+  }
+
+  span.light-blue, p.light-blue {
+    color: $light-blue;
+  }
+
+  .light-blue.ar {
+    font-size: 1.6em;
+  }
+
+
+  #img-mangroves {
+    width: 462px;
+    margin-top: 9px;
+  }
+
+  #img-out-on-sea {
+    float: right;
+    margin-left: 6px;
+  }
+
+  #img-mangroves-nursery {
+    margin-top: 9px;
+  }
+
+  #img-in-the-field {
+    margin-top: 16px;
+  }
+
+  .img-footer-supporters {
+    padding-top: 10px;
+  }
+
+  #img-help-screenshot {
+    padding-top: 19px;
+  }
+
+  form {
+    margin-left: 19px;
+    margin-bottom: 10px;
+  }
 }
 
 body.matted {
@@ -38,14 +116,14 @@ body.matted {
   background-position:-1px -1px, -1px -1px
 }
 
+.upper {
+  text-transform: uppercase;
+}
 
 .page {
   // For debugging!
   //@include susy-grid-background;
 
-  .upper {
-    text-transform: uppercase;
-  }
 
   // Notice the title and footer sections are out of the 12 columns container
   .banner, .content { @include container; }
@@ -57,7 +135,34 @@ body.matted {
       background-color: #fff;
     }
     .inner { 
-      @include container; 
+      @include container;
+
+      .banner { 
+        @include span-columns(5,$total-columns);
+        font-size: 12pt;
+        font-weight: normal;
+        padding-left: 3px;
+        padding-top: 3px;
+      }
+      .nav {
+        @include span-columns(6 omega,$total-columns);
+        #tool {
+          @include span-columns(2,$break);
+        }
+        #help { 
+          @include span-columns(2,$break);
+        }
+        #about { @include span-columns(2,$break); }
+        #language { 
+          @include suffix(4);
+          @include span-columns(2 omega,$break);
+        }
+        font-size: 1em;
+        margin-top: 35px;
+        text-align: right;
+        text-align: center;
+      }
+
       height: 84px;
       position: relative;
       img {
@@ -102,41 +207,7 @@ body.matted {
     background-color: #fff;
   }
 
-  .banner { 
-    @include span-columns(5,$total-columns);
-    font-size: 12pt;
-    font-weight: normal;
-    padding-left: 3px;
-    padding-top: 3px;
-  }
-
-  .nav {
-    @include span-columns(6 omega,$total-columns);
-    #tool {
-      @include span-columns(2,12);
-    }
-    #help { 
-      @include span-columns(2,12);
-    }
-    #about { @include span-columns(2,12); }
-    #language { 
-      @include suffix(4);
-      @include span-columns(2 omega,12);
-    }
-
-    font-size: 1em;
-    margin-top: 35px;
-    text-align: right;
-    text-align: center;
-  }
-
   div.title {
-    h1 {
-      font-size: 4.8em;
-      padding-top: 1.6em;
-      margin-top: 0;
-      margin-bottom: 0;
-    }
     .inner { @include container; }
     height: 500px;
     background-image: url(/assets/pages/homepage-map.jpg);
@@ -144,6 +215,12 @@ body.matted {
     background-position: center 10%;
     color: #fff;
     text-align: center;
+    h1 {
+      font-size: 4.8em;
+      padding-top: 1.6em;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
   }
 
   .content {
@@ -173,37 +250,6 @@ body.matted {
     background-color: $gray-logo; //lighten($gray-background, 4%);
     padding-top: $grid-padding;
     border-radius: 12px;
-  }
-
-  footer {
-    .inner { @include container; }
-    #attributions { 
-      //@include susy-grid-background;
-      @include span-columns(8,12); 
-    }
-    #authentication { 
-      @include span-columns(3,12); 
-      text-align: right;
-      input[type=submit] {
-        margin-right: 21px;
-      }
-    }
-    #contact { 
-      @include span-columns(1 omega,12); 
-      text-align: right;
-    }
-    height: 150px;
-    background-color: #fff;
-    padding-top: 1.5em;
-    a {
-      text-decoration: none;
-      font-size: 11pt;
-      text-transform: uppercase;
-      color: #000;
-    }
-    li {
-      list-style-type: none;
-    }
   }
 
   // About page
@@ -277,84 +323,37 @@ body.matted {
     padding-top: 20px;
   }
 
-  font-family: 'Montserrat', Arial, 'Helvetica Neue', sans-serif;
-
-  a.button {
-    @include sassy-button("matte", 6px, 1em, $corporate-green-light, $corporate-green-dark, #fff, "inset");
-    margin: 16px 0;
+  footer {
+    .inner { @include container; }
+    #attributions { 
+      //@include susy-grid-background;
+      @include span-columns(8,$break); 
+    }
+    #authentication { 
+      @include span-columns(3,$break); 
+      text-align: right;
+      input[type=submit] {
+        margin-right: 21px;
+      }
+    }
+    #contact { 
+      @include span-columns(1 omega,$break); 
+      text-align: right;
+    }
+    height: 150px;
+    background-color: #fff;
+    padding-top: 1.5em;
+    a {
+      text-decoration: none;
+      font-size: 11pt;
+      text-transform: uppercase;
+      color: #000;
+    }
+    li {
+      list-style-type: none;
+    }
   }
 
-  h3 {
-    border-bottom: 1px solid black; 
-  }
-
-  p {
-    font: 10pt Helvetica;
-		line-height: 1.5em;
-  }
-
-  p.footnote, span.i {
-    font-style: italic;
-  }
-
-  div.small p {
-    font-size: 10pt;
-  }
-
-  p.bold {
-    font-weight: bold;
-  }
-
-  p.big-bold {
-    font-weight: bold;
-    font-size: 1.6em;
-    margin-top: 16px;
-    margin-bottom: 45px;
-  }
-
-  span.big {
-    font-size: 1.2em;
-  }
-
-  span.light-blue, p.light-blue {
-    color: $light-blue;
-  }
-
-  .light-blue.ar {
-    font-size: 1.6em;
-  }
-
-
-  #img-mangroves {
-    width: 462px;
-    margin-top: 9px;
-  }
-
-  #img-out-on-sea {
-    float: right;
-    margin-left: 6px;
-  }
-
-  #img-mangroves-nursery {
-    margin-top: 9px;
-  }
-
-  #img-in-the-field {
-    margin-top: 16px;
-  }
-
-  .img-footer-supporters {
-    padding-top: 10px;
-  }
-
-  #img-help-screenshot {
-    padding-top: 19px;
-  }
-
-  form {
-    margin-left: 19px;
-    margin-bottom: 10px;
-  }
 
 }
 
