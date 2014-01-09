@@ -129,7 +129,11 @@ body.matted {
   
 
   // Notice the title and footer sections are out of the 12 columns container
-  .banner, .content { 
+  //.banner { 
+  //  @include container; 
+  //  @include susy-grid-background;
+  //}
+  .content { 
     @include container($total-columns, $break); 
     @include susy-grid-background;
   }
@@ -142,16 +146,17 @@ body.matted {
     }
     .inner { 
       @include container;
+      $container-style: magic;
 
       .banner { 
-        @include span-columns(5,$total-columns);
+        @include span-columns(5,$break);
         font-size: 12pt;
         font-weight: normal;
         padding-left: 3px;
         padding-top: 3px;
       }
       .nav {
-        @include span-columns(6 omega,$total-columns);
+        @include span-columns(6 omega,$break);
         #tool {
           @include span-columns(2,$break);
         }
@@ -230,15 +235,8 @@ body.matted {
   }
 
   .content {
-
-      .left {
-        @include span-columns(3,$total-columns);
-      }
-      .right {
-        @include span-columns(3 omega,$total-columns);
-      }
     
-    @include at-breakpoint($break-em) {
+    @include at-breakpoint($break) {
       .left {
         @include span-columns(6,$break);
       }
@@ -319,13 +317,6 @@ body.matted {
       @include container($total-columns, $break);
       @include susy-grid-background;
 
-      
-      //.left {
-      //  @include span-columns(3,3);
-      //}
-      //.right {
-      //  @include span-columns(3,3);
-      //}
       @include at-breakpoint($break) {
         div.full {
           @include span-columns($break,$break);
