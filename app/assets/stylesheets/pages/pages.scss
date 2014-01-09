@@ -18,12 +18,14 @@ $corporate-green-light:        #a3d39e; //#6baa65;
 $corporate-green-dark-hover:   #70af6a;
 $corporate-green-light-hover:  #a3d39e;
 
-$total-columns  : 12;
-$column-width   : 4em;
-$gutter-width   : 1em;
-$grid-padding   : $gutter-width;
-$break: 12;
-$big: 10em;
+$total-columns         : 12;
+$break                 : 12;
+$total-ecosys-columns  : 3;
+$ecosys-break          : 5;
+$column-width          : 4em;
+$gutter-width          : 1em;
+$grid-padding          : $gutter-width;
+
 
 body {
   background-color: $gray-background;
@@ -123,7 +125,6 @@ body.matted {
 .page {
   // For debugging!
   //@include susy-grid-background;
-
 
   // Notice the title and footer sections are out of the 12 columns container
   .banner, .content { @include container; }
@@ -260,28 +261,6 @@ body.matted {
       h3 { margin-bottom: 0; }
     }
 
-    .ecosystems h3 {
-      h3 { margin-bottom: 0; }
-    }
-
-    #blue-carbon-ecosystem {
-      @include span-columns(3, 5);
-    }
-    #blue-carbon-ecosystem.right {
-      @include span-columns(3 omega, 5);
-    }
-
-    #associated-ecosystem {
-      @include span-columns(1,5);
-    }
-    
-    #candidate-ecosystem {
-      @include span-columns(1 omega, 5);
-    }
-    #candidate-ecosystem.right {
-      @include span-columns(1, 5);
-    }
-
     .left {
       @include span-columns(6,$total-columns);
     }
@@ -289,19 +268,47 @@ body.matted {
       @include span-columns(6 omega,$total-columns);
     }
 
-    #mangroves, #cyanobacterial_mats, #seagrass, #saltmarshes {
-      @include span-columns(1,5);
+    #core-ecosystems {
+      @include span-columns(3, 5);
+      #blue-carbon-ecosystem {
+        @include span-columns(3, 3);
+      }
+      #blue-carbon-ecosystem.right {
+        @include span-columns(3 omega, 3);
+      }
+      #mangroves, #seagrass, #saltmarshes {
+        @include span-columns(1,3);
+      }
+      #mangroves.right {
+        @include span-columns(1 omega, 3);
+      }
+      #saltmarshes {
+        @include span-columns(1 omega, 3);
+      }
     }
-    #mangroves.right {
-      @include span-columns(1 omega,5);
-    }
-    #sabkha {
-      @include span-columns(1 omega,5);
-    }
-    #sabkha.right {
-      @include span-columns(1,5);
+    #other-ecosystems {
+      @include span-columns(2 omega, 5);
+      #associated-ecosystem {
+        @include span-columns(1,2);
+      }
+      #candidate-ecosystem {
+        @include span-columns(1 omega, 2);
+      }
+      #candidate-ecosystem.right {
+        @include span-columns(1, 2);
+      }
+      #cyanobacterial_mats, #sabkha {
+        @include span-columns(1,2);
+      }
+      #sabkha {
+        @include span-columns(1 omega,2);
+      }
+       
     }
 
+    .ecosystems h3 {
+      h3 { margin-bottom: 0; }
+    }
     margin-top: 40px;
     p.light-blue {
       padding-bottom: 20px;
