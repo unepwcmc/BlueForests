@@ -368,7 +368,7 @@ body.matted {
     @include with-grid-settings(12,4em,1em,1em) {
       .inner { 
         @include container; 
-        @include susy-grid-background;
+        //@include susy-grid-background;
       }
       #attributions { 
         @include span-columns(7,$break); 
