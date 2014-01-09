@@ -3,7 +3,7 @@ development:
   database: bluecarbon_development
   pool: 5
   username: postgres
-  password: postgres
+  password: 
   host: localhost
   template: template_postgis
 
