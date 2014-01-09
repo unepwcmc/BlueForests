@@ -279,7 +279,11 @@ body.matted {
         }
         #mangroves, #seagrass, #saltmarshes {
           @include span-columns(1,$total-columns-e);
+          //@include nth-omega($total-columns-e);
         }
+        //#mangroves.right {
+        //  @include span-columns(1 omega, $total-columns-e);
+        //}
         #saltmarshes {
           @include span-columns(1 omega, $total-columns-e);
         }
@@ -340,8 +344,14 @@ body.matted {
     p.light-blue.fix-orphans {
       padding-top: 13px;
     }
+    p.light-blue.fix-orphans.ar {
+      padding-top: 19px;
+    }
     p.light-blue.doubble {
       padding-bottom: 0;
+    }
+    p.light-blue.doubble.ar {
+      padding-bottom: 37px;
     }
   }
 
