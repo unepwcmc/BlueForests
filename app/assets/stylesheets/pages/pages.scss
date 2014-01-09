@@ -24,6 +24,7 @@ $total-ecosys-columns  : 3;
 $ecosys-break          : 5;
 $column-width          : 4em;
 $gutter-width          : 1em;
+$break-em              : 50em;
 $grid-padding          : $gutter-width;
 $container-style       : static;
 
@@ -231,13 +232,13 @@ body.matted {
   .content {
 
       .left {
-        @include span-columns(6,$total-columns);
+        @include span-columns(3,$total-columns);
       }
       .right {
-        @include span-columns(6 omega,$total-columns);
+        @include span-columns(3 omega,$total-columns);
       }
     
-    @include at-breakpoint(60em) {
+    @include at-breakpoint($break-em) {
       .left {
         @include span-columns(6,$break);
       }
@@ -269,12 +270,13 @@ body.matted {
 
   // About page
   .content-full {
-    $total-columns-e: 3;
-    $break-e:         5;
+    
     @include with-grid-settings(5,10.5em,1.5em,1em) {
+      $total-columns-e: 3;
+      $break-e:         5;
       .inner-e { 
         @include container($total-columns-e, $break-e); 
-        //@include susy-grid-background;
+        @include susy-grid-background;
       }
 
       .core-ecosystems {
@@ -293,7 +295,7 @@ body.matted {
         @include span-columns(1, $total-columns-e);
       }
 
-      @include at-breakpoint(60em) {
+      @include at-breakpoint($break-e) {
         .core-ecosystems {
           @include span-columns(3, $break-e);
           #blue-carbon-ecosystem {
@@ -313,13 +315,31 @@ body.matted {
       }
     };
 
-    .inner { @include container; }
-    .left {
-      @include span-columns(6,$total-columns);
+    .inner { 
+      @include container($total-columns, $break);
+      @include susy-grid-background;
+
+      
+      //.left {
+      //  @include span-columns(3,3);
+      //}
+      //.right {
+      //  @include span-columns(3,3);
+      //}
+      @include at-breakpoint($break) {
+        div.full {
+          @include span-columns($break,$break);
+          h3 { margin-bottom: 0; }
+        }
+        .left {
+          @include span-columns(6,$break);
+        }
+        .right {
+          @include span-columns(6 omega,$break);
+        }
+      }
     }
-    .right {
-      @include span-columns(6 omega,$total-columns);
-    }
+
 
     .ecosystems h3 {
       h3 { margin-bottom: 0; }
