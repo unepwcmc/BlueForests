@@ -2,8 +2,7 @@ class AnalysisController < ApplicationController
   before_filter :set_locale
   layout :get_layout_from_params
 
-  def index
-    @phrases = {
+  phrases = {
       "analysis.buttons.draw_polygon" => I18n.t(
         "analysis.buttons.draw_polygon"),
       "analysis.buttons.draw_another_polygon" => I18n.t(
@@ -78,8 +77,10 @@ class AnalysisController < ApplicationController
         "analysis.click.close_shape"),
       "analysis.empty_result"=> I18n.t(
         "analysis.empty_result")
-
     }
+
+  def index
+    
   end
 
   private
