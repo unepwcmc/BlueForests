@@ -21,9 +21,9 @@ class Habitat
 
   def table_name
     table_str = "bc_#{name}"
-    unless Rails.env == "production"
-      table_str += "_#{Rails.env}"
-    end
+    #unless Rails.env == "production"
+    #  table_str += "_#{Rails.env}"
+    #end
     table_str
   end
 
@@ -36,19 +36,18 @@ class Habitat
 
     if table_name.blank?
       Habitat.all.each do |habitat|
-        query << generate_shapefile_export_query(habitat.table_name) 
+        query << "SELECT habitat, the_geom FROM bc_#{habitat.table_name} WHERE toggle = 'true' and action <> 'delete'"
       end
       query = query.join(" UNION ALL ")
     else
       query = generate_shapefile_export_query("bc_#{table_name}")
     end
+
     puts query
     "http://carbon-tool.cartodb.com/api/v2/sql?q=#{URI.encode(query)}&format=shp&api_key=#{api_key}"
   end
 
   def self.generate_shapefile_export_query table_name
-    "SELECT the_geom, habitat FROM #{table_name}"
+      "SELECT the_geom, habitat, density, knowledge, condition, age, capturesource, ecoregion, notes, interpolated, soil_geology  FROM #{table_name} WHERE toggle = 'true' and action <> 'delete'"
   end
-
-
 end
