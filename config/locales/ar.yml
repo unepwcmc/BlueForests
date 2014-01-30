@@ -270,7 +270,7 @@ ar:
     area_ha: "مساحة  (الموئل)"
     area_percentage: "مساحة (نسبتها من إجمالي مساحة الموئل)"
     c_stock: "مخزون الكربون"
-    total_area: "إجمالي المساحة"
+    total_area: "المنطقة"
     total_carbon_stock: "إجمالي مخزون الكربون"
     total_size_area_interest: "إجمالي مساحة المنطقة الواقعة ضمن دائرة اهتمامك بالكيلومتر المربّع"
     equivalent_per_capita_CO2_emissions: "انبعاثات ثاني أكسيد الكربون المقابلة لكل فرد"

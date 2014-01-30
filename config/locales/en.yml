@@ -224,7 +224,7 @@ en:
     area_ha: "Area <span>ha</sup></span>"
     area_percentage: "Area <span>% of Tot.</span>"
     c_stock: "C-Stock <span>T</span>"
-    total_area: "Area <span>% of Tot.</span>"
+    total_area: "Area"
     total_carbon_stock: "Total Carbon Stock"
     total_size_area_interest: "The total size of your Area of Interest in km2"
     equivalent_per_capita_CO2_emissions: "Equivalent per capita CO<sub>2</sub> emissions"
