@@ -21,9 +21,9 @@ class Habitat
 
   def table_name
     table_str = "bc_#{name}"
-    #unless Rails.env == "production"
-    #  table_str += "_#{Rails.env}"
-    #end
+    unless Rails.env == "production"
+      table_str += "_#{Rails.env}"
+    end
     table_str
   end
 
@@ -48,6 +48,6 @@ class Habitat
   end
 
   def self.generate_shapefile_export_query table_name
-      "SELECT the_geom, habitat, density, knowledge, condition, age, capturesource, ecoregion, notes, interpolated, soil_geology  FROM #{table_name} WHERE toggle = 'true' and action <> 'delete'"
+      "SELECT the_geom, habitat, density, knowledge, condition, age, capturesource, ecoregion, notes, interpolated, soil_geology FROM #{table_name} WHERE toggle = 'true' and action <> 'delete'"
   end
 end
