@@ -28,7 +28,13 @@ window.JST['area_results_view'] = _.template("""
             </tr>
           </thead>
           <tbody>
-            <td class="<%= this.textDirection %>"><%= roundToDecimals(results.sum.area, 2) %> <span>km<sup>2</sup></span></td>
+            <td class="<%= this.textDirection %>">
+              <% if (results.sum.area > 1) { %> 
+                <%= roundToDecimals(results.sum.area, 2) %> 
+              <% } else { %>
+                <%= roundToDecimals(results.sum.area, 3) %> 
+              <% } %>
+              <span>km<sup>2</sup></span></td>
           </tbody>
         </table>
 
