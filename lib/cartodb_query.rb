@@ -32,6 +32,7 @@ INSERT INTO #{table_name} (the_geom, action, admin_id#{more_params}, phase, phas
     WHERE ST_IsEmpty(a.the_geom) = false;
 
 UPDATE #{table_name} AS t SET toggle = false WHERE toggle IS NULL;
+UPDATE #{table_name} AS t SET the_geom_webmercator = ST_Transform(the_geom, 3857) where the_geom_webmercator IS NULL;
 
 SQL
       elsif validation.action == 'add'
@@ -69,8 +70,10 @@ INSERT INTO #{table_name}
 
 UPDATE #{table_name} AS t SET toggle = true WHERE toggle IS NULL AND action = 'validate';
 UPDATE #{table_name} AS t SET toggle = false WHERE toggle IS NULL;
+UPDATE #{table_name} AS t SET the_geom_webmercator = ST_Transform(the_geom, 3857) where the_geom_webmercator IS NULL;
 
     SQL
+
     
  
     else
@@ -105,6 +108,7 @@ INSERT INTO #{table_name}
     WHERE (SELECT COUNT(1) FROM #{table_name} t, (SELECT #{geom} AS polygon) dt WHERE ST_Intersects(t.the_geom, dt.polygon) AND toggle IS NULL) = 0;
 
 UPDATE #{table_name} AS t SET toggle = false WHERE toggle IS NULL;
+UPDATE #{table_name} AS t SET the_geom_webmercator = ST_Transform(the_geom, 3857) where the_geom_webmercator IS NULL;
 SQL
     end
   end
@@ -112,7 +116,7 @@ SQL
   def self.editing(table_name, validation)
     <<-SQL
       UPDATE  #{table_name} AS t SET age = #{validation.age || '0'}, area_id = #{validation.area_id || '0'}, density = #{validation.density || '0'}, knowledge = '#{validation.knowledge}', notes = '#{validation.notes}', condition = #{validation.condition}
-      WHERE edit_phase = #{validation.id}
+      WHERE edit_phase = #{validation.id};
     SQL
   end
 
