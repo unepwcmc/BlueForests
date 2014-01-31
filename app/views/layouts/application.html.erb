@@ -37,7 +37,11 @@
     <div class="navbar-inner">
       <div class="container-fluid">
         <%= link_to home_path, :class => 'homepage-banner' do %>
-          <img class="one" src="/assets/header-1.png">
+            <% if I18n.locale == I18n.default_locale %>
+            <img class="one" src="/assets/header-1.png">
+            <% else %>
+            <img class="one" src="/assets/header-1_ar.png">
+            <%end%>
         <% end %>
 
         <ul class="nav pull-right">
