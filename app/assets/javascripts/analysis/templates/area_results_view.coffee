@@ -28,7 +28,13 @@ window.JST['area_results_view'] = _.template("""
             </tr>
           </thead>
           <tbody>
-            <td class="<%= this.textDirection %>"><%= roundToDecimals(results.sum.area, 2) %> <span>km<sup>2</sup></span></td>
+            <td class="<%= this.textDirection %>">
+              <% if (results.sum.area > 1) { %> 
+                <%= roundToDecimals(results.sum.area, 2) %> 
+              <% } else { %>
+                <%= roundToDecimals(results.sum.area, 3) %> 
+              <% } %>
+              <span>km<sup>2</sup></span></td>
           </tbody>
         </table>
 
@@ -65,7 +71,7 @@ window.JST['area_results_view'] = _.template("""
 
         <div class="footer">
           <div class="permalink">
-            <h5>Share your work with this link</h5>
+            <h5>Copy the link below and share</h5>
             <input type="text" value="http://bluecarbon.unep-wcmc.org/<%= polyglot.locale() %>/layout/#/analysis/<%= area.get('id') %>">
           </div>
           <a dir="<%= this.textDirection %>" class="btn btn-primary share"><%= polyglot.t("analysis.share_your_work") %></a>

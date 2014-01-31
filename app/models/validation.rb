@@ -81,7 +81,8 @@ class Validation < ActiveRecord::Base
   end
 
   def cartodb_query(sql)
-    CartoDB::Connection.query("BEGIN; #{sql} COMMIT;")
+  sql.gsub!("\n","")
+  CartoDB::Connection.query("BEGIN; #{sql} COMMIT;")
   rescue CartoDB::Client::Error => e
     errors.add :base, 'There was an error trying to render the layers.'
     logger.info "There was an error trying to execute the following query:\n#{sql}\nError details: #{e.inspect}"
