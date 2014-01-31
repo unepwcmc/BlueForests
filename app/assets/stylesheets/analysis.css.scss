@@ -10,7 +10,7 @@ $corporate-green: #6dad67;
   overflow: auto;
   float: right;
   top: $navbarHeight;
-  width: 320px;
+  width: 350px;
   background-color: $gray-background;
   right: 0;
   bottom: 120px;
@@ -206,8 +206,16 @@ $corporate-green: #6dad67;
     &.polygon-stats {
       tbody {
         font-family: Arial, "Helvetica Neue", sans-serif;
-
+        tr:first-child td {
+          font-size: 12px;
+        }
         tr {
+          td {
+            text-align: right;
+          }
+          td:first-child {
+            text-align: left;
+          }
           &:first-child {
             td {
               border: none;
@@ -345,7 +353,7 @@ $corporate-green: #6dad67;
 
 #area {
   position: fixed;
-  width: 298px;
+  width: 328px;
   padding: 10px;
   padding-top: 5px;
   overflow: scroll;
