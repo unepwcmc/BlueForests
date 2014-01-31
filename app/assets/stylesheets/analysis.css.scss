@@ -206,19 +206,15 @@ $corporate-green: #6dad67;
     &.polygon-stats {
       tbody {
         font-family: Arial, "Helvetica Neue", sans-serif;
-
         tr:first-child td {
-          font-family: 'Montserrat', Arial, 'Helvetica Neue', sans-serif;
+          font-size: 12px;
         }
-
         tr {
           td {
             text-align: right;
-            font-family: "PT Mono", 'Montserrat', Arial;
           }
           td:first-child {
             text-align: left;
-            font-family: 'Montserrat', Arial, 'Helvetica Neue', sans-serif;
           }
           &:first-child {
             td {

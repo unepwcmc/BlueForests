@@ -55,7 +55,7 @@ window.JST['area_results_view'] = _.template("""
             <tr>
               <td><%= polyglot.t("analysis.ecosystem") %></td>
               <td dir="<%= this.textDirection %>"><%= polyglot.t("analysis.area_ha") %></td>
-              <td dir="<%= this.textDirection %>"><%= polyglot.t("analysis.total_area") %></td>
+              <td dir="<%= this.textDirection %>"><%= polyglot.t("analysis.area_percentage") %></td>
               <td dir="<%= this.textDirection %>" title="Carbon Stock"><%= polyglot.t("analysis.c_stock") %></td>
             </tr>
             <% _.each(results.habitats, function(attributes, key) { %>
