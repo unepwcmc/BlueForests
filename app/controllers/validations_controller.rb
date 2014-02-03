@@ -100,7 +100,7 @@ class ValidationsController < AdminController
 
     data = open(url).read
 
-    habitat_name = params[:habitat] || 'All'
+    habitat_name = params[:habitat]
     filename = "BlueCarbon_#{habitat_name}_Download.zip"
     send_data data, :filename => filename
   end
