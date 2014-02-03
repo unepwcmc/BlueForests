@@ -5,7 +5,8 @@
     <%= f.input :email, :required => true, :autofocus => true %>
     <%= f.input :password, :required => true %>
     <%= f.input :password_confirmation, :required => true %>
-    <%= f.association :roles, :as => :check_boxes, :input_html => { :class => nil, :disabled => (@admin == current_admin) } %>
+
+    <%= f.association :roles, :as => :check_boxes, :label => false, :label_method => lambda { |role| "#{role.name.humanize.capitalize}<br> <span class='description'>#{role.description}</span>".html_safe }, :input_html => { :class => nil, :disabled => (@admin == current_admin) } %>
   </div>
 
   <div class="form-actions">
