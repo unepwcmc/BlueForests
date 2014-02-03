@@ -34,14 +34,7 @@ class Habitat
 
     query = []
 
-    if table_name.blank?
-      Habitat.all.each do |habitat|
-        query << "SELECT habitat, the_geom FROM bc_#{habitat.table_name} WHERE toggle = 'true' and action <> 'delete'"
-      end
-      query = query.join(" UNION ALL ")
-    else
-      query = generate_shapefile_export_query("bc_#{table_name}")
-    end
+    query = generate_shapefile_export_query("bc_#{table_name}")
     puts query
     "http://carbon-tool.cartodb.com/api/v2/sql?q=#{URI.encode(query)}&format=shp&api_key=#{api_key}"
   end
