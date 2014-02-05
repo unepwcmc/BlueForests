@@ -40,7 +40,7 @@ initializeMap = () ->
   L.control.layers(baseMaps, overlayMaps).addTo(map)
 
   attribution = L.control.attribution(
-    position: 'bottomleft'
+    position: 'bottomright'
     prefix: ''
   )
   attribution.addAttribution('Developed for the Abu Dhabi Blue Carbon Demonstration Project')
