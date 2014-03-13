@@ -50,7 +50,7 @@ initializeMap = () ->
 
 initializePica = (map) ->
   window.pica = new Pica.Application(
-    magpieUrl: "http://magpie.unepwcmc-005.vm.brightbox.net"
+    magpieUrl: "http://magpie.unep-wcmc.org"
     projectId: 4
     map: map
   )
