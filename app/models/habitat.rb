@@ -41,12 +41,7 @@ class Habitat
   end
 
   def self.generate_shapefile_export_query table_name
-    "SELECT tb.the_geom, tb.habitat, cvd.density, knowledge, cvc.condition, cva.age, tb.capturesource, tb.ecoregion, tb.notes, interpolated, soil_geology 
-        FROM #{table_name} tb 
-        LEFT JOIN bc_density_codes cvd on cvd.density_code = tb.density
-        LEFT JOIN bc_condition_codes cvc on cvc.condition_code = tb.condition
-        LEFT JOIN bc_age_codes cva on cva.age_code = tb.age
-        WHERE toggle = 'true' and action <> 'delete'"
+    "SELECT tb.the_geom, tb.habitat, cvd.density, knowledge, cvc.condition, cva.age, tb.capturesource, tb.ecoregion, tb.notes, interpolated, soil_geology FROM #{table_name} tb LEFT JOIN bc_density_codes cvd on cvd.density_code = tb.density LEFT JOIN bc_condition_codes cvc on cvc.condition_code = tb.condition LEFT JOIN bc_age_codes cva on cva.age_code = tb.age WHERE toggle = 'true' and action <> 'delete'"
       #SELECT the_geom, habitat, density, knowledge, condition, age, capturesource, ecoregion, notes, interpolated, soil_geology FROM #{table_name} WHERE toggle = 'true' and action <> 'delete'"
   end
 end
