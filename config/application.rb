@@ -5,9 +5,9 @@ require 'active_record/connection_adapters/postgis_adapter/railtie'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  Bundler.require(*Rails.groups(:assets => %w(development test staging)))
   # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
+#  Bundler.require(:default, :assets, Rails.env)
 end
 
 module BlueCarbon
