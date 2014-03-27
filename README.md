@@ -7,9 +7,5 @@ You'll need to install the postgis extensions in the database before it will mig
     template: template_postgis
 
 ## Deployment
-The app is deployed to a EC2 ubuntu instance. The deploy script is setup to deploy to a server named 'raster-stats', which you will need to add to your .ssh/config, like thus:
 
-    Host raster-stats
-    User <- server username ->
-    HostName bluecarbon.unep-wcmc.org
-    IdentityFile <- EC2 pem key location ->
+The app is now deployed on Brightbox....and can be deployed in the normal way.
