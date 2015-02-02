@@ -7,8 +7,8 @@ test:
   tilemill_path: '/usr/share/tilemill'
 
 staging:
-  projectmill_path: '$HOME/temp/tilemill'
-  tilemill_path: '/usr/share/tilemill'
+  projectmill_path: '$HOME/temp/projectmill'
+  tilemill_path: '$HOME/temp/tilemill'
 
 production:
   projectmill_path: '$HOME/mapbox/projectmill'
