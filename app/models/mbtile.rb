@@ -37,9 +37,10 @@ class Mbtile < ActiveRecord::Base
     config_file = generate_config(9, 15)
 
     system "rm -rf #{habitat_path}_final #{tilemill_path}/cache"
-    system "#{APP_CONFIG['projectmill_path']}/index.js -f --mill --render  -p #{tilemill_path}/ -c #{config_file} -t #{APP_CONFIG['tilemill_path']}"
+    tilemill_output = `#{APP_CONFIG['projectmill_path']}/index.js -f --mill --render  -p #{tilemill_path}/ -c #{config_file} -t #{APP_CONFIG['tilemill_path']} 2>&1`
 
-    unless $?.success?
+    if tilemill_output =~ /Error/
+      FileUtils.rm final_path if File.exist? final_path
       FileUtils.cp empty_mbtiles_path, final_path
     end
 
