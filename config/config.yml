@@ -6,6 +6,10 @@ test:
   projectmill_path: '$HOME/Projects/ecoplotter/projectmill'
   tilemill_path: '/usr/share/tilemill'
 
+staging:
+  projectmill_path: '$HOME/mapbox/projectmill'
+  tilemill_path: '/usr/share/tilemill'
+
 production:
   projectmill_path: '$HOME/mapbox/projectmill'
   tilemill_path: '/usr/share/tilemill'
