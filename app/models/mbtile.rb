@@ -1,3 +1,5 @@
+require 'fileutils'
+
 class Mbtile < ActiveRecord::Base
   attr_accessible :area_id, :habitat, :last_generation_started_at, :last_generated_at, :status
 
@@ -37,6 +39,10 @@ class Mbtile < ActiveRecord::Base
     system "rm -rf #{habitat_path}_final #{tilemill_path}/cache"
     system "#{APP_CONFIG['projectmill_path']}/index.js -f --mill --render  -p #{tilemill_path}/ -c #{config_file} -t #{APP_CONFIG['tilemill_path']}"
 
+    unless $?.success?
+      FileUtils.cp empty_mbtiles_path, final_path
+    end
+
     update_attributes(status: 'complete', last_generated_at: Time.now)
   end
 
@@ -45,6 +51,10 @@ class Mbtile < ActiveRecord::Base
   end
 
   private
+
+  def empty_mbtiles_path
+    Rails.root.join('lib', 'empty.mbtiles')
+  end
 
   def generate_style
     colors = {mangrove: '008b00', seagrass: '9b1dea', sabkha: 'f38417', saltmarsh: '007dff', algal_mat: 'ffe048', other: '1dcbea'}
