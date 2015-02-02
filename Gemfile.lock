@@ -75,7 +75,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
-    columnize (0.3.6)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -84,12 +83,6 @@ GEM
       compass (>= 0.12.2, < 0.14)
     daemons (1.1.9)
     database_cleaner (0.9.1)
-    debugger (1.5.0)
-      columnize (>= 0.3.1)
-      debugger-linecache (~> 1.2.0)
-      debugger-ruby_core_source (~> 1.2.0)
-    debugger-linecache (1.2.0)
-    debugger-ruby_core_source (1.2.0)
     delayed_job (3.0.4)
       activesupport (~> 3.0)
     delayed_job_active_record (0.3.3)
@@ -280,7 +273,6 @@ DEPENDENCIES
   compass-rails (>= 1.0.3)
   daemons
   database_cleaner
-  debugger
   delayed_job_active_record
   delayed_job_web
   devise

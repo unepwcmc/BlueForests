@@ -40,7 +40,6 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   gem 'therubyracer', :platforms => :ruby
-  gem 'libv8', '~> 3.11.8'
 
   gem 'uglifier', '>= 1.0.3'
 
@@ -78,7 +77,6 @@ gem 'database_cleaner', :group => :test
 
 group :development do
   gem 'guard-rspec'
-  gem 'debugger'
   gem 'rb-inotify', '~> 0.8.8', :require => RUBY_PLATFORM.include?('linux') && 'rb-inotify'
   gem 'rb-fsevent', '~> 0.9.1', :require => RUBY_PLATFORM.include?('darwin') && 'rb-fsevent'
 end
