@@ -1,6 +1,9 @@
 # BlueCarbon
 
-EcoPlotter application to analyse the data collected about blue carbon in the Abu Dhabi coastline
+Blue Carbon is a Rails application to analyse the data collected about
+blue carbon in various country's coastlines, as well as acting as an
+admin interface for the [tablet data collection
+tool](https://github.com/unepwcmc/BlueCarbonMobileNext).
 
 ## Development
 
@@ -30,7 +33,7 @@ You'll need to setup a `.env` file to utilise CartoDB:
 cp .env.example .env
 ```
 
-Use your favourite editor (vim) to fill in the blanks:
+Use your favourite editor (as long as it's vim) to fill in the blanks:
 
 ```
 vim .env
