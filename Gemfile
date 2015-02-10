@@ -39,3 +39,4 @@ gem 'capistrano-ext'
 gem 'rspec-rails', '~> 3.2.0', :group => [:test, :development]
 gem 'database_cleaner', :group => :test
 
+gem 'dotenv', '~> 0.11.1'

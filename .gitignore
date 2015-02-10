@@ -20,5 +20,10 @@
 # Tilemill mbtiles generation
 /lib/tilemill
 
+/vendor/tilemill
+/vendor/projectmill
+
 # Uploads
 /public/system
+
+/.env
