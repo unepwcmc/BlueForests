@@ -23,7 +23,7 @@ class Validation < ActiveRecord::Base
   after_update :cartodb_update
 
   after_save do
-    Mbtile.delay.generate(area_id, habitat) if area_id
+    MbtileGenerator.perform_async(area_id, habitat) if area_id
 
     # Reset associated photos
     unless photo_ids.nil?

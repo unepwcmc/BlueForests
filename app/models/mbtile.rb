@@ -4,11 +4,11 @@ class Mbtile < ActiveRecord::Base
   belongs_to :area
 
   after_create do
-    Mbtile.delay.generate(area_id, habitat)
+    MbtileGenerator.perform_async(area_id, habitat)
   end
 
   def self.generate(area_id, habitat)
-    find_or_create_by_area_id_and_habitat(area_id, habitat).generate
+    where(area_id: area_id, habitat: habitat).first_or_create.generate
   end
 
   def completed?
