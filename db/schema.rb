@@ -15,7 +15,6 @@ ActiveRecord::Schema.define(version: 20150210155914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "postgis"
 
   create_table "admins", force: true do |t|
@@ -59,45 +58,6 @@ ActiveRecord::Schema.define(version: 20150210155914) do
     t.string   "iso"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "delayed_jobs", force: true do |t|
-    t.integer  "priority",   default: 0
-    t.integer  "attempts",   default: 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
-
-  create_table "geometries", force: true do |t|
-    t.string  "action"
-    t.integer "admin_id"
-    t.integer "age"
-    t.integer "area_id"
-    t.integer "density"
-    t.string  "knowledge"
-    t.text    "notes"
-    t.string  "author"
-    t.boolean "display"
-    t.integer "phase",                limit: 8
-    t.integer "phase_id",             limit: 8
-    t.integer "prev_phase",           limit: 8
-    t.integer "edit_phase",           limit: 8
-    t.boolean "toggle"
-    t.float   "value"
-    t.spatial "the_geom",             limit: {:srid=>0, :type=>"geometry"}
-    t.integer "condition"
-    t.text    "habitat"
-    t.spatial "the_geom_webmercator", limit: {:srid=>0, :type=>"geometry"}
-    t.spatial "carbon_view",          limit: {:srid=>0, :type=>"geometry"}
   end
 
   create_table "mbtiles", force: true do |t|
