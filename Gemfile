@@ -36,5 +36,6 @@ end
 gem 'capistrano'
 gem 'capistrano-ext'
 
-gem 'rspec-rails', '~> 2.0', :group => [:test, :development]
+gem 'rspec-rails', '~> 3.2.0', :group => [:test, :development]
 gem 'database_cleaner', :group => :test
+
