@@ -25,7 +25,7 @@ class Backbone.Diorama.ManagedRegion
 
 # Augment backbone view to add binding management and close method
 # Inspired by http://stackoverflow.com/questions/7567404/backbone-js-repopulate-or-recreate-the-view/7607853#7607853
-_.extend(Backbone.View.prototype, 
+_.extend(Backbone.View.prototype,
 
   # Use instead of bind, creates a bind and stores the binding in @bindings
   bindTo: (model, ev, callback) ->

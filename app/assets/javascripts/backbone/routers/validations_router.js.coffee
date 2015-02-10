@@ -21,7 +21,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     $("#validations").html(@view.render().el)
 
     # Map
-    args = 
+    args =
       map_id: 'map'
       coordinates: @findCoordinates()
       prev_validation_id: prev_validation_id
@@ -31,7 +31,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       @initializeMap args
 
     # Upload photo
-    new AjaxUpload 'upload-photo'
+    new AjaxUpload 'upload-photo',
       action: '/photos'
       name: 'photo[attachment]'
       data:
@@ -78,7 +78,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     $("#validations").html(@view.render().el)
 
     # Map
-    args = 
+    args =
       map_id: 'map'
       coordinates: JSON.parse(validation.get('coordinates'))
       validation_id: id
@@ -91,14 +91,14 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     $("#validations").html(@view.render().el)
 
     # Map
-    args = 
+    args =
       map_id: 'map'
       coordinates: JSON.parse(validation.get('coordinates'))
       validation_id: id
     @initializeMap args
 
     # Upload photo
-    new AjaxUpload 'upload-photo'
+    new AjaxUpload 'upload-photo',
       action: '/photos'
       name: 'photo[attachment]'
       data:
