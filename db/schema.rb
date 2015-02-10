@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140203160641) do
+ActiveRecord::Schema.define(version: 20150210112951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,13 +78,17 @@ ActiveRecord::Schema.define(version: 20140203160641) do
     t.text    "notes"
     t.string  "author"
     t.boolean "display"
-    t.integer "phase",      limit: 8
-    t.integer "phase_id",   limit: 8
-    t.integer "prev_phase", limit: 8
-    t.integer "edit_phase", limit: 8
+    t.integer "phase",                limit: 8
+    t.integer "phase_id",             limit: 8
+    t.integer "prev_phase",           limit: 8
+    t.integer "edit_phase",           limit: 8
     t.boolean "toggle"
     t.float   "value"
-    t.spatial "the_geom",   limit: {:srid=>0, :type=>"geometry"}
+    t.spatial "the_geom",             limit: {:srid=>0, :type=>"geometry"}
+    t.integer "condition"
+    t.text    "habitat"
+    t.spatial "the_geom_webmercator", limit: {:srid=>0, :type=>"geometry"}
+    t.spatial "carbon_view",          limit: {:srid=>0, :type=>"geometry"}
   end
 
   create_table "mbtiles", force: true do |t|
