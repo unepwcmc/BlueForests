@@ -1,6 +1,4 @@
 class Photo < ActiveRecord::Base
-  attr_accessible :attachment, :validation_id
-
   belongs_to :validation
 
   has_attached_file :attachment, :styles => { :thumb => "200x200>" }

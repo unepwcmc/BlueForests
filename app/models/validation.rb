@@ -1,13 +1,10 @@
 class Validation < ActiveRecord::Base
-  attr_accessible :coordinates, :action, :habitat, :area_id, :knowledge,
-    :density, :condition, :age, :species, :recorded_at, :notes, :photo_ids
   attr_accessor :photo_ids
 
   serialize :coordinates
 
   belongs_to :area
   belongs_to :admin
-
   has_many :photos
 
   validates :coordinates, presence: true

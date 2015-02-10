@@ -1,8 +1,6 @@
 require 'fileutils'
 
 class Mbtile < ActiveRecord::Base
-  attr_accessible :area_id, :habitat, :last_generation_started_at, :last_generated_at, :status
-
   belongs_to :area
 
   after_create do

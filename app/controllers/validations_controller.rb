@@ -12,7 +12,7 @@ class ValidationsController < AdminController
       @validations = current_admin.validations
     end
     @areas = Area.all
-    
+
     @photo = Photo.new
 
     respond_to do |format|
@@ -51,7 +51,7 @@ class ValidationsController < AdminController
   # POST /validations
   # POST /validations.json
   def create
-    @validation = Validation.new(params[:validation])
+    @validation = Validation.new(validation_params)
     @validation.admin = current_admin
 
     respond_to do |format|
@@ -71,7 +71,7 @@ class ValidationsController < AdminController
     @validation = Validation.find(params[:id])
 
     respond_to do |format|
-      if @validation.update_attributes(params[:validation])
+      if @validation.update_attributes(validation_params)
         format.html { redirect_to @validation, notice: 'Validation was successfully updated.' }
         format.json { render json: @validation }
       else
@@ -97,10 +97,29 @@ class ValidationsController < AdminController
 
   def export
     url = Habitat.shapefile_export_url(params[:habitat])
-    puts url 
+    puts url
     data = open(url).read
     habitat_name = params[:habitat]
     filename = "BlueCarbon_#{habitat_name}_Download.zip"
     send_data data, :filename => filename
+  end
+
+  private
+
+  def validation_params
+    params.require(:validation).permit(
+      :coordinates,
+      :action,
+      :habitat,
+      :area_id,
+      :knowledge,
+      :density,
+      :condition,
+      :age,
+      :species,
+      :recorded_at,
+      :notes,
+      :photo_ids
+    )
   end
 end
