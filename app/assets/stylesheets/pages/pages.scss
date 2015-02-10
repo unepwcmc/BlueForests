@@ -1,6 +1,3 @@
-@import "susy";
-@import "sassy-buttons";
-
 $dark-blue: #2b3038;
 $dark-gray: #373737;
 $light-blue: #259dd7; //#384658;
@@ -34,12 +31,11 @@ body {
   font-family: 'Montserrat', Arial, 'Helvetica Neue', sans-serif;
 
   a.button {
-    @include sassy-button("matte", 6px, 1em, $corporate-green-light, $corporate-green-dark, #fff, "inset");
     margin: 16px 0;
   }
 
   h3 {
-    border-bottom: 1px solid black; 
+    border-bottom: 1px solid black;
   }
 
   p {
@@ -127,72 +123,12 @@ body.matted {
 
 .page {
   // Notice the title and footer sections are out of the 12 columns container
-  .content { 
-    @include container($total-columns, $break); 
-    //@include susy-grid-background;
-  }
 
   header {
     background-color: $corporate-green;
     .outer {
       height: 13px;
       background-color: #fff;
-    }
-    @include with-grid-settings(12,4em,1em,1em) {
-      .inner { 
-        @include container;
-        //$container-style: magic;
-  
-        .banner { 
-          @include span-columns(5,12);
-          font-size: 12pt;
-          font-weight: normal;
-          padding-left: 3px;
-          padding-top: 3px;
-        }
-        .nav {
-          @include span-columns(6 omega,12);
-          #tool {
-            @include span-columns(2,$break);
-          }
-          #help { 
-            @include span-columns(2,$break);
-          }
-          #about { @include span-columns(2,$break); }
-          #language { 
-            @include suffix(4);
-            @include span-columns(2 omega,$break);
-          }
-          font-size: 1em;
-          margin-top: 35px;
-          text-align: right;
-          text-align: center;
-        }
-  
-  
-        height: 84px;
-        position: relative;
-        img {
-          position: absolute;
-        }
-        img.one {
-          top: -16px;
-          position: relative;
-        }
-        img.two {
-          top: 0;
-          right: 10px;
-          z-index: 1;
-        }
-        a.agedi {
-          position: absolute;
-          right: 30px;
-          top: -23px;
-          color: $corporate-green;
-          font-size: 1.3em;
-          letter-spacing: -1px;
-        }
-      }
     }
     margin-top: 0;
     margin-bottom: 0;
@@ -231,24 +167,6 @@ body.matted {
   }
 
   .content {
-    
-    @include at-breakpoint($break) {
-      .left {
-        @include span-columns(6,$break);
-      }
-      .right {
-        @include span-columns(6 omega,$break);
-      }
-      .content-three {
-        @include span-columns(3,$break);
-      }
-      .content-three-centre {
-        @include span-columns(6,$break);
-      }
-      .content-three-last {
-        @include span-columns(3 omega,$break);
-      }
-    }
     margin-top: 40px;
     margin-bottom: 30px;
     h3 {
@@ -264,73 +182,6 @@ body.matted {
 
   // About page
   .content-full {
-    
-    @include with-grid-settings(5,10.5em,1.5em,1em) {
-      $total-columns-e: 3;
-      $break-e:         5;
-      .inner-e { 
-        @include container($total-columns-e, $break-e); 
-        //@include susy-grid-background;
-      }
-
-      .core-ecosystems {
-        @include span-columns($total-columns-e, $total-columns-e);
-        #blue-carbon-ecosystem {
-          @include span-columns($total-columns-e, $total-columns-e);
-        }
-        #mangroves, #seagrass, #saltmarshes {
-          @include span-columns(1,$total-columns-e);
-          //@include nth-omega($total-columns-e);
-        }
-        //#mangroves.right {
-        //  @include span-columns(1 omega, $total-columns-e);
-        //}
-        #saltmarshes {
-          @include span-columns(1 omega, $total-columns-e);
-        }
-      }
-      .other-ecosystems {
-        @include span-columns(1, $total-columns-e);
-      }
-
-      @include at-breakpoint($break-e) {
-        .core-ecosystems {
-          @include span-columns(3, $break-e);
-          #blue-carbon-ecosystem {
-            @include span-columns(3, 3);
-          }
-          #mangroves, #seagrass, #saltmarshes {
-            @include span-columns(1,3);
-          }
-          #saltmarshes {
-            @include span-columns(1 omega, 3);
-          }
-        }
-        .other-ecosystems {
-          @include span-columns(1, $break-e);
-          @include nth-omega(2n);
-        }
-      }
-    };
-
-    .inner { 
-      @include container($total-columns, $break);
-      //@include susy-grid-background;
-
-      @include at-breakpoint($break) {
-        div.full {
-          @include span-columns($break,$break);
-          h3 { margin-bottom: 0; }
-        }
-        .left {
-          @include span-columns(6,$break);
-        }
-        .right {
-          @include span-columns(6 omega,$break);
-        }
-      }
-    }
-
 
     .ecosystems h3 {
       h3 { margin-bottom: 0; }
@@ -358,7 +209,7 @@ body.matted {
 			margin-top: -17px;
 			margin-bottom: 10px;
 		}
-		
+
     p.light-blue.doubble.ar {
       padding-bottom: 37px;
     }
@@ -372,42 +223,5 @@ body.matted {
     margin-top: 0;
     padding-top: 20px;
   }
-
-  footer {
-    @include with-grid-settings(12,4em,1em,1em) {
-      .inner { 
-        @include container; 
-        //@include susy-grid-background;
-      }
-      #attributions { 
-        @include span-columns(7,$break); 
-      }
-      #authentication { 
-        @include span-columns(3,$break); 
-        text-align: right;
-        input[type=submit] {
-          margin-right: 21px;
-        }
-      }
-      #contact { 
-        @include span-columns(2 omega,$break); 
-        text-align: right;
-      }
-      height: 150px;
-      background-color: #fff;
-      padding-top: 1.5em;
-      a {
-        text-decoration: none;
-        font-size: 11pt;
-        text-transform: uppercase;
-        color: #000;
-      }
-      li {
-        list-style-type: none;
-      }
-    }
-  }
-
-
 }
 

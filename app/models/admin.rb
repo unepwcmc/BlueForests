@@ -4,9 +4,6 @@ class Admin < ActiveRecord::Base
   devise :token_authenticatable, :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role_ids
-
   #validates :role_ids, presence: true
 
   before_save :ensure_authentication_token

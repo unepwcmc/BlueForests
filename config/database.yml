@@ -3,9 +3,8 @@ development:
   database: bluecarbon_development
   pool: 5
   username: postgres
-  password: 
+  password:
   host: localhost
-  template: template_postgis
 
 test:
   adapter: postgis
@@ -15,7 +14,6 @@ test:
   username: postgres
   password:
   host: localhost
-  template: template_postgis
 
 production:
   adapter: postgresql

@@ -53,7 +53,7 @@ class AdminsController < AdminController
   # POST /admins
   # POST /admins.json
   def create
-    @admin = Admin.new(params[:admin])
+    @admin = Admin.new(admin_params)
 
     respond_to do |format|
       if @admin.save
@@ -102,5 +102,15 @@ class AdminsController < AdminController
         format.json { render json: @admin.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def admin_params
+    params.require(:admin).permit(
+      :email,
+      :password,
+      :password_confirmation,
+      :remember_me,
+      :role_ids
+    )
   end
 end
