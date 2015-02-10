@@ -8,7 +8,6 @@ describe CartodbQuery do
       @addition = OpenStruct.new(id: 1, action: 'add', admin_id: 1, age: 1, area_id: 1, density: 1, knowledge: 'local_data', notes: 'test', habitat: 'mangrove')
     end
 
-
     describe 'when there is one geometry that overlaps totally' do
       before(:each) do
         add_query = "INSERT INTO geometries (the_geom, toggle) VALUES (ST_GeomFromText('MULTIPOLYGON(((1 1, 1 3, 3 3, 3 1, 1 1)))', 4326), true);"
@@ -16,8 +15,6 @@ describe CartodbQuery do
 
         query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((0 0, 4 0, 4 4, 0 4, 0 0)))',4326)", @addition)
         ActiveRecord::Base.connection.execute(query)
-        
-        puts add_query, query
       end
 
       it 'creates 1 more geometry (total of 3)' do

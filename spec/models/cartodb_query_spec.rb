@@ -231,8 +231,6 @@ describe CartodbQuery do
 
         query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((0 0, 4 0, 4 -4, 0 -4, 0 0)))',4326)", @addition)
         ActiveRecord::Base.connection.execute(query)
-        
-        puts query, add_query
       end
 
       it 'creates 1 more geometries (total of 2)' do
