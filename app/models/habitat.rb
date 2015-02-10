@@ -30,7 +30,7 @@ class Habitat
   # Returns a link to CartoDB to retrieve a shapefile download of the
   # current state of the habitats
   def self.shapefile_export_url table_name = ''
-    api_key = CARTODB_CONFIG['api_key']
+    api_key = Rails.application.secrets.cartodb['api_key']
 
     query = []
 
