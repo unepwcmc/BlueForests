@@ -6,7 +6,7 @@ gem 'pg'
 
 gem 'devise'
 gem 'devise-token_authenticatable'
-gem 'cancan'
+gem 'cancancan', '~> 1.10'
 
 gem 'rack-cors', :require => 'rack/cors'
 
@@ -40,3 +40,5 @@ gem 'rspec-rails', '~> 3.2.0', :group => [:test, :development]
 gem 'database_cleaner', :group => :test
 
 gem 'dotenv', '~> 0.11.1'
+
+gem 'byebug', :group => [:test, :development]

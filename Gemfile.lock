@@ -35,7 +35,10 @@ GEM
     bootstrap-generators (3.3.1)
       railties (>= 3.1.0)
     builder (3.2.2)
-    cancan (1.6.10)
+    byebug (3.1.2)
+      columnize (~> 0.8)
+      debugger-linecache (~> 1.2)
+    cancancan (1.10.1)
     capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
@@ -55,8 +58,10 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.0)
+    columnize (0.8.9)
     daemons (1.1.9)
     database_cleaner (1.4.0)
+    debugger-linecache (1.2.0)
     delayed_job (4.0.6)
       activesupport (>= 3.0, < 5.0)
     delayed_job_active_record (4.0.3)
@@ -212,7 +217,8 @@ PLATFORMS
 DEPENDENCIES
   activerecord-postgis-adapter (= 2.2.0)
   bootstrap-generators
-  cancan
+  byebug
+  cancancan (~> 1.10)
   capistrano
   capistrano-ext
   coffee-rails
