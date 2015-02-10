@@ -1,7 +1,7 @@
 development:
   adapter: postgis
   database: blueforest_development
-  pool: 5
+  pool: 25
   username: postgres
   password:
   host: localhost
