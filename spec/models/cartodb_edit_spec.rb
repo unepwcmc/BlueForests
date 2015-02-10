@@ -20,8 +20,6 @@ describe CartodbQuery do
 
         query = CartodbQuery.editing('geometries', @editing)
         ActiveRecord::Base.connection.execute(query)
-
-        puts add_query, query
       end
 
       it 'gets 1 more geometry with age 1234' do

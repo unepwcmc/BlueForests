@@ -11,6 +11,7 @@ You will need the following dependencies installed:
 ```
 brew install postgresql
 brew install postgis
+brew install redis
 
 git clone git@github.com:mapbox/tilemill.git vendor/tilemill
 cd vendor/tilemill
@@ -33,6 +34,15 @@ Use your favourite editor (vim) to fill in the blanks:
 
 ```
 vim .env
+```
+
+### Workers
+
+Sidekiq is used to run MBTile generation in the background. While redis
+is running, you can start the workers with:
+
+```
+bundle exec sidekiq
 ```
 
 ## Deployment

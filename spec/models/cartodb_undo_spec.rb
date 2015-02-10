@@ -52,7 +52,7 @@ describe CartodbQuery do
         Integer(check['count']).should ==(1)
       end
     end
-    
+
     describe 'when there is one geometry that intersects' do
       before(:each) do
         add_query = "INSERT INTO geometries (the_geom, phase, toggle) VALUES (ST_GeomFromText('MULTIPOLYGON(((-1 -1, 3 -1, 3 3, -1 3, -1 -1)))', 4326), #{@time}, true);"
@@ -60,7 +60,7 @@ describe CartodbQuery do
 
         query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((0 0, 4 0, 4 -4, 0 -4, 0 0)))',4326)", @addition)
         ActiveRecord::Base.connection.execute(query)
-          
+
         remove  = CartodbQuery.remove('geometries')
         ActiveRecord::Base.connection.execute(remove)
       end
@@ -88,7 +88,7 @@ describe CartodbQuery do
 
         query = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((-1 3.5, 6 3.5, 6 1, -1 1, -1 3.5)))',4326)", @addition)
         ActiveRecord::Base.connection.execute(query)
-          
+
         remove  = CartodbQuery.remove('geometries')
         ActiveRecord::Base.connection.execute(remove)
       end
@@ -117,8 +117,8 @@ describe CartodbQuery do
 
         query2 = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((-1 3.5, 6 3.5, 6 1, -1 1, -1 3.5)))',4326)", @addition2)
         ActiveRecord::Base.connection.execute(query2)
-          
-        remove  = CartodbQuery.remove('geometries')
+
+        remove = CartodbQuery.remove('geometries')
         ActiveRecord::Base.connection.execute(remove)
       end
 
@@ -186,7 +186,7 @@ describe CartodbQuery do
         query2 = CartodbQuery.query('geometries', "ST_GeomFromText('MultiPolygon(((-1 3.5, 6 3.5, 6 1, -1 1, -1 3.5)))',4326)", @addition2)
         ActiveRecord::Base.connection.execute(query2)
 
-        puts remove  = CartodbQuery.remove('geometries')
+        remove = CartodbQuery.remove('geometries')
         ActiveRecord::Base.connection.execute(remove)
 
       end
