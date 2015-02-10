@@ -1,6 +1,4 @@
 class Area < ActiveRecord::Base
-  attr_accessible :title, :coordinates
-
   has_many :validations, dependent: :destroy
   has_many :mbtiles, dependent: :destroy
 
