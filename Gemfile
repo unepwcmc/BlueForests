@@ -16,8 +16,8 @@ gem 'rails-backbone'
 gem 'jquery-rails'
 
 gem 'daemons'
-gem 'delayed_job_active_record'
-gem 'delayed_job_web'
+gem 'sidekiq', '~> 3.3.2'
+gem 'sinatra', :require => nil
 
 gem 'rvm-capistrano'
 gem 'rabl'

@@ -1,7 +1,8 @@
 BlueCarbon::Application.routes.draw do
   root :to => 'pages#home'
 
-  get "/delayed_job" => DelayedJobWeb, :anchor => false
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/admin/sidekiq'
 
   get 'admins/me' => 'admins#me'
 
