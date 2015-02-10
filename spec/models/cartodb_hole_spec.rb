@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 require_relative '../../lib/cartodb_query'
 
 describe CartodbQuery do

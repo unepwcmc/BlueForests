@@ -63,7 +63,6 @@ GEM
     columnize (0.8.9)
     connection_pool (2.1.1)
     daemons (1.1.9)
-    database_cleaner (1.4.0)
     debugger-linecache (1.2.0)
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -81,6 +80,11 @@ GEM
     ejs (1.1.1)
     erubis (2.7.0)
     execjs (2.3.0)
+    factory_girl (4.5.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.5.0)
+      factory_girl (~> 4.5.0)
+      railties (>= 3.0.0)
     highline (1.6.21)
     hike (1.2.3)
     hitimes (1.2.2)
@@ -229,10 +233,10 @@ DEPENDENCIES
   capistrano-ext
   coffee-rails
   daemons
-  database_cleaner
   devise
   devise-token_authenticatable
   dotenv (~> 0.11.1)
+  factory_girl_rails (~> 4.5.0)
   jquery-rails
   paperclip (~> 3.0)
   pg

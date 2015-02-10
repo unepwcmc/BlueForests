@@ -36,8 +36,8 @@ end
 gem 'capistrano'
 gem 'capistrano-ext'
 
-gem 'rspec-rails', '~> 3.2.0', :group => [:test, :development]
-gem 'database_cleaner', :group => :test
+gem 'rspec-rails', '~> 3.2.0', group: [:test, :development]
+gem 'factory_girl_rails', '~> 4.5.0', group: [:test]
 
 gem 'dotenv', '~> 0.11.1'
 
