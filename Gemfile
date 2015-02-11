@@ -22,6 +22,8 @@ gem 'sinatra', :require => nil
 gem 'rvm-capistrano'
 gem 'rabl'
 
+gem 'httparty', '~> 0.13.3'
+
 gem 'activerecord-postgis-adapter', '2.2.0'
 
 gem 'paperclip', '~> 3.0'
@@ -38,6 +40,7 @@ gem 'capistrano-ext'
 
 gem 'rspec-rails', '~> 3.2.0', group: [:test, :development]
 gem 'factory_girl_rails', '~> 4.5.0', group: [:test]
+gem 'webmock', '~> 1.20.4', group: [:test]
 
 gem 'dotenv', '~> 0.11.1'
 
