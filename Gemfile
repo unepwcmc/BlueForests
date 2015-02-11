@@ -42,6 +42,6 @@ gem 'rspec-rails', '~> 3.2.0', group: [:test, :development]
 gem 'factory_girl_rails', '~> 4.5.0', group: [:test]
 gem 'webmock', '~> 1.20.4', group: [:test]
 
-gem 'dotenv', '~> 0.11.1'
+gem 'dotenv-rails', '~> 1.0.2'
 
 gem 'byebug', :group => [:test, :development]
