@@ -28,8 +28,8 @@ describe ApplicationController do
     describe 'given no subdomain' do
       subject { get :index }
 
-      it 'does not redirect' do
-        expect(subject).to_not redirect_to("/")
+      it 'redirects to the home page' do
+        expect(subject).to redirect_to("/")
       end
     end
 

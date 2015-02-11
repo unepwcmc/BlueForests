@@ -23,11 +23,11 @@ class ApplicationController < ActionController::Base
     @current_country = Country.where(subdomain: request.subdomain).first
 
     if @current_country.blank?
-      redirect_to root_url unless no_subdomain?
+      redirect_to(root_path) unless is_root?
     end
   end
 
-  def no_subdomain?
-    request.subdomain.blank? || request.subdomain == "www"
+  def is_root?
+    request.path == "/"
   end
 end
