@@ -66,7 +66,8 @@ bundle exec rake cartodb:setup
 ```
 
 Setting up the habitat tables is a bit more fiddly. If you're lucky,
-someone else will have done it already.
+someone else will have done it already, or imported from some
+shapefiles.
 
 You need one table per habitat, and one set of habitat tables per
 environment. Given the habitats `mangrove`, `seagrass` and `saltmarsh`,
