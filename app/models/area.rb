@@ -2,6 +2,8 @@ class Area < ActiveRecord::Base
   has_many :validations, dependent: :destroy
   has_many :mbtiles, dependent: :destroy
 
+  belongs_to :country
+
   validates :title, presence: true, uniqueness: true
   validates :coordinates, presence: true
 
