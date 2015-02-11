@@ -48,6 +48,19 @@ is running, you can start the workers with:
 bundle exec sidekiq
 ```
 
+## Architecture
+
 ## Deployment
 
 The app is now deployed on Brightbox....and can be deployed in the normal way.
+
+### CartoDB
+
+The app depends on a few things existing in CartoDB, namely the habitat
+tables and the views for use in displaying calculations.
+
+The views, if they don't already exist, can be created with:
+
+```
+bundle exec rake cartodb:setup
+```
