@@ -20,7 +20,8 @@ class Habitat
   end
 
   def table_name
-    table_str = "bc_#{name}"
+    prefix = Rails.application.secrets.cartodb['table_prefix']
+    table_str = "#{prefix}_#{name}"
     unless Rails.env == "production"
       table_str += "_#{Rails.env}"
     end
