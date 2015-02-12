@@ -9,13 +9,14 @@ class CartoDb
     JSON.parse(response.body)
   end
 
-  def url_for query
+  def url_for query, format="json"
     URI::HTTPS.build(
       host: "#{USERNAME}.cartodb.com",
       path: "/api/v2/sql",
       query: {
         q: query,
-        api_key: API_KEY
+        api_key: API_KEY,
+        format: format
       }.to_query
     ).to_s
   end
