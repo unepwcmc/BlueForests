@@ -1,15 +1,22 @@
 class CartoDb
   include HTTParty
 
-  base_uri "https://#{Rails.application.secrets.cartodb['username']}.cartodb.com/api/v2/sql"
-
-  def initialize
-    api_key = Rails.application.secrets.cartodb['api_key']
-    @options = { query: { api_key: api_key } }
-  end
+  USERNAME = Rails.application.secrets.cartodb['username']
+  API_KEY  = Rails.application.secrets.cartodb['api_key']
 
   def query query
-    @options[:query][:q] = query
-    JSON.parse(self.class.get('/', @options).body)
+    response = self.class.get url_for(query)
+    JSON.parse(response.body)
+  end
+
+  def url_for query
+    URI::HTTPS.build(
+      host: "#{USERNAME}.cartodb.com",
+      path: "/api/v2/sql",
+      query: {
+        q: query,
+        api_key: API_KEY
+      }.to_query
+    ).to_s
   end
 end

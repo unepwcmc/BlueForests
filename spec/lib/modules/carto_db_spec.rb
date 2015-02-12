@@ -5,18 +5,9 @@ RSpec.describe CartoDb do
   let(:username) { Rails.application.secrets.cartodb['username'] }
   let(:api_key) { Rails.application.secrets.cartodb['api_key'] }
 
-  it "uses the application secrets API key to construct the API URL
-   and query" do
-    expected_url = "https://#{username}.cartodb.com/api/v2/sql"
-    expect(CartoDb.base_uri).to eq(expected_url)
-
-    actual_api_key = subject.instance_variable_get(:@options)[:query][:api_key]
-    expect(actual_api_key).to eq(api_key)
-  end
-
   describe ".query, given an SQL query" do
     let(:query) { "CREATE THING IF NOT EXISTS" }
-    let(:url) { "https://#{username}.cartodb.com/api/v2/sql/" }
+    let(:url) { "https://#{username}.cartodb.com/api/v2/sql" }
     let(:cartodb) { CartoDb.new() }
 
     subject { cartodb.query(query) }
@@ -28,6 +19,19 @@ RSpec.describe CartoDb do
 
       expect(subject).to eq({"rows" => 1})
       expect(request_stub).to have_been_requested.once
+    end
+  end
+
+  describe ".url_for" do
+    let(:query) { "CREATE THING IF NOT EXISTS" }
+    let(:encoded_query) { "CREATE+THING+IF+NOT+EXISTS" }
+    let(:url) { "https://#{username}.cartodb.com/api/v2/sql?api_key=#{api_key}&q=#{encoded_query}" }
+    let(:cartodb) { CartoDb.new() }
+
+    subject { cartodb.url_for(query) }
+
+    it "returns the CartoDB API URL for the given query" do
+      expect(subject).to eq(url)
     end
   end
 end
