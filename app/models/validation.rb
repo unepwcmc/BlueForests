@@ -31,7 +31,7 @@ class Validation < ActiveRecord::Base
     end
 
     # Associate uploaded photos
-    Photo.update_all(["validation_id = ?", id], ["id IN (?)", photo_ids])
+    #Photo.update_all(["validation_id = ?", id], ["id IN (?)", photo_ids])
   end
 
   def self.undo_most_recent_by_habitat(habitat)
@@ -78,10 +78,5 @@ class Validation < ActiveRecord::Base
   end
 
   def cartodb_query(sql)
-  sql.gsub!("\n","")
-  CartoDB::Connection.query("BEGIN; #{sql} COMMIT;")
-  rescue CartoDB::Client::Error => e
-    errors.add :base, 'There was an error trying to render the layers.'
-    logger.info "There was an error trying to execute the following query:\n#{sql}\nError details: #{e.inspect}"
   end
 end

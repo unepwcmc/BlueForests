@@ -2,7 +2,8 @@ class MbtileGenerator
   include Sidekiq::Worker
   sidekiq_options retry: false
 
-  def perform area_id, habitat
-    Mbtile.generate area_id, habitat
+  def perform mbtile_id
+    @mbtile = Mbtile.find(mbtile_id)
+    return if @mbtile.already_generated?
   end
 end

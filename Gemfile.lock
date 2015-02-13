@@ -216,6 +216,7 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
+    timecop (0.7.1)
     timers (4.0.1)
       hitimes
     treetop (1.4.15)
@@ -263,5 +264,6 @@ DEPENDENCIES
   simple_form
   sinatra
   therubyracer
+  timecop (~> 0.7.1)
   uglifier (>= 1.0.3)
   webmock (~> 1.20.4)

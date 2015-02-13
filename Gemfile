@@ -39,8 +39,11 @@ gem 'capistrano'
 gem 'capistrano-ext'
 
 gem 'rspec-rails', '~> 3.2.0', group: [:test, :development]
-gem 'factory_girl_rails', '~> 4.5.0', group: [:test]
-gem 'webmock', '~> 1.20.4', group: [:test]
+group :test do
+  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'webmock', '~> 1.20.4'
+  gem 'timecop', '~> 0.7.1'
+end
 
 gem 'dotenv-rails', '~> 1.0.2'
 
