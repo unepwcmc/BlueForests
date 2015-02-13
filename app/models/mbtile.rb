@@ -167,6 +167,6 @@ class Mbtile < ActiveRecord::Base
     habitat_model = Habitat.find(habitat)
     query = Rack::Utils.escape("SELECT * FROM (SELECT ST_Intersection(t.the_geom, ST_GeomFromText('MultiPolygon(((#{area.json_coordinates})))', 4326)) AS the_geom FROM #{habitat_model.table_name} t WHERE ST_Intersects(t.the_geom, ST_GeomFromText('MultiPolygon(((#{area.json_coordinates})))', 4326)) AND toggle = true AND (action <> 'delete' OR action IS NULL)) AS intersected_geom UNION ALL SELECT ST_GeomFromEWKT('SRID=4326;POLYGON EMPTY') AS the_geom")
 
-    "http://carbon-tool.cartodb.com/api/v2/sql?format=kml&q=#{query}"
+    CartoDb.url_for(query)
   end
 end
