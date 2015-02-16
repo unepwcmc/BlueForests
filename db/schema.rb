@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211112202) do
+ActiveRecord::Schema.define(version: 20150216140627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "postgis"
 
   create_table "admins", force: true do |t|
@@ -62,22 +61,6 @@ ActiveRecord::Schema.define(version: 20150211112202) do
     t.datetime "updated_at"
   end
 
-  create_table "delayed_jobs", force: true do |t|
-    t.integer  "priority",   default: 0
-    t.integer  "attempts",   default: 0
-    t.text     "handler"
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
-
   create_table "geometries", force: true do |t|
     t.string  "action"
     t.integer "admin_id"
@@ -99,6 +82,7 @@ ActiveRecord::Schema.define(version: 20150211112202) do
     t.text    "habitat"
     t.spatial "the_geom_webmercator", limit: {:srid=>0, :type=>"geometry"}
     t.spatial "carbon_view",          limit: {:srid=>0, :type=>"geometry"}
+    t.string  "country_id"
   end
 
   create_table "mbtiles", force: true do |t|
