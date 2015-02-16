@@ -5,8 +5,12 @@ module CartoDb
   API_KEY  = Rails.application.secrets.cartodb['api_key']
 
   def self.query query
-    response = self.get url_for(query)
+    response = self.get url_for(with_transaction(query))
     JSON.parse(response.body)
+  end
+
+  def self.with_transaction query
+    "BEGIN; #{query} COMMIT;"
   end
 
   def self.url_for query, format="json"

@@ -5,6 +5,15 @@ RSpec.describe CartoDb do
   let(:username) { Rails.application.secrets.cartodb['username'] }
   let(:api_key) { Rails.application.secrets.cartodb['api_key'] }
 
+  describe ".with_transaction, given a query" do
+    let(:query) { "SELECT * THE THINGS;" }
+    subject { CartoDb.with_transaction(query) }
+
+    it "wraps the query string in an SQL transaction" do
+      expect(subject).to eq("BEGIN; SELECT * THE THINGS; COMMIT;")
+    end
+  end
+
   describe ".query, given an SQL query" do
     let(:query) { "CREATE THING IF NOT EXISTS" }
     let(:url) { "https://#{username}.cartodb.com/api/v2/sql" }
