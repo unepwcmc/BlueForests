@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe CartoDb do
-  subject { CartoDb.new() }
+  subject { CartoDb }
   let(:username) { Rails.application.secrets.cartodb['username'] }
   let(:api_key) { Rails.application.secrets.cartodb['api_key'] }
 
   describe ".query, given an SQL query" do
     let(:query) { "CREATE THING IF NOT EXISTS" }
     let(:url) { "https://#{username}.cartodb.com/api/v2/sql" }
-    let(:cartodb) { CartoDb.new() }
+    let(:cartodb) { CartoDb }
 
     subject { cartodb.query(query) }
 
@@ -25,7 +25,7 @@ RSpec.describe CartoDb do
   describe ".url_for" do
     let(:query) { "CREATE THING IF NOT EXISTS" }
     let(:encoded_query) { "CREATE+THING+IF+NOT+EXISTS" }
-    let(:cartodb) { CartoDb.new() }
+    let(:cartodb) { CartoDb }
 
     describe "given a query and no format" do
       let(:url) { "https://#{username}.cartodb.com/api/v2/sql?api_key=#{api_key}&format=json&q=#{encoded_query}" }
