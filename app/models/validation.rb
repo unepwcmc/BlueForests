@@ -19,7 +19,7 @@ class Validation < ActiveRecord::Base
     end
   end
 
-  after_create :cartodb
+  after_create :upload_to_carto_db
   after_update :cartodb_update
 
   after_save do
@@ -67,16 +67,12 @@ class Validation < ActiveRecord::Base
     json_coordinates
   end
 
-  def cartodb
-    sql = CartodbQuery.query(Habitat.find(habitat).table_name, "ST_GeomFromText('MultiPolygon(((#{json_coordinates})))',4326)", self)
-    self.cartodb_query(sql)
+  def upload_to_carto_db
+    CartoDb::Validation.create self
   end
 
   def cartodb_update
     sql = CartodbQuery.editing(Habitat.find(habitat).table_name, self)
     self.cartodb_query(sql)
-  end
-
-  def cartodb_query(sql)
   end
 end
