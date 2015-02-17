@@ -1,4 +1,4 @@
-CREATE VIEW bc_carbon_view AS
+CREATE OR REPLACE VIEW bc_carbon_view AS
   SELECT a.the_geom, a.habitat, c_mg_ha FROM (
     SELECT mngr.the_geom, mngr.habitat, area_ha, phase, b.c_mg_ha,b.standard_value_habitat
         FROM bc_mangrove mngr
@@ -59,4 +59,4 @@ CREATE VIEW bc_carbon_view AS
     FROM bc_algal_mat algm
   LEFT JOIN carbon_values b
   ON (algm.habitat = b.habitat)
-  WHERE toggle = true AND action <> 'delete'
+  WHERE toggle = true AND action <> 'delete';
