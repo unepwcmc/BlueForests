@@ -21,11 +21,7 @@ class Habitat
 
   def table_name
     prefix = Rails.application.secrets.cartodb['table_prefix']
-    table_str = "#{prefix}_#{name}"
-    unless Rails.env == "production"
-      table_str += "_#{Rails.env}"
-    end
-    table_str
+    "#{prefix}_#{name}_#{Rails.env}"
   end
 
   # Returns a link to CartoDB to retrieve a shapefile download of the
