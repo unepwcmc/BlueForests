@@ -59,11 +59,21 @@ The app is now deployed on Brightbox....and can be deployed in the normal way.
 The app depends on a few things existing in CartoDB, namely the habitat
 tables and the views for use in displaying calculations.
 
+#### Views
+
 The views, if they don't already exist, can be created with:
 
 ```
 bundle exec rake cartodb:setup
 ```
+
+The views are important as they allow the Validation queries to easily
+handle data on a country level, rather than having to constantly filter
+by `country_id`. Ideally this would be done by having separate tables
+per country, but unfortunately at the time of writing it was not
+possible to programmatically create tables on CartoDB.
+
+#### Tables
 
 Setting up the habitat tables is a bit more fiddly. If you're lucky,
 someone else will have done it already, or imported from some
