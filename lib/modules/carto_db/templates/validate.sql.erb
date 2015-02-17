@@ -1,17 +1,20 @@
-UPDATE <%= table_name %> AS t SET toggle = FALSE, notes = 'null at <%= validation.id %>'  WHERE t.toggle IS NULL;
-UPDATE <%= table_name %> AS t SET toggle = NULL WHERE ST_Intersects(ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326),t.the_geom) AND t.toggle = true AND (t.action != 'delete' OR t.action IS NULL);
+UPDATE <%= table_name %> AS t SET toggle = FALSE, notes = 'null at <%= validation.id %>'  WHERE t.toggle IS NULL AND country_id = '<%= validation.area.country.iso %>';
+UPDATE <%= table_name %> AS t SET toggle = NULL WHERE ST_Intersects(ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326),t.the_geom) AND t.toggle = true AND (t.action != 'delete' OR t.action IS NULL) AND country_id = '<%= validation.area.country.iso %>';
 
-INSERT INTO <%= table_name %> (the_geom, action, admin_id, age, area_id, density, condition, knowledge, notes, habitat, phase, phase_id, prev_phase, edit_phase, toggle)
-SELECT ST_Multi(ST_Intersection(ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326), t.the_geom)) AS the_geom, '<%= validation.action %>', <%= validation.admin_id %>, <%= validation.age || '0' %>, <%= validation.area_id || '0' %>, <%= validation.density || '0' %>, <%= validation.condition || '0' %>, '<%= validation.knowledge %>', '<%= validation.notes %>', '<%= validation.habitat %>', <%= validation.id %>, 1, t.phase AS prev_phase, <%= validation.id %> as edit_phase, true
-FROM <%= view_name %> t
-    WHERE t.toggle IS NULL
+INSERT INTO <%= table_name %> (the_geom, action, admin_id, age, area_id, density, condition, knowledge, notes, habitat, phase, phase_id, prev_phase, edit_phase, toggle, country_id)
+  SELECT ST_Multi(ST_Intersection(ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326), t.the_geom)) AS the_geom, '<%= validation.action %>', <%= validation.admin_id %>, <%= validation.age || '0' %>, <%= validation.area_id || '0' %>, <%= validation.density || '0' %>, <%= validation.condition || '0' %>, '<%= validation.knowledge %>', '<%= validation.notes %>', '<%= validation.habitat %>', <%= validation.id %>, 1, t.phase AS prev_phase, <%= validation.id %> as edit_phase, true, '<%= validation.area.country.iso %>'::text
+  FROM <%= view_name %> t
+  WHERE t.toggle IS NULL
+
   UNION ALL
-  SELECT * FROM(
-    SELECT ST_Multi(ST_Difference(t.the_geom, ST_Buffer(ST_Collect(ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326)),0))) AS the_geom, t.action, t.admin_id, t.age, t.area_id, t.density, t.condition, t.knowledge, t.notes, t.habitat, <%= validation.id %>, t.phase_id,  <%= validation.id %>, t.phase as edit_phase, true
+
+  SELECT * FROM (
+    SELECT ST_Multi(ST_Difference(t.the_geom, ST_Buffer(ST_Collect(ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326)),0))) AS the_geom, t.action, t.admin_id, t.age, t.area_id, t.density, t.condition, t.knowledge, t.notes, t.habitat, <%= validation.id %>, t.phase_id,  <%= validation.id %>, t.phase as edit_phase, true, '<%= validation.area.country.iso %>'::text
     FROM <%= view_name %> t
     WHERE t.toggle IS NULL
-    GROUP BY t.the_geom, t.action, t.admin_id, t.age, t.area_id, t.density, t.condition, t.knowledge, t.notes, t.habitat, t.phase, t.phase_id, t.prev_phase) a
-    WHERE ST_IsEmpty(a.the_geom) = false;
+    GROUP BY t.the_geom, t.action, t.admin_id, t.age, t.area_id, t.density, t.condition, t.knowledge, t.notes, t.habitat, t.phase, t.phase_id, t.prev_phase
+  ) a
+  WHERE ST_IsEmpty(a.the_geom) = false;
 
-UPDATE <%= table_name %> AS t SET toggle = false WHERE toggle IS NULL;
-UPDATE <%= table_name %> AS t SET the_geom_webmercator = ST_Transform(the_geom, 3857) where the_geom_webmercator IS NULL;
+UPDATE <%= table_name %> AS t SET toggle = false WHERE toggle IS NULL AND country_id = '<%= validation.area.country.iso %>';
+UPDATE <%= table_name %> AS t SET the_geom_webmercator = ST_Transform(the_geom, 3857) where the_geom_webmercator IS NULL AND country_id = '<%= validation.area.country.iso %>';
