@@ -24,6 +24,11 @@ class Habitat
     "#{prefix}_#{name}_#{Rails.env}"
   end
 
+  def view_name country
+    prefix = Rails.application.secrets.cartodb['table_prefix']
+    "#{prefix}_#{name}_#{Rails.env}_#{country.name}"
+  end
+
   # Returns a link to CartoDB to retrieve a shapefile download of the
   # current state of the habitats
   def self.shapefile_export_url table_name = ''

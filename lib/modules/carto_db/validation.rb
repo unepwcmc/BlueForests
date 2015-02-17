@@ -33,4 +33,8 @@ class CartoDb::Validation
   def table_name
     Habitat.find(@validation.habitat).table_name
   end
+
+  def view_name
+    Habitat.find(@validation.habitat).view_name @validation.area.country
+  end
 end
