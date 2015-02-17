@@ -20,7 +20,7 @@ class Validation < ActiveRecord::Base
   end
 
   after_create :upload_to_carto_db
-  after_update :cartodb_update
+  after_update :upload_edits_to_carto_db
 
   after_save do
     MbtileGenerator.perform_async(area_id, habitat) if area_id
@@ -71,8 +71,7 @@ class Validation < ActiveRecord::Base
     CartoDb::Validation.create self
   end
 
-  def cartodb_update
-    sql = CartodbQuery.editing(Habitat.find(habitat).table_name, self)
-    self.cartodb_query(sql)
+  def upload_edits_to_carto_db
+    CartoDb::Validation.edit self
   end
 end
