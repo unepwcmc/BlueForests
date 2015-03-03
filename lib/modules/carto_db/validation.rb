@@ -35,6 +35,6 @@ class CartoDb::Validation
   end
 
   def view_name
-    Habitat.find(@validation.habitat).view_name @validation.area.country
+    Habitat.find(@validation.habitat).view_name @validation.country
   end
 end

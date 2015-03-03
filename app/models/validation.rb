@@ -67,6 +67,10 @@ class Validation < ActiveRecord::Base
     json_coordinates
   end
 
+  def country
+    area.try(:country) || admin.try(:country)
+  end
+
   def upload_to_carto_db
     CartoDb::Validation.create self
   end

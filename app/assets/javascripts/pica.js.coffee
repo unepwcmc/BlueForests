@@ -80,7 +80,7 @@ class Pica.Model extends Pica.Events
         data: data
       )
     )
-  
+
   # Parse the data that is returned from the server.
   parse: (data) ->
     for attr, val of data
@@ -96,7 +96,7 @@ class Pica.Model extends Pica.Events
     sync = @sync(options)
     #sync.done => console.log("saving #{@constructor.name} #{@get('id')}")
     sync
-    
+
 
   fetch: (options = {}) =>
     options.url = if @url().read? then @url().read else @url()
@@ -541,7 +541,7 @@ class Pica.Views.ShowLayersView
 
   # For every layer in @app.layers,
   # we build a @tileLayers object, compatible with the arguments to
-  # L.control.layers, and, if we are not delegating the Layer Control 
+  # L.control.layers, and, if we are not delegating the Layer Control
   # functionality to Pica, we simply add every layer to the map in order.
   render: =>
     @removeTileLayers()
@@ -555,7 +555,7 @@ class Pica.Views.ShowLayersView
       @layerControl = @renderLayerControl @app.config.map
 
   # If we are delegating the Layer Control functionality to Pica:
-  # first we merge optional extra overlays from the config into 
+  # first we merge optional extra overlays from the config into
   # @tileLayers and then we show the first layer in the Layer Control.
   renderLayerControl: (map) ->
     extraOverlays = @app.config.extraOverlays or {}
@@ -567,7 +567,7 @@ class Pica.Views.ShowLayersView
     for name, layer of layers
       layer.addTo map
       return
- 
+
   removeTileLayers: =>
     for name, tileLayer of @tileLayers
       @app.map.removeLayer(tileLayer)

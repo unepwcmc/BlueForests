@@ -7,7 +7,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
   events:
     'click .share': 'toggleSharePopover'
 
-  TOOLTIP_DATA: 
+  TOOLTIP_DATA:
     tot_area_tip: polyglot.t("analysis.tooltips.tot_area_tip")
     ca_stock_tip: polyglot.t("analysis.tooltips.ca_stock_tip")
     co2_pc_emis_tip: polyglot.t("analysis.tooltips.co2_pc_emis_tip")
@@ -17,7 +17,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
     if polyglot.locale() == "en"
       return "ltr"
     "rtl"
-    
+
   initialize: (options) ->
     "I am in the AreaResultsView initializer!"
     @area = options.area
@@ -73,7 +73,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
 
     $('body').on('click', (e) ->
       unless $(e.target).hasClass('share') or $('.permalink').has(e.target).length > 0
-        $('.permalink').hide() 
+        $('.permalink').hide()
     )
 
 
