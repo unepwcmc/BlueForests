@@ -27,11 +27,10 @@ class Backbone.Views.TabsView extends Backbone.View
   addArea: ->
     if pica.currentWorkspace.areas.length <= 3
       app = window.pica
-      area = new Pica.Models.Area(window.pica)
+      area = @workspace.addArea()
       area.setName(
         polyglot.t("analysis.area_#{pica.currentWorkspace.areas.length + 1}")
       )
-      @workspace.addArea(area)
       @workspace.setCurrentArea(area)
       @render()
 

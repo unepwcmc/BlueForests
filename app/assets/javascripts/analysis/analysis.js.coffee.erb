@@ -1,4 +1,4 @@
-initializeMap = () ->
+initializeMap = (opts={}) ->
   baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 17})
   baseSatellite =  new L.BingLayer("ApZALeudlU-OTm7Me2qekFHrstBXNdv3hft6qy3ZeTQWD6a460-QqCQyYnDigINc", {type: "Aerial", maxZoom: 19})
 
@@ -23,7 +23,7 @@ initializeMap = () ->
   }
 
   _.each habitats, (polygon_fill, habitat) ->
-    query = "SELECT * FROM bc_#{habitat} WHERE toggle = true AND (action <> 'delete' OR action IS NULL)"
+    query = "SELECT * FROM blueforest_#{habitat}_<%= Rails.env %> WHERE toggle = true AND (action <> 'delete' OR action IS NULL)"
     style = """
       #bc_#{habitat} {
         line-color: #FFF;
@@ -32,7 +32,7 @@ initializeMap = () ->
         polygon-opacity: 0.4
       }
     """
-    url   = "http://carbon-tool.cartodb.com/tiles/bc_#{habitat}/{z}/{x}/{y}.png?sql=#{query}&style=#{style}"
+    url   = "http://carbon-tool.cartodb.com/tiles/blueforest_#{habitat}_<%= Rails.env %>/{z}/{x}/{y}.png?sql=#{query}&style=#{style}"
 
     prettyName = polyglot.t("analysis.#{habitat}")
     overlayMaps[prettyName] = L.tileLayer(url).addTo(map)
@@ -48,17 +48,19 @@ initializeMap = () ->
 
   return map
 
-initializePica = (map) ->
+initializePica = (map, opts={}) ->
   window.pica = new Pica.Application(
-    magpieUrl: "http://magpie.unep-wcmc.org"
-    projectId: 4
+    magpieUrl: "http://localhost:3001"
+    projectId: 3
     map: map
   )
 
-  window.pica.newWorkspace()
+  window.pica.newWorkspace(properties: {country: opts.country})
 
   window.router = new Backbone.Routers.AnalysisRouter()
+
   Backbone.history.start()
+
 
 invertLocaleOnPermalink = (permalink) ->
   currentLocale = polyglot.locale()
@@ -77,6 +79,10 @@ setupTranslationLink = ->
       window.location.href = permalink
 
 $(document).ready ->
-  map = initializeMap() if $('#map_analysis').length > 0
-  initializePica(map) if map?
+  if $('#map_analysis').length > 0
+    countryName = $('#map_analysis').data('country-name')
+
+    map = initializeMap(country: countryName)
+    initializePica(map, country: countryName)
+
   setupTranslationLink()

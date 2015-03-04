@@ -142,8 +142,8 @@ class Pica.Application extends Pica.Events
     # to pica, then show Tile Layers by default.
     if @config.delegateLayerControl then @showTileLayers()
 
-  newWorkspace: ->
-    @currentWorkspace = new Pica.Models.Workspace(@)
+  newWorkspace: (options) ->
+    @currentWorkspace = new Pica.Models.Workspace(@, options)
 
   showTileLayers: ->
     new Pica.Views.ShowLayersView(app:@)
@@ -175,11 +175,13 @@ class Pica.Application extends Pica.Events
       @trigger('syncFinished')
 
 class Pica.Models.Area extends Pica.Model
-  constructor: (@app) ->
+  constructor: (@app, defaults={}) ->
     @throwIfNoApp()
     @polygons = []
 
-    @set('name', 'My Lovely Area')
+    defaults = $.extend(defaults, {'name': 'My Lovely Area'})
+    for property, value of defaults
+      @set(property, value)
 
   setName: (name) ->
     @set('name', name)
@@ -370,18 +372,20 @@ class Pica.Models.Polygon extends Pica.Model
       )
 
 class Pica.Models.Workspace extends Pica.Model
-  constructor: (@app, options) ->
+  constructor: (@app, @areasDefaults) ->
     @throwIfNoApp()
     @attributes = {}
     @areas = []
 
-    @currentArea = new Pica.Models.Area(@app)
+    @currentArea = new Pica.Models.Area(@app, @areasDefaults)
     @addArea(@currentArea)
 
   url: () ->
     "#{Pica.config.magpieUrl}/workspaces.json"
 
   addArea: (area) ->
+    unless area?
+      area = new Pica.Models.Area(@app, @areasDefaults)
     area.on('requestWorkspaceId', (options) =>
       if @get('id')?
         options.success(@)
@@ -389,6 +393,8 @@ class Pica.Models.Workspace extends Pica.Model
         @save(options)
     )
     @areas.push(area)
+
+    area
 
   removeArea: (theArea) ->
     id = @areas.indexOf(theArea)
