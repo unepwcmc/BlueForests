@@ -19,7 +19,6 @@ gem 'daemons'
 gem 'sidekiq', '~> 3.3.2'
 gem 'sinatra', :require => nil
 
-gem 'rvm-capistrano'
 gem 'rabl'
 
 gem 'httparty', '~> 0.13.3'
@@ -37,6 +36,9 @@ end
 
 gem 'capistrano'
 gem 'capistrano-ext'
+gem 'capistrano-sidekiq', '~> 0.4.0'
+gem 'rvm-capistrano'
+gem 'brightbox', '>=2.3.9'
 
 gem 'rspec-rails', '~> 3.2.0', group: [:test, :development]
 group :test do
