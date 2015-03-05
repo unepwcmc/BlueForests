@@ -10,10 +10,10 @@ RSpec.describe Mbtile::Geojson do
       let(:file_mock) { double('file') }
 
       it 'writes the geojson on a file' do
-        CartoDb.should_receive(:query).and_return('the geojson')
+        expect(CartoDb).to receive(:query).and_return('the geojson')
 
-        File.should_receive(:open).and_yield(file_mock)
-        file_mock.should_receive(:<<).with('the geojson')
+        expect(File).to receive(:open).and_yield(file_mock)
+        expect(file_mock).to receive(:<<).with('the geojson')
 
         subject
       end
