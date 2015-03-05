@@ -21,13 +21,18 @@ initializeMap = (map_id) ->
     'Map': baseMap
     'Satellite': baseSatellite
 
-  overlayMaps =
-    'Mangrove': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_mangrove/{z}/{x}/{y}.png?sql=SELECT * FROM bc_mangrove WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
-    'Seagrass': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_seagrass/{z}/{x}/{y}.png?sql=SELECT * FROM bc_seagrass WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
-    'Sabkha': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_sabkha/{z}/{x}/{y}.png?sql=SELECT * FROM bc_sabkha WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
-    'Saltmarsh': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_saltmarsh/{z}/{x}/{y}.png?sql=SELECT * FROM bc_saltmarsh WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
-    'Algal Mat': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_algal_mat/{z}/{x}/{y}.png?sql=SELECT * FROM bc_algal_mat WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
-    'Other': L.tileLayer('https://carbon-tool.cartodb.com/tiles/bc_other/{z}/{x}/{y}.png?sql=SELECT * FROM bc_other WHERE toggle = true AND (action <> \'delete\' OR action IS NULL)').addTo(map)
+  habitats = ['Mangrove', 'Seagrass', 'Sabkha', 'Saltmarsh', 'Algal Mat', 'Other']
+
+  habitatOverlay = (habitat) ->
+    "/proxy/#{habitat}/{z}/{x}/{y}.png?where=toggle = true AND (action <> 'delete' OR action IS NULL)"
+
+
+  overlayMaps = habitats.reduce( (total, habitat) ->
+    overlay = habitatOverlay(habitat)
+
+    total[habitat] = L.tileLayer(overlay).addTo(map)
+    total
+  , {})
 
   L.control.layers(baseMaps, overlayMaps).addTo(map)
 
