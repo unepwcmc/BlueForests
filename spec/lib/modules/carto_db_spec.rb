@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CartoDb do
   subject { CartoDb }
+  let(:table_prefix) { Rails.application.secrets.cartodb['table_prefix'] }
   let(:username) { Rails.application.secrets.cartodb['username'] }
   let(:api_key) { Rails.application.secrets.cartodb['api_key'] }
 
