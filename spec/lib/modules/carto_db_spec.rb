@@ -48,14 +48,14 @@ RSpec.describe CartoDb do
     end
   end
 
-  describe ".url_for" do
+  describe ".url_for_query" do
     let(:query) { "CREATE THING IF NOT EXISTS" }
     let(:encoded_query) { "CREATE+THING+IF+NOT+EXISTS" }
     let(:cartodb) { CartoDb }
 
     describe "given a query and no format" do
       let(:url) { "https://#{username}.cartodb.com/api/v2/sql?api_key=#{api_key}&format=json&q=#{encoded_query}" }
-      subject { cartodb.url_for(query) }
+      subject { cartodb.url_for_query(query) }
 
       it "returns the CartoDB API URL with the query and JSON format" do
         expect(subject).to eq(url)
@@ -64,10 +64,43 @@ RSpec.describe CartoDb do
 
     describe "given a query and KML format" do
       let(:url) { "https://#{username}.cartodb.com/api/v2/sql?api_key=#{api_key}&format=kml&q=#{encoded_query}" }
-      subject { cartodb.url_for(query, 'kml') }
+      subject { cartodb.url_for_query(query, 'kml') }
 
       it "returns the CartoDB API URL with the query and KML format" do
         expect(subject).to eq(url)
+      end
+    end
+  end
+
+  describe ".proxy" do
+    let(:url) { "https://#{username}.cartodb.com/tiles/#{from}/#{coords[:z]}/#{coords[:x]}/#{coords[:y]}.png" }
+    let(:from) { 'blueforest_seagrass_test' }
+    let(:coords) { {x: 1, y: 21, z: 17} }
+
+    describe "given table and coordinates" do
+      subject { CartoDb.proxy(from, coords) }
+
+      it "returns the tiles requested from cartodb" do
+        stub_request(:get, url).
+          with({query: {api_key: api_key}}).
+          to_return(:status => 200, :body => 'this is the image', :headers => {})
+
+        expect(subject).to eq('this is the image')
+      end
+    end
+
+    describe "given table, coordinates, sql and style" do
+      let(:sql) { "SELECT * FROM blueforest_seagrass_test_norway" }
+      let(:style) { "#seagrass { line-opacity: 0; }" }
+
+      subject { CartoDb.proxy(from, coords, sql: sql, style: style) }
+
+      it "returns the tiles requested from cartodb" do
+        stub_request(:get, url).
+          with({query: {api_key: api_key, sql: sql, style: style}}).
+          to_return(:status => 200, :body => 'this is the image', :headers => {})
+
+        expect(subject).to eq('this is the image')
       end
     end
   end
