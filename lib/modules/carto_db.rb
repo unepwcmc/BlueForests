@@ -4,8 +4,10 @@ module CartoDb
   USERNAME = Rails.application.secrets.cartodb['username']
   API_KEY  = Rails.application.secrets.cartodb['api_key']
 
-  def self.query query
-    response = self.get url_for(with_transaction(query))
+  def self.query query, with_transaction=true
+    query = with_transaction(query) if with_transaction
+
+    response = self.get url_for(query)
     JSON.parse(response.body)
   end
 
