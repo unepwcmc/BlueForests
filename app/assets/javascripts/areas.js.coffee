@@ -20,7 +20,7 @@ initializeMap = (map_id) ->
   habitats = ['Mangrove', 'Seagrass', 'Sabkha', 'Saltmarsh', 'Algal Mat', 'Other']
 
   habitatOverlay = (habitat) ->
-    "/proxy/#{habitat}/{z}/{x}/{y}.png?where=toggle = true AND (action <> 'delete' OR action IS NULL)"
+    "/proxy/#{habitat.replace(' ', '_')}/{z}/{x}/{y}.png?where=toggle = true AND (action <> 'delete' OR action IS NULL)"
 
 
   overlayMaps = habitats.reduce( (total, habitat) ->
