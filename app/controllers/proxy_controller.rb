@@ -1,12 +1,12 @@
 class ProxyController < ApplicationController
   def tiles
-    send_data(proxied_tile, type: 'image/png', disposition: 'inline')
+    send_data(tile, type: 'image/png', disposition: 'inline')
   end
 
   private
 
-  def proxied_tile
-    CartoDb.proxy(params[:table], coords, query)
+  def tile
+    CartoDb::Proxy.tile(params[:habitat], coords, query)
   end
 
   def coords
@@ -14,6 +14,6 @@ class ProxyController < ApplicationController
   end
 
   def query
-    @query ||= params.slice(:sql, :style).symbolize_keys
+    @query ||= params.slice(:where, :style).symbolize_keys
   end
 end

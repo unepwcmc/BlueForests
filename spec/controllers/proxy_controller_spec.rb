@@ -3,35 +3,36 @@ require 'rails_helper'
 RSpec.describe ProxyController, type: :controller do
   before :each do
     FactoryGirl.create(:country, subdomain: 'japan')
-    @request.host = "japan.blueforests.com"
+    @request.host = "japan.blueforest.io"
   end
 
   describe 'GET #tiles' do
-    let(:table) { 'blueforest_mangrove_development' }
+    let(:habitat) { 'mangrove' }
     let(:coords) { {x: '12', y: '24', z: '8' } }
+    let(:table) { 'blueforest_mangrove_test' }
 
-    describe 'given table and coords' do
+    describe 'given habitat and coords' do
       it 'returns the tile from CartoDb proxy' do
-        expect(CartoDb).to(
-          receive(:proxy).with(table, coords, {}).and_return('the image')
+        expect(CartoDb::Proxy).to(
+          receive(:tile).with(habitat, coords, {}).and_return('the image')
         )
 
-        get :tiles, {table: table}.merge(coords)
+        get :tiles, {habitat: habitat}.merge(coords)
         expect(response.body).to eq('the image')
       end
     end
 
-    describe 'given table, coords, sql query and style' do
-      let(:sql) { 'SELECT * FROM blueforest_mangrove_development' }
+    describe 'given habitat, coords, sql conditions and style' do
+      let(:where) { 'toggle IS true' }
       let(:style) { '#mangrove { fill-color: red; }' }
-      let(:query) { {sql: sql, style: style} }
+      let(:query) { {where: where, style: style} }
 
       it 'returns the tile from CartoDb proxy' do
-        expect(CartoDb).to(
-          receive(:proxy).with(table, coords, query).and_return('the image')
+        expect(CartoDb::Proxy).to(
+          receive(:tile).with(habitat, coords, query).and_return('the image')
         )
 
-        get :tiles, {table: table}.merge(coords).merge(query)
+        get :tiles, {habitat: habitat}.merge(coords).merge(query)
         expect(response.body).to eq('the image')
       end
     end

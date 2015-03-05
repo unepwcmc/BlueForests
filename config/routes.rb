@@ -6,7 +6,7 @@ BlueCarbon::Application.routes.draw do
 
   get 'admins/me' => 'admins#me'
 
-  get 'proxy/:table/:z/:x/:y' => 'proxy#tiles'
+  get 'proxy/:habitat/:z/:x/:y' => 'proxy#tiles'
 
   devise_for :admins, path_prefix: 'my', controllers: { sessions: 'sessions' }
   resources :admins
