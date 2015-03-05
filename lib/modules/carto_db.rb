@@ -4,11 +4,6 @@ module CartoDb
   USERNAME = Rails.application.secrets.cartodb['username']
   API_KEY  = Rails.application.secrets.cartodb['api_key']
 
-  def self.proxy from, coords, opts={}
-    response = self.get(url_for_proxy from, coords, opts)
-    response.body
-  end
-
   def self.query query, with_transaction=true
     query = with_transaction(query) if with_transaction
 
@@ -35,10 +30,6 @@ module CartoDb
     build_url("/api/v2/sql", q: query, format: format)
   end
 
-  def self.url_for_proxy from, coords, opts
-    coords = [:z, :x, :y].map(&coords.method(:[])).join('/')
-    build_url("/tiles/#{from}/#{coords}.png", opts)
-  end
 
   def self.build_url path, query
     URI::HTTPS.build(
