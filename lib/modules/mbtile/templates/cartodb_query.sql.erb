@@ -3,7 +3,7 @@ SELECT * FROM (
     t.the_geom,
     ST_GeomFromText('MultiPolygon(((<%= @area.json_coordinates %>)))', 4326)
   ) AS the_geom
-  FROM <%= habitat_model.view_name %> t
+  FROM <%= habitat_model.view_name @area.country %> t
   WHERE ST_Intersects(t.the_geom, ST_GeomFromText('MultiPolygon(((<%= @area.json_coordinates %>)))', 4326))
         AND toggle = true
         AND (action <> 'delete' OR action IS NULL)

@@ -14,20 +14,37 @@ RSpec.describe CartoDb do
     end
   end
 
-  describe ".query, given an SQL query" do
+  describe ".query" do
+    let(:cartodb) { CartoDb }
     let(:query) { "CREATE THING IF NOT EXISTS" }
     let(:url) { "https://#{username}.cartodb.com/api/v2/sql" }
-    let(:cartodb) { CartoDb }
 
-    subject { cartodb.query(query) }
+    describe "given an SQL query" do
+      let(:query_with_transaction) { "BEGIN; #{query} COMMIT;" }
 
-    it "sends the sql query to cartodb and returns the object" do
-      request_stub = stub_request(:get, url).
-        with({query: {api_key: api_key, q: query, format: 'json'}}).
-        to_return(:status => 200, :body => '{"rows": 1}', :headers => {})
+      subject { cartodb.query(query) }
 
-      expect(subject).to eq({"rows" => 1})
-      expect(request_stub).to have_been_requested.once
+      it "sends the sql query wrapped in a transaction to cartodb and returns the object" do
+        request_stub = stub_request(:get, url).
+          with({query: {api_key: api_key, q: query_with_transaction, format: 'json'}}).
+          to_return(:status => 200, :body => '{"rows": 1}', :headers => {})
+
+        expect(subject).to eq({"rows" => 1})
+        expect(request_stub).to have_been_requested.once
+      end
+    end
+
+    describe "given an SQL query and false, as with no transaction" do
+      subject { cartodb.query(query, false) }
+
+      it "sends the sql query wrapped in a transaction to cartodb and returns the object" do
+        request_stub = stub_request(:get, url).
+          with({query: {api_key: api_key, q: query, format: 'json'}}).
+          to_return(:status => 200, :body => '{"rows": 1}', :headers => {})
+
+        expect(subject).to eq({"rows" => 1})
+        expect(request_stub).to have_been_requested.once
+      end
     end
   end
 
