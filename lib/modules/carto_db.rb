@@ -16,6 +16,15 @@ module CartoDb
     JSON.parse(response.body)
   end
 
+  def self.table_name habitat
+    prefix = Rails.application.secrets.cartodb['table_prefix']
+    "#{prefix}_#{habitat}_#{Rails.env}"
+  end
+
+  def self.view_name habitat, country
+    "#{table_name(habitat)}_#{country.name}"
+  end
+
   private
 
   def self.with_transaction query

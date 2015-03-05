@@ -72,35 +72,25 @@ RSpec.describe CartoDb do
     end
   end
 
-  describe ".proxy" do
-    let(:url) { "https://#{username}.cartodb.com/tiles/#{from}/#{coords[:z]}/#{coords[:x]}/#{coords[:y]}.png" }
-    let(:from) { 'blueforest_seagrass_test' }
-    let(:coords) { {x: 1, y: 21, z: 17} }
+  describe '.table_name' do
+    describe 'given a habitat name' do
+      subject { CartoDb.table_name(habitat) }
+      let(:habitat) { 'mangrove' }
 
-    describe "given table and coordinates" do
-      subject { CartoDb.proxy(from, coords) }
-
-      it "returns the tiles requested from cartodb" do
-        stub_request(:get, url).
-          with({query: {api_key: api_key}}).
-          to_return(:status => 200, :body => 'this is the image', :headers => {})
-
-        expect(subject).to eq('this is the image')
+      it 'returns the correct table name' do
+        expect(subject).to eq("#{table_prefix}_mangrove_test")
       end
     end
+  end
 
-    describe "given table, coordinates, sql and style" do
-      let(:sql) { "SELECT * FROM blueforest_seagrass_test_norway" }
-      let(:style) { "#seagrass { line-opacity: 0; }" }
+  describe '.view_name' do
+    describe 'given a habitat name and a country name' do
+      subject { CartoDb.view_name(habitat, country) }
+      let(:habitat) { 'mangrove' }
+      let(:country) { FactoryGirl.build(:country, name: 'Japan') }
 
-      subject { CartoDb.proxy(from, coords, sql: sql, style: style) }
-
-      it "returns the tiles requested from cartodb" do
-        stub_request(:get, url).
-          with({query: {api_key: api_key, sql: sql, style: style}}).
-          to_return(:status => 200, :body => 'this is the image', :headers => {})
-
-        expect(subject).to eq('this is the image')
+      it 'returns the correct table name' do
+        expect(subject).to eq("#{table_prefix}_mangrove_test_Japan")
       end
     end
   end
