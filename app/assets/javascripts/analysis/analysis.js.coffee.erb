@@ -23,7 +23,7 @@ initializeMap = (opts={}) ->
   }
 
   _.each habitats, (polygon_fill, habitat) ->
-    query = "SELECT * FROM blueforest_#{habitat}_<%= Rails.env %> WHERE toggle = true AND (action <> 'delete' OR action IS NULL)"
+    where = "toggle = true AND (action <> 'delete' OR action IS NULL)"
     style = """
       #bc_#{habitat} {
         line-color: #FFF;
@@ -32,7 +32,7 @@ initializeMap = (opts={}) ->
         polygon-opacity: 0.4
       }
     """
-    url   = "http://carbon-tool.cartodb.com/tiles/blueforest_#{habitat}_<%= Rails.env %>/{z}/{x}/{y}.png?sql=#{query}&style=#{style}"
+    url   = "/proxy/#{habitat}/{z}/{x}/{y}?where=#{where}&style=#{style}"
 
     prettyName = polyglot.t("analysis.#{habitat}")
     overlayMaps[prettyName] = L.tileLayer(url).addTo(map)

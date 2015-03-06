@@ -2,6 +2,10 @@ require 'rails_helper'
 
 describe Mbtile do
   describe ".already_generated?" do
+    before(:example) do
+      allow(CartoDb::Validation).to receive(:create)
+    end
+
     let(:area) { FactoryGirl.create(:area) }
 
     let(:mbtile) {

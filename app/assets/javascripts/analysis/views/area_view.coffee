@@ -14,7 +14,7 @@ class Backbone.Views.AreaView extends Backbone.View
 
 
   deleteArea: (event) ->
-    
+
 
   handlePolygonClick: (polygon, event) =>
     new Backbone.Views.PolyActionsView(
