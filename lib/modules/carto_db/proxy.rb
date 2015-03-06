@@ -10,16 +10,13 @@ module CartoDb::Proxy
   private
 
   def self.tiles_url table, coords, opts
-    coords = [:z, :x, :y].map(&coords.method(:[])).join('/')
+    coords = "#{coords[:z]}/#{coords[:x]}/#{coords[:y]}"
     CartoDb.build_url("/tiles/#{table}/#{coords}.png", opts)
   end
 
   def self.sql habitat, country, where
-    [].tap { |parts|
-      parts << 'SELECT *'
-      parts << "FROM #{source(habitat, country)}"
-      parts << "WHERE #{where}" if where
-    }.join(' ')
+    parts = "SELECT * FROM #{source(habitat, country)}"
+    parts << " WHERE #{where}" if where
   end
 
   def self.source habitat, country
