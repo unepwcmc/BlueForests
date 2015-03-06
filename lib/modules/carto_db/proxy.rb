@@ -17,6 +17,7 @@ module CartoDb::Proxy
   def self.sql habitat, country, where
     parts = "SELECT * FROM #{source(habitat, country)}"
     parts << " WHERE #{where}" if where
+    parts
   end
 
   def self.source habitat, country
