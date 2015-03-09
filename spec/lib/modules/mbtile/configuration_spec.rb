@@ -10,8 +10,8 @@ RSpec.describe Mbtile::Configuration do
       let(:file_mock) { double('file') }
 
       it 'writes the configuration on a file' do
-        File.should_receive(:open).and_yield(file_mock)
-        file_mock.should_receive(:<<).with('{"source":"mangrove","destination":"mangrove_final","format":"mbtiles","minzoom":9,"maxzoom":21,"mml":{}}')
+        expect(File).to receive(:open).and_yield(file_mock)
+        expect(file_mock).to receive(:<<).with('{"source":"mangrove","destination":"mangrove_final","format":"mbtiles","minzoom":9,"maxzoom":21,"mml":{}}')
 
         subject
       end

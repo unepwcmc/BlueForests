@@ -89,7 +89,3 @@ class BlueCarbon.Collections.ValidationsCollection extends Backbone.Collection
     getLatest = _.memoize @getLatest
     latest = getLatest habitat
     model.get("id") == latest.get("id")
-
-
-
-

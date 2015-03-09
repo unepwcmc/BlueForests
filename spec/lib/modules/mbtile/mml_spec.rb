@@ -12,10 +12,10 @@ RSpec.describe Mbtile::Mml do
       }
 
       it 'writes the mml json on a file with the given zoom' do
-        CartoDb.should_receive(:url_for).and_return('geojson')
-        File.should_receive(:open).and_yield(file_mock)
+        expect(CartoDb).to receive(:url_for_query).and_return('geojson')
+        expect(File).to receive(:open).and_yield(file_mock)
 
-        file_mock.should_receive(:<<).with("""
+        expect(file_mock).to receive(:<<).with("""
           {
             \"bounds\": [0, 0, 1, 1],
             \"center\": [0.5, 0.5, 9],
@@ -50,5 +50,3 @@ RSpec.describe Mbtile::Mml do
     end
   end
 end
-
-

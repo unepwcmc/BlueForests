@@ -20,10 +20,6 @@ class Mbtile::Base
     template.result(binding).squish
   end
 
-  def habitat_model
-    Habitat.find(@habitat)
-  end
-
   def habitat_path
     tilemill_path.join('project', @habitat).tap do |dir|
       FileUtils.mkdir_p dir unless File.directory? dir

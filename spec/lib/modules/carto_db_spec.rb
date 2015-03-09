@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe CartoDb do
   subject { CartoDb }
+  let(:table_prefix) { Rails.application.secrets.cartodb['table_prefix'] }
   let(:username) { Rails.application.secrets.cartodb['username'] }
   let(:api_key) { Rails.application.secrets.cartodb['api_key'] }
 
@@ -14,31 +15,48 @@ RSpec.describe CartoDb do
     end
   end
 
-  describe ".query, given an SQL query" do
+  describe ".query" do
+    let(:cartodb) { CartoDb }
     let(:query) { "CREATE THING IF NOT EXISTS" }
     let(:url) { "https://#{username}.cartodb.com/api/v2/sql" }
-    let(:cartodb) { CartoDb }
 
-    subject { cartodb.query(query) }
+    describe "given an SQL query" do
+      let(:query_with_transaction) { "BEGIN; #{query} COMMIT;" }
 
-    it "sends the sql query to cartodb and returns the object" do
-      request_stub = stub_request(:get, url).
-        with({query: {api_key: api_key, q: query, format: 'json'}}).
-        to_return(:status => 200, :body => '{"rows": 1}', :headers => {})
+      subject { cartodb.query(query) }
 
-      expect(subject).to eq({"rows" => 1})
-      expect(request_stub).to have_been_requested.once
+      it "sends the sql query wrapped in a transaction to cartodb and returns the object" do
+        request_stub = stub_request(:get, url).
+          with({query: {api_key: api_key, q: query_with_transaction, format: 'json'}}).
+          to_return(:status => 200, :body => '{"rows": 1}', :headers => {})
+
+        expect(subject).to eq({"rows" => 1})
+        expect(request_stub).to have_been_requested.once
+      end
+    end
+
+    describe "given an SQL query and false, as with no transaction" do
+      subject { cartodb.query(query, false) }
+
+      it "sends the sql query wrapped in a transaction to cartodb and returns the object" do
+        request_stub = stub_request(:get, url).
+          with({query: {api_key: api_key, q: query, format: 'json'}}).
+          to_return(:status => 200, :body => '{"rows": 1}', :headers => {})
+
+        expect(subject).to eq({"rows" => 1})
+        expect(request_stub).to have_been_requested.once
+      end
     end
   end
 
-  describe ".url_for" do
+  describe ".url_for_query" do
     let(:query) { "CREATE THING IF NOT EXISTS" }
     let(:encoded_query) { "CREATE+THING+IF+NOT+EXISTS" }
     let(:cartodb) { CartoDb }
 
     describe "given a query and no format" do
       let(:url) { "https://#{username}.cartodb.com/api/v2/sql?api_key=#{api_key}&format=json&q=#{encoded_query}" }
-      subject { cartodb.url_for(query) }
+      subject { cartodb.url_for_query(query) }
 
       it "returns the CartoDB API URL with the query and JSON format" do
         expect(subject).to eq(url)
@@ -47,10 +65,33 @@ RSpec.describe CartoDb do
 
     describe "given a query and KML format" do
       let(:url) { "https://#{username}.cartodb.com/api/v2/sql?api_key=#{api_key}&format=kml&q=#{encoded_query}" }
-      subject { cartodb.url_for(query, 'kml') }
+      subject { cartodb.url_for_query(query, 'kml') }
 
       it "returns the CartoDB API URL with the query and KML format" do
         expect(subject).to eq(url)
+      end
+    end
+  end
+
+  describe '.table_name' do
+    describe 'given a habitat name' do
+      subject { CartoDb.table_name(habitat) }
+      let(:habitat) { 'mangrove' }
+
+      it 'returns the correct table name' do
+        expect(subject).to eq("#{table_prefix}_mangrove_test")
+      end
+    end
+  end
+
+  describe '.view_name' do
+    describe 'given a habitat name and a country name' do
+      subject { CartoDb.view_name(habitat, country) }
+      let(:habitat) { 'mangrove' }
+      let(:country) { FactoryGirl.build(:country, name: 'Japan') }
+
+      it 'returns the correct table name' do
+        expect(subject).to eq("#{table_prefix}_mangrove_test_Japan")
       end
     end
   end

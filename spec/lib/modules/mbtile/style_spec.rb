@@ -10,9 +10,9 @@ RSpec.describe Mbtile::Style do
       let(:file_mock) { double('file') }
 
       it 'writes the style on a file' do
-        File.should_receive(:open).and_yield(file_mock)
+        expect(File).to receive(:open).and_yield(file_mock)
 
-        file_mock.should_receive(:<<).with("""
+        expect(file_mock).to receive(:<<).with("""
           #mangrove {
             line-color: #fff;
             line-width: 0.5;
