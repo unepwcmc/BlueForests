@@ -4,17 +4,16 @@ set :domain, "unepwcmc-012.vm.brightbox.net"
 ## List of servers
 server "unepwcmc-012.vm.brightbox.net", :app, :web, :db, :primary => true
 
-set :application, "bluecarbon"
-set :server_name, "bluecarbon.unepwcmc-012.vm.brightbox.net"
+set :application, "blueforest"
+set :server_name, "blueforest.unepwcmc-012.vm.brightbox.net"
 set :sudo_user, "rails"
-set :app_port, "80" 
-
+set :app_port, "80"
 
 set :default_environment, {
-  'PATH' => "/home/rails/.rvm/gems/ruby-1.9.2-p320/bin:/home/rails/.rvm/bin:/home/rails/.rvm/rubies/ruby-1.9.2-p320/bin:$PATH",
-  'RUBY_VERSION' => 'ruby-1.9.2-p320',
-  'GEM_HOME' => '/home/rails/.rvm/gems/ruby-1.9.2-p320',
-  'GEM_PATH' => '/home/rails/.rvm/gems/ruby-1.9.2-p320',
+  'PATH' => "/home/rails/.rvm/gems/ruby-2.1.2/bin:/home/rails/.rvm/bin:/home/rails/.rvm/rubies/ruby-2.1.2/bin:$PATH",
+  'RUBY_VERSION' => 'ruby-2.1.2',
+  'GEM_HOME' => '/home/rails/.rvm/gems/ruby-2.1.2',
+  'GEM_PATH' => '/home/rails/.rvm/gems/ruby-2.1.2',
 }
 
 desc "Configure VHost"
@@ -35,5 +34,5 @@ task :config_vhost do
   sudo "mv /tmp/vhost_config /etc/nginx/sites-available/#{application}"
   sudo "ln -s /etc/nginx/sites-available/#{application} /etc/nginx/sites-enabled/#{application}"
 end
- 
+
 after "deploy:setup", :config_vhost
