@@ -1,6 +1,6 @@
-# BlueCarbon
+# BlueForest
 
-Blue Carbon is a Rails application to analyse the data collected about
+Blue Forest is a Rails application to analyse the data collected about
 blue carbon in various country's coastlines, as well as acting as an
 admin interface for the [tablet data collection
 tool](https://github.com/unepwcmc/BlueCarbonMobileNext).
@@ -38,6 +38,14 @@ Use your favourite editor (as long as it's vim) to fill in the blanks:
 ```
 vim .env
 ```
+
+### Seeds
+
+Countries, Roles and Admins (the current nomenclature for Users in BlueForest, due to legacy reasons) are created by launching `bundle exec rake db:seed`, after creating the BlueForest database, and launching the migrations.
+
+The `seeds.rb` file includes the creation of an admin for every country-role combination, generating admin like `super_admin@japan.blueforest.io`, or `project_participant@spain.blueforest.io`. The password for all these users is `blueforest`.
+
+NB: Admins are only created in the `development`, `test`, and `staging` environments. Seeding the database in the `production` environment will only create countries and roles.
 
 ### Workers
 
