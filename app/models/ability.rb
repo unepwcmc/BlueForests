@@ -10,17 +10,16 @@ class Ability
     end
   end
 
-  def admin
+  def super_admin
     can :manage, Area
     can :manage, Validation
     can :manage, Admin
-    can :read, Habitat
   end
 
   def project_manager
-    can :read, Area
+    can :manage, Area
     can :manage, Validation, admin_id: @admin.id
-    can [:show, :update, :destroy], Admin, id: @admin.id
+    can :manage, Admin, country_id: @admin.country_id
   end
 
   def project_participant
