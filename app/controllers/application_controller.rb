@@ -1,11 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :set_country
+  before_filter :check_country
 
   # CanCan
   def current_ability
     @current_ability ||= Ability.new(current_admin)
+  end
+
+  def current_country
+    if current_admin && !current_admin.super_admin?
+      current_admin.country
+    else
+      Country.where(subdomain: request.subdomain).first
+    end
   end
 
   def after_sign_in_path_for(resource)
@@ -19,10 +27,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_country
-    @current_country = Country.where(subdomain: request.subdomain).first
-
-    if @current_country.blank?
+  def check_country
+    if current_country.blank?
       redirect_to(root_path) unless is_root?
     end
   end

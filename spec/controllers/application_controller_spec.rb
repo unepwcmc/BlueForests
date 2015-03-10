@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ApplicationController do
+describe ApplicationController, type: :controller do
   controller do
     def index
       render text: ''
@@ -13,7 +13,7 @@ describe ApplicationController do
     }
 
     describe 'given a subdomain' do
-      subject { assigns(:current_country) }
+      subject { @controller.current_country }
 
       before :each do
         @request.host = "#{country.subdomain}.blueforests.com"
@@ -29,7 +29,7 @@ describe ApplicationController do
       subject { get :index }
 
       it 'redirects to the home page' do
-        expect(subject).to redirect_to("/")
+        is_expected.to redirect_to("/")
       end
     end
 
@@ -41,7 +41,23 @@ describe ApplicationController do
       end
 
       it 'redirects to the home page' do
-        expect(subject).to redirect_to("/")
+        is_expected.to redirect_to("/")
+      end
+    end
+
+    describe 'given admin is signed in' do
+      subject { @controller.current_country }
+
+      let(:admin_country) { FactoryGirl.create(:country) }
+      let(:admin) { FactoryGirl.create(:admin, country: admin_country) }
+
+      before :each do
+        sign_in admin
+        @request.host = "#{country.subdomain}.blueforests.com"
+      end
+
+      it 'sets the country to the admin country' do
+        is_expected.to eq(admin_country)
       end
     end
   end
