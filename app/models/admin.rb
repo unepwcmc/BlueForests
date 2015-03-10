@@ -11,4 +11,8 @@ class Admin < ActiveRecord::Base
   has_many :validations
   has_many :assignments, dependent: :destroy
   has_many :roles, through: :assignments
+
+  def super_admin?
+    roles.any?{ |role| role.name == 'super_admin' }
+  end
 end
