@@ -1,11 +1,11 @@
-require 'delayed/recipes'
+require 'capistrano/sidekiq'
 
 set :stages, %w(production staging)
 set :default_stage, 'staging'
 require 'capistrano/ext/multistage'
 
-set :application, "bluecarbon"
-set :repository,  "https://github.com/unepwcmc/BlueCarbon.git"
+set :application, "blueforest"
+set :repository,  "https://github.com/unepwcmc/BlueForest.git"
 
 set(:deploy_to) { File.join("", "home", user, application) }
 
@@ -20,6 +20,9 @@ set :git_enable_submodules, 1
 default_run_options[:pty] = true # Must be set for the password prompt from git to work
 
 set :use_sudo, false
+
+require 'rvm/capistrano'
+set :rvm_ruby_string, '2.1.2'
 
 # bundler bootstrap
 require 'bundler/capistrano'
@@ -71,39 +74,6 @@ end
 after "deploy:setup", "database:build_configuration"
 after "deploy:finalize_update", "database:link_configuration_file"
 
-# CartoDB
-
-namespace :cartodb do
-  desc "Generate a cartodb configuration file"
-  task :build_configuration do
-    host = Capistrano::CLI.ui.ask("CartoDB host: ")
-    oauth_key = Capistrano::CLI.ui.ask("CartoDB key: ")
-    oauth_secret = Capistrano::CLI.ui.ask("CartoDB secret: ")
-    username = Capistrano::CLI.ui.ask("CartoDB username: ")
-    password = Capistrano::CLI.password_prompt("CartoDB password: ")
-
-    cartodb_options = {
-      "host" => host,
-      "oauth_key" => oauth_key,
-      "oauth_secret" => oauth_secret,
-      "username" => username,
-      "password" => password
-    }
-
-    config_options = {"production" => cartodb_options}.to_yaml
-    run "mkdir -p #{shared_path}/config"
-    put config_options, "#{shared_path}/config/cartodb_config.yml"
-  end
-
-  desc "Links the configuration file"
-  task :link_configuration_file do
-    run "ln -nsf #{shared_path}/config/cartodb_config.yml #{latest_release}/config/cartodb_config.yml"
-  end
-end
-
-after "deploy:setup", "cartodb:build_configuration"
-after "deploy:finalize_update", "cartodb:link_configuration_file"
-
 # Email
 
 #namespace :mail do
@@ -144,15 +114,3 @@ end
 
 after "deploy:setup", "tilemill:make_shared_folder"
 after "deploy:update_code", "tilemill:link_folder"
-
-# Delayed_job
-
-after "deploy:stop",    "delayed_job:stop"
-after "deploy:start",   "delayed_job:start"
-after "deploy:restart", "delayed_job:restart"
-
-# If you want to use command line options, for example to start multiple workers,
-# define a Capistrano variable delayed_job_args:
-#
-#   set :delayed_job_args, "-n 2"
-
