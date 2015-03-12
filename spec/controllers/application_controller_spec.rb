@@ -25,6 +25,19 @@ describe ApplicationController, type: :controller do
       end
     end
 
+    describe 'given a fancy subdomain' do
+      subject { @controller.current_country }
+
+      before :each do
+        @request.host = "#{country.subdomain}.greenforest.blueforests.com"
+      end
+
+      it 'assigns @current_country' do
+        get :index
+        is_expected.to eq(country)
+      end
+    end
+
     describe 'given no subdomain' do
       subject { get :index }
 

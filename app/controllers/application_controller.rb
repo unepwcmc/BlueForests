@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     if current_admin && !current_admin.super_admin?
       current_admin.country
     else
-      Country.where(subdomain: request.subdomain).first
+      Country.where(subdomain: subdomain).first
     end
   end
 
@@ -31,6 +31,10 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def subdomain
+    request.subdomain.split('.').first
+  end
 
   def check_country
     if current_country.blank?
