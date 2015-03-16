@@ -74,6 +74,15 @@ end
 after "deploy:setup", "database:build_configuration"
 after "deploy:finalize_update", "database:link_configuration_file"
 
+namespace :config do
+  desc "Links the env configuration file"
+  task :link_env_file do
+    run "ln -nsf #{shared_path}/.env #{latest_release}/.env"
+  end
+end
+
+after "deploy:finalize_update", "config:link_env_file"
+
 # Email
 
 #namespace :mail do
