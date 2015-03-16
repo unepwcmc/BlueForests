@@ -41,20 +41,20 @@
 
         <ul class="nav pull-right">
           <%= content_tag(:li, link_to("Validations", validations_path), class: params[:controller] == 'validations' ? 'active' : nil) if can? :read, Validation %>
-          <%= content_tag(:li, link_to("Users", admins_path), class: params[:controller] == 'admins' ? 'active' : nil) if can? :manage, Admin %>
+          <%= content_tag(:li, link_to("Users", users_path), class: params[:controller] == 'users' ? 'active' : nil) if can? :manage, User %>
           <%= content_tag(:li, link_to("iPad Admin", areas_path), class: params[:controller] == 'areas' ? 'active' : nil) if can? :read, Area %>
 
-          <% if admin_signed_in? %>
+          <% if user_signed_in? %>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= truncate("#{current_admin.email}") %> <b class="caret"></b></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= truncate("#{current_user.email}") %> <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><%= link_to "My Account", edit_admin_path(current_admin) %></li>
+                <li><%= link_to "My Account", edit_user_path(current_user) %></li>
                 <li class="divider"></li>
-                <li><%= link_to "Logout", destroy_admin_session_path, method: :delete %></li>
+                <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
               </ul>
             </li>
           <% else %>
-            <li><%= link_to 'Login', new_admin_session_path %></li>
+            <li><%= link_to 'Login', new_user_session_path %></li>
           <% end %>
         </ul>
         <img class="two" src="/assets/header-2.png">
@@ -87,7 +87,7 @@
       locale: "<%= I18n.locale %>"
     });
   </script>
-	
+
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
