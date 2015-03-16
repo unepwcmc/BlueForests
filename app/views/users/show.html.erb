@@ -1,0 +1,26 @@
+<div class="page-header">
+  <%= link_to users_path, :class => 'btn' do %>
+    <i class="icon-list-alt"></i>
+    Back
+  <% end if can? :manage, User %>
+  <%= link_to edit_user_path(@user), :class => 'btn btn-primary' do %>
+    <i class="icon-pencil icon-white"></i>
+    Edit
+  <% end %>
+
+  <% if can? :manage, User %>
+    <%= link_to user_path(@user), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' do %>
+      <i class="icon-remove icon-white"></i>
+      Delete
+    <% end %>
+  <% end %>
+  <h1>User</h1>
+</div>
+
+<dl>
+  <dt>Email:</dt>
+  <dd><%= @user.email %></dd>
+
+  <dt>Roles:</dt>
+  <dd><%= @user.roles.any? && @user.roles.map(&:name).join(', ') || '-' %></dd>
+</dl>
