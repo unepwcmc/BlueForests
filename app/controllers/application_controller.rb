@@ -5,12 +5,12 @@ class ApplicationController < ActionController::Base
 
   # CanCan
   def current_ability
-    @current_ability ||= Ability.new(current_admin)
+    @current_ability ||= Ability.new(current_user)
   end
 
   def current_country
-    if current_admin && !current_admin.super_admin?
-      current_admin.country
+    if current_user && !current_user.super_admin?
+      current_user.country
     else
       Country.where(subdomain: request.subdomain).first
     end
