@@ -15,28 +15,8 @@ ActiveRecord::Schema.define(version: 20150216140627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
   enable_extension "postgis"
-
-  create_table "admins", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "authentication_token"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "country_id"
-  end
-
-  add_index "admins", ["authentication_token"], :name => "index_admins_on_authentication_token", :unique => true
-  add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
-  add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
 
   create_table "areas", force: true do |t|
     t.string   "title"
@@ -47,7 +27,7 @@ ActiveRecord::Schema.define(version: 20150216140627) do
   end
 
   create_table "assignments", force: true do |t|
-    t.integer  "admin_id"
+    t.integer  "user_id"
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -63,7 +43,7 @@ ActiveRecord::Schema.define(version: 20150216140627) do
 
   create_table "geometries", force: true do |t|
     t.string  "action"
-    t.integer "admin_id"
+    t.integer "user_id"
     t.integer "age"
     t.integer "area_id"
     t.integer "density"
@@ -112,12 +92,33 @@ ActiveRecord::Schema.define(version: 20150216140627) do
     t.text     "description"
   end
 
+  create_table "users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "authentication_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "country_id"
+  end
+
+  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
   create_table "validations", force: true do |t|
     t.text     "coordinates"
     t.string   "action"
     t.datetime "recorded_at"
     t.integer  "area_id"
-    t.integer  "admin_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "habitat"

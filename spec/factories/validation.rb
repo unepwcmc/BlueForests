@@ -3,6 +3,6 @@ FactoryGirl.define do
     coordinates '[[1,2],[1,1],[1,2]]'
     action 'delete'
     habitat 'mangrove'
-    admin
+    user
   end
 end

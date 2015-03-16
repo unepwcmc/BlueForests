@@ -1,4 +1,4 @@
 class Country < ActiveRecord::Base
-  has_many :admins
+  has_many :users
   has_many :areas
 end

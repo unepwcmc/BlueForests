@@ -58,19 +58,19 @@ describe ApplicationController, type: :controller do
       end
     end
 
-    describe 'given admin is signed in' do
+    describe 'given user is signed in' do
       subject { @controller.current_country }
 
-      let(:admin_country) { FactoryGirl.create(:country) }
-      let(:admin) { FactoryGirl.create(:admin, country: admin_country) }
+      let(:user_country) { FactoryGirl.create(:country) }
+      let(:user) { FactoryGirl.create(:user, country: user_country) }
 
       before :each do
-        sign_in admin
+        sign_in user
         @request.host = "#{country.subdomain}.blueforests.com"
       end
 
-      it 'sets the country to the admin country' do
-        is_expected.to eq(admin_country)
+      it 'sets the country to the user country' do
+        is_expected.to eq(user_country)
       end
     end
   end

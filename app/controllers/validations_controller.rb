@@ -1,15 +1,16 @@
 class ValidationsController < AdminController
-  before_filter :authenticate_admin!
+  before_filter :authenticate_user!
   load_and_authorize_resource
 
   # GET /validations
   # GET /validations.json
   def index
     # Admins can view all validations, users only their own
-    if current_admin.roles.find_by_name("admin")
+    # TODO change this to super_admin
+    if current_user.roles.find_by_name("admin")
       @validations = Validation.all
     else
-      @validations = current_admin.validations
+      @validations = current_user.validations
     end
     @areas = Area.all
 
@@ -52,12 +53,12 @@ class ValidationsController < AdminController
   # POST /validations.json
   def create
     @validation = Validation.new(validation_params)
-    @validation.admin = current_admin
+    @validation.user = current_user
 
     respond_to do |format|
       if @validation.save
         format.html { redirect_to @validation, notice: 'Validation was successfully created.' }
-        format.json { render json: @validation.to_json(include: [:admin, photos: {only: :id, methods: [:attachment_url, :thumbnail_url]}]), status: :created, location: @validation }
+        format.json { render json: @validation.to_json(include: [:user, photos: {only: :id, methods: [:attachment_url, :thumbnail_url]}]), status: :created, location: @validation }
       else
         format.html { render action: "new" }
         format.json { render json: @validation.errors, status: :unprocessable_entity }

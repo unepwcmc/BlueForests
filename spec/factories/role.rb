@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :role do
-    name "admin"
+    name "project_participant"
   end
 end

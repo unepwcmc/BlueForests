@@ -7,7 +7,7 @@ class CreateGeometries < ActiveRecord::Migration
         t.geometry  :the_geom
 
         t.string    :action
-        t.integer   :admin_id
+        t.integer   :user_id
         t.integer   :age
         t.integer   :area_id
         t.integer   :density

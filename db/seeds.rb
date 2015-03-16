@@ -14,7 +14,7 @@ def populate
 
   if Rails.env.production?
     puts '### WARNING ###'
-    puts 'Users are not created by the seeds in production. You will have to create default admin users manually.'
+    puts 'Users are not created by the seeds in production. You will have to create default users manually.'
   else
     populate_users
   end
@@ -34,7 +34,7 @@ def populate_users
   puts '### Creating test users'
   COUNTRIES.each do |country|
     ROLES.each do |role|
-      Admin.create({
+      User.create({
         email: "#{role[:name]}@#{country[:subdomain]}.blueforest.io",
         password: "blueforest",
         password_confirmation: 'blueforest',

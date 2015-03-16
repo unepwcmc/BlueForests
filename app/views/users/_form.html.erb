@@ -1,0 +1,15 @@
+<%= simple_form_for(@user, :defaults => { :input_html => { :class => 'span8' } }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email, :required => true, :autofocus => true %>
+    <%= f.input :password, :required => true %>
+    <%= f.input :password_confirmation, :required => true %>
+
+    <%= f.association :roles, :as => :check_boxes, :label => false, :label_method => lambda { |role| "#{role.name.humanize.capitalize}<br> <span class='description'>#{role.description}</span>".html_safe }, :input_html => { :class => nil, :disabled => (@user == current_user) } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, :class => "btn-primary", :value => 'Save User' %>
+  </div>
+<% end %>
