@@ -40,7 +40,7 @@ class BlueCarbon.Models.Validation extends Backbone.Model
   # Can't update record; Can't mass-assign protected attributes: id
   # (https://github.com/codebrew/backbone-rails/issues/38)
 
-  secureAttributes: ['id', 'photos', 'admin', 'admin_id', 'created_at', 'updated_at']
+  secureAttributes: ['id', 'photos', 'user', 'user_id', 'created_at', 'updated_at']
 
   toJSON: (all = false) ->
     return @attributes if all
