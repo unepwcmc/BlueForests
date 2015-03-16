@@ -4,12 +4,12 @@ BlueCarbon::Application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/admin/sidekiq'
 
-  get 'admins/me' => 'admins#me'
+  get 'users/me' => 'users#me'
 
   get 'proxy/:habitat/:z/:x/:y' => 'proxy#tiles'
 
-  devise_for :admins, path_prefix: 'my', controllers: { sessions: 'sessions' }
-  resources :admins
+  devise_for :users, path_prefix: 'my', controllers: { sessions: 'sessions' }
+  resources :users
 
   resources :validations
   get '/export/:habitat' => 'validations#export'
