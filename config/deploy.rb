@@ -53,7 +53,7 @@ namespace :database do
     pg_password = Capistrano::CLI.password_prompt("Database user password: ")
 
     db_options = {
-      "adapter" => "postgresql",
+      "adapter" => "postgis",
       "database" => database_name,
       "username" => database_user,
       "host" => the_host,
