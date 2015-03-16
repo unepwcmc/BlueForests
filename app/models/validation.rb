@@ -4,14 +4,14 @@ class Validation < ActiveRecord::Base
   serialize :coordinates
 
   belongs_to :area
-  belongs_to :admin
+  belongs_to :user
   has_many :photos
 
   validates :coordinates, presence: true
   validates :action, presence: true, inclusion: { in: %w(add delete validate) }
   validates :habitat, presence: true, inclusion: { in: Habitat.all.map { |h| h.to_param } }
   validates :condition, presence: true, unless: Proc.new { |v| v.action == 'delete' || v.habitat == 'seagrass' || v.habitat == 'sabkha' || v.habitat == 'saltmarsh' || v.habitat == 'algal_mat' || v.habitat == 'other' }
-  validates :admin, presence: true
+  validates :user, presence: true
 
   before_create do
     if coordinates.kind_of?(Array)
@@ -67,7 +67,7 @@ class Validation < ActiveRecord::Base
   end
 
   def country
-    area.try(:country) || admin.try(:country)
+    area.try(:country) || user.try(:country)
   end
 
   def upload_to_carto_db
