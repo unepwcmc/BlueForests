@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   devise :token_authenticatable, :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :country, presence: true
+  validates :country, presence: true, unless: :super_admin?
 
   before_save :ensure_authentication_token
 

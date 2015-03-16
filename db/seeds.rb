@@ -32,17 +32,30 @@ end
 
 def populate_users
   puts '### Creating test users'
-  COUNTRIES.each do |country|
-    ROLES.each do |role|
-      User.create({
-        email: "#{role[:name]}@#{country[:subdomain]}.blueforest.io",
-        password: "blueforest",
-        password_confirmation: 'blueforest',
-        country: Country.where(name: country[:name]).first,
-        roles: Role.where(name: role[:name])
-      })
+  create_test_user(nil, Role.where(name: 'super_admin'))
+
+  Country.all.each do |country|
+    Role.where("name != 'super_admin'").each do |role|
+      create_test_user(country, role)
     end
   end
+end
+
+def create_test_user country, roles
+  roles = Array.wrap(roles)
+  email = if country
+    "#{roles.first.name}@#{country.subdomain}.blueforest.io"
+  else
+    "#{roles.first.name}@blueforest.io"
+  end
+
+  User.create({
+    email: email,
+    password: 'blueforest',
+    password_confirmation: 'blueforest',
+    country: country,
+    roles: roles
+  })
 end
 
 populate
