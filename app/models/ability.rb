@@ -18,7 +18,7 @@ class Ability
 
   def project_manager
     can :manage, Area
-    can :manage, Validation, user_id: @user.id
+    can :manage, Validation, country: @user.country
     can :manage, User, country_id: @user.country_id
   end
 
