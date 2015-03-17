@@ -5,7 +5,7 @@ class Ability
     @user = user || User.new # guest user (not logged in)
     @user.roles.each { |role| send(role.name) }
 
-    if @user.roles.size == 0
+    if @user.roles.empty?
       can :read, Validation
     end
   end
