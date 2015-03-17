@@ -35,6 +35,8 @@ class UsersController < AdminController
   end
 
   def create
+    assign_country unless current_user.super_admin?
+
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -78,13 +80,16 @@ class UsersController < AdminController
     end
   end
 
+  private
+
   def user_params
-    params.require(:user).permit(
-      :email,
-      :password,
-      :password_confirmation,
-      :remember_me,
-      :role_ids
-    )
+    allowed = [:email, :password, :password_confirmation, :remember_me, :role_ids]
+    allowed << :country_id if current_user.super_admin?
+
+    params.require(:user).permit(*allowed)
+  end
+
+  def assign_country
+    @user.country = current_user.country
   end
 end
