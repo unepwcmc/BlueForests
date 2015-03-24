@@ -53,6 +53,10 @@ class Validation < ActiveRecord::Base
       first
   end
 
+  def self.most_recent_id_by_habitat relation=Validation
+    Hash[relation.group(:habitat).pluck('habitat, MAX(id)')]
+  end
+
   def json_coordinates
     if coordinates.kind_of?(Array)
       json_coordinates = coordinates
