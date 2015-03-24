@@ -1,0 +1,18 @@
+<td><%= validation.recorded_at %></td>
+<td>
+  <% if validation.user %>
+    <%= link_to(user_path(validation.user), validation.user.email) %>
+  <% else %>
+    -
+  <% end %>
+</td>
+<td><%= validation.action.capitalize %></td>
+<td><%= validation.habitat.gsub(/_/, ' ').capitalize %></td>
+<td><a href="#/<%= id %>">View</td>
+<td><a href="#/<%= id %>/edit">Edit</a></td>
+
+<% if @last_validation_id_by_habitat[validation.habitat] == validation.id %>
+  <td id="<%= id %>_delete" class="deleteme">Delete</td>
+<% else %>
+  <td></td>
+<% end %>
