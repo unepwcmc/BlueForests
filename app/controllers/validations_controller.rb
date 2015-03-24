@@ -2,49 +2,39 @@ class ValidationsController < AdminController
   before_filter :authenticate_user!
   load_and_authorize_resource
 
-  # GET /validations
-  # GET /validations.json
   def index
-    @validations = Validation.accessible_by(current_ability)
     @last_validation_id_by_habitat = Validation.most_recent_id_by_habitat(@validations)
     @areas = Area.all
     @photo = Photo.new
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @validations }
     end
   end
 
-  # GET /validations/1
-  # GET /validations/1.json
   def show
     @validation = Validation.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @validation }
     end
   end
 
-  # GET /validations/new
-  # GET /validations/new.json
   def new
     @validation = Validation.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: @validation }
     end
   end
 
-  # GET /validations/1/edit
   def edit
     @validation = Validation.find(params[:id])
   end
 
-  # POST /validations
-  # POST /validations.json
   def create
     @validation = Validation.new(validation_params)
     @validation.user = current_user
@@ -60,8 +50,6 @@ class ValidationsController < AdminController
     end
   end
 
-  # PUT /validations/1
-  # PUT /validations/1.json
   def update
     @validation = Validation.find(params[:id])
 
@@ -76,8 +64,6 @@ class ValidationsController < AdminController
     end
   end
 
-  # DELETE /validations/1
-  # DELETE /validations/1.json
   def destroy
     @validation = Validation.find(params[:id])
     habitat = @validation.habitat
