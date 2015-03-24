@@ -5,6 +5,7 @@ class Validation < ActiveRecord::Base
 
   belongs_to :area
   belongs_to :user
+  belongs_to :country
   has_many :photos
 
   validates :coordinates, presence: true
@@ -14,6 +15,8 @@ class Validation < ActiveRecord::Base
   validates :user, presence: true
 
   before_create do
+    self.country = area.try(:country) || user.try(:country)
+
     if coordinates.kind_of?(Array)
       self.coordinates = "#{coordinates}"
     end
@@ -37,8 +40,7 @@ class Validation < ActiveRecord::Base
   def self.undo_most_recent_by_habitat(habitat)
     validation = Validation.most_recent(habitat)
 
-    if validation.present? && validation.destroy
-      # Undo the most recent validation
+    if validation.try :destroy
       sql = CartodbQuery.remove(CartoDb.table_name(habitat))
       validation.cartodb_query(sql)
     end
@@ -64,10 +66,6 @@ class Validation < ActiveRecord::Base
     json_coordinates = json_coordinates.gsub(/(\[)|(\])/, "")
 
     json_coordinates
-  end
-
-  def country
-    area.try(:country) || user.try(:country)
   end
 
   def upload_to_carto_db
