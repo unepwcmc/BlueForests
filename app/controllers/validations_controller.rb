@@ -5,15 +5,9 @@ class ValidationsController < AdminController
   # GET /validations
   # GET /validations.json
   def index
-    # Admins can view all validations, users only their own
-    # TODO change this to super_admin
-    if current_user.roles.find_by_name("admin")
-      @validations = Validation.all
-    else
-      @validations = current_user.validations
-    end
+    @validations = Validation.accessible_by(current_ability)
+    @last_validation_id_by_habitat = Validation.most_recent_id_by_habitat(@validations)
     @areas = Area.all
-
     @photo = Photo.new
 
     respond_to do |format|
