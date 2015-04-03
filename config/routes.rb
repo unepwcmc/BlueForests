@@ -7,6 +7,7 @@ BlueCarbon::Application.routes.draw do
   get 'users/me' => 'users#me'
 
   get 'proxy/:habitat/:z/:x/:y' => 'proxy#tiles'
+  post 'proxy/maps' => 'proxy#maps'
 
   devise_for :users, path_prefix: 'my', controllers: { sessions: 'sessions' }
   resources :users
