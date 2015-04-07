@@ -3,7 +3,11 @@ module CartoDb::Proxy
     sql = sql(habitat, opts[:country], opts[:where])
     cartocss = opts[:style] if opts[:style]
 
-    carto_response = CartoDb.post(maps_url, body: mapconfig_json(sql, cartocss))
+    carto_response = CartoDb.post(
+      maps_url,
+      body: mapconfig_json(sql, cartocss),
+      headers: {'Content-Type' => 'application/json'}
+    )
     extract_tiles_url(carto_response.body)
   end
 

@@ -46,7 +46,8 @@ RSpec.describe CartoDb::Proxy do
   describe '.new_map' do
     before(:each) do
       stub_request(:post, url).to_return(
-        body: '{"layergroupid":"thelayerid:0", "cdn_url": {"http": "http://cdb.com", "https": "https://cdb.com"}}'
+        body: '{"layergroupid":"thelayerid:0", "cdn_url": {"http": "http://cdb.com", "https": "https://cdb.com"}}',
+        headers: {'Content-Type' => 'application/json'}
       )
     end
 
