@@ -11,35 +11,6 @@ RSpec.describe ProxyController, type: :controller do
     @request.host = "japan.blueforest.io"
   end
 
-  describe 'GET #tiles' do
-    subject { response.body }
-
-    let(:coords) { {x: '12', y: '24', z: '8' } }
-    let(:table) { 'blueforest_mangrove_test' }
-
-    describe 'given habitat and coords' do
-      it 'returns the tile from CartoDb proxy' do
-        expect(CartoDb::Proxy).to(
-          receive(:tile).with(habitat, coords, {}).and_return('the image')
-        )
-
-        get :tiles, {habitat: habitat}.merge(coords)
-        is_expected.to eq('the image')
-      end
-    end
-
-    describe 'given habitat, coords, sql conditions and style' do
-      it 'returns the tile from CartoDb proxy' do
-        expect(CartoDb::Proxy).to(
-          receive(:tile).with(habitat, coords, options).and_return('the image')
-        )
-
-        get :tiles, {habitat: habitat}.merge(coords).merge(options)
-        is_expected.to eq('the image')
-      end
-    end
-  end
-
   describe 'POST #maps' do
     let(:location) { 'http://location' }
     before(:each) do

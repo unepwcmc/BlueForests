@@ -1,8 +1,4 @@
 class ProxyController < ApplicationController
-  def tiles
-    send_data(tile, type: 'image/png', disposition: 'inline')
-  end
-
   def maps
     tiles_url = new_map
     head :created, location: tiles_url

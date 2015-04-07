@@ -1,12 +1,4 @@
 module CartoDb::Proxy
-  def self.tile habitat, coords, opts={}
-    query = {sql: sql(habitat, opts[:country], opts[:where])}
-    query[:style] = opts[:style] if opts[:style]
-
-    url = tiles_url(CartoDb.table_name(habitat), coords, query)
-    CartoDb.get(url).body
-  end
-
   def self.new_map habitat, opts={}
     sql = sql(habitat, opts[:country], opts[:where])
     cartocss = opts[:style] if opts[:style]
@@ -36,11 +28,6 @@ module CartoDb::Proxy
 
   def self.maps_url
     CartoDb.build_url("/api/v1/map")
-  end
-
-  def self.tiles_url table, coords, opts
-    coords = "#{coords[:z]}/#{coords[:x]}/#{coords[:y]}"
-    CartoDb.build_url("/tiles/#{table}/#{coords}.png", query: opts)
   end
 
   def self.sql habitat, country, where
