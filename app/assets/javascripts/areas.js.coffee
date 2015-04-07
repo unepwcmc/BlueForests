@@ -1,37 +1,13 @@
-$(document).ready ->
-  initializeMap('map') if $('#map').length > 0
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-initializeMap = (map_id) ->
-  baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 17})
-  baseSatellite = new L.BingLayer("ApZALeudlU-OTm7Me2qekFHrstBXNdv3hft6qy3ZeTQWD6a460-QqCQyYnDigINc", {type: "Aerial", maxZoom: 19})
+$ ->
+  if $('#map').length > 0
+    map = new Map('map', country: $('#map').data('country-iso'))
+    addDraw(map)
 
-  map = L.map map_id,
-    center: [24.5, 54]
-    zoom: 9
-    minZoom: 8
-    maxZoom: 19
-    layers: [baseSatellite]
-
-  # Layers
-  baseMaps =
-    'Map': baseMap
-    'Satellite': baseSatellite
-
-  habitats = ['Mangrove', 'Seagrass', 'Sabkha', 'Saltmarsh', 'Algal Mat', 'Other']
-
-  habitatOverlay = (habitat) ->
-    "/proxy/#{habitat.replace(' ', '_')}/{z}/{x}/{y}.png?where=toggle = true AND (action <> 'delete' OR action IS NULL)"
-
-
-  overlayMaps = habitats.reduce( (total, habitat) ->
-    overlay = habitatOverlay(habitat)
-
-    total[habitat] = L.tileLayer(overlay).addTo(map)
-    total
-  , {})
-
-  L.control.layers(baseMaps, overlayMaps).addTo(map)
-
+addDraw = (map) ->
   drawnItems = new L.LayerGroup()
 
   if findAreaCoordinates()

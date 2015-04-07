@@ -1,3 +1,4 @@
+//= require async
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
@@ -16,6 +17,7 @@
 //= require data_tables_bootstrap
 //= require ajaxupload
 //= require OpenLayers
+//= require_tree ./modules
 //= require areas
 //= require_tree ./analysis/lib
 //= require_tree ./analysis/templates/
