@@ -25,7 +25,7 @@ module CartoDb::Proxy
   end
 
   def self.mapconfig_template
-    @@mapconfig_template = ERB.new(
+    @@mapconfig_template ||= ERB.new(
       File.read(CartoDb::TEMPLATES_PATH.join('mapconfig.json.erb'))
     )
   end

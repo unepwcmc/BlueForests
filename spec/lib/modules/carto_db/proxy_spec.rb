@@ -5,43 +5,10 @@ RSpec.describe CartoDb::Proxy do
   let(:api_key) { Rails.application.secrets.cartodb['api_key'] }
 
   let(:habitat) { 'seagrass' }
-  let(:expected_sql) { 'SELECT * FROM blueforest_seagrass_test' }
+  let(:expected_sql) { "SELECT * FROM blueforest_seagrass_test WHERE country_id = '#{country.iso}'" }
   let(:style) { "#seagrass { line-opacity: 0; }" }
-  let(:country) { FactoryGirl.create(:country, name: 'Japan') }
+  let(:country) { FactoryGirl.create(:country, iso: 'JP') }
   let(:where) { "toggle IS TRUE" }
-
-  describe ".tile" do
-    let(:url) { "https://#{username}.cartodb.com/tiles/blueforest_#{habitat}_test/#{coords[:z]}/#{coords[:x]}/#{coords[:y]}.png" }
-    let(:coords) { {x: 1, y: 21, z: 17} }
-
-    context "given table and coordinates" do
-      subject { CartoDb::Proxy.tile(habitat, coords) }
-
-      it "returns the tiles requested from cartodb" do
-
-        stub_request(:get, url).
-          with({query: {api_key: api_key, sql: expected_sql}}).
-          to_return(:status => 200, :body => 'this is the image', :headers => {})
-
-        expect(subject).to eq('this is the image')
-      end
-    end
-
-    context "given table, coordinates, where condition and style" do
-
-      subject { CartoDb::Proxy.tile(habitat, coords, country: country, where: where, style: style) }
-
-      it "returns the tiles requested from cartodb" do
-        expected_sql = 'SELECT * FROM blueforest_seagrass_test_Japan WHERE toggle IS TRUE'
-
-        stub_request(:get, url).
-          with({query: {api_key: api_key, sql: expected_sql, style: style}}).
-          to_return(:status => 200, :body => 'this is the image', :headers => {})
-
-        expect(subject).to eq('this is the image')
-      end
-    end
-  end
 
   describe '.new_map' do
     before(:each) do
