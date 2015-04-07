@@ -63,8 +63,8 @@ RSpec.describe CartoDb::Proxy do
         expect(WebMock).to have_requested(:post, url).with(body: '''
           { "version": "1.0.1", "layers": [{
             "type": "cartodb", "options":
-              { "cartocss_version": "2.0.1", "cartocss": #seagrass { line-opacity: 0; },
-                "sql": SELECT * FROM blueforest_seagrass_test_Japan WHERE toggle IS TRUE
+              { "cartocss_version": "2.0.1", "cartocss": "#seagrass { line-opacity: 0; }",
+                "sql": "SELECT * FROM blueforest_seagrass_test WHERE country_id = \'JP\' AND toggle IS TRUE"
               }
             }]
           }'''.squish

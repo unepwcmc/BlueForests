@@ -44,16 +44,13 @@ module CartoDb::Proxy
   end
 
   def self.sql habitat, country, where
-    parts = "SELECT * FROM #{source(habitat, country)}"
-    parts << " WHERE #{where}" if where
+    parts = "SELECT * FROM #{source(habitat)}"
+    parts << " WHERE country_id = '#{country.iso}'"
+    parts << " AND #{where}" if where
     parts
   end
 
-  def self.source habitat, country
-    if country
-      CartoDb.view_name(habitat, country)
-    else
-      CartoDb.table_name(habitat)
-    end
+  def self.source habitat
+    CartoDb.table_name(habitat)
   end
 end

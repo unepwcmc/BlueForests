@@ -14,15 +14,9 @@ class ProxyController < ApplicationController
     CartoDb::Proxy.new_map(params[:habitat], options)
   end
 
-  def tile
-    CartoDb::Proxy.tile(params[:habitat], coords, options)
-  end
-
-  def coords
-    @coords ||= params.slice(:x, :y, :z).symbolize_keys
-  end
-
   def options
-    @query ||= params.slice(:country, :where, :style).symbolize_keys
+    @query ||= params.slice(:country, :where, :style).tap do |opts|
+      opts['country'] = Country.find_by_iso(opts['country']) if opts['country']
+    end.symbolize_keys
   end
 end

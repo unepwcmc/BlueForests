@@ -32,9 +32,9 @@ setupTranslationLink = ->
 
 $(document).ready ->
   if $('#map_analysis').length > 0
-    countryName = $('#map_analysis').data('country-name')
+    countryIso = $('#map_analysis').data('country-iso')
 
-    map = initializeMap(country: countryName)
-    initializePica(map, country: countryName)
+    map = initializeMap(country: countryIso)
+    initializePica(map, country: countryIso)
 
   setupTranslationLink()

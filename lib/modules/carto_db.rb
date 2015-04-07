@@ -18,7 +18,7 @@ module CartoDb
   end
 
   def self.view_name habitat, country
-    "#{table_name(habitat)}_#{country.name}"
+    "#{table_name(habitat)}_#{country.iso}"
   end
 
   def self.build_url path, opts={}
