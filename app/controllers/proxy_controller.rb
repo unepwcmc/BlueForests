@@ -1,19 +1,18 @@
 class ProxyController < ApplicationController
-  def tiles
-    send_data(tile, type: 'image/png', disposition: 'inline')
+  def maps
+    tiles_url = new_map
+    head :created, location: tiles_url
   end
 
   private
 
-  def tile
-    CartoDb::Proxy.tile(params[:habitat], coords, query)
+  def new_map
+    CartoDb::Proxy.new_map(params[:habitat], options)
   end
 
-  def coords
-    @coords ||= params.slice(:x, :y, :z).symbolize_keys
-  end
-
-  def query
-    @query ||= params.slice(:where, :style).symbolize_keys
+  def options
+    @query ||= params.slice(:country, :where, :style).tap do |opts|
+      opts['country'] = Country.find_by_iso(opts['country']) if opts['country']
+    end.symbolize_keys
   end
 end

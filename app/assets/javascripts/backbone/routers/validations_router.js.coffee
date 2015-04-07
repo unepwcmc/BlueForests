@@ -9,13 +9,13 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
   routes:
     "new"                                : "newValidation"
     "new/:z/:y/:x"                       : "newValidation"
-    "new/:z/:y/:x/:prev_validation_id"   : "newValidation"
+    "new/:z/:y/:x/:prevValidationId"   : "newValidation"
     "index"                              : "index"
     ":id/edit"                           : "edit"
     ":id"                                : "show"
     ".*"                                 : "index"
 
-  newValidation: (z, y, x, prev_validation_id) ->
+  newValidation: (z, y, x, prevValidationId) ->
     @view = new BlueCarbon.Views.Validations.NewView(
       collection: @validations, areas: @areas)
     $("#validations").html(@view.render().el)
@@ -24,7 +24,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     args =
       map_id: 'map'
       coordinates: @findCoordinates()
-      prev_validation_id: prev_validation_id
+      prevValidationId: prevValidationId
     if z && y && x
       @initializeMap _.extend( {center: [y, x], zoom: z }, args )
     else
@@ -167,21 +167,16 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     @renderUndoButton()
 
   initializeMap: (args) ->
-    map_id = args.map_id
-    prev_validation_id = args.prev_validation_id
+    mapId = args.map_id
+    prevValidationId = args.prevValidationId
     coordinates = args.coordinates
-    center = args.center || [24.5, 54]
-    zoom = args.zoom || 9
 
-    baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 19})
-    baseSatellite =  new L.BingLayer("ApZALeudlU-OTm7Me2qekFHrstBXNdv3hft6qy3ZeTQWD6a460-QqCQyYnDigINc", {type: "Aerial", maxZoom: 19})
+    mapOpts = {}
+    mapOpts.country = $("##{mapId}").data('country-iso')
+    mapOpts.center = args.center if args.center?
+    mapOpts.zoom = args.zoom if args.zoom?
 
-    map = L.map map_id,
-      center: center
-      zoom: zoom
-      minZoom: 8
-      maxZoom: 19
-      layers: [baseSatellite]
+    map = new Map(mapId, mapOpts).map
 
     # Clean polygonDraw
     delete @polygonDraw
@@ -201,32 +196,11 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     # Scale
     L.control.scale().addTo(map)
 
-    # Layers
-    baseMaps =
-      'Map': baseMap
-      'Satellite': baseSatellite
-
-    habitats = ['Mangrove', 'Seagrass', 'Sabkha', 'Saltmarsh', 'Algal Mat', 'Other']
-
-    habitatOverlay = (habitat) ->
-      "/proxy/#{habitat.replace(' ', '_')}/{z}/{x}/{y}.png?where=toggle = true AND (action <> 'delete' OR action IS NULL)"
-
-
-    overlayMaps = habitats.reduce( (total, habitat) ->
-      overlay = habitatOverlay(habitat)
-
-      total[habitat] = L.tileLayer(overlay).addTo(map)
-      total
-    , {})
-
-    L.control.layers(baseMaps, overlayMaps).addTo(map)
-
-
     drawnItems = new L.LayerGroup()
 
     # If we have a previous validation, then show it on the map.
-    if prev_validation_id
-      validation = @validations.get prev_validation_id
+    if prevValidationId
+      validation = @validations.get prevValidationId
       coords = JSON.parse(validation.get "coordinates")
       latLngCoordinates = _.map(coords, (arr) -> [arr[1], arr[0]])
       p = new L.polygon(latLngCoordinates)
