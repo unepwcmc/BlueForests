@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_country
-    if current_user && !current_user.super_admin?
+    @current_country = if current_user && !current_user.super_admin?
       current_user.country
     else
       Country.where(subdomain: subdomain).first
