@@ -1,0 +1,11 @@
+{
+  "version": "<%= Rails.application.secrets.cartodb['mapconfig']['version'] %>",
+  "layers": [{
+    "type": "cartodb",
+    "options": {
+      "cartocss_version": "<%= Rails.application.secrets.cartodb['mapconfig']['cartocss_version'] %>",
+      "cartocss": "<%= cartocss %>",
+      "sql": "<%= sql %>"
+    }
+  }]
+}

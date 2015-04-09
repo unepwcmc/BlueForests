@@ -86,12 +86,12 @@ RSpec.describe CartoDb do
 
   describe '.view_name' do
     describe 'given a habitat name and a country name' do
-      subject { CartoDb.view_name(habitat, country) }
+      subject { CartoDb.view_name(habitat, country.iso) }
       let(:habitat) { 'mangrove' }
-      let(:country) { FactoryGirl.build(:country, name: 'Japan') }
+      let(:country) { FactoryGirl.build(:country, iso: 'JP') }
 
       it 'returns the correct table name' do
-        expect(subject).to eq("#{table_prefix}_mangrove_test_Japan")
+        expect(subject).to eq("#{table_prefix}_mangrove_test_JP")
       end
     end
   end

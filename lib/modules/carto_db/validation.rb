@@ -1,5 +1,4 @@
 class CartoDb::Validation
-  BASE_PATH = Rails.root.join('lib', 'modules', 'carto_db', 'templates')
 
   def self.create validation
     new(validation, validation.action).run
@@ -27,7 +26,7 @@ class CartoDb::Validation
   end
 
   def template
-    File.read(BASE_PATH.join("#{@action}.sql.erb"))
+    File.read(CartoDb::TEMPLATES_PATH.join("#{@action}.sql.erb"))
   end
 
   def table_name
