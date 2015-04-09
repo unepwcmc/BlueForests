@@ -86,7 +86,7 @@ RSpec.describe CartoDb do
 
   describe '.view_name' do
     describe 'given a habitat name and a country name' do
-      subject { CartoDb.view_name(habitat, country.iso) }
+      subject { CartoDb.view_name(habitat, country) }
       let(:habitat) { 'mangrove' }
       let(:country) { FactoryGirl.build(:country, iso: 'JP') }
 
