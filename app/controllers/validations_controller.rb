@@ -24,6 +24,9 @@ class ValidationsController < AdminController
   end
 
   def new
+    @validations = Validation.accessible_by(current_ability)
+    @areas = Area.accessible_by(current_ability)
+    @photo = Photo.new
     @validation = Validation.new
 
     respond_to do |format|
