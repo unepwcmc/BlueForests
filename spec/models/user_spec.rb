@@ -6,8 +6,10 @@ RSpec.describe User, type: :model do
     subject { Ability.new(user) }
 
     let(:user) { nil }
+
     let(:japan) { FactoryGirl.create(:country, name: 'Japan') }
     let(:kosovo) { FactoryGirl.create(:country, name: 'Kosovo') }
+
     let(:kosovo_validation) { Validation.new(country: kosovo) }
     let(:japan_validation) { Validation.new(country: japan) }
 
@@ -15,6 +17,7 @@ RSpec.describe User, type: :model do
       let(:user) { FactoryGirl.create(:super_admin, country: japan) }
       it { is_expected.to be_able_to(:manage, User.new(country: kosovo)) }
       it { is_expected.to be_able_to(:manage, kosovo_validation) }
+      it { is_expected.to be_able_to(:read, Role.new(name: 'super_admin')) }
     end
 
     context "when is a project manager" do
@@ -25,6 +28,7 @@ RSpec.describe User, type: :model do
       it { is_expected.to_not be_able_to(:manage, User.new(country: kosovo)) }
       it { is_expected.to_not be_able_to(:manage, kosovo_validation) }
       it { is_expected.to be_able_to(:manage, japan_validation) }
+      it { is_expected.to be_able_to(:read, Role.new(name: 'project_manager')) }
     end
 
     context "when is a project participant" do
@@ -36,6 +40,8 @@ RSpec.describe User, type: :model do
       it { is_expected.to_not be_able_to(:manage, User.new) }
       it { is_expected.to_not be_able_to(:manage, japan_validation) }
       it { is_expected.to be_able_to(:manage, user_validation) }
+      it { is_expected.to be_able_to(:read, Role.new(name: 'project_participant')) }
+      it { is_expected.to_not be_able_to(:read, Role.new(name: 'project_manager')) }
     end
   end
 
