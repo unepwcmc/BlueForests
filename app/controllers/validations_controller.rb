@@ -81,15 +81,33 @@ class ValidationsController < AdminController
   end
 
   def export
-    url = Habitat.shapefile_export_url(params[:habitat])
-    puts url
-    data = open(url).read
-    habitat_name = params[:habitat]
-    filename = "BlueCarbon_#{habitat_name}_Download.zip"
-    send_data data, :filename => filename
+    download = CartoDb::Proxy.download_shapefile(
+      params[:habitat], country: export_country
+    )
+
+    send_data(
+      download,
+      filename: export_filename(params[:habitat], export_country)
+    )
   end
 
   private
+
+  def export_country
+    @country ||= begin
+      if params[:country_id] && current_user.super_admin?
+        Country.find(params[:country_id]) rescue nil
+      else
+        current_user.country
+      end
+    end
+  end
+
+  def export_filename habitat, country
+    filename = "blueforest_#{params[:habitat]}_"
+    filename << "#{country.try(:subdomain) || 'all'}_"
+    filename << "download.zip"
+  end
 
   def load_validations
     @validations = Validation.accessible_by(current_ability)

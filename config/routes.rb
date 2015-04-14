@@ -12,9 +12,10 @@ BlueCarbon::Application.routes.draw do
   devise_for :users, path_prefix: 'my', controllers: { sessions: 'sessions' }
   resources :users
 
-  resources :validations
-  get '/export/:habitat' => 'validations#export'
-  get '/export' => 'validations#export'
+  resources :validations do
+    collection { get :export }
+  end
+
   resources :photos, only: :create
   resources :areas do
     resources :mbtiles, only: :show
