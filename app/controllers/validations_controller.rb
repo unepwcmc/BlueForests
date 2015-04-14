@@ -1,6 +1,7 @@
 class ValidationsController < AdminController
   before_filter :authenticate_user!
-  load_and_authorize_resource
+  before_filter :load_validations, only: :index
+  load_and_authorize_resource except: :index
 
   def index
     @last_validation_id_by_habitat = Validation.most_recent_id_by_habitat(@validations)
@@ -86,6 +87,14 @@ class ValidationsController < AdminController
   end
 
   private
+
+  def load_validations
+    @validations = Validation.accessible_by(current_ability)
+
+    if params[:country_id] && current_user.super_admin?
+      @validations = @validations.where(country_id: params[:country_id])
+    end
+  end
 
   def validation_params
     params.require(:validation).permit(

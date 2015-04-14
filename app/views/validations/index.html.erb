@@ -2,7 +2,7 @@
   <div class="page-header">
     <a href="#/new" class="btn btn-primary"><i class="icon-plus icon-white"></i> New Validation</a>
       <div class="btn-group">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" id="export" href="#">
           Export
           <span class="caret"></span>
         </a>
@@ -15,22 +15,40 @@
           <li><a href="/export/other">Other</a></li>
         </ul>
       </div>
+      <% if current_user.super_admin? %>
+        <div class="btn-group">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" id="country-select" href="#">
+            Filter by country
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="country-select">
+            <% Country.pluck(:id, :name).each do |id, name| %>
+              <li><%= link_to name, validations_path(country_id: id) %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
     <h1>Listing validations</h1>
   </div>
-  <table id="validations-table" class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>User</th>
-        <th>Edit Type</th>
-        <th>Habitat</th>
-        <th></th>
-        <th></th>
-        <th>Latest</th>
-      </tr>
-    </thead>
-    <tbody>
-      <%= render partial: 'validation', collection: @validations %>
-    </tbody>
-  </table>
+  <% if @validations.any? %>
+    <table id="validations-table" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <% if current_user.super_admin? %><th>Country</th><% end %>
+          <th>User</th>
+          <th>Edit Type</th>
+          <th>Habitat</th>
+          <th></th>
+          <th></th>
+          <th>Latest</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'validation', collection: @validations %>
+      </tbody>
+    </table>
+  <% else %>
+    <h2 style="text-align: center">There are no validations yet</h2>
+  <% end %>
 </div>
