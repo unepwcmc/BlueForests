@@ -23,12 +23,13 @@ module CartoDb
 
   def self.build_url path, opts={}
     opts = {with_api_key: true}.merge opts
-
-    URI::HTTPS.build(
+    uri = URI::HTTPS.build(
       host: "#{USERNAME}.cartodb.com",
       path: path,
       query: build_querystring(opts)
-    ).to_s
+    )
+
+    opts[:as_uri] ? uri : uri.to_s
   end
 
   private
