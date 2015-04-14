@@ -1,0 +1,21 @@
+<tr>
+  <td><%= validation.recorded_at %></td>
+  <% if current_user.super_admin? %><td><%= validation.country.try(:name) %></td><% end %>
+  <td>
+    <% if validation.user %>
+      <%= link_to(validation.user.email, user_path(validation.user)) %>
+    <% else %>
+      -
+    <% end %>
+  </td>
+  <td><%= validation.action.capitalize %></td>
+  <td><%= validation.habitat.gsub(/_/, ' ').capitalize %></td>
+  <td><a href="#/<%= validation.id %>">View</td>
+  <td><a href="#/<%= validation.id %>/edit">Edit</a></td>
+
+  <% if @last_validation_id_by_habitat[validation.habitat] == validation.id %>
+    <td id="<%= validation.id %>_delete" class="deleteme">Delete</td>
+  <% else %>
+    <td></td>
+  <% end %>
+</tr>

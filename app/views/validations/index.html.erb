@@ -1,12 +1,53 @@
 <div id="validations" class="static">
+  <div class="page-header">
+    <a href="<%= new_validation_path %>" class="btn btn-primary"><i class="icon-plus icon-white"></i> New Validation</a>
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" id="export" href="#">
+          Export
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="export">
+          <% Habitat.all.each do |habitat| %>
+            <li>
+              <a href="<%= export_validations_path(habitat: habitat.to_param, country_id: params[:country_id]) %>"><%= habitat.pretty_name %></a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <% if current_user.super_admin? %>
+        <div class="btn-group">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" id="country-select" href="#">
+            Filter by country
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="country-select">
+            <% Country.pluck(:id, :name).each do |id, name| %>
+              <li><%= link_to name, validations_path(country_id: id) %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <h1>Listing validations</h1>
+  </div>
+  <% if @validations.any? %>
+    <table id="validations-table" class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <% if current_user.super_admin? %><th>Country</th><% end %>
+          <th>User</th>
+          <th>Edit Type</th>
+          <th>Habitat</th>
+          <th></th>
+          <th></th>
+          <th>Latest</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render partial: 'validation', collection: @validations %>
+      </tbody>
+    </table>
+  <% else %>
+    <h2 style="text-align: center">There are no validations yet</h2>
+  <% end %>
 </div>
-
-<script type="text/javascript">
-  $(function() {
-      window.router = new BlueCarbon.Routers.ValidationsRouter({
-        validations: <%= @validations.to_json(include: [:user, photos: {only: :id, methods: [:attachment_url, :thumbnail_url]}]).html_safe -%>,
-        areas: <%= @areas.to_json.html_safe %>
-      });
-    Backbone.history.start();
-  });
-</script>

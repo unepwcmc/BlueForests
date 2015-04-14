@@ -83,7 +83,7 @@ class UsersController < AdminController
   private
 
   def user_params
-    allowed = [:email, :password, :password_confirmation, :remember_me, :role_ids]
+    allowed = [:email, :password, :password_confirmation, {role_ids: []}, :remember_me]
     allowed << :country_id if current_user.super_admin?
 
     params.require(:user).permit(*allowed)

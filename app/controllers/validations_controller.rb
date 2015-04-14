@@ -1,56 +1,44 @@
 class ValidationsController < AdminController
   before_filter :authenticate_user!
-  load_and_authorize_resource
+  before_filter :load_validations, only: :index
+  load_and_authorize_resource except: :index
 
-  # GET /validations
-  # GET /validations.json
   def index
-    # Admins can view all validations, users only their own
-    # TODO change this to super_admin
-    if current_user.roles.find_by_name("admin")
-      @validations = Validation.all
-    else
-      @validations = current_user.validations
-    end
+    @last_validation_id_by_habitat = Validation.most_recent_id_by_habitat(@validations)
     @areas = Area.all
-
     @photo = Photo.new
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.json { render json: @validations }
     end
   end
 
-  # GET /validations/1
-  # GET /validations/1.json
   def show
     @validation = Validation.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.json { render json: @validation }
     end
   end
 
-  # GET /validations/new
-  # GET /validations/new.json
   def new
+    @validations = Validation.accessible_by(current_ability)
+    @areas = Area.accessible_by(current_ability)
+    @photo = Photo.new
     @validation = Validation.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render json: @validation }
     end
   end
 
-  # GET /validations/1/edit
   def edit
     @validation = Validation.find(params[:id])
   end
 
-  # POST /validations
-  # POST /validations.json
   def create
     @validation = Validation.new(validation_params)
     @validation.user = current_user
@@ -66,8 +54,6 @@ class ValidationsController < AdminController
     end
   end
 
-  # PUT /validations/1
-  # PUT /validations/1.json
   def update
     @validation = Validation.find(params[:id])
 
@@ -82,8 +68,6 @@ class ValidationsController < AdminController
     end
   end
 
-  # DELETE /validations/1
-  # DELETE /validations/1.json
   def destroy
     @validation = Validation.find(params[:id])
     habitat = @validation.habitat
@@ -97,15 +81,41 @@ class ValidationsController < AdminController
   end
 
   def export
-    url = Habitat.shapefile_export_url(params[:habitat])
-    puts url
-    data = open(url).read
-    habitat_name = params[:habitat]
-    filename = "BlueCarbon_#{habitat_name}_Download.zip"
-    send_data data, :filename => filename
+    download = CartoDb::Proxy.download_shapefile(
+      params[:habitat], country: export_country
+    )
+
+    send_data(
+      download,
+      filename: export_filename(params[:habitat], export_country)
+    )
   end
 
   private
+
+  def export_country
+    @country ||= begin
+      if params[:country_id] && current_user.super_admin?
+        Country.find(params[:country_id]) rescue nil
+      else
+        current_user.country
+      end
+    end
+  end
+
+  def export_filename habitat, country
+    filename = "blueforest_#{params[:habitat]}_"
+    filename << "#{country.try(:subdomain) || 'all'}_"
+    filename << "download.zip"
+  end
+
+  def load_validations
+    @validations = Validation.accessible_by(current_ability)
+
+    if params[:country_id] && current_user.super_admin?
+      @validations = @validations.where(country_id: params[:country_id])
+    end
+  end
 
   def validation_params
     params.require(:validation).permit(

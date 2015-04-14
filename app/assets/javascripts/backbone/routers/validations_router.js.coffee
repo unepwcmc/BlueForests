@@ -1,5 +1,7 @@
 class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
   initialize: (options) ->
+    @country = options.country
+
     @validations = new BlueCarbon.Collections.ValidationsCollection()
     @validations.reset options.validations
 
@@ -9,7 +11,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
   routes:
     "new"                                : "newValidation"
     "new/:z/:y/:x"                       : "newValidation"
-    "new/:z/:y/:x/:prevValidationId"   : "newValidation"
+    "new/:z/:y/:x/:prevValidationId"     : "newValidation"
     "index"                              : "index"
     ":id/edit"                           : "edit"
     ":id"                                : "show"
@@ -17,7 +19,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
 
   newValidation: (z, y, x, prevValidationId) ->
     @view = new BlueCarbon.Views.Validations.NewView(
-      collection: @validations, areas: @areas)
+      country: @country, collection: @validations, areas: @areas)
     $("#validations").html(@view.render().el)
 
     # Map

@@ -24,7 +24,7 @@ describe Mbtile do
       }
 
       it "returns true" do
-        expect(subject).to eq(true)
+        is_expected.to eq(true)
       end
     end
 
@@ -36,13 +36,13 @@ describe Mbtile do
       }
 
       it "returns false" do
-        expect(subject).to eq(false)
+        is_expected.to eq(false)
       end
     end
 
     describe "given an area with no validations" do
       it "returns false" do
-        expect(subject).to eq(false)
+        is_expected.to eq(false)
       end
     end
   end

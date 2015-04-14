@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216140627) do
+ActiveRecord::Schema.define(version: 20150323162045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "hstore"
   enable_extension "postgis"
 
   create_table "areas", force: true do |t|
@@ -128,6 +127,7 @@ ActiveRecord::Schema.define(version: 20150216140627) do
     t.text     "notes"
     t.integer  "condition"
     t.string   "species"
+    t.integer  "country_id"
   end
 
 end

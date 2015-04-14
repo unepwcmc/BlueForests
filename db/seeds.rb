@@ -5,7 +5,10 @@ ROLES = [
 ]
 
 COUNTRIES = [
-  {name: 'Japan', subdomain: 'japan', iso: 'JP'}
+  {name: 'Mozambique', subdomain: 'mozambique', iso: 'MZ'},
+  {name: 'Ecuador', subdomain: 'ecuador', iso: 'EC'},
+  {name: 'Indonesia', subdomain: 'indonesia', iso: 'ID'},
+  {name: 'Madagascar', subdomain: 'madagascar', iso: 'MD'}
 ]
 
 def populate

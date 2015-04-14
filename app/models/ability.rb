@@ -5,7 +5,7 @@ class Ability
     @user = user || User.new # guest user (not logged in)
     @user.roles.each { |role| send(role.name) }
 
-    if @user.roles.size == 0
+    if @user.roles.empty?
       can :read, Validation
     end
   end
@@ -17,13 +17,13 @@ class Ability
   end
 
   def project_manager
-    can :manage, Area
-    can :manage, Validation, user_id: @user.id
+    can :manage, Area, country_id: @user.country_id
+    can :manage, Validation, country_id: @user.country_id
     can :manage, User, country_id: @user.country_id
   end
 
   def project_participant
-    can :read, Area
+    can :read, Area, country_id: @user.country_id
     can :manage, Validation, user_id: @user.id
     can [:show, :update, :destroy], User, id: @user.id
   end

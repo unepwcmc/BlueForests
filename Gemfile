@@ -37,7 +37,7 @@ end
 gem 'capistrano'
 gem 'capistrano-ext'
 gem 'capistrano-sidekiq', '~> 0.4.0'
-gem 'rvm-capistrano'
+gem 'rvm-capistrano', require: false
 gem 'brightbox', '>=2.3.9'
 
 gem 'rspec-rails', '~> 3.2.0', group: [:test, :development]
