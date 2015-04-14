@@ -14,17 +14,20 @@ class Ability
     can :manage, Area
     can :manage, Validation
     can :manage, User
+    can :read, Role
   end
 
   def project_manager
     can :manage, Area, country_id: @user.country_id
     can :manage, Validation, country_id: @user.country_id
     can :manage, User, country_id: @user.country_id
+    can :read, Role, name: ['project_manager', 'project_participant']
   end
 
   def project_participant
     can :read, Area, country_id: @user.country_id
     can :manage, Validation, user_id: @user.id
     can [:show, :update, :destroy], User, id: @user.id
+    can :read, Role, name: 'project_participant'
   end
 end
