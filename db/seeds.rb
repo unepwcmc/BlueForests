@@ -47,15 +47,15 @@ end
 def create_test_user country, roles
   roles = Array.wrap(roles)
   email = if country
-    "#{roles.first.name}@#{country.subdomain}.blueforest.io"
+    "#{roles.first.name}@#{country.subdomain}.blueforests.io"
   else
-    "#{roles.first.name}@blueforest.io"
+    "#{roles.first.name}@blueforests.io"
   end
 
   User.create({
     email: email,
-    password: 'blueforest',
-    password_confirmation: 'blueforest',
+    password: 'blueforests',
+    password_confirmation: 'blueforests',
     country: country,
     roles: roles
   })
