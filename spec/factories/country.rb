@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :country do
-    name "Venezuela"
-    subdomain  "venez"
-    iso "VZ"
+    sequence(:name) { |n| "Venezuela N. #{n}" }
+    sequence(:subdomain) { |n| "venez#{n}" }
+    sequence(:iso) { |n| "V#{n}" }
   end
 end
