@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  let(:country) { FactoryGirl.create(:country, subdomain: 'japan') }
+  let(:country) { FactoryGirl.create(:country, subdomain: 'mozambique') }
   let(:another_country) { FactoryGirl.create(:country) }
 
   before :each do

@@ -7,38 +7,38 @@ RSpec.describe User, type: :model do
 
     let(:user) { nil }
 
-    let(:japan) { FactoryGirl.create(:country, name: 'Japan') }
+    let(:mozambique) { FactoryGirl.create(:country, name: 'mozambique') }
     let(:kosovo) { FactoryGirl.create(:country, name: 'Kosovo') }
 
     let(:kosovo_validation) { Validation.new(country: kosovo) }
-    let(:japan_validation) { Validation.new(country: japan) }
+    let(:mozambique_validation) { Validation.new(country: mozambique) }
 
     context "when is a super admin" do
-      let(:user) { FactoryGirl.create(:super_admin, country: japan) }
+      let(:user) { FactoryGirl.create(:super_admin, country: mozambique) }
       it { is_expected.to be_able_to(:manage, User.new(country: kosovo)) }
       it { is_expected.to be_able_to(:manage, kosovo_validation) }
       it { is_expected.to be_able_to(:read, Role.new(name: 'super_admin')) }
     end
 
     context "when is a project manager" do
-      let(:user) { FactoryGirl.create(:project_manager, country: japan) }
+      let(:user) { FactoryGirl.create(:project_manager, country: mozambique) }
 
-      it { is_expected.to be_able_to(:manage, Area.new(country: japan)) }
-      it { is_expected.to be_able_to(:manage, User.new(country: japan)) }
+      it { is_expected.to be_able_to(:manage, Area.new(country: mozambique)) }
+      it { is_expected.to be_able_to(:manage, User.new(country: mozambique)) }
       it { is_expected.to_not be_able_to(:manage, User.new(country: kosovo)) }
       it { is_expected.to_not be_able_to(:manage, kosovo_validation) }
-      it { is_expected.to be_able_to(:manage, japan_validation) }
+      it { is_expected.to be_able_to(:manage, mozambique_validation) }
       it { is_expected.to be_able_to(:read, Role.new(name: 'project_manager')) }
     end
 
     context "when is a project participant" do
-      let(:user) { FactoryGirl.create(:project_participant, country: japan) }
+      let(:user) { FactoryGirl.create(:project_participant, country: mozambique) }
       let(:user_validation) { Validation.new(user: user) }
 
       it { is_expected.to_not be_able_to(:manage, Area.new) }
-      it { is_expected.to be_able_to(:read, Area.new(country: japan)) }
+      it { is_expected.to be_able_to(:read, Area.new(country: mozambique)) }
       it { is_expected.to_not be_able_to(:manage, User.new) }
-      it { is_expected.to_not be_able_to(:manage, japan_validation) }
+      it { is_expected.to_not be_able_to(:manage, mozambique_validation) }
       it { is_expected.to be_able_to(:manage, user_validation) }
       it { is_expected.to be_able_to(:read, Role.new(name: 'project_participant')) }
       it { is_expected.to_not be_able_to(:read, Role.new(name: 'project_manager')) }
