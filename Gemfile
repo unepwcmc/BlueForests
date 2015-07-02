@@ -16,7 +16,7 @@ gem 'rails-backbone'
 gem 'jquery-rails'
 
 gem 'daemons'
-gem 'sidekiq', '~> 3.3.2'
+gem 'sidekiq', '~> 2.17.8'
 gem 'sinatra', :require => nil
 
 gem 'rabl'
