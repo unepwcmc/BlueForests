@@ -3,15 +3,15 @@ UPDATE <%= table_name %> AS t SET toggle = NULL WHERE ST_Intersects(ST_GeomFromT
 
 INSERT INTO <%= table_name %> (the_geom, action, admin_id, age, area_id, density, condition, knowledge, notes, habitat, phase, phase_id, prev_phase, edit_phase, toggle, country_id)
   SELECT ST_Multi(ST_Intersection(ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326), t.the_geom)) AS the_geom, '<%= validation.action %>', <%= validation.user_id %>, <%= validation.age || '0' %>, <%= validation.area_id || '0' %>, <%= validation.density || '0' %>, <%= validation.condition || '0' %>, '<%= validation.knowledge %>', '<%= validation.notes %>', '<%= validation.habitat %>', <%= validation.id %>, 1, t.phase as prev_phase, <%= validation.id %> as edit_phase, true, '<%= validation.country.iso %>'::text
-  FROM <%= view_name %> t
-  WHERE t.toggle IS NULL AND (t.action != 'validate' OR t.action IS NULL)
+  FROM <%= table_name %> t
+  WHERE t.toggle IS NULL AND (t.action != 'validate' OR t.action IS NULL) AND country_id = '<%= validation.country.iso %>'
 
   UNION ALL
 
   SELECT * FROM (
     SELECT ST_Multi(ST_Difference(t.the_geom, ST_Buffer(ST_Collect(ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326)),0))) AS the_geom, t.action, t.admin_id, t.age, t.area_id, t.density, t.condition, t.knowledge, t.notes, t.habitat, <%= validation.id %>, t.phase_id, t.phase as prev_phase, t.phase as edit_phase, true, '<%= validation.country.iso %>'::text
-    FROM <%= view_name %> t
-    WHERE t.toggle IS NULL AND (t.action != 'validate' OR t.action IS NULL)
+    FROM <%= table_name %> t
+    WHERE t.toggle IS NULL AND (t.action != 'validate' OR t.action IS NULL) AND country_id = '<%= validation.country.iso %>'
     GROUP BY t.the_geom, t.action, t.admin_id, t.age, t.area_id, t.density, t.condition, t.knowledge, t.notes, t.habitat, t.phase, t.phase_id, t.prev_phase
   ) a
   WHERE ST_IsEmpty(a.the_geom) = false
@@ -21,8 +21,8 @@ INSERT INTO <%= table_name %> (the_geom, action, admin_id, age, area_id, density
   SELECT the_geom, '<%= validation.action %>', <%= validation.user_id %>, <%= validation.age || '0' %>, <%= validation.area_id || '0' %>, <%= validation.density || '0' %>, <%= validation.condition || '0' %>, '<%= validation.knowledge %>', '<%= validation.notes %>', '<%= validation.habitat %>', <%= validation.id %>, 1, <%= validation.id %> as prev_phase, <%= validation.id %> as edit_phase, true, '<%= validation.country.iso %>'::text
   FROM (
     SELECT ST_Multi(ST_Difference(dt.polygon, ST_Buffer(ST_Collect(t.the_geom),0))) AS the_geom
-    FROM <%= view_name %> t, (SELECT ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326) AS polygon) dt
-    WHERE ST_Intersects(t.the_geom, dt.polygon) AND t.toggle IS NULL
+    FROM <%= table_name %> t, (SELECT ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326) AS polygon) dt
+    WHERE ST_Intersects(t.the_geom, dt.polygon) AND t.toggle IS NULL AND country_id = '<%= validation.country.iso %>'
     GROUP BY dt.polygon
   ) a
   WHERE ST_IsEmpty(a.the_geom) = false;
@@ -31,7 +31,7 @@ INSERT INTO <%= table_name %> (the_geom, action, admin_id, age, area_id, density
     the_geom, action, admin_id, age, area_id, density, condition, knowledge, notes, habitat, phase, phase_id, prev_phase, edit_phase, toggle, country_id)
   SELECT ST_Multi(dt.polygon) AS the_geom, '<%= validation.action %>', <%= validation.user_id %>, <%= validation.age || '0' %>, <%= validation.area_id || '0' %>, <%= validation.density || '0' %>, <%= validation.condition || '0' %>, '<%= validation.knowledge %>', '<%= validation.notes %>', '<%= validation.habitat %>', <%= validation.id %>, 1, <%= validation.id %>, <%= validation.id %>, true, '<%= validation.country.iso %>'::text
   FROM (SELECT ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326) AS polygon) dt
-  WHERE (SELECT COUNT(1) FROM <%= view_name %> t, (SELECT ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326) AS polygon) dt WHERE ST_Intersects(t.the_geom, dt.polygon) AND toggle IS NULL) = 0;
+  WHERE (SELECT COUNT(1) FROM <%= table_name %> t, (SELECT ST_GeomFromText('MultiPolygon(((<%= validation.json_coordinates %>)))',4326) AS polygon) dt WHERE ST_Intersects(t.the_geom, dt.polygon) AND toggle IS NULL AND country_id = '<%= validation.country.iso %>') = 0;
 
 UPDATE <%= table_name %> AS t SET toggle = true WHERE toggle IS NULL AND action = 'validate' AND country_id = '<%= validation.country.iso %>';
 UPDATE <%= table_name %> AS t SET toggle = false WHERE toggle IS NULL AND country_id = '<%= validation.country.iso %>';
