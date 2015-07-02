@@ -47,7 +47,7 @@ window.Map = class Map
         sublayers[prettyName] = L.tileLayer(tilesUrl).addTo(@map)
         cb(null, sublayers)
       )
-    )
+    , done)
 
   getSublayers: ->
     _.map(HABITATS, (polygon_fill, habitat) ->
