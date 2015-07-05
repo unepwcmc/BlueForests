@@ -3,9 +3,7 @@ class SessionsController < Devise::SessionsController
     respond_to do |format|
       format.html { super }
       format.json {
-        build_resource
-        user = User.find_for_database_authentication(email: params[:user][:email])
-        return invalid_login_attempt unless resource
+        user = User.find_by_email(params[:user][:email])
 
         if user.valid_password?(params[:user][:password])
           render json: { auth_token: user.authentication_token }, success: true, status: :created
@@ -21,6 +19,7 @@ class SessionsController < Devise::SessionsController
       format.html { super }
       format.json {
         user = User.find_by_authentication_token(params[:auth_token])
+
         if user
           user.reset_authentication_token!
           render json: { message: 'Session deleted' }, success: true, status: 204
