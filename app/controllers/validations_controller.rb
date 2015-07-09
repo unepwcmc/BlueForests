@@ -104,7 +104,7 @@ class ValidationsController < AdminController
   end
 
   def export_filename habitat, country
-    filename = "blueforest_#{params[:habitat]}_"
+    filename = "blueforests_#{params[:habitat]}_"
     filename << "#{country.try(:subdomain) || 'all'}_"
     filename << "download.zip"
   end

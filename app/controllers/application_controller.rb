@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "Access denied!"
+    flash[:error] = 'Access denied!'
 
     begin
       redirect_to :back
@@ -37,8 +37,8 @@ class ApplicationController < ActionController::Base
   end
 
   def check_country
-    if current_country.blank?
-      redirect_to(root_path) unless is_root?
+    if current_country.blank? && !is_root?
+      redirect_to(root_path)
     end
   end
 

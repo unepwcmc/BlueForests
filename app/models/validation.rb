@@ -47,10 +47,7 @@ class Validation < ActiveRecord::Base
   end
 
   def self.most_recent(habitat)
-    Validation.
-      where(["habitat = ?", habitat]).
-      order("id DESC").
-      first
+    Validation.where(['habitat = ?', habitat]).order('id DESC').first
   end
 
   def self.most_recent_id_by_habitat relation=Validation
