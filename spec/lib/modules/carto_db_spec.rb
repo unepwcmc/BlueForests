@@ -17,7 +17,7 @@ RSpec.describe CartoDb do
 
   describe ".query" do
     let(:cartodb) { CartoDb }
-    let(:query) { "CREATE THING IF NOT EXISTS" }
+    let(:query) { "CREATE THING IF NOT EXISTS;" }
     let(:url) { "https://#{username}.cartodb.com/api/v2/sql" }
 
     describe "given an SQL query" do

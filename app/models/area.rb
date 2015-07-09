@@ -8,7 +8,7 @@ class Area < ActiveRecord::Base
   validates :coordinates, presence: true
 
   def geo_json
-    "{\"type\":\"Polygon\",\"coordinates\":#{coordinates}"
+    "{\"type\":\"Polygon\",\"coordinates\":#{coordinates}}"
   end
 
   def json_coordinates

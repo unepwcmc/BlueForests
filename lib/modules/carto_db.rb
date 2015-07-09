@@ -41,6 +41,7 @@ module CartoDb
   end
 
   def self.with_transaction query
+    query << ';' if query.last != ';'
     "BEGIN; #{query} COMMIT;"
   end
 
