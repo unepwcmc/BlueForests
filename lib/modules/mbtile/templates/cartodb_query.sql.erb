@@ -3,10 +3,11 @@ SELECT * FROM (
     t.the_geom,
     ST_GeomFromText('MultiPolygon(((<%= @area.json_coordinates %>)))', 4326)
   ) AS the_geom
-  FROM <%= CartoDb.view_name @habitat, @area.country %> t
+  FROM <%= CartoDb.table_name @habitat %> t
   WHERE ST_Intersects(t.the_geom, ST_GeomFromText('MultiPolygon(((<%= @area.json_coordinates %>)))', 4326))
         AND toggle = true
         AND (action <> 'delete' OR action IS NULL)
+        AND country_id = '<%= @area.country.iso %>'
 ) AS intersected_geom
   UNION ALL
 SELECT ST_GeomFromEWKT('SRID=4326;POLYGON EMPTY') AS the_geom
