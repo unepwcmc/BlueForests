@@ -1,5 +1,8 @@
 module CartoDb
+  MAX_SQL_GET_LENGTH = 1024
   TEMPLATES_PATH = Rails.root.join('lib', 'modules', 'carto_db', 'templates')
+
+  SQL_URL = '/api/v2/sql'
   USERNAME = Rails.application.secrets.cartodb['username']
   API_KEY  = Rails.application.secrets.cartodb['api_key']
 
@@ -7,8 +10,14 @@ module CartoDb
 
   def self.query query, with_transaction=true
     query = with_transaction(query) if with_transaction
+    needs_a_post = query.length >= MAX_SQL_GET_LENGTH
 
-    response = self.get url_for_query(query)
+    response = if needs_a_post
+      self.post(build_url(SQL_URL), body: {q: query, format: 'json'})
+    else
+      self.get(url_for_query(query))
+    end
+
     JSON.parse(response.body)
   end
 
@@ -46,7 +55,6 @@ module CartoDb
   end
 
   def self.url_for_query query, format="json"
-    url = build_url("/api/v2/sql", query: {q: query, format: format})
-    url
+    build_url(SQL_URL, query: {q: query, format: format})
   end
 end

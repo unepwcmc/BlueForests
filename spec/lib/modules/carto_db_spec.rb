@@ -47,6 +47,20 @@ RSpec.describe CartoDb do
         expect(request_stub).to have_been_requested.once
       end
     end
+
+    describe "given a string longer than 1024 chars" do
+      subject { cartodb.query(query, false) }
+      let(:query) { 1024.times.map{ "x" }.reduce(:+) }
+
+      it "sends a POST request" do
+        request_stub = stub_request(:post, url).
+          with({query: {api_key: api_key}, body: {q: query, format: 'json'}}).
+          to_return(:status => 200, :body => '{"rows": 1}', :headers => {})
+
+        expect(subject).to eq({"rows" => 1})
+        expect(request_stub).to have_been_requested.once
+      end
+    end
   end
 
   describe ".url_for_query" do
