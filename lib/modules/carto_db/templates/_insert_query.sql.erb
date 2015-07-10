@@ -1,0 +1,46 @@
+INSERT INTO <%= table_name %> (
+  the_geom, action, admin_id, age,
+  area_id, density, condition, knowledge,
+  notes, habitat, phase, phase_id,
+  prev_phase, edit_phase, toggle, country_id
+)
+  SELECT
+    ST_Multi(ST_Intersection(<%= render '_validation_geom' %>, t.the_geom)) AS the_geom,
+    '<%= validation.action %>', <%= validation.user_id %>, <%= validation.age.to_i %>, <%= validation.area_id.to_i %>,
+    <%= validation.density.to_i %>, <%= validation.condition.to_i %>, '<%= validation.knowledge %>', '<%= validation.notes %>',
+    '<%= validation.habitat %>', <%= validation.id %>, 1, t.phase AS prev_phase,
+    <%= validation.id %> as edit_phase, true, '<%= validation.country.iso %>'::text
+  FROM <%= table_name %> t
+  WHERE t.toggle IS NULL
+    <% if opts[:exclude_not_validate] %>
+      AND (t.action != 'validate' OR t.action IS NULL)
+    <% end %>
+    AND country_id = '<%= validation.country.iso %>'
+
+  UNION ALL
+
+  SELECT * FROM (
+    SELECT
+      ST_Multi(ST_Difference(t.the_geom, ST_Buffer(ST_Collect(<%= render '_validation_geom' %>),0))) AS the_geom,
+      t.action, t.admin_id, t.age, t.area_id,
+      t.density, t.condition, t.knowledge, t.notes,
+      t.habitat, <%= validation.id %>, t.phase_id,
+
+      <% if opts[:with_prev_phase] %>
+        t.phase as prev_phase,
+      <% else %>
+        <%= validation.id %>,
+      <% end %>
+
+      t.phase as edit_phase, true, '<%= validation.country.iso %>'::text
+    FROM <%= table_name %> t
+    WHERE t.toggle IS NULL
+      <% if opts[:exclude_not_validate] %>
+        AND (t.action != 'validate' OR t.action IS NULL)
+      <% end %>
+      AND country_id = '<%= validation.country.iso %>'
+    GROUP BY t.the_geom, t.action, t.admin_id, t.age, t.area_id, t.density, t.condition, t.knowledge, t.notes, t.habitat, t.phase, t.phase_id, t.prev_phase
+  ) a
+  WHERE ST_IsEmpty(a.the_geom) = false
+
+  <% unless opts[:continues] %> ; <% end %>

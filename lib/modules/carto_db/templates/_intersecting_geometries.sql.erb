@@ -1,0 +1,8 @@
+SELECT COUNT(1)
+FROM
+  <%= table_name %> t,
+  (SELECT <%= render '_validation_geom' %> AS polygon) dt
+WHERE ST_Intersects(t.the_geom, dt.polygon)
+  AND toggle IS NULL
+  AND country_id = '<%= validation.country.iso %>'
+

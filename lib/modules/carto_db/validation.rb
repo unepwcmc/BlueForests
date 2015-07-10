@@ -22,11 +22,18 @@ class CartoDb::Validation
   attr_reader :validation
 
   def query
-    ERB.new(template).result(binding).squish
+    render @action
   end
 
-  def template
-    File.read(CartoDb::TEMPLATES_PATH.join("#{@action}.sql.erb"))
+  def render name, opts={}
+    Rails.logger.info name
+    Rails.logger.info opts
+
+    ERB.new(template(name)).result(binding).squish
+  end
+
+  def template name
+    File.read(CartoDb::TEMPLATES_PATH.join("#{name}.sql.erb"))
   end
 
   def table_name

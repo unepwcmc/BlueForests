@@ -1,0 +1,4 @@
+UPDATE <%= table_name %> AS t
+SET toggle = FALSE, notes = 'null at <%= validation.id %>'
+WHERE t.toggle IS NULL
+  AND country_id = '<%= validation.country.iso %>';

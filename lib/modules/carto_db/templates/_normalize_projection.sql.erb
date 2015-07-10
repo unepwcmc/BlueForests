@@ -1,0 +1,5 @@
+UPDATE <%= table_name %> AS t
+SET the_geom_webmercator = ST_Transform(the_geom, 3857)
+WHERE the_geom_webmercator IS NULL
+  AND country_id = '<%= validation.country.iso %>';
+
