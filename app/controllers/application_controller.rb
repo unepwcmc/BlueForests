@@ -9,10 +9,10 @@ class ApplicationController < ActionController::Base
   end
 
   def current_country
-    @current_country = if current_user && !current_user.super_admin?
-      current_user.country
+    @current_country = if current_user
+      from_session or store_from_subdomain
     else
-      Country.where(subdomain: subdomain).first
+      from_subdomain
     end
   end
 
@@ -31,6 +31,18 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def from_session
+    Country.find_by_id(session[:country_id])
+  end
+
+  def store_from_subdomain
+    from_subdomain.tap { |country| session[:country_id] = country.id }
+  end
+
+  def from_subdomain
+    Country.find_by_subdomain(subdomain)
+  end
 
   def subdomain
     request.subdomain.split('.').first
