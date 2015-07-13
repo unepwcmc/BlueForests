@@ -57,21 +57,5 @@ describe ApplicationController, type: :controller do
         is_expected.to redirect_to("http://blueforests.com/")
       end
     end
-
-    describe 'given user is signed in' do
-      subject { @controller.current_country }
-
-      let(:user_country) { FactoryGirl.create(:country) }
-      let(:user) { FactoryGirl.create(:user, country: user_country) }
-
-      before :each do
-        sign_in user
-        @request.host = "#{country.subdomain}.blueforests.com"
-      end
-
-      it 'sets the country to the user country' do
-        is_expected.to eq(user_country)
-      end
-    end
   end
 end
