@@ -14,9 +14,10 @@ class User < ActiveRecord::Base
 
 
   def self.find_for_authentication(warden_conditions)
-    country = Country.find_by_subdomain(warden_conditions[:subdomain])
-    users_with_email = where(:email => warden_conditions[:email])
+    subdomain = warden_conditions[:subdomain].split('.').first
+    country = Country.find_by_subdomain(subdomain)
 
+    users_with_email = where(:email => warden_conditions[:email])
     users_with_email.detect { |user|
       user.super_admin? || user.country == country
     }

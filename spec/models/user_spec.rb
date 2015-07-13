@@ -2,13 +2,14 @@ require "rails_helper"
 require "cancan/matchers"
 
 RSpec.describe User, type: :model do
+  let(:mozambique) { FactoryGirl.create(:country, subdomain: 'mozambique', name: 'mozambique') }
+  let(:kosovo) { FactoryGirl.create(:country, name: 'Kosovo') }
+
   describe "abilities" do
     subject { Ability.new(user) }
 
     let(:user) { nil }
 
-    let(:mozambique) { FactoryGirl.create(:country, name: 'mozambique') }
-    let(:kosovo) { FactoryGirl.create(:country, name: 'Kosovo') }
 
     let(:kosovo_validation) { Validation.new(country: kosovo) }
     let(:mozambique_validation) { Validation.new(country: mozambique) }
@@ -56,6 +57,21 @@ RSpec.describe User, type: :model do
     context 'when is not a super admin' do
       let(:user) { FactoryGirl.create(:project_manager) }
       it { is_expected.to be false }
+    end
+  end
+
+  describe '::find_for_authentication' do
+    subject { User.find_for_authentication(conditions) }
+    let(:user) { FactoryGirl.create(:user, country: mozambique) }
+
+    context 'when a country subdomain is given' do
+      let(:conditions) { {email: user.email, subdomain: 'mozambique'} }
+      it { is_expected.to eq user }
+    end
+
+    context 'when a composed subdomain is given' do
+      let(:conditions) { {email: user.email, subdomain: 'mozambique.some.other-stuff'} }
+      it { is_expected.to eq user }
     end
   end
 end
