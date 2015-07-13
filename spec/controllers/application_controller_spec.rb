@@ -16,7 +16,7 @@ describe ApplicationController, type: :controller do
       subject { @controller.current_country }
 
       before :each do
-        @request.host = "#{country.subdomain}.blueforests.com"
+        @request.host = "#{country.subdomain}.blueforests.io"
       end
 
       it 'assigns @current_country' do
@@ -29,7 +29,7 @@ describe ApplicationController, type: :controller do
       subject { @controller.current_country }
 
       before :each do
-        @request.host = "#{country.subdomain}.greenforest.blueforests.com"
+        @request.host = "#{country.subdomain}.greenforest.blueforests.io"
       end
 
       it 'assigns @current_country' do
@@ -50,11 +50,11 @@ describe ApplicationController, type: :controller do
       subject { get :index }
 
       before :each do
-        @request.host = "darkoakwoods.blueforests.com"
+        @request.host = "darkoakwoods.blueforests.io"
       end
 
       it 'redirects to the home page' do
-        is_expected.to redirect_to("http://blueforests.com/")
+        is_expected.to redirect_to("http://blueforests.io/")
       end
     end
   end

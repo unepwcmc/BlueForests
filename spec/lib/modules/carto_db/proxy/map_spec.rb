@@ -5,7 +5,7 @@ RSpec.describe CartoDb::Proxy::Map do
   let(:api_key) { Rails.application.secrets.cartodb['api_key'] }
 
   let(:habitat) { 'seagrass' }
-  let(:expected_sql) { "SELECT * FROM blueforest_seagrass_test WHERE country_id = '#{country.iso}'" }
+  let(:expected_sql) { "SELECT * FROM blueforests_seagrass_test WHERE country_id = '#{country.iso}'" }
   let(:style) { "#seagrass { line-opacity: 0; }" }
   let(:country) { FactoryGirl.create(:country, iso: 'JP') }
   let(:where) { "toggle IS TRUE" }
@@ -32,7 +32,7 @@ RSpec.describe CartoDb::Proxy::Map do
           { "version": "1.0.1", "layers": [{
             "type": "cartodb", "options":
               { "cartocss_version": "2.0.1", "cartocss": "#seagrass { line-opacity: 0; }",
-                "sql": "SELECT * FROM blueforest_seagrass_test WHERE country_id = \'JP\' AND toggle IS TRUE"
+                "sql": "SELECT * FROM blueforests_seagrass_test WHERE country_id = \'JP\' AND toggle IS TRUE"
               }
             }]
           }'''.squish

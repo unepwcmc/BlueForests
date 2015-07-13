@@ -5,14 +5,14 @@ RSpec.describe UsersController, type: :controller do
   let(:another_country) { FactoryGirl.create(:country) }
 
   before :each do
-    @request.host = "#{country.subdomain}.blueforest.io"
+    @request.host = "#{country.subdomain}.blueforests.io"
     sign_in current_user
   end
 
   describe 'POST #create' do
     subject { User.find_by_email('try@email.com') }
     let(:role) { FactoryGirl.create(:role) }
-    let(:user_params) { {email: 'try@email.com', password: 'blueforest', password_confirmation: 'blueforest', roles_ids: [role.id]} }
+    let(:user_params) { {email: 'try@email.com', password: 'blueforests', password_confirmation: 'blueforests', roles_ids: [role.id]} }
 
     context 'current user is a project manager' do
       let(:current_user) { FactoryGirl.create(:project_manager, country: country) }

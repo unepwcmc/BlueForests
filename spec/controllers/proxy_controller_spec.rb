@@ -8,7 +8,7 @@ RSpec.describe ProxyController, type: :controller do
 
   before :each do
     FactoryGirl.create(:country, subdomain: 'mozambique')
-    @request.host = "mozambique.blueforest.io"
+    @request.host = "mozambique.blueforests.io"
   end
 
   describe 'POST #maps' do

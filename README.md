@@ -91,17 +91,17 @@ You need one table per habitat, and one set of habitat tables per
 environment. Given the habitats `mangrove`, `seagrass` and `saltmarsh`,
 you would need to setup:
 
-* blueforest_mangrove_staging
-* blueforest_mangrove_production
-* blueforest_mangrove_development
-* blueforest_seagrass_staging
-* blueforest_seagrass_production
-* blueforest_seagrass_development
-* blueforest_saltmarsh_staging
-* blueforest_saltmarsh_production
-* blueforest_saltmarsh_development
+* blueforests_mangrove_staging
+* blueforests_mangrove_production
+* blueforests_mangrove_development
+* blueforests_seagrass_staging
+* blueforests_seagrass_production
+* blueforests_seagrass_development
+* blueforests_saltmarsh_staging
+* blueforests_saltmarsh_production
+* blueforests_saltmarsh_development
 
 There is a [template
-table](https://carbon-tool.cartodb.com/tables/blueforest_template/) to
+table](https://carbon-tool.cartodb.com/tables/blueforests_template/) to
 duplicate from, as CartoDB does not let you create tables manually via
 SQL.

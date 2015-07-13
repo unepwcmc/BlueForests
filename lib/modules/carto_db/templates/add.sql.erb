@@ -26,7 +26,7 @@ WHERE ST_Intersects(<%= render '_validation_geom' %>,t.the_geom)
   WHERE ST_IsEmpty(a.the_geom) = false;
 
   INSERT INTO <%= table_name %> (
-    the_geom, action, admin_id, age, area_id, density,
+    the_geom, action, user_id, age, area_id, density,
     condition, knowledge, notes, habitat, phase,
     phase_id, prev_phase, edit_phase, toggle, country_id
   )

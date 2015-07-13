@@ -1,5 +1,5 @@
 INSERT INTO <%= table_name %> (
-  the_geom, action, admin_id, age,
+  the_geom, action, user_id, age,
   area_id, density, condition, knowledge,
   notes, habitat, phase, phase_id,
   prev_phase, edit_phase, toggle, country_id
@@ -22,7 +22,7 @@ INSERT INTO <%= table_name %> (
   SELECT * FROM (
     SELECT
       ST_Multi(ST_Difference(t.the_geom, ST_Buffer(ST_Collect(<%= render '_validation_geom' %>),0))) AS the_geom,
-      t.action, t.admin_id, t.age, t.area_id,
+      t.action, t.user_id, t.age, t.area_id,
       t.density, t.condition, t.knowledge, t.notes,
       t.habitat, <%= validation.id %>, t.phase_id,
 
@@ -39,7 +39,7 @@ INSERT INTO <%= table_name %> (
         AND (t.action != 'validate' OR t.action IS NULL)
       <% end %>
       AND country_id = '<%= validation.country.iso %>'
-    GROUP BY t.the_geom, t.action, t.admin_id, t.age, t.area_id, t.density, t.condition, t.knowledge, t.notes, t.habitat, t.phase, t.phase_id, t.prev_phase
+    GROUP BY t.the_geom, t.action, t.user_id, t.age, t.area_id, t.density, t.condition, t.knowledge, t.notes, t.habitat, t.phase, t.phase_id, t.prev_phase
   ) a
   WHERE ST_IsEmpty(a.the_geom) = false
 
