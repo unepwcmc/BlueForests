@@ -1,0 +1,338 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+ANALYSIS	./lib/modules/i18n_repo.rb	/^  ANALYSIS = {$/;"	C	class:I18nRepo
+API_KEY	./lib/modules/carto_db.rb	/^  API_KEY  = Rails.application.secrets.cartodb['api_key']$/;"	C	class:CartoDb
+Ability	./app/models/ability.rb	/^class Ability$/;"	c
+AddCountryIdToArea	./db/migrate/20150211112202_add_country_id_to_area.rb	/^class AddCountryIdToArea < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddCountryIdToGeometries	./db/migrate/20150216140627_add_country_id_to_geometries.rb	/^class AddCountryIdToGeometries < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddCountryIdToUser	./db/migrate/20150210155914_add_country_id_to_user.rb	/^class AddCountryIdToUser < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddCountryIdToValidationsTable	./db/migrate/20150323162045_add_country_id_to_validations_table.rb	/^class AddCountryIdToValidationsTable < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddDescriptionToRoles	./db/migrate/20140203160641_add_description_to_roles.rb	/^class AddDescriptionToRoles < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddFieldsToValidation	./db/migrate/20121220110332_add_fields_to_validation.rb	/^class AddFieldsToValidation < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddMetadataToValidation	./db/migrate/20121207084946_add_metadata_to_validation.rb	/^class AddMetadataToValidation < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddMissingColumnsToGeometries	./db/migrate/20150210112951_add_missing_columns_to_geometries.rb	/^class AddMissingColumnsToGeometries < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddNotesToValidation	./db/migrate/20121214153038_add_notes_to_validation.rb	/^class AddNotesToValidation < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AddPostgisExtension	./db/migrate/20100209164949_add_postgis_extension.rb	/^class AddPostgisExtension < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+AdminController	./app/controllers/admin_controller.rb	/^class AdminController < ApplicationController$/;"	c	inherits:ApplicationController
+AnalysisController	./app/controllers/analysis_controller.rb	/^class AnalysisController < ApplicationController$/;"	c	inherits:ApplicationController
+Application	./config/application.rb	/^  class Application < Rails::Application$/;"	c	class:BlueCarbon	inherits:Rails.Application
+ApplicationController	./app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c	inherits:ActionController.Base
+Area	./app/models/area.rb	/^class Area < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+AreasController	./app/controllers/areas_controller.rb	/^class AreasController < AdminController$/;"	c	inherits:AdminController
+Assignment	./app/models/assignment.rb	/^class Assignment < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+Base	./lib/modules/mbtile/base.rb	/^class Mbtile::Base$/;"	c	class:Mbtile
+BlueCarbon	./config/application.rb	/^module BlueCarbon$/;"	m
+CARTODB_QUERY_PATH	./lib/modules/mbtile/base.rb	/^  CARTODB_QUERY_PATH = 'lib\/modules\/mbtile\/templates\/cartodb_query.sql.erb'$/;"	C	class:Mbtile.Base
+CARTODB_QUERY_TEMPLATE	./lib/modules/mbtile/base.rb	/^  CARTODB_QUERY_TEMPLATE = File.read(Rails.root.join(CARTODB_QUERY_PATH))$/;"	C	class:Mbtile.Base
+COLORS	./lib/modules/mbtile/style.rb	/^  COLORS = {$/;"	C	class:Mbtile.Style
+COUNTRIES	./db/seeds.rb	/^COUNTRIES = [$/;"	C	class:
+CartoDb	./lib/modules/carto_db.rb	/^module CartoDb$/;"	m
+CartodbQuery	./lib/cartodb_query.rb	/^class CartodbQuery$/;"	c
+ChangeAreasCoordinatesType	./db/migrate/20121221131343_change_areas_coordinates_type.rb	/^class ChangeAreasCoordinatesType < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+Configuration	./lib/modules/mbtile/configuration.rb	/^class Mbtile::Configuration < Mbtile::Base$/;"	c	class:Mbtile	inherits:Mbtile.Base
+ControllerHelpers	./spec/rails_helper.rb	/^module ControllerHelpers$/;"	m
+Country	./app/models/country.rb	/^class Country < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+CreateAreas	./db/migrate/20121130120318_create_areas.rb	/^class CreateAreas < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateAssignments	./db/migrate/20121210105313_create_assignments.rb	/^class CreateAssignments < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateCountries	./db/migrate/20150210155527_create_countries.rb	/^class CreateCountries < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateGeometries	./db/migrate/20121211001959_create_geometries.rb	/^class CreateGeometries < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateMbtiles	./db/migrate/20121207140451_create_mbtiles.rb	/^class CreateMbtiles < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreatePhotos	./db/migrate/20130104145639_create_photos.rb	/^class CreatePhotos < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateRoles	./db/migrate/20121210105435_create_roles.rb	/^class CreateRoles < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+CreateValidations	./db/migrate/20121204160220_create_validations.rb	/^class CreateValidations < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+DeviseCreateUsers	./db/migrate/20121130123438_devise_create_users.rb	/^class DeviseCreateUsers < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+Geojson	./lib/modules/mbtile/geojson.rb	/^class Mbtile::Geojson < Mbtile::Base$/;"	c	class:Mbtile	inherits:Mbtile.Base
+Habitat	./app/models/habitat.rb	/^class Habitat$/;"	c
+I18nRepo	./lib/modules/i18n_repo.rb	/^module I18nRepo$/;"	m
+MAX_SQL_GET_LENGTH	./lib/modules/carto_db.rb	/^  MAX_SQL_GET_LENGTH = 1024$/;"	C	class:CartoDb
+MML_PATH	./lib/modules/mbtile/mml.rb	/^  MML_PATH = 'lib\/modules\/mbtile\/templates\/mml.json.erb'$/;"	C	class:Mbtile.Mml
+MML_TEMPLATE	./lib/modules/mbtile/mml.rb	/^  MML_TEMPLATE = File.read(Rails.root.join(MML_PATH))$/;"	C	class:Mbtile.Mml
+Map	./lib/modules/carto_db/proxy/map.rb	/^module CartoDb::Proxy::Map$/;"	m	class:CartoDb.Proxy
+Mbtile	./app/models/mbtile.rb	/^class Mbtile < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+MbtileGenerator	./app/workers/mbtile_generator.rb	/^class MbtileGenerator$/;"	c
+MbtilesController	./app/controllers/mbtiles_controller.rb	/^class MbtilesController < AdminController$/;"	c	inherits:AdminController
+Mml	./lib/modules/mbtile/mml.rb	/^class Mbtile::Mml < Mbtile::Base$/;"	c	class:Mbtile	inherits:Mbtile.Base
+PagesController	./app/controllers/pages_controller.rb	/^class PagesController < ApplicationController$/;"	c	inherits:ApplicationController
+Photo	./app/models/photo.rb	/^class Photo < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+PhotosController	./app/controllers/photos_controller.rb	/^class PhotosController < AdminController$/;"	c	inherits:AdminController
+Project	./lib/modules/mbtile/project.rb	/^class Mbtile::Project < Mbtile::Base$/;"	c	class:Mbtile	inherits:Mbtile.Base
+Proxy	./lib/modules/carto_db/proxy.rb	/^module CartoDb::Proxy$/;"	m	class:CartoDb
+ProxyController	./app/controllers/proxy_controller.rb	/^class ProxyController < ApplicationController$/;"	c	inherits:ApplicationController
+ROLES	./db/seeds.rb	/^ROLES = [$/;"	C	class:
+ReindexUsersByEmailAndCountryId	./db/migrate/20150713124543_reindex_users_by_email_and_country_id.rb	/^class ReindexUsersByEmailAndCountryId < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+RemoveNameFromValidation	./db/migrate/20121214153125_remove_name_from_validation.rb	/^class RemoveNameFromValidation < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
+Role	./app/models/role.rb	/^class Role < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+SQL_URL	./lib/modules/carto_db.rb	/^  SQL_URL = '\/api\/v2\/sql'$/;"	C	class:CartoDb
+SessionsController	./app/controllers/sessions_controller.rb	/^class SessionsController < Devise::SessionsController$/;"	c	inherits:Devise.SessionsController
+Shapefile	./lib/modules/carto_db/proxy/shapefile.rb	/^module CartoDb::Proxy::Shapefile$/;"	m	class:CartoDb.Proxy
+Style	./lib/modules/mbtile/style.rb	/^class Mbtile::Style < Mbtile::Base$/;"	c	class:Mbtile	inherits:Mbtile.Base
+TEMPLATES_PATH	./lib/modules/carto_db.rb	/^  TEMPLATES_PATH = Rails.root.join('lib', 'modules', 'carto_db', 'templates')$/;"	C	class:CartoDb
+USERNAME	./lib/modules/carto_db.rb	/^  USERNAME = Rails.application.secrets.cartodb['username']$/;"	C	class:CartoDb
+User	./app/models/user.rb	/^class User < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+UsersController	./app/controllers/users_controller.rb	/^class UsersController < AdminController$/;"	c	inherits:AdminController
+Validation	./app/models/validation.rb	/^class Validation < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+Validation	./lib/modules/carto_db/validation.rb	/^class CartoDb::Validation$/;"	c	class:CartoDb
+ValidationsController	./app/controllers/validations_controller.rb	/^class ValidationsController < AdminController$/;"	c	inherits:AdminController
+about	./app/controllers/pages_controller.rb	/^  def about$/;"	f	class:PagesController
+after_sign_in_path_for	./app/controllers/application_controller.rb	/^  def after_sign_in_path_for(resource)$/;"	f	class:ApplicationController
+all	./app/models/habitat.rb	/^  def self.all$/;"	F	class:Habitat
+already_generated?	./app/models/mbtile.rb	/^  def already_generated?$/;"	f	class:Mbtile
+area	./app/models/mbtile.rb	/^  belongs_to :area$/;"	F	class:Mbtile
+area	./app/models/validation.rb	/^  belongs_to :area$/;"	F	class:Validation
+area=	./app/models/mbtile.rb	/^  belongs_to :area$/;"	F	class:Mbtile
+area=	./app/models/validation.rb	/^  belongs_to :area$/;"	F	class:Validation
+area_ids	./app/models/country.rb	/^  has_many :areas, dependent: :destroy$/;"	F	class:Country
+area_ids=	./app/models/country.rb	/^  has_many :areas, dependent: :destroy$/;"	F	class:Country
+area_params	./app/controllers/areas_controller.rb	/^  def area_params$/;"	f	class:AreasController
+areas	./app/models/country.rb	/^  has_many :areas, dependent: :destroy$/;"	F	class:Country
+areas=	./app/models/country.rb	/^  has_many :areas, dependent: :destroy$/;"	F	class:Country
+assign_country	./app/controllers/users_controller.rb	/^  def assign_country$/;"	f	class:UsersController
+assignment_ids	./app/models/role.rb	/^  has_many :assignments, dependent: :destroy$/;"	F	class:Role
+assignment_ids	./app/models/user.rb	/^  has_many :assignments, dependent: :destroy$/;"	F	class:User
+assignment_ids=	./app/models/role.rb	/^  has_many :assignments, dependent: :destroy$/;"	F	class:Role
+assignment_ids=	./app/models/user.rb	/^  has_many :assignments, dependent: :destroy$/;"	F	class:User
+assignments	./app/models/role.rb	/^  has_many :assignments, dependent: :destroy$/;"	F	class:Role
+assignments	./app/models/user.rb	/^  has_many :assignments, dependent: :destroy$/;"	F	class:User
+assignments=	./app/models/role.rb	/^  has_many :assignments, dependent: :destroy$/;"	F	class:Role
+assignments=	./app/models/user.rb	/^  has_many :assignments, dependent: :destroy$/;"	F	class:User
+attachment_url	./app/models/photo.rb	/^  def attachment_url$/;"	f	class:Photo
+bounds	./lib/modules/mbtile/mml.rb	/^  def bounds$/;"	f	class:Mbtile.Mml
+build_area	./app/models/mbtile.rb	/^  belongs_to :area$/;"	F	class:Mbtile
+build_area	./app/models/validation.rb	/^  belongs_to :area$/;"	F	class:Validation
+build_country	./app/models/area.rb	/^  belongs_to :country$/;"	F	class:Area
+build_country	./app/models/user.rb	/^  belongs_to :country$/;"	F	class:User
+build_country	./app/models/validation.rb	/^  belongs_to :country$/;"	F	class:Validation
+build_querystring	./lib/modules/carto_db.rb	/^  def self.build_querystring opts$/;"	F	class:CartoDb
+build_role	./app/models/assignment.rb	/^  belongs_to :role$/;"	F	class:Assignment
+build_url	./lib/modules/carto_db.rb	/^  def self.build_url path, opts={}$/;"	F	class:CartoDb
+build_user	./app/models/assignment.rb	/^  belongs_to :user$/;"	F	class:Assignment
+build_user	./app/models/validation.rb	/^  belongs_to :user$/;"	F	class:Validation
+build_validation	./app/models/photo.rb	/^  belongs_to :validation$/;"	F	class:Photo
+cartodb_query	./lib/modules/mbtile/base.rb	/^  def cartodb_query$/;"	f	class:Mbtile.Base
+center	./lib/modules/mbtile/mml.rb	/^  def center$/;"	f	class:Mbtile.Mml
+change	./db/migrate/20100209164949_add_postgis_extension.rb	/^  def change$/;"	f	class:AddPostgisExtension
+change	./db/migrate/20121130120318_create_areas.rb	/^  def change$/;"	f	class:CreateAreas
+change	./db/migrate/20121130123438_devise_create_users.rb	/^  def change$/;"	f	class:DeviseCreateUsers
+change	./db/migrate/20121204160220_create_validations.rb	/^  def change$/;"	f	class:CreateValidations
+change	./db/migrate/20121207140451_create_mbtiles.rb	/^  def change$/;"	f	class:CreateMbtiles
+change	./db/migrate/20121210105313_create_assignments.rb	/^  def change$/;"	f	class:CreateAssignments
+change	./db/migrate/20121210105435_create_roles.rb	/^  def change$/;"	f	class:CreateRoles
+change	./db/migrate/20121211001959_create_geometries.rb	/^  def change$/;"	f	class:CreateGeometries
+change	./db/migrate/20121214153038_add_notes_to_validation.rb	/^  def change$/;"	f	class:AddNotesToValidation
+change	./db/migrate/20121220110332_add_fields_to_validation.rb	/^  def change$/;"	f	class:AddFieldsToValidation
+change	./db/migrate/20140203160641_add_description_to_roles.rb	/^  def change$/;"	f	class:AddDescriptionToRoles
+change	./db/migrate/20150210112951_add_missing_columns_to_geometries.rb	/^  def change$/;"	f	class:AddMissingColumnsToGeometries
+change	./db/migrate/20150210155527_create_countries.rb	/^  def change$/;"	f	class:CreateCountries
+change	./db/migrate/20150210155914_add_country_id_to_user.rb	/^  def change$/;"	f	class:AddCountryIdToUser
+change	./db/migrate/20150211112202_add_country_id_to_area.rb	/^  def change$/;"	f	class:AddCountryIdToArea
+change	./db/migrate/20150216140627_add_country_id_to_geometries.rb	/^  def change$/;"	f	class:AddCountryIdToGeometries
+change	./db/migrate/20150323162045_add_country_id_to_validations_table.rb	/^  def change$/;"	f	class:AddCountryIdToValidationsTable
+change	./db/migrate/20150713124543_reindex_users_by_email_and_country_id.rb	/^  def change$/;"	f	class:ReindexUsersByEmailAndCountryId
+check_country	./app/controllers/application_controller.rb	/^  def check_country$/;"	f	class:ApplicationController
+clear_cache	./lib/modules/mbtile/project.rb	/^  def clear_cache$/;"	f	class:Mbtile.Project
+completed?	./app/models/mbtile.rb	/^  def completed?$/;"	f	class:Mbtile
+config	./lib/modules/mbtile/configuration.rb	/^  def config$/;"	f	class:Mbtile.Configuration
+config_file	./lib/modules/mbtile/project.rb	/^  def config_file$/;"	f	class:Mbtile.Project
+coordinates	./lib/modules/mbtile/mml.rb	/^  def coordinates$/;"	f	class:Mbtile.Mml
+country	./app/models/area.rb	/^  belongs_to :country$/;"	F	class:Area
+country	./app/models/user.rb	/^  belongs_to :country$/;"	F	class:User
+country	./app/models/validation.rb	/^  belongs_to :country$/;"	F	class:Validation
+country=	./app/models/area.rb	/^  belongs_to :country$/;"	F	class:Area
+country=	./app/models/user.rb	/^  belongs_to :country$/;"	F	class:User
+country=	./app/models/validation.rb	/^  belongs_to :country$/;"	F	class:Validation
+create	./app/controllers/areas_controller.rb	/^  def create$/;"	f	class:AreasController
+create	./app/controllers/photos_controller.rb	/^  def create$/;"	f	class:PhotosController
+create	./app/controllers/sessions_controller.rb	/^  def create$/;"	f	class:SessionsController
+create	./app/controllers/users_controller.rb	/^  def create$/;"	f	class:UsersController
+create	./app/controllers/validations_controller.rb	/^  def create$/;"	f	class:ValidationsController
+create	./lib/modules/carto_db/proxy/map.rb	/^  def self.create habitat, opts={}$/;"	F	class:CartoDb.Proxy.Map
+create	./lib/modules/carto_db/validation.rb	/^  def self.create validation$/;"	F	class:CartoDb.Validation
+create_area	./app/models/mbtile.rb	/^  belongs_to :area$/;"	F	class:Mbtile
+create_area	./app/models/validation.rb	/^  belongs_to :area$/;"	F	class:Validation
+create_area!	./app/models/mbtile.rb	/^  belongs_to :area$/;"	F	class:Mbtile
+create_area!	./app/models/validation.rb	/^  belongs_to :area$/;"	F	class:Validation
+create_country	./app/models/area.rb	/^  belongs_to :country$/;"	F	class:Area
+create_country	./app/models/user.rb	/^  belongs_to :country$/;"	F	class:User
+create_country	./app/models/validation.rb	/^  belongs_to :country$/;"	F	class:Validation
+create_country!	./app/models/area.rb	/^  belongs_to :country$/;"	F	class:Area
+create_country!	./app/models/user.rb	/^  belongs_to :country$/;"	F	class:User
+create_country!	./app/models/validation.rb	/^  belongs_to :country$/;"	F	class:Validation
+create_export_path	./lib/modules/mbtile/project.rb	/^  def create_export_path$/;"	f	class:Mbtile.Project
+create_role	./app/models/assignment.rb	/^  belongs_to :role$/;"	F	class:Assignment
+create_role!	./app/models/assignment.rb	/^  belongs_to :role$/;"	F	class:Assignment
+create_test_user	./db/seeds.rb	/^def create_test_user country, roles$/;"	f	class:Object
+create_user	./app/models/assignment.rb	/^  belongs_to :user$/;"	F	class:Assignment
+create_user	./app/models/validation.rb	/^  belongs_to :user$/;"	F	class:Validation
+create_user!	./app/models/assignment.rb	/^  belongs_to :user$/;"	F	class:Assignment
+create_user!	./app/models/validation.rb	/^  belongs_to :user$/;"	F	class:Validation
+create_validation	./app/models/photo.rb	/^  belongs_to :validation$/;"	F	class:Photo
+create_validation!	./app/models/photo.rb	/^  belongs_to :validation$/;"	F	class:Photo
+current_ability	./app/controllers/application_controller.rb	/^  def current_ability$/;"	f	class:ApplicationController
+current_country	./app/controllers/application_controller.rb	/^  def current_country$/;"	f	class:ApplicationController
+default_url_options	./app/controllers/analysis_controller.rb	/^  def default_url_options(options={})$/;"	f	class:AnalysisController
+default_url_options	./app/controllers/pages_controller.rb	/^  def default_url_options(options={})$/;"	f	class:PagesController
+destroy	./app/controllers/areas_controller.rb	/^  def destroy$/;"	f	class:AreasController
+destroy	./app/controllers/sessions_controller.rb	/^  def destroy$/;"	f	class:SessionsController
+destroy	./app/controllers/users_controller.rb	/^  def destroy$/;"	f	class:UsersController
+destroy	./app/controllers/validations_controller.rb	/^  def destroy$/;"	f	class:ValidationsController
+down	./db/migrate/20121207084946_add_metadata_to_validation.rb	/^  def down$/;"	f	class:AddMetadataToValidation
+down	./db/migrate/20121214153125_remove_name_from_validation.rb	/^  def down$/;"	f	class:RemoveNameFromValidation
+down	./db/migrate/20121221131343_change_areas_coordinates_type.rb	/^  def down$/;"	f	class:ChangeAreasCoordinatesType
+down	./db/migrate/20130104145639_create_photos.rb	/^  def self.down$/;"	F	class:CreatePhotos
+download	./lib/modules/carto_db/proxy/shapefile.rb	/^  def self.download habitat, opts={}, &blk$/;"	F	class:CartoDb.Proxy.Shapefile
+download_shapefile	./lib/modules/carto_db/proxy.rb	/^  def self.download_shapefile habitat, opts={}$/;"	F	class:CartoDb.Proxy
+download_uri	./lib/modules/carto_db/proxy/shapefile.rb	/^  def self.download_uri query$/;"	F	class:CartoDb.Proxy.Shapefile
+edit	./app/controllers/areas_controller.rb	/^  def edit$/;"	f	class:AreasController
+edit	./app/controllers/users_controller.rb	/^  def edit$/;"	f	class:UsersController
+edit	./app/controllers/validations_controller.rb	/^  def edit$/;"	f	class:ValidationsController
+edit	./lib/modules/carto_db/validation.rb	/^  def self.edit validation$/;"	F	class:CartoDb.Validation
+empty_mbtiles_path	./lib/modules/mbtile/project.rb	/^  def empty_mbtiles_path$/;"	f	class:Mbtile.Project
+export	./app/controllers/validations_controller.rb	/^  def export$/;"	f	class:ValidationsController
+export_country	./app/controllers/validations_controller.rb	/^  def export_country$/;"	f	class:ValidationsController
+export_filename	./app/controllers/validations_controller.rb	/^  def export_filename habitat, country$/;"	f	class:ValidationsController
+export_path	./lib/modules/mbtile/project.rb	/^  def export_path$/;"	f	class:Mbtile.Project
+extent	./lib/modules/mbtile/mml.rb	/^  alias_method :extent, :bounds$/;"	a	class:Mbtile.Mml
+extract_tiles_url	./lib/modules/carto_db/proxy/map.rb	/^  def self.extract_tiles_url response$/;"	F	class:CartoDb.Proxy.Map
+final_path	./lib/modules/mbtile/project.rb	/^  def final_path$/;"	f	class:Mbtile.Project
+find	./app/models/habitat.rb	/^  def self.find(param)$/;"	F	class:Habitat
+find_for_authentication	./app/models/user.rb	/^  def self.find_for_authentication(warden_conditions)$/;"	F	class:User
+from_session	./app/controllers/application_controller.rb	/^  def from_session$/;"	f	class:ApplicationController
+from_subdomain	./app/controllers/application_controller.rb	/^  def from_subdomain$/;"	f	class:ApplicationController
+generate	./app/models/mbtile.rb	/^  def self.generate(area_id, habitat)$/;"	F	class:Mbtile
+generate	./lib/modules/mbtile/base.rb	/^  def self.generate *opts$/;"	F	class:Mbtile.Base
+generate	./lib/modules/mbtile/configuration.rb	/^  def generate$/;"	f	class:Mbtile.Configuration
+generate	./lib/modules/mbtile/geojson.rb	/^  def generate$/;"	f	class:Mbtile.Geojson
+generate	./lib/modules/mbtile/mml.rb	/^  def generate$/;"	f	class:Mbtile.Mml
+generate	./lib/modules/mbtile/project.rb	/^  def generate$/;"	f	class:Mbtile.Project
+generate	./lib/modules/mbtile/style.rb	/^  def generate$/;"	f	class:Mbtile.Style
+geo_json	./app/models/area.rb	/^  def geo_json$/;"	f	class:Area
+geojson	./lib/modules/mbtile/geojson.rb	/^  def geojson$/;"	f	class:Mbtile.Geojson
+get_layout_from_params	./app/controllers/analysis_controller.rb	/^  def get_layout_from_params$/;"	f	class:AnalysisController
+habitat_path	./lib/modules/mbtile/base.rb	/^  def habitat_path$/;"	f	class:Mbtile.Base
+help	./app/controllers/pages_controller.rb	/^  def help$/;"	f	class:PagesController
+home	./app/controllers/pages_controller.rb	/^  def home$/;"	f	class:PagesController
+index	./app/controllers/analysis_controller.rb	/^  def index$/;"	f	class:AnalysisController
+index	./app/controllers/areas_controller.rb	/^  def index$/;"	f	class:AreasController
+index	./app/controllers/users_controller.rb	/^  def index$/;"	f	class:UsersController
+index	./app/controllers/validations_controller.rb	/^  def index$/;"	f	class:ValidationsController
+initialize	./app/models/ability.rb	/^  def initialize(user)$/;"	f	class:Ability
+initialize	./app/models/habitat.rb	/^  def initialize(name)$/;"	f	class:Habitat
+initialize	./lib/modules/carto_db/validation.rb	/^  def initialize validation, action$/;"	f	class:CartoDb.Validation
+initialize	./lib/modules/mbtile/base.rb	/^  def initialize habitat, area$/;"	f	class:Mbtile.Base
+initialize	./lib/modules/mbtile/configuration.rb	/^  def initialize habitat, area, opts={minzoom: 9, maxzoom: 22}$/;"	f	class:Mbtile.Configuration
+initialize	./lib/modules/mbtile/mml.rb	/^  def initialize habitat, area, opts={minzoom: 9, maxzoom: 22}$/;"	f	class:Mbtile.Mml
+invalid_login_attempt	./app/controllers/sessions_controller.rb	/^  def invalid_login_attempt$/;"	f	class:SessionsController
+is_root?	./app/controllers/application_controller.rb	/^  def is_root?$/;"	f	class:ApplicationController
+json_coordinates	./app/models/area.rb	/^  def json_coordinates$/;"	f	class:Area
+json_coordinates	./app/models/validation.rb	/^  def json_coordinates$/;"	f	class:Validation
+last_validation_updated_at	./app/models/mbtile.rb	/^  def last_validation_updated_at$/;"	f	class:Mbtile
+layers_path	./lib/modules/mbtile/geojson.rb	/^  def layers_path$/;"	f	class:Mbtile.Geojson
+load_area	./app/controllers/areas_controller.rb	/^  def load_area$/;"	f	class:AreasController
+load_validations	./app/controllers/validations_controller.rb	/^  def load_validations$/;"	f	class:ValidationsController
+mapconfig_json	./lib/modules/carto_db/proxy/map.rb	/^  def self.mapconfig_json sql, cartocss$/;"	F	class:CartoDb.Proxy.Map
+mapconfig_template	./lib/modules/carto_db/proxy/map.rb	/^  def self.mapconfig_template$/;"	F	class:CartoDb.Proxy.Map
+maps	./app/controllers/proxy_controller.rb	/^  def maps$/;"	f	class:ProxyController
+maps_url	./lib/modules/carto_db/proxy/map.rb	/^  def self.maps_url$/;"	F	class:CartoDb.Proxy.Map
+mbtile_ids	./app/models/area.rb	/^  has_many :mbtiles, dependent: :destroy$/;"	F	class:Area
+mbtile_ids=	./app/models/area.rb	/^  has_many :mbtiles, dependent: :destroy$/;"	F	class:Area
+mbtiles	./app/models/area.rb	/^  has_many :mbtiles, dependent: :destroy$/;"	F	class:Area
+mbtiles=	./app/models/area.rb	/^  has_many :mbtiles, dependent: :destroy$/;"	F	class:Area
+me	./app/controllers/users_controller.rb	/^  def me$/;"	f	class:UsersController
+mml_template	./lib/modules/mbtile/mml.rb	/^  def mml_template$/;"	f	class:Mbtile.Mml
+most_recent	./app/models/validation.rb	/^  def self.most_recent(habitat)$/;"	F	class:Validation
+most_recent_id_by_habitat	./app/models/validation.rb	/^  def self.most_recent_id_by_habitat relation=Validation$/;"	F	class:Validation
+name	./app/models/habitat.rb	/^  attr_reader :name$/;"	f	class:Habitat
+new	./app/controllers/areas_controller.rb	/^  def new$/;"	f	class:AreasController
+new	./app/controllers/users_controller.rb	/^  def new$/;"	f	class:UsersController
+new	./app/controllers/validations_controller.rb	/^  def new$/;"	f	class:ValidationsController
+new_map	./app/controllers/proxy_controller.rb	/^  def new_map$/;"	f	class:ProxyController
+new_map	./lib/modules/carto_db/proxy.rb	/^  def self.new_map habitat, opts={}$/;"	F	class:CartoDb.Proxy
+options	./app/controllers/proxy_controller.rb	/^  def options$/;"	f	class:ProxyController
+perform	./app/workers/mbtile_generator.rb	/^  def perform mbtile_id$/;"	f	class:MbtileGenerator
+photo_ids	./app/models/validation.rb	/^  attr_accessor :photo_ids$/;"	f	class:Validation
+photo_ids	./app/models/validation.rb	/^  has_many :photos$/;"	F	class:Validation
+photo_ids=	./app/models/validation.rb	/^  attr_accessor :photo_ids$/;"	f	class:Validation
+photo_ids=	./app/models/validation.rb	/^  has_many :photos$/;"	F	class:Validation
+photo_params	./app/controllers/photos_controller.rb	/^  def photo_params$/;"	f	class:PhotosController
+photos	./app/models/validation.rb	/^  has_many :photos$/;"	F	class:Validation
+photos=	./app/models/validation.rb	/^  has_many :photos$/;"	F	class:Validation
+populate	./db/seeds.rb	/^def populate$/;"	f	class:Object
+populate_countries	./db/seeds.rb	/^def populate_countries$/;"	f	class:Object
+populate_roles	./db/seeds.rb	/^def populate_roles$/;"	f	class:Object
+populate_users	./db/seeds.rb	/^def populate_users$/;"	f	class:Object
+pretty_name	./app/models/habitat.rb	/^  def pretty_name$/;"	f	class:Habitat
+project_manager	./app/models/ability.rb	/^  def project_manager$/;"	f	class:Ability
+project_participant	./app/models/ability.rb	/^  def project_participant$/;"	f	class:Ability
+query	./lib/modules/carto_db.rb	/^  def self.query query, with_transaction=true$/;"	F	class:CartoDb
+query	./lib/modules/carto_db/validation.rb	/^  def query$/;"	f	class:CartoDb.Validation
+remove	./lib/cartodb_query.rb	/^  def self.remove(table_name)$/;"	F	class:CartodbQuery
+render	./lib/modules/carto_db/validation.rb	/^  def render name, opts={}$/;"	f	class:CartoDb.Validation
+role	./app/models/assignment.rb	/^  belongs_to :role$/;"	F	class:Assignment
+role=	./app/models/assignment.rb	/^  belongs_to :role$/;"	F	class:Assignment
+role_ids	./app/models/user.rb	/^  has_many :roles, through: :assignments$/;"	F	class:User
+role_ids=	./app/models/user.rb	/^  has_many :roles, through: :assignments$/;"	F	class:User
+roles	./app/models/user.rb	/^  has_many :roles, through: :assignments$/;"	F	class:User
+roles=	./app/models/user.rb	/^  has_many :roles, through: :assignments$/;"	F	class:User
+run	./lib/modules/carto_db/validation.rb	/^  def run$/;"	f	class:CartoDb.Validation
+run_tilemill	./lib/modules/mbtile/project.rb	/^  def run_tilemill$/;"	f	class:Mbtile.Project
+set_locale	./app/controllers/analysis_controller.rb	/^  def set_locale$/;"	f	class:AnalysisController
+set_locale	./app/controllers/pages_controller.rb	/^  def set_locale$/;"	f	class:PagesController
+shapefile_export_query	./lib/modules/carto_db/proxy/shapefile.rb	/^  def self.shapefile_export_query table_name, country$/;"	F	class:CartoDb.Proxy.Shapefile
+show	./app/controllers/areas_controller.rb	/^  def show$/;"	f	class:AreasController
+show	./app/controllers/mbtiles_controller.rb	/^  def show$/;"	f	class:MbtilesController
+show	./app/controllers/users_controller.rb	/^  def show$/;"	f	class:UsersController
+show	./app/controllers/validations_controller.rb	/^  def show$/;"	f	class:ValidationsController
+sign_in	./spec/rails_helper.rb	/^  def sign_in(user = double('user'))$/;"	f	class:ControllerHelpers
+source	./lib/modules/carto_db/proxy/map.rb	/^  def self.source habitat$/;"	F	class:CartoDb.Proxy.Map
+sql	./lib/modules/carto_db/proxy/map.rb	/^  def self.sql habitat, country, where$/;"	F	class:CartoDb.Proxy.Map
+store_from_subdomain	./app/controllers/application_controller.rb	/^  def store_from_subdomain$/;"	f	class:ApplicationController
+style	./lib/modules/mbtile/style.rb	/^  def style$/;"	f	class:Mbtile.Style
+subdomain	./app/controllers/application_controller.rb	/^  def subdomain$/;"	f	class:ApplicationController
+super_admin	./app/models/ability.rb	/^  def super_admin$/;"	f	class:Ability
+super_admin?	./app/models/user.rb	/^  def super_admin?$/;"	f	class:User
+table_name	./lib/modules/carto_db.rb	/^  def self.table_name habitat$/;"	F	class:CartoDb
+table_name	./lib/modules/carto_db/validation.rb	/^  def table_name$/;"	f	class:CartoDb.Validation
+template	./lib/modules/carto_db/validation.rb	/^  def template name$/;"	f	class:CartoDb.Validation
+thumbnail_url	./app/models/photo.rb	/^  def thumbnail_url$/;"	f	class:Photo
+tilemill_path	./lib/modules/mbtile/base.rb	/^  def tilemill_path$/;"	f	class:Mbtile.Base
+to_param	./app/models/habitat.rb	/^  def to_param$/;"	f	class:Habitat
+undo_most_recent_by_habitat	./app/models/validation.rb	/^  def self.undo_most_recent_by_habitat(habitat)$/;"	F	class:Validation
+up	./db/migrate/20121207084946_add_metadata_to_validation.rb	/^  def up$/;"	f	class:AddMetadataToValidation
+up	./db/migrate/20121214153125_remove_name_from_validation.rb	/^  def up$/;"	f	class:RemoveNameFromValidation
+up	./db/migrate/20121221131343_change_areas_coordinates_type.rb	/^  def up$/;"	f	class:ChangeAreasCoordinatesType
+up	./db/migrate/20130104145639_create_photos.rb	/^  def self.up$/;"	F	class:CreatePhotos
+update	./app/controllers/areas_controller.rb	/^  def update$/;"	f	class:AreasController
+update	./app/controllers/users_controller.rb	/^  def update$/;"	f	class:UsersController
+update	./app/controllers/validations_controller.rb	/^  def update$/;"	f	class:ValidationsController
+upload_edits_to_carto_db	./app/models/validation.rb	/^  def upload_edits_to_carto_db$/;"	f	class:Validation
+upload_to_carto_db	./app/models/validation.rb	/^  def upload_to_carto_db$/;"	f	class:Validation
+url_for_query	./lib/modules/carto_db.rb	/^  def self.url_for_query query, format="json"$/;"	F	class:CartoDb
+user	./app/models/assignment.rb	/^  belongs_to :user$/;"	F	class:Assignment
+user	./app/models/validation.rb	/^  belongs_to :user$/;"	F	class:Validation
+user=	./app/models/assignment.rb	/^  belongs_to :user$/;"	F	class:Assignment
+user=	./app/models/validation.rb	/^  belongs_to :user$/;"	F	class:Validation
+user_ids	./app/models/country.rb	/^  has_many :users, dependent: :destroy$/;"	F	class:Country
+user_ids	./app/models/role.rb	/^  has_many :users, through: :assignments$/;"	F	class:Role
+user_ids=	./app/models/country.rb	/^  has_many :users, dependent: :destroy$/;"	F	class:Country
+user_ids=	./app/models/role.rb	/^  has_many :users, through: :assignments$/;"	F	class:Role
+user_params	./app/controllers/users_controller.rb	/^  def user_params$/;"	f	class:UsersController
+users	./app/models/country.rb	/^  has_many :users, dependent: :destroy$/;"	F	class:Country
+users	./app/models/role.rb	/^  has_many :users, through: :assignments$/;"	F	class:Role
+users=	./app/models/country.rb	/^  has_many :users, dependent: :destroy$/;"	F	class:Country
+users=	./app/models/role.rb	/^  has_many :users, through: :assignments$/;"	F	class:Role
+validation	./app/models/photo.rb	/^  belongs_to :validation$/;"	F	class:Photo
+validation	./lib/modules/carto_db/validation.rb	/^  attr_reader :validation$/;"	f	class:CartoDb.Validation
+validation=	./app/models/photo.rb	/^  belongs_to :validation$/;"	F	class:Photo
+validation_ids	./app/models/area.rb	/^  has_many :validations, dependent: :destroy$/;"	F	class:Area
+validation_ids	./app/models/user.rb	/^  has_many :validations$/;"	F	class:User
+validation_ids=	./app/models/area.rb	/^  has_many :validations, dependent: :destroy$/;"	F	class:Area
+validation_ids=	./app/models/user.rb	/^  has_many :validations$/;"	F	class:User
+validation_params	./app/controllers/validations_controller.rb	/^  def validation_params$/;"	f	class:ValidationsController
+validations	./app/models/area.rb	/^  has_many :validations, dependent: :destroy$/;"	F	class:Area
+validations	./app/models/user.rb	/^  has_many :validations$/;"	F	class:User
+validations=	./app/models/area.rb	/^  has_many :validations, dependent: :destroy$/;"	F	class:Area
+validations=	./app/models/user.rb	/^  has_many :validations$/;"	F	class:User
+view_name	./lib/modules/carto_db.rb	/^  def self.view_name habitat, country$/;"	F	class:CartoDb
+view_name	./lib/modules/carto_db/validation.rb	/^  def view_name$/;"	f	class:CartoDb.Validation
+while_generating	./app/workers/mbtile_generator.rb	/^  def while_generating$/;"	f	class:MbtileGenerator
+with_transaction	./lib/modules/carto_db.rb	/^  def self.with_transaction query$/;"	F	class:CartoDb
