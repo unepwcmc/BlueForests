@@ -8,6 +8,10 @@ class CartoDb::Validation
     new(validation, 'edit').run
   end
 
+  def self.undo validation
+    new(validation, 'undo').run
+  end
+
   def initialize validation, action
     @validation = validation
     @action = action

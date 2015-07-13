@@ -38,12 +38,10 @@ class Validation < ActiveRecord::Base
   end
 
   def self.undo_most_recent_by_habitat(habitat)
-    validation = Validation.most_recent(habitat)
+    return unless validation = Validation.most_recent(habitat)
 
-    if validation.try :destroy
-      sql = CartodbQuery.remove(CartoDb.table_name(habitat))
-      CartoDb.query(sql)
-    end
+    CartoDb::Validation.undo(validation)
+    validation.destroy
   end
 
   def self.most_recent(habitat)
