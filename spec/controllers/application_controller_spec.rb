@@ -54,7 +54,7 @@ describe ApplicationController, type: :controller do
       end
 
       it 'redirects to the home page' do
-        is_expected.to redirect_to("/")
+        is_expected.to redirect_to("http://blueforests.com/")
       end
     end
 

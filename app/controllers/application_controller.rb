@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
 
   def check_country
     if current_country.blank? && !is_root?
-      redirect_to(root_path)
+      redirect_to(root_url(subdomain: false))
     end
   end
 
