@@ -27,7 +27,6 @@ CARTODB_QUERY_TEMPLATE	./lib/modules/mbtile/base.rb	/^  CARTODB_QUERY_TEMPLATE =
 COLORS	./lib/modules/mbtile/style.rb	/^  COLORS = {$/;"	C	class:Mbtile.Style
 COUNTRIES	./db/seeds.rb	/^COUNTRIES = [$/;"	C	class:
 CartoDb	./lib/modules/carto_db.rb	/^module CartoDb$/;"	m
-CartodbQuery	./lib/cartodb_query.rb	/^class CartodbQuery$/;"	c
 ChangeAreasCoordinatesType	./db/migrate/20121221131343_change_areas_coordinates_type.rb	/^class ChangeAreasCoordinatesType < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
 Configuration	./lib/modules/mbtile/configuration.rb	/^class Mbtile::Configuration < Mbtile::Base$/;"	c	class:Mbtile	inherits:Mbtile.Base
 ControllerHelpers	./spec/rails_helper.rb	/^module ControllerHelpers$/;"	m
@@ -265,7 +264,6 @@ project_manager	./app/models/ability.rb	/^  def project_manager$/;"	f	class:Abil
 project_participant	./app/models/ability.rb	/^  def project_participant$/;"	f	class:Ability
 query	./lib/modules/carto_db.rb	/^  def self.query query, with_transaction=true$/;"	F	class:CartoDb
 query	./lib/modules/carto_db/validation.rb	/^  def query$/;"	f	class:CartoDb.Validation
-remove	./lib/cartodb_query.rb	/^  def self.remove(table_name)$/;"	F	class:CartodbQuery
 render	./lib/modules/carto_db/validation.rb	/^  def render name, opts={}$/;"	f	class:CartoDb.Validation
 role	./app/models/assignment.rb	/^  belongs_to :role$/;"	F	class:Assignment
 role=	./app/models/assignment.rb	/^  belongs_to :role$/;"	F	class:Assignment
@@ -296,6 +294,7 @@ template	./lib/modules/carto_db/validation.rb	/^  def template name$/;"	f	class:
 thumbnail_url	./app/models/photo.rb	/^  def thumbnail_url$/;"	f	class:Photo
 tilemill_path	./lib/modules/mbtile/base.rb	/^  def tilemill_path$/;"	f	class:Mbtile.Base
 to_param	./app/models/habitat.rb	/^  def to_param$/;"	f	class:Habitat
+undo	./lib/modules/carto_db/validation.rb	/^  def self.undo validation$/;"	F	class:CartoDb.Validation
 undo_most_recent_by_habitat	./app/models/validation.rb	/^  def self.undo_most_recent_by_habitat(habitat)$/;"	F	class:Validation
 up	./db/migrate/20121207084946_add_metadata_to_validation.rb	/^  def up$/;"	f	class:AddMetadataToValidation
 up	./db/migrate/20121214153125_remove_name_from_validation.rb	/^  def up$/;"	f	class:RemoveNameFromValidation
@@ -332,7 +331,5 @@ validations	./app/models/area.rb	/^  has_many :validations, dependent: :destroy$
 validations	./app/models/user.rb	/^  has_many :validations$/;"	F	class:User
 validations=	./app/models/area.rb	/^  has_many :validations, dependent: :destroy$/;"	F	class:Area
 validations=	./app/models/user.rb	/^  has_many :validations$/;"	F	class:User
-view_name	./lib/modules/carto_db.rb	/^  def self.view_name habitat, country$/;"	F	class:CartoDb
-view_name	./lib/modules/carto_db/validation.rb	/^  def view_name$/;"	f	class:CartoDb.Validation
 while_generating	./app/workers/mbtile_generator.rb	/^  def while_generating$/;"	f	class:MbtileGenerator
 with_transaction	./lib/modules/carto_db.rb	/^  def self.with_transaction query$/;"	F	class:CartoDb

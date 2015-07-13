@@ -39,8 +39,4 @@ class CartoDb::Validation
   def table_name
     CartoDb.table_name(@validation.habitat)
   end
-
-  def view_name
-    CartoDb.view_name(@validation.habitat, @validation.country)
-  end
 end

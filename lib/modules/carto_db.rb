@@ -26,10 +26,6 @@ module CartoDb
     "#{prefix}_#{habitat}_#{Rails.env}"
   end
 
-  def self.view_name habitat, country
-    "#{table_name(habitat)}_#{country.iso}"
-  end
-
   def self.build_url path, opts={}
     opts = {with_api_key: true}.merge opts
     uri = URI::HTTPS.build(
