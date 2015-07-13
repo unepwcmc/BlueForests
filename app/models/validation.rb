@@ -42,7 +42,7 @@ class Validation < ActiveRecord::Base
 
     if validation.try :destroy
       sql = CartodbQuery.remove(CartoDb.table_name(habitat))
-      validation.cartodb_query(sql)
+      CartoDb.query(sql)
     end
   end
 

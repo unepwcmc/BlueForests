@@ -14,7 +14,9 @@
   <td><a href="#/<%= validation.id %>/edit">Edit</a></td>
 
   <% if @last_validation_id_by_habitat[validation.habitat] == validation.id %>
-    <td id="<%= validation.id %>_delete" class="deleteme">Delete</td>
+    <td id="<%= validation.id %>_delete" class="deleteme">
+      <%= link_to "Delete", validation_path(validation.id), method: :delete %>
+    </td>
   <% else %>
     <td></td>
   <% end %>
