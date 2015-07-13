@@ -1,12 +1,16 @@
 <%= render '_normalize_toggle' %>
 
+<%# set all visible polygons to toggle = NULL for future reference in the insert statement %>
 UPDATE <%= table_name %> AS t
 SET toggle = NULL
-WHERE ST_Intersects(<%= render '_validation_geom' %>, t.the_geom)
-  AND t.toggle = true
-  AND country_id = '<%= validation.country.iso %>';
+WHERE t.toggle = true
+  AND country_id = '<%= validation.country.iso %>'
+  AND ST_Intersects(<%= render '_validation_geom' %>, t.the_geom);
+
 
 INSERT INTO <%= table_name %> (the_geom, action, user_id, phase, phase_id, prev_phase, edit_phase, toggle, country_id)
+  <%# insert new polygons that are the intersection between the deletion polygon and the existing visible polygons %>
+  <%# these polygons will have 'delete' action, toggle = true, and prev_phase set to the last visible polygon it's intesecting %>
   SELECT
     ST_Multi(ST_Intersection(<%= render '_validation_geom' %>, t.the_geom)) AS the_geom,
     '<%= validation.action %>', <%= validation.user_id %>, <%= validation.id %>,
@@ -17,31 +21,38 @@ INSERT INTO <%= table_name %> (the_geom, action, user_id, phase, phase_id, prev_
 
   UNION ALL
 
+  <%# insert new polygons that are the difference between the visible polygons and the new 'delete' polygon %>
+  <%# these polygons will have 'add' or 'validate' action, toggle=true, and prev_phase set to the last visible polygon it's intersecting %>
   SELECT *
   FROM (
     SELECT
       ST_Multi(ST_Difference(t.the_geom, ST_Buffer(ST_Collect(<%= render '_validation_geom' %>), 0))) AS the_geom,
-      t.action, t.user_id, t.phase, t.phase_id, t.prev_phase, t.phase as edit_phase, true, '<%= validation.country.iso %>'::text
+      t.action, t.user_id, <%= validation.id %>, t.phase_id, t.phase AS prev_phase, t.phase as edit_phase, true, '<%= validation.country.iso %>'::text
     FROM <%= table_name %> t
     WHERE t.toggle IS NULL
       AND country_id = '<%= validation.country.iso %>'
     GROUP BY t.the_geom, t.action, t.user_id, t.phase, t.phase_id, t.prev_phase
   ) a
-  WHERE ST_IsEmpty(a.the_geom) = false
+  WHERE ST_IsEmpty(a.the_geom) IS FALSE
 
   UNION ALL
 
+  <%# insert new polygons that are the difference between the new 'delete' polygon and the latest visible polygons %>
+  <%# these new polygons will have 'delete' action, toggle = true, and the validation id as prev_phase. Still don't know why %>
   SELECT
     a.the_geom, '<%= validation.action %>', <%= validation.user_id %>, <%= validation.id %> as prev_phase, 1,
     <%= validation.id %>, <%= validation.id %> as edit_phase, true, '<%= validation.country.iso %>'::text
   FROM (
     SELECT ST_Multi(ST_Difference(dt.polygon, ST_Buffer(ST_Collect(t.the_geom),0))) AS the_geom
     FROM <%= table_name %> t, (SELECT <%= render '_validation_geom' %> AS polygon) dt
-    WHERE ST_Intersects(t.the_geom, dt.polygon) AND t.toggle IS NULL AND country_id = '<%= validation.country.iso %>'
+    WHERE t.toggle IS NULL
+      AND country_id = '<%= validation.country.iso %>'
+      AND ST_Intersects(t.the_geom, dt.polygon)
     GROUP BY dt.polygon
   ) a
   WHERE ST_IsEmpty(a.the_geom) = false;
 
+<%# insert simple new polygon with 'delete' action if none of the previous insert clauses generated something %>
 INSERT INTO <%= table_name %> (the_geom, action, user_id, phase, phase_id, prev_phase, edit_phase, toggle)
   SELECT
     ST_Multi(dt.polygon) AS the_geom, '<%= validation.action %>', <%= validation.user_id %>, <%= validation.id %>,
@@ -51,11 +62,12 @@ INSERT INTO <%= table_name %> (the_geom, action, user_id, phase, phase_id, prev_
     SELECT COUNT(1)
     FROM <%= table_name %> t,
       (SELECT <%= render '_validation_geom' %> AS polygon) dt
-    WHERE ST_Intersects(t.the_geom, dt.polygon)
+    WHERE toggle IS NULL
       AND country_id = '<%= validation.country.iso %>'
-      AND toggle IS NULL
+      AND ST_Intersects(t.the_geom, dt.polygon)
   ) = 0;
 
+<%# hide whatever is still toggle = null %>
 UPDATE <%= table_name %> AS t
 SET toggle = false
 WHERE toggle IS NULL
