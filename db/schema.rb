@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150713124543) do
+ActiveRecord::Schema.define(version: 20150714105116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150713124543) do
     t.string   "iso"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "bounds",     default: [], array: true
   end
 
   create_table "geometries", force: true do |t|
