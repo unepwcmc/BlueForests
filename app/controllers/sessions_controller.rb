@@ -1,4 +1,6 @@
 class SessionsController < Devise::SessionsController
+  layout false
+
   def create
     respond_to do |format|
       format.html { super }
