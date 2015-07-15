@@ -5,6 +5,12 @@
       New Field Site
     <% end %>
   <% end %>
+  <div class="btn-group">
+    <% if current_user.super_admin? %>
+      <%= render 'shared/country_filter', path: :areas_path %>
+    <% end %>
+  </div>
+
   <h1>Field Sites</h1>
 </div>
 

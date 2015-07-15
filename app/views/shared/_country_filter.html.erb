@@ -1,0 +1,11 @@
+<div class="btn-group">
+  <a class="btn dropdown-toggle" data-toggle="dropdown" id="country-select" href="#">
+    Filter by country
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="country-select">
+    <% Country.pluck(:id, :name).each do |id, name| %>
+      <li><%= link_to name, send(path, country_id: id) %></li>
+    <% end %>
+  </ul>
+</div>

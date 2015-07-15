@@ -15,17 +15,7 @@
         </ul>
       </div>
       <% if current_user.super_admin? %>
-        <div class="btn-group">
-          <a class="btn dropdown-toggle" data-toggle="dropdown" id="country-select" href="#">
-            Filter by country
-            <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="country-select">
-            <% Country.pluck(:id, :name).each do |id, name| %>
-              <li><%= link_to name, validations_path(country_id: id) %></li>
-            <% end %>
-          </ul>
-        </div>
+        <%= render 'shared/country_filter', path: :validations_path %>
       <% end %>
     <h1>Listing validations</h1>
   </div>
