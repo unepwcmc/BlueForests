@@ -11,8 +11,8 @@ FactoryGirl.define do
 
     factory :project_manager do
       roles {[FactoryGirl.create(:role, name: 'project_manager')]}
-
     end
+
     factory :project_participant do
       roles {[FactoryGirl.create(:role, name: 'project_participant')]}
     end
