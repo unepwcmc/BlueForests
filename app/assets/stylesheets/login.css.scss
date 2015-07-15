@@ -1,0 +1,32 @@
+@import 'z-index';
+
+.full-page-overlay {
+  &:not(.hidden) { display: flex; }
+
+  align-items: center;
+  justify-content: center;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: #333f85;
+  background-color: rgba(66, 84, 151, 0.9);
+}
+
+.login-modal-container {
+  z-index: $zIndex-max;
+  display: block;
+
+  align-self: flex-start;
+
+  height: 540px;
+  width: 30%;
+  margin: auto;
+
+  background-color: white;
+}
+
+

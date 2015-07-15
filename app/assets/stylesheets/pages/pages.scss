@@ -25,6 +25,9 @@ $break-em              : 50em;
 $grid-padding          : $gutter-width;
 //$container-style       : static;
 
+.hidden {
+  display: none;
+}
 
 body {
   background-color: $gray-background;
@@ -202,13 +205,14 @@ body.matted {
       padding-top: 19px;
     }
     p.light-blue.doubble {
-			margin-top: 0;
+      margin-top: 0;
       padding-bottom: 0;
     }
-		p.light-blue.doubble.fix-orphans{
-			margin-top: -17px;
-			margin-bottom: 10px;
-		}
+
+    p.light-blue.doubble.fix-orphans{
+            margin-top: -17px;
+            margin-bottom: 10px;
+    }
 
     p.light-blue.doubble.ar {
       padding-bottom: 37px;
