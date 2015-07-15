@@ -1,12 +1,11 @@
 class AreasController < AdminController
   before_filter :authenticate_user!
   before_filter :load_area, only: [:show, :edit, :update, :destroy]
+  before_filter :load_areas, only: [:index]
 
   load_and_authorize_resource
 
   def index
-    @areas = Area.all
-
     respond_to do |format|
       format.html
       format.json
@@ -76,6 +75,14 @@ class AreasController < AdminController
   end
 
   def area_params
-    params.require(:area).permit(:title, :coordinates)
+    params.require(:area).permit(:title, :coordinates, :country_id)
+  end
+
+  def load_areas
+    @areas = Area.accessible_by(current_ability)
+
+    if params[:country_id] && current_user.super_admin?
+      @areas = @areas.where(country_id: params[:country_id])
+    end
   end
 end
