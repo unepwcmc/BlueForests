@@ -4,7 +4,10 @@ class UsersController < AdminController
 
   def me
     if user_signed_in?
-      render json: current_user.to_json(only: [:id, :email, :login_method])
+      render json: current_user.to_json(
+        only: [:id, :email, :login_method],
+        include: {country: {only: [:name, :bounds]}}
+      )
     else
       render json: { error: '401 Unauthorized' }, status: :unauthorized
     end

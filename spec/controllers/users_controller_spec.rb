@@ -32,5 +32,24 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
+
+  describe 'GET #me' do
+    subject { JSON.parse(response.body) }
+    let(:bounds) { [[-1, -1], [1, 1]] }
+    let(:country) { FactoryGirl.create(:country, bounds: bounds) }
+    let(:current_user) { FactoryGirl.create(:user, country: country) }
+
+    it 'returns the user details' do
+      get :me
+      expect(subject).to eq({
+        "id" => current_user.id,
+        "email" => current_user.email,
+        "country" => {
+          "name" => country.name,
+          "bounds" => bounds
+        }
+      })
+    end
+  end
 end
 
