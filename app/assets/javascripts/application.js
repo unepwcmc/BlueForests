@@ -24,7 +24,6 @@
 //= require_tree ./analysis/views/
 //= require_tree ./analysis/routers/
 //= require ./analysis/analysis.js.coffee
-//= require pica
 
 var roundToDecimals = function(number, places) {
   places = Math.pow(10, places);
