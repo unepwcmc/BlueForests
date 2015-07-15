@@ -1,15 +1,15 @@
-# Set the defaults for DataTables initialisation 
+# Set the defaults for DataTables initialisation
 $.extend true, $.fn.dataTable.defaults,
   sDom: "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>"
   sPaginationType: "bootstrap"
   oLanguage:
     sLengthMenu: "_MENU_ records per page"
 
-# Default class modification 
+# Default class modification
 $.extend $.fn.dataTableExt.oStdClasses,
   sWrapper: "dataTables_wrapper form-inline"
 
-# API method to get paging information 
+# API method to get paging information
 $.fn.dataTableExt.oApi.fnPagingInfo = (oSettings) ->
   iStart: oSettings._iDisplayStart
   iEnd: oSettings.fnDisplayEnd()
@@ -19,7 +19,7 @@ $.fn.dataTableExt.oApi.fnPagingInfo = (oSettings) ->
   iPage: Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength)
   iTotalPages: Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
 
-# Bootstrap style pagination control 
+# Bootstrap style pagination control
 $.extend $.fn.dataTableExt.oPagination,
   bootstrap:
     fnInit: (oSettings, nPaging, fnDraw) ->
@@ -63,10 +63,10 @@ $.extend $.fn.dataTableExt.oPagination,
       iLen = an.length
 
       while i < iLen
-        
+
         # Remove the middle elements
         $("li:gt(0)", an[i]).filter(":not(:last)").remove()
-        
+
         # Add the new list items and their event handlers
         j = iStart
         while j <= iEnd
@@ -77,7 +77,7 @@ $.extend $.fn.dataTableExt.oPagination,
             fnDraw oSettings
 
           j++
-        
+
         # Add / remove disabled classes from the static elements
         if oPaging.iPage is 0
           $("li:first", an[i]).addClass "disabled"
@@ -92,7 +92,7 @@ $.extend $.fn.dataTableExt.oPagination,
 #
 # * TableTools Bootstrap compatibility
 # * Required TableTools 2.1+
-# 
+#
 if $.fn.DataTable.TableTools
   # Set the classes that TableTools uses to something suitable for Bootstrap
   $.extend true, $.fn.DataTable.TableTools.classes,
