@@ -17,6 +17,9 @@ addDraw = (map) ->
 
   editableMap(map, drawnItems) if $('#area_coordinates').length > 0
 
+  if $('#area_country_id').length > 0
+    $('#area_country_id').val($('#map').data('country-id'))
+
   map.addLayer(drawnItems)
 
 editableMap = (map, drawnItems) ->
