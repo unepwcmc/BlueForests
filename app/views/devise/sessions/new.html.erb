@@ -2,8 +2,9 @@
 
 <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :defaults => { :input_html => { :class => 'span8' } }) do |f| %>
   <div class="form-inputs">
-    <%= f.input :email, :required => false, :autofocus => true %>
-    <%= f.input :password, :required => false %>
+    <%= f.input :email, :autofocus => true %>
+    <%= f.input :password %>
+    <%= f.input :country_id, collection: Country.all, include_blank: "Select a country" %>
     <%= f.input :remember_me, :as => :boolean, :input_html => { :class => nil } if devise_mapping.rememberable? %>
   </div>
 
