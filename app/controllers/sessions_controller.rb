@@ -34,6 +34,10 @@ class SessionsController < Devise::SessionsController
 
   protected
 
+  def after_sign_in_path_for(resource)
+    validations_url(subdomain: resource.country.subdomain)
+  end
+
   def invalid_login_attempt
     warden.custom_failure!
     render json: { success: false, message: 'Error with your login or password' }, status: 401
