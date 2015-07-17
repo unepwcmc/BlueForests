@@ -1,6 +1,8 @@
 class ValidationsController < AdminController
   before_filter :authenticate_user!
+  before_filter :check_country_for_restricted_pages
   before_filter :load_validations, only: :index
+
   load_and_authorize_resource except: :index
 
   def index

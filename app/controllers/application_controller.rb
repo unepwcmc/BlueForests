@@ -45,8 +45,12 @@ class ApplicationController < ActionController::Base
   end
 
   def check_country
-    if current_country.blank? && !is_root?
-      redirect_to(root_url(subdomain: false))
+    redirect_to(root_url(subdomain: false)) if current_country.nil? && !is_root?
+  end
+
+  def check_country_for_restricted_pages
+    if signed_in? && current_country != current_user.country
+      redirect_to(root_url)
     end
   end
 

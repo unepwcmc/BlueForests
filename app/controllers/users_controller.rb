@@ -1,5 +1,7 @@
 class UsersController < AdminController
   before_filter :authenticate_user!, except: :me
+  before_filter :check_country_for_restricted_pages
+
   load_and_authorize_resource except: :me
 
   def me
