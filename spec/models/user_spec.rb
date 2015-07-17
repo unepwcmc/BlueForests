@@ -64,13 +64,15 @@ RSpec.describe User, type: :model do
     subject { User.find_for_authentication(conditions) }
     let(:user) { FactoryGirl.create(:user, country: mozambique) }
 
-    context 'when a country subdomain is given' do
-      let(:conditions) { {email: user.email, subdomain: 'mozambique'} }
+    context 'when a country_id is given' do
+      let(:conditions) { {email: user.email, country_id: mozambique.id} }
       it { is_expected.to eq user }
     end
 
-    context 'when a composed subdomain is given' do
-      let(:conditions) { {email: user.email, subdomain: 'mozambique.some.other-stuff'} }
+    context 'when authentication_token is given' do
+      let(:user) { FactoryGirl.create(:user, authentication_token: '123asd123') }
+      let(:conditions) { {email: user.email, authentication_token: '123asd123'} }
+
       it { is_expected.to eq user }
     end
   end
