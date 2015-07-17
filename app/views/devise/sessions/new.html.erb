@@ -1,7 +1,8 @@
 <h2>Log in</h2>
 
 <%= form_tag user_session_path, method: 'POST' do %>
-  <%= label_tag(:username, 'Email') %>
+  <%= label_tag(:errors, 'Invalid email or password', class: 'login-error hidden') %>
+  <%= label_tag(:email, 'Email') %>
   <%= email_field(:user, :email) %>
 
   <%= label_tag(:password, 'Password') %>

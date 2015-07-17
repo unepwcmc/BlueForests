@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
 
 
   def self.find_for_authentication(conditions)
-    Rails.logger.info conditions
     if conditions[:authentication_token]
       find_by_authentication_token(conditions[:authentication_token])
     else
