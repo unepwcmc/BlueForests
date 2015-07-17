@@ -1,15 +1,18 @@
-<h2>Sign in</h2>
+<h2>Log in</h2>
 
-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :defaults => { :input_html => { :class => 'span8' } }) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, :autofocus => true %>
-    <%= f.input :password %>
-    <%= f.input :country_id, collection: Country.all, include_blank: "Select a country" %>
-    <%= f.input :remember_me, :as => :boolean, :input_html => { :class => nil } if devise_mapping.rememberable? %>
-  </div>
+<%= form_tag user_session_path, method: 'POST' do %>
+  <%= label_tag(:username, 'Email') %>
+  <%= email_field(:user, :email) %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign in", class: 'btn-primary' %>
-    <%= render "devise/shared/links" %>
-  </div>
+  <%= label_tag(:password, 'Password') %>
+  <%= password_field(:user, :password) %>
+
+  <% if @current_country %>
+    <%= hidden_field(:user, :country_id, value: @current_country.id) %>
+  <% else %>
+    <%= label_tag(:country_id, 'Country') %>
+    <%= select(:user, :country_id, Country.pluck(:name, :id)) %>
+  <% end %>
+
+  <%= submit_tag("Log in") %>
 <% end %>
