@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def is_root?
-    request.path == "/" && subdomain.blank?
+  def is_root? with_subdomain=nil
+    request.path == "/" && (subdomain.blank? || subdomain == with_subdomain)
   end
 end
