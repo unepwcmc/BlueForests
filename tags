@@ -3,6 +3,7 @@
 ANALYSIS	./lib/modules/i18n_repo.rb	/^  ANALYSIS = {$/;"	C	class:I18nRepo
 API_KEY	./lib/modules/carto_db.rb	/^  API_KEY  = Rails.application.secrets.cartodb['api_key']$/;"	C	class:CartoDb
 Ability	./app/models/ability.rb	/^class Ability$/;"	c
+AddBoundsColumnToCountriesTable	./db/migrate/20150714105116_add_bounds_column_to_countries_table.rb	/^class AddBoundsColumnToCountriesTable < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
 AddCountryIdToArea	./db/migrate/20150211112202_add_country_id_to_area.rb	/^class AddCountryIdToArea < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
 AddCountryIdToGeometries	./db/migrate/20150216140627_add_country_id_to_geometries.rb	/^class AddCountryIdToGeometries < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
 AddCountryIdToUser	./db/migrate/20150210155914_add_country_id_to_user.rb	/^class AddCountryIdToUser < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
@@ -73,7 +74,7 @@ Validation	./app/models/validation.rb	/^class Validation < ActiveRecord::Base$/;
 Validation	./lib/modules/carto_db/validation.rb	/^class CartoDb::Validation$/;"	c	class:CartoDb
 ValidationsController	./app/controllers/validations_controller.rb	/^class ValidationsController < AdminController$/;"	c	inherits:AdminController
 about	./app/controllers/pages_controller.rb	/^  def about$/;"	f	class:PagesController
-after_sign_in_path_for	./app/controllers/application_controller.rb	/^  def after_sign_in_path_for(resource)$/;"	f	class:ApplicationController
+after_sign_in_path_for	./app/controllers/sessions_controller.rb	/^  def after_sign_in_path_for(resource)$/;"	f	class:SessionsController
 all	./app/models/habitat.rb	/^  def self.all$/;"	F	class:Habitat
 already_generated?	./app/models/mbtile.rb	/^  def already_generated?$/;"	f	class:Mbtile
 area	./app/models/mbtile.rb	/^  belongs_to :area$/;"	F	class:Mbtile
@@ -127,7 +128,9 @@ change	./db/migrate/20150211112202_add_country_id_to_area.rb	/^  def change$/;"	
 change	./db/migrate/20150216140627_add_country_id_to_geometries.rb	/^  def change$/;"	f	class:AddCountryIdToGeometries
 change	./db/migrate/20150323162045_add_country_id_to_validations_table.rb	/^  def change$/;"	f	class:AddCountryIdToValidationsTable
 change	./db/migrate/20150713124543_reindex_users_by_email_and_country_id.rb	/^  def change$/;"	f	class:ReindexUsersByEmailAndCountryId
+change	./db/migrate/20150714105116_add_bounds_column_to_countries_table.rb	/^  def change$/;"	f	class:AddBoundsColumnToCountriesTable
 check_country	./app/controllers/application_controller.rb	/^  def check_country$/;"	f	class:ApplicationController
+check_country_for_restricted_pages	./app/controllers/application_controller.rb	/^  def check_country_for_restricted_pages$/;"	f	class:ApplicationController
 clear_cache	./lib/modules/mbtile/project.rb	/^  def clear_cache$/;"	f	class:Mbtile.Project
 completed?	./app/models/mbtile.rb	/^  def completed?$/;"	f	class:Mbtile
 config	./lib/modules/mbtile/configuration.rb	/^  def config$/;"	f	class:Mbtile.Configuration
@@ -194,7 +197,7 @@ extent	./lib/modules/mbtile/mml.rb	/^  alias_method :extent, :bounds$/;"	a	class
 extract_tiles_url	./lib/modules/carto_db/proxy/map.rb	/^  def self.extract_tiles_url response$/;"	F	class:CartoDb.Proxy.Map
 final_path	./lib/modules/mbtile/project.rb	/^  def final_path$/;"	f	class:Mbtile.Project
 find	./app/models/habitat.rb	/^  def self.find(param)$/;"	F	class:Habitat
-find_for_authentication	./app/models/user.rb	/^  def self.find_for_authentication(warden_conditions)$/;"	F	class:User
+find_for_authentication	./app/models/user.rb	/^  def self.find_for_authentication(conditions)$/;"	F	class:User
 from_session	./app/controllers/application_controller.rb	/^  def from_session$/;"	f	class:ApplicationController
 from_subdomain	./app/controllers/application_controller.rb	/^  def from_subdomain$/;"	f	class:ApplicationController
 generate	./app/models/mbtile.rb	/^  def self.generate(area_id, habitat)$/;"	F	class:Mbtile
@@ -221,12 +224,13 @@ initialize	./lib/modules/mbtile/base.rb	/^  def initialize habitat, area$/;"	f	c
 initialize	./lib/modules/mbtile/configuration.rb	/^  def initialize habitat, area, opts={minzoom: 9, maxzoom: 22}$/;"	f	class:Mbtile.Configuration
 initialize	./lib/modules/mbtile/mml.rb	/^  def initialize habitat, area, opts={minzoom: 9, maxzoom: 22}$/;"	f	class:Mbtile.Mml
 invalid_login_attempt	./app/controllers/sessions_controller.rb	/^  def invalid_login_attempt$/;"	f	class:SessionsController
-is_root?	./app/controllers/application_controller.rb	/^  def is_root?$/;"	f	class:ApplicationController
+is_root?	./app/controllers/application_controller.rb	/^  def is_root? with_subdomain=nil$/;"	f	class:ApplicationController
 json_coordinates	./app/models/area.rb	/^  def json_coordinates$/;"	f	class:Area
 json_coordinates	./app/models/validation.rb	/^  def json_coordinates$/;"	f	class:Validation
 last_validation_updated_at	./app/models/mbtile.rb	/^  def last_validation_updated_at$/;"	f	class:Mbtile
 layers_path	./lib/modules/mbtile/geojson.rb	/^  def layers_path$/;"	f	class:Mbtile.Geojson
 load_area	./app/controllers/areas_controller.rb	/^  def load_area$/;"	f	class:AreasController
+load_areas	./app/controllers/areas_controller.rb	/^  def load_areas$/;"	f	class:AreasController
 load_validations	./app/controllers/validations_controller.rb	/^  def load_validations$/;"	f	class:ValidationsController
 mapconfig_json	./lib/modules/carto_db/proxy/map.rb	/^  def self.mapconfig_json sql, cartocss$/;"	F	class:CartoDb.Proxy.Map
 mapconfig_template	./lib/modules/carto_db/proxy/map.rb	/^  def self.mapconfig_template$/;"	F	class:CartoDb.Proxy.Map
