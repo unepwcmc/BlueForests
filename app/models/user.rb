@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   devise :token_authenticatable, :database_authenticatable,
-         :recoverable, :rememberable, :trackable, request_keys: [:subdomain]
+         :recoverable, :rememberable, :trackable, authentication_keys: [:email, :country_id]
 
   validates :country, presence: true, unless: :super_admin?
 
@@ -12,17 +12,16 @@ class User < ActiveRecord::Base
   has_many :assignments, dependent: :destroy
   has_many :roles, through: :assignments
 
+  delegate :subdomain, to: :country
 
-  def self.find_for_authentication(warden_conditions)
-    if warden_conditions[:authentication_token]
-      where(authentication_token: warden_conditions[:authentication_token]).first
+
+  def self.find_for_authentication(conditions)
+    Rails.logger.info conditions
+    if conditions[:authentication_token]
+      find_by_authentication_token(conditions[:authentication_token])
     else
-      subdomain = warden_conditions[:subdomain].split('.').first
-      country = Country.find_by_subdomain(subdomain)
-
-      users_with_email = where(:email => warden_conditions[:email])
-      users_with_email.detect { |user|
-        user.super_admin? || user.country == country
+      where(:email => conditions[:email]).detect { |user|
+        user.country_id == conditions[:country_id].to_i || user.super_admin?
       }
     end
   end
