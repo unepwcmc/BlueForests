@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_country
-    @current_country = if current_user
+    @current_country ||= if signed_in? && current_user.super_admin?
       from_session or store_from_subdomain
     else
       from_subdomain
