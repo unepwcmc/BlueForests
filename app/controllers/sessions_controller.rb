@@ -1,4 +1,5 @@
 class SessionsController < Devise::SessionsController
+  skip_before_filter :check_country, only: [:new, :create]
   layout false
 
   def create
