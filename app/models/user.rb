@@ -34,12 +34,4 @@ class User < ActiveRecord::Base
       conditions[:country_id]
     ).first
   end
-
-  def subdomain selected_country_id=nil
-    if super_admin?
-      Rails.application.secrets.admin_subdomain
-    else
-      countries.find(selected_country_id).subdomain
-    end
-  end
 end

@@ -76,20 +76,4 @@ RSpec.describe User, type: :model do
       it { is_expected.to eq user }
     end
   end
-
-  describe '#subdomain' do
-    subject { user.subdomain }
-
-    context 'when is super_admin?' do
-      let(:user) { FactoryGirl.create(:super_admin) }
-      it { is_expected.to eq 'admin' }
-    end
-
-    context 'when country_id is passed in' do
-      subject { user.subdomain(mozambique.id) }
-      let(:user) { FactoryGirl.create(:user, countries: [mozambique]) }
-
-      it { is_expected.to eq 'mozambique' }
-    end
-  end
 end

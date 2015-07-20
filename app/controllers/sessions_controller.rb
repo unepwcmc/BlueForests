@@ -39,7 +39,7 @@ class SessionsController < Devise::SessionsController
 
 
   def after_sign_in_path_for resource, country_id=nil
-    validations_url(subdomain: resource.subdomain(country_id))
+    validations_url(subdomain: Subdomainer.from_user(resource, country_id))
   end
 
   def invalid_login_attempt
