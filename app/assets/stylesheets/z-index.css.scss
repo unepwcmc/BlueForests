@@ -1,1 +1,13 @@
-$zIndex-max: 9999;
+$z-index: (
+  modal              : 200,
+  navigation         : 100,
+  footer             : 90,
+);
+
+@function z-index($key) {
+  @return map-get($z-index, $key);
+}
+
+@mixin z-index($key) {
+  z-index: z-index($key);
+}
