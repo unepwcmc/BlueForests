@@ -35,7 +35,7 @@ end
 
 def populate_users
   puts '### Creating test users'
-  create_test_user(nil, Role.where(name: 'super_admin'))
+  create_test_user(Country.all, Role.where(name: 'super_admin'))
 
   Country.all.each do |country|
     Role.where("name != 'super_admin'").each do |role|
@@ -44,10 +44,12 @@ def populate_users
   end
 end
 
-def create_test_user country, roles
+def create_test_user countries, roles
+  countries = Array.wrap(countries)
   roles = Array.wrap(roles)
-  email = if country
-    "#{roles.first.name}@#{country.subdomain}.blueforests.io"
+
+  email = if countries.length == 1
+    "#{roles.first.name}@#{countries.first.subdomain}.blueforests.io"
   else
     "#{roles.first.name}@blueforests.io"
   end
@@ -56,7 +58,7 @@ def create_test_user country, roles
     email: email,
     password: 'blueforests',
     password_confirmation: 'blueforests',
-    country: country,
+    countries: countries,
     roles: roles
   })
 end
