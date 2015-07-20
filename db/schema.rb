@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150714105116) do
+ActiveRecord::Schema.define(version: 20150717151226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,12 +106,17 @@ ActiveRecord::Schema.define(version: 20150714105116) do
     t.string   "authentication_token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "country_id"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
-  add_index "users", ["email", "country_id"], :name => "index_users_on_email_and_country_id", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "users_countries", force: true do |t|
+    t.integer "country_id"
+    t.integer "user_id"
+  end
+
+  add_index "users_countries", ["user_id", "country_id"], :name => "index_users_countries_on_user_id_and_country_id", :unique => true
 
   create_table "validations", force: true do |t|
     t.text     "coordinates"
