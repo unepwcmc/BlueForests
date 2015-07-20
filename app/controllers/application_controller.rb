@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     @current_country ||= if signed_in? && current_user.super_admin?
       from_session or store_from_subdomain
     else
-      from_subdomain
+      Subdomainer.country(request)
     end
   end
 
@@ -33,19 +33,12 @@ class ApplicationController < ActionController::Base
   end
 
   def store_from_subdomain
-    from_subdomain.tap { |country| session[:country_id] = country.id }
-  end
-
-  def from_subdomain
-    Country.find_by_subdomain(subdomain)
-  end
-
-  def subdomain
-    request.subdomain.split('.').first
+    Subdomainer.country(request).tap { |country| session[:country_id] = country.id }
   end
 
   def check_country
-    redirect_to(root_url(subdomain: false)) if current_country.nil? && !is_root?
+    unrecognised_subdomain = current_country.nil? && !is_root?
+    redirect_to(root_url(subdomain: Subdomainer.root)) if unrecognised_subdomain
   end
 
   def check_country_for_restricted_pages
@@ -54,7 +47,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def is_root? with_subdomain=nil
-    request.path == "/" && (subdomain.blank? || subdomain == with_subdomain)
+  def is_root?
+    request.path == "/" && Subdomainer.root?(request)
   end
 end
