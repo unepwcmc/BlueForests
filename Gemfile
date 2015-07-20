@@ -14,6 +14,7 @@ gem 'bootstrap-generators'
 gem 'simple_form'
 gem 'rails-backbone'
 gem 'jquery-rails'
+gem 'html5-rails'
 
 gem 'daemons'
 gem 'sidekiq', '~> 2.17.8'
@@ -31,6 +32,10 @@ group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'therubyracer', :platforms => :ruby
+
+  gem 'compass-rails'
+  gem 'compass-h5bp'
+
   gem 'uglifier', '>= 1.0.3'
 end
 
