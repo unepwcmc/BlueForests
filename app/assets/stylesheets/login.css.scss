@@ -17,7 +17,7 @@
 }
 
 .login-modal-container {
-  z-index: $zIndex-max;
+  @include z-index(modal);
   display: block;
 
   align-self: flex-start;
