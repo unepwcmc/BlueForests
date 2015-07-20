@@ -1,6 +1,7 @@
 //= require async
 //= require jquery
 //= require jquery_ujs
+//= require h5bp
 //= require bootstrap
 //= require leaflet
 //= require leaflet.draw
