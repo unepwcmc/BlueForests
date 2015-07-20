@@ -7,7 +7,7 @@
     <%= f.input :password_confirmation, required: true %>
 
     <% if current_user.super_admin? && current_user != @user %>
-      <%= f.association :country, required: true %>
+      <%= f.association :countries, required: true %>
     <% end %>
 
     <%= f.association :roles, as: :check_boxes, collection: Role.accessible_by(current_ability), label: false, label_method: -> (role) { "#{role.name.humanize.capitalize}<br> <span class='description'>#{role.description}</span>".html_safe }, input_html: { class: nil, disabled: (@user == current_user) } %>

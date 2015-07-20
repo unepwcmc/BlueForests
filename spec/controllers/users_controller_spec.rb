@@ -12,14 +12,14 @@ RSpec.describe UsersController, type: :controller do
   describe 'POST #create' do
     subject { User.find_by_email('try@email.com') }
     let(:role) { FactoryGirl.create(:role) }
-    let(:user_params) { {email: 'try@email.com', password: 'blueforests', password_confirmation: 'blueforests', roles_ids: [role.id]} }
+    let(:user_params) { {email: 'try@email.com', password: 'blueforests', password_confirmation: 'blueforests', role_ids: [role.id]} }
 
     context 'current user is a project manager' do
-      let(:current_user) { FactoryGirl.create(:project_manager, country: country) }
+      let(:current_user) { FactoryGirl.create(:project_manager, countries: [country]) }
 
       it 'creates the user under the current country' do
         post :create, user: user_params
-        expect(subject.country).to eq(country)
+        expect(subject.countries).to eq([country])
       end
     end
 
@@ -27,8 +27,8 @@ RSpec.describe UsersController, type: :controller do
       let(:current_user) { FactoryGirl.create(:super_admin) }
 
       it 'creates the user with the chosen country' do
-        post :create, user: user_params.merge({country_id: another_country.id})
-        expect(subject.country).to eq(another_country)
+        post :create, user: user_params.merge({country_ids: [another_country.id]})
+        expect(subject.countries).to eq([another_country])
       end
     end
   end
@@ -37,17 +37,17 @@ RSpec.describe UsersController, type: :controller do
     subject { JSON.parse(response.body) }
     let(:bounds) { [[-1, -1], [1, 1]] }
     let(:country) { FactoryGirl.create(:country, bounds: bounds) }
-    let(:current_user) { FactoryGirl.create(:user, country: country) }
+    let(:current_user) { FactoryGirl.create(:user, countries: [country]) }
 
     it 'returns the user details' do
       get :me
       expect(subject).to eq({
         "id" => current_user.id,
         "email" => current_user.email,
-        "country" => {
+        "countries" => [{
           "name" => country.name,
           "bounds" => bounds
-        }
+        }]
       })
     end
   end

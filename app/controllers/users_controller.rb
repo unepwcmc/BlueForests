@@ -8,7 +8,7 @@ class UsersController < AdminController
     if user_signed_in?
       render json: current_user.to_json(
         only: [:id, :email, :login_method],
-        include: {country: {only: [:name, :bounds]}}
+        include: {countries: {only: [:name, :bounds]}}
       )
     else
       render json: { error: '401 Unauthorized' }, status: :unauthorized
@@ -89,12 +89,12 @@ class UsersController < AdminController
 
   def user_params
     allowed = [:email, :password, :password_confirmation, {role_ids: []}, :remember_me]
-    allowed << :country_id if current_user.super_admin?
+    allowed << {country_ids: []} if current_user.super_admin?
 
     params.require(:user).permit(*allowed)
   end
 
   def assign_country
-    @user.country = current_user.country
+    @user.countries = [current_country]
   end
 end
