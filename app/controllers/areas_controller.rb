@@ -1,4 +1,4 @@
-class AreasController < AdminController
+class AreasController < ApplicationController
   before_filter :authenticate_user!
   before_filter :check_country_for_restricted_pages
   before_filter :load_area, only: [:show, :edit, :update, :destroy]

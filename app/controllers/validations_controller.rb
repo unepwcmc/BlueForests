@@ -1,4 +1,4 @@
-class ValidationsController < AdminController
+class ValidationsController < ApplicationController
   before_filter :authenticate_user!
   before_filter :check_country_for_restricted_pages
   before_filter :load_validations, only: :index

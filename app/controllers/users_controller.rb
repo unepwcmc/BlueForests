@@ -1,4 +1,4 @@
-class UsersController < AdminController
+class UsersController < ApplicationController
   before_filter :authenticate_user!, except: :me
   before_filter :check_country_for_restricted_pages
 
