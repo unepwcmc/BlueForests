@@ -58,5 +58,13 @@ RSpec.describe Subdomainer do
       let(:user) { FactoryGirl.build(:super_admin) }
       it { is_expected.to eq 'admin' }
     end
+
+    context 'given a user with multiple countries and a non-existing country id' do
+      let(:another_country) { FactoryGirl.create(:country) }
+      let(:user) { FactoryGirl.create(:user, countries: [country, another_country]) }
+      subject { Subdomainer.from_user(user, 9999) }
+
+      it { is_expected.to eq '' }
+    end
   end
 end

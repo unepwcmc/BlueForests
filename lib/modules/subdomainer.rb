@@ -16,7 +16,7 @@ module Subdomainer
     return from_super_admin if user.super_admin?
 
     if user.countries.count > 1
-      resolve user.countries.find(country_id).try(:subdomain)
+      resolve user.countries.find_by_id(country_id).try(:subdomain)
     else
       resolve user.countries.first.subdomain
     end
