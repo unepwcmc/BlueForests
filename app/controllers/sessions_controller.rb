@@ -7,11 +7,24 @@ class SessionsController < Devise::SessionsController
   end
 
   def destroy
-    byebug
     request.xhr? ? sign_out_via_xhr : super
   end
 
   protected
+
+  def sign_in_via_xhr
+    user = User.find_for_authentication(params[:user].merge(params[:session]))
+
+    if user.valid_password?(params[:user][:password])
+      render(
+        json: { auth_token: user.authentication_token },
+        success: true, status: :created,
+        location: after_sign_in_path_for(user, params[:session][:country_id])
+      )
+    else
+      invalid_login_attempt
+    end
+  end
 
   def sign_out_via_xhr
     user = User.find_by_authentication_token(params[:auth_token])
@@ -24,22 +37,9 @@ class SessionsController < Devise::SessionsController
     end
   end
 
-  def sign_in_via_xhr
-    user = User.find_for_authentication(params[:user])
 
-    if user.valid_password?(params[:user][:password])
-      render(
-        json: { auth_token: user.authentication_token },
-        success: true, status: :created,
-        location: after_sign_in_path_for(user)
-      )
-    else
-      invalid_login_attempt
-    end
-  end
-
-  def after_sign_in_path_for(resource)
-    validations_url(subdomain: resource.country.subdomain)
+  def after_sign_in_path_for resource, country_id=nil
+    validations_url(subdomain: resource.subdomain(country_id))
   end
 
   def invalid_login_attempt
