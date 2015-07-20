@@ -4,7 +4,7 @@ RSpec.describe AreasController, type: :controller do
   render_views
 
   let(:country) { FactoryGirl.create(:country, subdomain: 'mozambique') }
-  let(:current_user) { FactoryGirl.create(:project_manager, country: country) }
+  let(:current_user) { FactoryGirl.create(:project_manager, countries: [country]) }
 
   before :each do
     @request.host = 'mozambique.blueforests.io'
