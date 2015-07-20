@@ -3,6 +3,8 @@ class Country < ActiveRecord::Base
     validates field, presence: true, uniqueness: true
   end
 
-  has_many :users, dependent: :destroy
+  has_many :users_countries, dependent: :destroy
+  has_many :users, through: :users_countries
+
   has_many :areas, dependent: :destroy
 end
