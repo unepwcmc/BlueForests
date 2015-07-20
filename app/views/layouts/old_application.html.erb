@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>BlueForests</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <!--[if lte IE 8]>
+    <%= stylesheet_link_tag "leaflet.ie.css" %>
+    <%= stylesheet_link_tag "leaflet.draw.ie.css" %>
+  <![endif]-->
+
+  <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag "opentip.css" %>
+  <%= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "pages" %>
+
+  <%= javascript_include_tag "polyglot" %>
+  <script>
+    var polyglot = new Polyglot({
+      phrases: <%= raw @phrases.to_json %>,
+      locale: "<%= I18n.locale %>"
+    });
+  </script>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <%= link_to home_path, :class => 'homepage-banner' do %>
+            <% if I18n.locale == I18n.default_locale %>
+            <img class="one" src="/assets/header-1.png">
+            <% else %>
+            <img class="one" src="/assets/header-1_ar.png">
+            <%end%>
+        <% end %>
+
+        <ul class="nav pull-right">
+          <li><%= link_to t('help'), help_path %></li>
+          <li><%= link_to t('about'), about_path %></li>
+          <li id="language">
+            <% if I18n.locale == I18n.default_locale %>
+              <%= link_to "عربي/عربى", :locale=>'ar'%>
+            <% else %>
+              <%= link_to "ENGLISH", :locale=>'en'%>
+            <%end%>
+          </li>
+        </ul>
+        <img class="two" src="/assets/header-2.png">
+        <a class="agedi" href="http://www.agedi.ae" target="_blank">AGEDI.ae</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <% flash.each do |name, msg| %>
+      <% if msg.is_a?(String) %>
+        <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+          <button type="button" class="close" data-dismiss="alert">×</button>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        </div>
+      <% end %>
+    <% end %>
+    <%= yield %>
+  </div>
+
+  <footer class="navbar navbar-fixed-bottom">
+    <div class="navbar-inner">
+        <div class="links pull-left">
+          <%= t('developed_by') %> <br>
+          <a href="http://www.agedi.ae">
+            <img src="/assets/agedi_group_logo.png" alt="Supporters" class="img-footer-supporters">
+          </a>
+          <a href="https://www.ead.ae">
+            <img src="/assets/eaad_group_logo.png" alt="Supporters" class="img-footer-supporters">
+          </a>
+          <a href="http://www.grida.no">
+            <img src="/assets/arendal_group_logo.png" alt="Supporters" class="img-footer-supporters">
+          </a>
+          <a href="http://www.unep-wcmc.org">
+            <img src="/assets/wcmc_group_logo.png" alt="Supporters" class="img-footer-supporters">
+          </a>
+        </div>
+        <ul class="nav pull-right">
+          <li><%= render "layouts/sign_in" %></li>
+          <li><a href="mailto:info@agedi.ae" target="_top"><%= t('contact') %></a></li>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>
+    // Lovely hack to fix bootstrap on mobile devices
+    !function ($) {
+      $(function(){
+        $('body').on('touchstart.dropdown', '.dropdown-menu', function (e) {
+          e.stopPropagation();
+        });
+        $(document).on('click','.dropdown-menu a',function(){
+          document.location = $(this).attr('href');
+        });
+      })
+    }(window.jQuery)
+  </script>
+
+  <%= render 'shared/google_analytics' %>
+</body>
+</html>
