@@ -3,10 +3,17 @@ FactoryGirl.define do
     sequence(:email) { |n| "person#{n}@blueforests.io" }
     password "password"
     password_confirmation "password"
-    country
+
+    before(:create) do |user|
+      user.countries << create(:country) if user.countries.empty?
+    end
 
     factory :super_admin do
       roles {[FactoryGirl.create(:role, name: 'super_admin')]}
+
+      before(:create) do |user|
+        user.countries = Country.all || [create(:country)]
+      end
     end
 
     factory :project_manager do
