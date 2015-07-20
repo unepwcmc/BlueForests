@@ -15,25 +15,25 @@ RSpec.describe User, type: :model do
     let(:mozambique_validation) { Validation.new(country: mozambique) }
 
     context "when is a super admin" do
-      let(:user) { FactoryGirl.create(:super_admin, country: mozambique) }
-      it { is_expected.to be_able_to(:manage, User.new(country: kosovo)) }
+      let(:user) { FactoryGirl.create(:super_admin, countries: [mozambique]) }
+      it { is_expected.to be_able_to(:manage, User.new(countries: [kosovo])) }
       it { is_expected.to be_able_to(:manage, kosovo_validation) }
       it { is_expected.to be_able_to(:read, Role.new(name: 'super_admin')) }
     end
 
     context "when is a project manager" do
-      let(:user) { FactoryGirl.create(:project_manager, country: mozambique) }
+      let(:user) { FactoryGirl.create(:project_manager, countries: [mozambique]) }
 
       it { is_expected.to be_able_to(:manage, Area.new(country: mozambique)) }
-      it { is_expected.to be_able_to(:manage, User.new(country: mozambique)) }
-      it { is_expected.to_not be_able_to(:manage, User.new(country: kosovo)) }
+      it { is_expected.to be_able_to(:manage, User.new(countries: [mozambique])) }
+      it { is_expected.to_not be_able_to(:manage, User.new(countries: [kosovo])) }
       it { is_expected.to_not be_able_to(:manage, kosovo_validation) }
       it { is_expected.to be_able_to(:manage, mozambique_validation) }
       it { is_expected.to be_able_to(:read, Role.new(name: 'project_manager')) }
     end
 
     context "when is a project participant" do
-      let(:user) { FactoryGirl.create(:project_participant, country: mozambique) }
+      let(:user) { FactoryGirl.create(:project_participant, countries: [mozambique]) }
       let(:user_validation) { Validation.new(user: user) }
 
       it { is_expected.to_not be_able_to(:manage, Area.new) }
@@ -62,7 +62,7 @@ RSpec.describe User, type: :model do
 
   describe '::find_for_authentication' do
     subject { User.find_for_authentication(conditions) }
-    let(:user) { FactoryGirl.create(:user, country: mozambique) }
+    let(:user) { FactoryGirl.create(:user, countries: [mozambique]) }
 
     context 'when a country_id is given' do
       let(:conditions) { {email: user.email, country_id: mozambique.id} }
@@ -74,6 +74,22 @@ RSpec.describe User, type: :model do
       let(:conditions) { {email: user.email, authentication_token: '123asd123'} }
 
       it { is_expected.to eq user }
+    end
+  end
+
+  describe '#subdomain' do
+    subject { user.subdomain }
+
+    context 'when is super_admin?' do
+      let(:user) { FactoryGirl.create(:super_admin) }
+      it { is_expected.to eq 'admin' }
+    end
+
+    context 'when country_id is passed in' do
+      subject { user.subdomain(mozambique.id) }
+      let(:user) { FactoryGirl.create(:user, countries: [mozambique]) }
+
+      it { is_expected.to eq 'mozambique' }
     end
   end
 end

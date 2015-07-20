@@ -18,14 +18,16 @@ class Ability
   end
 
   def project_manager
-    can :manage, Area, country_id: @user.country_id
-    can :manage, Validation, country_id: @user.country_id
-    can :manage, User, country_id: @user.country_id
+    can :manage, Area, country_id: @user.users_countries.map(&:country_id)
+    can :manage, Validation, country_id: @user.users_countries.map(&:country_id)
+    can :manage, User do |user|
+      user.country_ids.empty? || (user.country_ids & @user.country_ids).any?
+    end
     can :read, Role, name: ['project_manager', 'project_participant']
   end
 
   def project_participant
-    can :read, Area, country_id: @user.country_id
+    can :read, Area, country_id: @user.users_countries.map(&:country_id)
     can :manage, Validation, user_id: @user.id
     can [:show, :update, :destroy], User, id: @user.id
     can :read, Role, name: 'project_participant'
