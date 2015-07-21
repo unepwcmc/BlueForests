@@ -33,7 +33,9 @@ class ApplicationController < ActionController::Base
   end
 
   def store_from_subdomain
-    Subdomainer.country(request).tap { |country| session[:country_id] = country.id }
+    Subdomainer.country(request).tap { |country|
+      session[:country_id] = country.id unless country.nil?
+    }
   end
 
   def check_country
