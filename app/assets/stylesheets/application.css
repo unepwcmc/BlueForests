@@ -2,6 +2,6 @@
 *= require 'fonts'
 *= require 'z-index'
 *= require 'shared'
-*= require 'iframe'
 *= require 'login'
+*= require 'home'
 */

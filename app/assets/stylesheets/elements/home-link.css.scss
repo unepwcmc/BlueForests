@@ -1,4 +1,5 @@
 @import '../colors';
+@import 'flexbox';
 
 @mixin main-logo($image-url) {
   width: 210px;
@@ -13,6 +14,7 @@
   height: 25px;
   border-left: solid 2px $color;
 
+  font-weight: 100;
   font-size: 25px;
   color: $color;
 
@@ -22,9 +24,9 @@
 @mixin home-link($version) {
   width: 380px;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @extend %flexbox;
+  @include justify-content(center);
+  @include align-items(center);
 
   text-decoration: none;
 
