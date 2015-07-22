@@ -1,0 +1,21 @@
+@import '../colors';
+
+@mixin oval-button($background-color) {
+  background-color: $background-color;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  padding: 0px 30px;
+  border-radius: 30px;
+
+  cursor: pointer;
+}
+
+@mixin oval-button-height($height) { line-height: $height; }
+@mixin oval-button-color($color) { color: $color; }
+@mixin oval-button-font-size($font-size) { font-size: $font-size; }
+
+%big-oval-button    { @include oval-button($white) }
+%medium-oval-button { @include oval-button($white) }
+%small-oval-button  { @include oval-button($white) }
