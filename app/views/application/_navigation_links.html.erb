@@ -1,0 +1,15 @@
+<% if user_signed_in? %>
+  <ul class="pull-right navigation-links logged-in">
+    <li>Validations</li>
+    <li>Users</li>
+    <li>Ipad Admin</li>
+    <li><%= current_user.email.truncate(10) %></li>
+  </ul>
+<% else %>
+  <ul class="pull-right navigation-links">
+    <li>Tool</li>
+    <li>Help</li>
+    <li>About</li>
+    <li>Log in</li>
+  </ul>
+<% end %>
