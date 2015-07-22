@@ -1,6 +1,7 @@
 /*
+*= require 'fonts'
 *= require 'z-index'
-*= require 'base'
+*= require 'shared'
 *= require 'iframe'
 *= require 'login'
 */
