@@ -1,0 +1,39 @@
+@import '../colors';
+
+@mixin main-logo($image-url) {
+  width: 210px;
+  height: 40px;
+
+  background-image: url($image-url);
+  background-position: center left;
+  background-repeat: no-repeat;
+}
+
+@mixin mapping-tool($color) {
+  height: 25px;
+  border-left: solid 2px $color;
+
+  font-size: 25px;
+  color: $color;
+
+  padding-left: 10px;
+}
+
+@mixin home-link($version) {
+  width: 380px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  text-decoration: none;
+
+  @if $version == color {
+    .mapping-tool { @include mapping-tool($dark-blue); }
+    .main-logo { @include main-logo(image-path('main-logo.png')); }
+  } @else {
+    .mapping-tool { @include mapping-tool($white); }
+    .main-logo { @include main-logo(image-path('white-main-logo.png')); }
+  }
+}
+

@@ -1,0 +1,34 @@
+@mixin navigation-links($color) {
+  margin: 0;
+  list-style: none;
+
+  @include navigation-links-items($color);
+
+  &.logged-in       { @include logged-in() }
+  &:not(.logged-in) { @include logged-out($color) }
+}
+
+@mixin navigation-links-items($color) {
+  & > li {
+    color: $color;
+    float: left;
+
+    margin: 0px 10px;
+    padding: 0px 10px;
+    line-height: 35px;
+
+    text-align: center;
+  }
+}
+
+@mixin logged-in() {
+  & > li:last-child { border: none; }
+}
+
+@mixin logged-out($color) {
+  & > li:last-child {
+    width: 100px;
+    border: solid 2px $color;
+    text-transform: uppercase;
+  }
+}

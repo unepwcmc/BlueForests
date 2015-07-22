@@ -1,0 +1,7 @@
+@mixin main-container($background-color) {
+  background-color: $background-color;
+
+  margin: auto;
+  max-width: 1088px;
+  padding: 20px 30px;
+}
