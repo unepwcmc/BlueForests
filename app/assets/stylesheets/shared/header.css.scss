@@ -1,0 +1,18 @@
+@import '../colors';
+
+@import '../elements/main-container';
+@import '../elements/home-link';
+@import '../elements/navigation-links';
+
+#header {
+  height: 100px;
+  width: 100%;
+
+  .main-container {
+    @include main-container($white);
+
+    .home-link        { @include home-link(color) }
+    .navigation-links { @include navigation-links($dark-blue) }
+  }
+}
+
