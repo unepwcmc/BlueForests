@@ -4,6 +4,7 @@ class SessionsController < Devise::SessionsController
 
   def create
     request.xhr? ? sign_in_via_xhr : super
+    session[:country_id] = params[:session][:country_id]
   end
 
   def destroy
