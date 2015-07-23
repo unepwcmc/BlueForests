@@ -1,3 +1,12 @@
+<%= javascript_include_tag "polyglot" %>
+
+<script>
+var polyglot = new Polyglot({
+  phrases: <%= raw @phrases.to_json %>,
+  locale: "<%= I18n.locale %>"
+});
+</script>
+
 <%= javascript_include_tag "application" %>
 
 <%# Google Analytics %>
