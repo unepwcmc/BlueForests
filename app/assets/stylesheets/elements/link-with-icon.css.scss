@@ -1,0 +1,23 @@
+@import '../colors';
+
+@mixin link-with-icon($icon) {
+  font-weight: 500;
+  line-height: 2em;
+  color: $dark-blue;
+
+  display: inline-block;
+
+  &::after {
+    float: right;
+    margin-left: 10px;
+
+    content: "";
+
+    width: 24px;
+    height: 2em;
+
+    background-image: url(image-path("entypo/#{$icon}.svg"));
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
