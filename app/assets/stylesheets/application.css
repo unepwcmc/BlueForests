@@ -1,6 +1,7 @@
 /*
 *= require 'z-index'
 *= require 'shared'
+*= require_tree ./shared
 *= require 'login'
 *= require 'home'
 */

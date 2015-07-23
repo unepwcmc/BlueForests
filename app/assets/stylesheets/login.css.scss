@@ -1,7 +1,9 @@
 @import 'z-index';
+@import 'colors';
 
-.full-page-overlay {
-  &:not(.hidden) { display: flex; }
+@import 'elements/full-page-overlay';
+@import 'elements/modal-header';
+@import 'elements/form-element';
 
   align-items: center;
   justify-content: center;

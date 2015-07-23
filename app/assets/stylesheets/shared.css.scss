@@ -4,12 +4,13 @@
 @import 'leaflet';
 @import 'leaflet.draw';
 
+@import 'colors';
 @import 'mixins.css.scss';
+
 @import 'elements/oval-button';
 @import 'elements/link-with-icon';
-
-@import 'shared/header';
-@import 'shared/footer';
+@import 'elements/row';
+@import 'elements/column';
 
 html, body {
   font-family: 'Ubuntu', sans-serif;

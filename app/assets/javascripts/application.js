@@ -25,6 +25,7 @@
 //= require_tree ./analysis/views/
 //= require_tree ./analysis/routers/
 //= require ./analysis/analysis.js.coffee
+//= require home
 
 var roundToDecimals = function(number, places) {
   places = Math.pow(10, places);
