@@ -1,0 +1,74 @@
+@import '../colors';
+@import 'oval-button';
+
+@mixin form-element() {
+  font-size: 14px;
+  $line-height: 2em;
+
+  fieldset {
+    margin-bottom: 1.5em;
+    padding: 0;
+  }
+
+  label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+  }
+
+  input, select {
+    box-sizing: border-box;
+    line-height: $line-height;
+
+    background-color: $white;
+    border: solid 1px $light-gray;
+
+    &:not([type="checkbox"]) {
+      -webkit-appearance: none;
+      width: 100%;
+      padding: 0px 10px;
+    }
+  }
+
+  select {
+    border-radius: 0;
+
+    background: no-repeat url(image-path('entypo/chevron-thin-down-dark-blue.svg'));
+    background-position: right 3% center;
+    background-size: 5%;
+  }
+
+  .half {
+    line-height: 3em;
+    font-weight: 400;
+
+    .remember-me {
+      cursor: pointer;
+      line-height: 3em;
+      font-weight: 300;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        vertical-align: sub;
+
+        margin-right: 10px;
+        border: solid 1px $light-gray;
+        height: 1em;
+        width: 1em;
+
+      }
+
+      &.checked::before {
+        background: no-repeat url(image-path('entypo/check-dark-blue.svg'));
+      }
+    }
+
+    .btn {
+      @include oval-button-height(3em);
+      @include oval-button-color($white);
+      @include oval-button-bg-color($dark-blue);
+      @include oval-button-font-size(0.9em);
+    }
+  }
+}

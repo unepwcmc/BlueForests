@@ -1,0 +1,21 @@
+@import '../colors';
+
+@mixin modal-header() {
+  overflow: auto;
+  border-bottom: solid 1px $light-gray;
+  padding-bottom: 1em;
+  margin-bottom: 1.5em;
+
+  h1 {
+    float: left;
+    font-size: 1.5em;
+    font-weight: 300;
+  }
+
+  button {
+    height: 1.5em;
+    width: 1.5em;
+    float: right;
+    background: no-repeat center/100% transparent url(image-path('entypo/circle-with-cross-dark-blue.svg'));
+  }
+}

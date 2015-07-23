@@ -1,0 +1,15 @@
+@mixin full-page-overlay($bg-color) {
+  &:not(.hidden) { display: flex; }
+
+  align-items: center;
+  justify-content: center;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: $bg-color;
+  background-color: transparentize($bg-color, 0.1);
+}
