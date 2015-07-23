@@ -1,0 +1,22 @@
+@import '../colors';
+
+@import '../elements/main-container';
+@import '../elements/home-link';
+@import '../elements/navigation-links';
+
+#footer {
+  font-size: 14px;
+
+  height: 100px;
+  width: 100%;
+
+  background-color: $dark-blue;
+
+  .main-container {
+    @include main-container($dark-blue);
+    color: $white;
+
+    .home-link        { @include home-link(white) }
+    .navigation-links { @include navigation-links($white) }
+  }
+}
