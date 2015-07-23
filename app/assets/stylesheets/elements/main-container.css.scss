@@ -1,7 +1,12 @@
-@mixin main-container($background-color) {
+@import '../colors';
+
+@mixin main-container($background-color: $white) {
   background-color: $background-color;
+  overflow: auto;
 
   margin: auto;
   max-width: 1088px;
   padding: 30px;
 }
+
+%main-container { @include main-container() }
