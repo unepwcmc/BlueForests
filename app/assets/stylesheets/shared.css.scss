@@ -1,18 +1,29 @@
 @import 'h5bp';
 @include h5bp-normalize;
 
-@import "leaflet";
-@import "leaflet.draw";
+@import 'leaflet';
+@import 'leaflet.draw';
 
-@import "mixins.css.scss";
+@import 'mixins.css.scss';
+@import 'elements/oval-button';
+@import 'elements/link-with-icon';
 
-@import "shared/header";
-@import "shared/main";
-@import "shared/footer";
+@import 'shared/header';
+@import 'shared/footer';
 
 html, body {
   font-family: 'Ubuntu', sans-serif;
+  a { cursor: pointer; }
 }
 
 .pull-left  { float: left }
 .pull-right { float: right }
+
+.btn { @include oval-button(); }
+a.with-icon { @include link-with-icon(arrow-with-circle-right-dark-blue); }
+
+.title {
+  font-family: 'Cabin', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+}
