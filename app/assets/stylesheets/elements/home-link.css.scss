@@ -1,13 +1,10 @@
 @import '../colors';
 @import 'flexbox';
 
-@mixin main-logo($image-url) {
-  width: 210px;
-  height: 40px;
-
-  background-image: url($image-url);
-  background-position: center left;
-  background-repeat: no-repeat;
+@mixin main-logo() {
+  width: auto;
+  height: 2em;
+  margin-right: 15px;
 }
 
 @mixin mapping-tool($color) {
@@ -15,7 +12,7 @@
   border-left: solid 2px $color;
 
   font-weight: 100;
-  font-size: 25px;
+  font-size: 1.5em;
   color: $color;
 
   padding-left: 10px;
@@ -32,10 +29,10 @@
 
   @if $version == color {
     .mapping-tool { @include mapping-tool($dark-blue); }
-    .main-logo { @include main-logo(image-path('main-logo.png')); }
+    .main-logo { @include main-logo(); }
   } @else {
     .mapping-tool { @include mapping-tool($white); }
-    .main-logo { @include main-logo(image-path('white-main-logo.png')); }
+    .main-logo { @include main-logo(); }
   }
 }
 
