@@ -14,11 +14,20 @@
 
 html, body {
   font-family: 'Ubuntu', sans-serif;
+  font-weight: 100;
+  color: $gray;
+
+  *:focus { outline: none; }
+
+  fieldset { border: none; }
+  h1 { margin: 0px; }
   a { cursor: pointer; }
+  button { border: none; padding: 0; }
 }
 
 .pull-left  { float: left }
 .pull-right { float: right }
+.hidden     { display: none }
 
 .btn { @include oval-button(); }
 a.with-icon { @include link-with-icon(arrow-with-circle-right-dark-blue); }
@@ -29,4 +38,5 @@ a.with-icon { @include link-with-icon(arrow-with-circle-right-dark-blue); }
   text-transform: uppercase;
 }
 
-.row { @include row($padding: 30px 0px) }
+.row  { @include row($padding: 30px 0px) }
+.half { @include column(50%, 20px) }

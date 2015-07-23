@@ -29,7 +29,6 @@
   .btn {
     @include oval-button-bg-color($white);
     @include oval-button-color($black);
-    @include oval-button-height(3em);
     @include oval-button-font-size(0.4em);
   }
 }
@@ -38,7 +37,6 @@
   @extend %main-container;
   margin-bottom: 100px;
 
-  .half { @include column(50%, 20px) }
 
   color: $gray;
 

@@ -9,11 +9,11 @@
 
   &::after {
     float: right;
-    margin-left: 10px;
+    margin-left: 7px;
 
     content: "";
 
-    width: 24px;
+    width: 1.5em;
     height: 2em;
 
     background-image: url(image-path("entypo/#{$icon}.svg"));
