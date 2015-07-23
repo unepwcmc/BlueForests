@@ -32,5 +32,38 @@
     @include oval-button-height(3em);
     @include oval-button-font-size(0.4em);
   }
+}
 
+.home-main.main-container {
+  @extend %main-container;
+  margin-bottom: 100px;
+
+  .half { @include column(50%, 20px) }
+
+  color: $gray;
+
+  h3 {
+    font-size: 1.6em;
+    font-weight: 300;
+    line-height: 1.5em;
+
+    &.title { margin-bottom: -24px }
+  }
+
+  p {
+    margin: 30px 0;
+    font-size: 0.9em;
+    line-height: 1.7em;
+    font-weight: 100;
+  }
+
+  .btn {
+    display: table;
+    margin-bottom: 10px;
+
+    @include oval-button-bg-color($dark-blue);
+    @include oval-button-color($white);
+    @include oval-button-height(3em);
+    @include oval-button-font-size(0.9em);
+  }
 }
