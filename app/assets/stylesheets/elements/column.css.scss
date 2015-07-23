@@ -1,0 +1,10 @@
+@mixin column($width, $padding-right) {
+  box-sizing: border-box;
+  width: $width;
+
+  float: left;
+
+  &:not(:last-child) {
+    padding-right: $padding-right;
+  }
+}
