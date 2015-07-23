@@ -1,15 +1,15 @@
 <% if user_signed_in? %>
-  <ul class="pull-right navigation-links logged-in">
+  <ul class="pull-right navigation-links">
     <li>Validations</li>
     <li>Users</li>
     <li>Ipad Admin</li>
-    <li><%= current_user.email.truncate(10) %></li>
+    <li><%= link_to current_user.email.truncate(20), destroy_user_session_path, method: :delete %></li>
   </ul>
 <% else %>
   <ul class="pull-right navigation-links">
     <li>Tool</li>
     <li>Help</li>
     <li>About</li>
-    <li>Log in</li>
+    <li><button data-login-path="<%= new_user_session_path %>" class="login-button">Log in</button></li>
   </ul>
 <% end %>
