@@ -18,6 +18,12 @@ window.LoginHandler = class LoginHandler
 
   addFormEventListeners: ->
     $formEl = @$loginModalContainer.find('form')
+    $rememberMeEl = @$loginModalContainer.find('.remember-me')
+    $rememberMeCheckboxEl = @$loginModalContainer.find('.remember-me-checkbox')
+    $closeButtonEl = @$loginModalContainer.find('.x-button')
+
+    handleRememberMeCheckbox($rememberMeEl, $rememberMeCheckboxEl)
+    handleCloseButton($closeButtonEl, @$loginModalContainer)
 
     $formEl.submit( (ev) ->
       ev.preventDefault()
@@ -35,3 +41,14 @@ window.LoginHandler = class LoginHandler
         $formEl.find('.login-error').removeClass('hidden')
       else
         document.location.replace(xhr.getResponseHeader('Location'))
+
+  handleRememberMeCheckbox = ($visibleEl, $hiddenCheckboxEl) ->
+    $visibleEl.click( (ev) ->
+      $visibleEl.toggleClass('checked')
+      $hiddenCheckboxEl.attr('checked', !$hiddenCheckboxEl.attr('checked'))
+    )
+
+  handleCloseButton = ($closeButtonEl, $targetEl) ->
+    $closeButtonEl.click( (ev) ->
+      $targetEl.empty().parent().addClass('hidden')
+    )
