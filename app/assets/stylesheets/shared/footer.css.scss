@@ -21,6 +21,16 @@
 
       .home-link        { @include home-link(white) }
       .navigation-links { @include navigation-links($white) }
+
+      &:last-child {
+        line-height: 3em;
+        .flag-icon {
+          line-height: inherit;
+          padding: 0px 10px;
+          width: auto;
+          background-color: $very-dark-blue;
+        }
+      }
     }
 
   }
