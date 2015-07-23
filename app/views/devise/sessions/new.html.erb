@@ -1,19 +1,37 @@
-<h2>Log in</h2>
+<header>
+  <h1>Log In</h1>
+  <button class="x-button"></button>
+</header>
 
 <%= form_tag user_session_path, method: 'POST' do %>
-  <%= label_tag(:errors, 'Invalid email or password', class: 'login-error hidden') %>
-  <%= label_tag(:email, 'Email') %>
-  <%= email_field(:user, :email) %>
-
-  <%= label_tag(:password, 'Password') %>
-  <%= password_field(:user, :password) %>
+  <fieldset class="login-error hidden">
+    <%= label_tag(:errors, 'Invalid email or password') %>
+  </fieldset>
+  <fieldset>
+    <%= label_tag(:email, 'Email') %>
+    <%= email_field(:user, :email) %>
+  </fieldset>
+  <fieldset>
+    <%= label_tag(:password, 'Password') %>
+    <%= password_field(:user, :password) %>
+  </fieldset>
 
   <% if @current_country %>
     <%= hidden_field(:session, :country_id, value: @current_country.id) %>
   <% else %>
-    <%= label_tag(:country_id, 'Country') %>
-    <%= select(:session, :country_id, Country.pluck(:name, :id)) %>
+    <fieldset>
+      <%= label_tag(:country_id, 'Country') %>
+      <%= select(:session, :country_id, Country.pluck(:name, :id)) %>
+    </fieldset>
   <% end %>
 
-  <%= submit_tag("Log in") %>
+  <fieldset>
+    <div class="half">
+      <%= check_box(:user, :remember_me, class: 'remember-me-checkbox hidden') %>
+      <%= label_tag(:remember_me, 'Remember me', class: 'remember-me') %>
+    </div>
+    <div class="half">
+      <%= submit_tag("Log in", class: 'btn') %>
+    </div>
+  </fieldset>
 <% end %>
