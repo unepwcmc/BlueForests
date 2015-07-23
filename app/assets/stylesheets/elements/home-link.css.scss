@@ -8,7 +8,7 @@
 }
 
 @mixin mapping-tool($color) {
-  height: 25px;
+  line-height: 1.1em;
   border-left: solid 2px $color;
 
   font-weight: 100;
@@ -19,8 +19,6 @@
 }
 
 @mixin home-link($version) {
-  width: 380px;
-
   @extend %flexbox;
   @include justify-content(center);
   @include align-items(center);

@@ -1,0 +1,17 @@
+@mixin row($padding, $padding-type: all) {
+  overflow: auto;
+
+  @extend %flexbox;
+  @include justify-content(space-between);
+
+
+  @if $padding-type == all {
+    padding: $padding;
+  } @else {
+    padding-#{$padding-type}: $padding;
+  }
+}
+
+@mixin row-divider($height, $color) {
+  &:not(:last-child) { border-bottom: solid $height $color }
+}

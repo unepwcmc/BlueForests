@@ -1,10 +1,15 @@
 <footer id="footer">
   <div class="main-container">
-    <a href="<%= home_path %>" class="home-link pull-left">
-      <img src="<%= asset_path 'main-white-logo.png' %>" class="main-logo"></img>
-      <div class="mapping-tool">Mapping tool</div>
-    </a>
+    <div class="row">
+      <a href="<%= home_path %>" class="home-link pull-left">
+        <img src="<%= asset_path 'main-white-logo.png' %>" class="main-logo"></img>
+        <div class="mapping-tool">Mapping tool</div>
+      </a>
 
-    <%= render 'navigation_links' %>
+      <%= render 'navigation_links' %>
+    </div>
+    <div class="row">
+      <p>The Blue Forests Mapping Toolkit was developed by</p>
+    </div>
   </div>
 </footer>
