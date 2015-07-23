@@ -27,7 +27,7 @@
   h1 { font-size: 2em; margin-top: -25px; margin-bottom: 0px; }
   h2 { font-size: 1em; margin-top: 5px; margin-bottom: 40px; }
   .btn {
-    @extend %big-oval-button;
+    @include oval-button-bg-color($white);
     @include oval-button-color($black);
     @include oval-button-height(3em);
     @include oval-button-font-size(0.4em);

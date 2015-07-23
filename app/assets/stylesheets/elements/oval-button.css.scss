@@ -1,12 +1,15 @@
 @import '../colors';
 
-@mixin oval-button($background-color) {
-  background-color: $background-color;
+@mixin oval-button() {
+  display: inline-block;
+
+  font-family: 'Cabin', sans-serif;
+  font-weight: 700;
 
   text-align: center;
   text-transform: uppercase;
 
-  padding: 0px 30px;
+  padding: 0px 40px;
   border-radius: 30px;
 
   cursor: pointer;
@@ -14,8 +17,5 @@
 
 @mixin oval-button-height($height) { line-height: $height; }
 @mixin oval-button-color($color) { color: $color; }
+@mixin oval-button-bg-color($bg-color) { background-color: $bg-color; }
 @mixin oval-button-font-size($font-size) { font-size: $font-size; }
-
-%big-oval-button    { @include oval-button($white) }
-%medium-oval-button { @include oval-button($white) }
-%small-oval-button  { @include oval-button($white) }
