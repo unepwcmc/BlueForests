@@ -11,7 +11,7 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe PagesHelper, type: :helper do
-  describe 'hero_text' do
+  describe '#hero_text' do
     subject { helper.hero_text(current_country) }
 
     context 'when current_country is nil' do

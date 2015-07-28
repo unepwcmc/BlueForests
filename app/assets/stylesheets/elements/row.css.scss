@@ -5,6 +5,7 @@
 
   @extend %flexbox;
   @include justify-content(space-between);
+  @include align-items(center);
 
 
   @if $padding-type == all {
