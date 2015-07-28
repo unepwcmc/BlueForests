@@ -1,0 +1,33 @@
+@mixin flag-icon-background {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+.flag-icon {
+  @include flag-icon-background();
+  position: relative;
+  display: inline-block;
+  width: (4 / 3) * 1em;
+  line-height: 1em;
+  &:before {
+    content: '\00a0';
+  }
+  &.flag-icon-squared {
+    width: 1em;
+  }
+}
+
+@mixin flag-icon($country) {
+  .flag-icon-#{$country} {
+    background-image: url(image-path("flags/4x3/#{$country}.svg"));
+    &.flag-icon-squared {
+    background-image: url(image-path("flags/1x1/#{$country}.svg"));
+    }
+  }
+}
+
+@mixin flag-icon-height($line-height) {
+  width: (4 / 3) * $line-height;
+  line-height: $line-height;
+}
