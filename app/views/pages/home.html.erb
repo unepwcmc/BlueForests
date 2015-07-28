@@ -1,9 +1,5 @@
 <div class="hero <%= "for-country" if @current_country %>">
-  <h1>Blue Forests</h1>
-  <h2>
-    Measuring Carbon Stocks
-    <% if @current_country %> in <%= @current_country.name %> <% else %> Worldwide <% end %>
-  </h2>
+  <%= hero_text @current_country %>
   <a class="btn">Start using the tool</a>
 </div>
 
