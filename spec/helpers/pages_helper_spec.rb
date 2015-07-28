@@ -28,4 +28,20 @@ RSpec.describe PagesHelper, type: :helper do
       it { is_expected.to eq expected_text }
     end
   end
+
+  describe '#country_flag' do
+    subject { helper.country_flag(country) }
+
+    context 'when country is nil' do
+      let(:country) { nil }
+      it { is_expected.to be_nil }
+    end
+
+    context 'when country is set' do
+      let(:country) { FactoryGirl.build(:country, iso: 'mz', name: 'mozambique') }
+      let(:expected_text) { '<div class="flag-and-name"><i class="flag-icon flag-icon-mz"></i><span>Mozambique</span></div>' }
+
+      it { is_expected.to eq expected_text }
+    end
+  end
 end

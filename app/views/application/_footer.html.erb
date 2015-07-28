@@ -9,12 +9,8 @@
       <%= render 'navigation_links' %>
     </div>
     <div class="row">
-      <% if @current_country %>
-        <p class="flag-icon flag-icon-gr"><%= @current_country.name %></p>
-        <p class="pull-right">The Blue Forests Mapping Toolkit was developed by</p>
-      <% else %>
-        <p>The Blue Forests Mapping Toolkit was developed by</p>
-      <% end %>
+      <%= country_flag @current_country %>
+      <p>The Blue Forests Mapping Toolkit was developed by</p>
     </div>
   </div>
 </footer>
