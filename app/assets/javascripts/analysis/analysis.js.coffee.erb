@@ -1,5 +1,5 @@
 initializeMap = (opts={}) ->
-  new Map('map_analysis', opts).map
+  new Map('map-analysis', opts).map
 
 initializePica = (map, opts={}) ->
   window.pica = new Pica.Application(
@@ -8,7 +8,7 @@ initializePica = (map, opts={}) ->
     map: map
   )
 
-  window.pica.newWorkspace(properties: {country: opts.country})
+  window.pica.newWorkspace(properties: {country_iso: opts.countryIso})
 
   window.router = new Backbone.Routers.AnalysisRouter()
   Backbone.history.start()
@@ -31,10 +31,10 @@ setupTranslationLink = ->
       window.location.href = permalink
 
 $(document).ready ->
-  if $('#map_analysis').length > 0
-    countryIso = $('#map_analysis').data('country-iso')
+  if $('#map-analysis').length > 0
+    countryIso = $('#map-analysis').data('country-iso')
 
-    map = initializeMap(country: countryIso)
-    initializePica(map, country: countryIso)
+    map = initializeMap(countryIso: countryIso)
+    initializePica(map, countryIso: countryIso)
 
   setupTranslationLink()

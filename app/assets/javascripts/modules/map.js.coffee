@@ -17,7 +17,7 @@ window.Map = class Map
 
     @initializeMap(elementId, mapOpts)
     @addAttribution()
-    @addOverlays(mapOpts.country, (err, overlays) =>
+    @addOverlays(mapOpts.countryIso, (err, overlays) =>
       L.control.layers(@baseMaps, overlays).addTo(@map)
     )
 
@@ -36,9 +36,9 @@ window.Map = class Map
     baseMaps[polyglot.t('analysis.map')] = @baseMap
     baseMaps[polyglot.t('analysis.satellite')] = @baseSatellite
 
-  addOverlays: (countryName, done) ->
+  addOverlays: (countryIso, done) ->
     async.reduce(@getSublayers(), {}, (sublayers, sublayer, cb) =>
-      sublayer.country = countryName
+      sublayer.country_iso = countryIso
 
       MapProxy.newMap(sublayer, (err, tilesUrl) =>
         tilesUrl = decodeURIComponent(tilesUrl)

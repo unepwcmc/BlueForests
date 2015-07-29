@@ -11,8 +11,8 @@ class ProxyController < ApplicationController
   end
 
   def options
-    @query ||= params.slice(:country, :where, :style).tap do |opts|
-      opts['country'] = Country.find_by_iso(opts['country']) if opts['country']
+    @query ||= params.slice(:country_iso, :where, :style).tap do |opts|
+      opts['country'] = Country.find_by_iso(opts['country_iso']) if opts['country_iso']
     end.symbolize_keys
   end
 end

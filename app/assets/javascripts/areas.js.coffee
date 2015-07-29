@@ -4,7 +4,7 @@
 
 $ ->
   if $('#map').length > 0
-    map = new Map('map', country: $('#map').data('country-iso')).map
+    map = new Map('map', countryIso: $('#map').data('country-iso')).map
     addDraw(map)
 
 addDraw = (map) ->

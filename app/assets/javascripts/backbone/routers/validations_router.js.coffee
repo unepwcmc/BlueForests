@@ -174,7 +174,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     coordinates = args.coordinates
 
     mapOpts = {}
-    mapOpts.country = $("##{mapId}").data('country-iso')
+    mapOpts.countryIso = $("##{mapId}").data('country-iso')
     mapOpts.center = args.center if args.center?
     mapOpts.zoom = args.zoom if args.zoom?
 
