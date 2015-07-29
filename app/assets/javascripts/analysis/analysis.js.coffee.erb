@@ -3,8 +3,8 @@ initializeMap = (opts={}) ->
 
 initializePica = (map, opts={}) ->
   window.pica = new Pica.Application(
-    magpieUrl: "http://magpie.unep-wcmc.org"
-    projectId: 3
+    magpieUrl: "<%= Rails.application.secrets.magpie_url %>"
+    projectId: 2
     map: map
   )
 
