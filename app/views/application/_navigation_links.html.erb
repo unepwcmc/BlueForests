@@ -1,13 +1,13 @@
 <% if user_signed_in? %>
   <ul class="pull-right navigation-links">
-    <li>Validations</li>
-    <li>Users</li>
+    <li><%= link_to "Validations", validations_path %></li>
+    <li><%= link_to 'Users' %></li>
     <li>Ipad Admin</li>
     <li><%= link_to current_user.email.truncate(20), destroy_user_session_path, method: :delete %></li>
   </ul>
 <% else %>
   <ul class="pull-right navigation-links">
-    <li>Tool</li>
+    <li><a href="<%= tool_path %>">Tool</a></li>
     <li>Help</li>
     <li>About</li>
     <li><button data-login-path="<%= new_user_session_path %>" class="login-button">Log in</button></li>
