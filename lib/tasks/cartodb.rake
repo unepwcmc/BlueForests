@@ -1,15 +1,6 @@
 namespace :cartodb do
-  def setup_carbon_view country, environment
-    puts "### Setting up #{environment} carbon views for #{country.name}"
+  def setup_carbon_view environment
     puts CartoDb.query(render_template("carbon_view.sql.erb", with_binding: binding))
-  end
-
-  def setup_country_view country, environment
-    puts "### Setting up #{environment} views for #{country.name}"
-
-    Habitat.all.each do |habitat|
-      puts CartoDb.query(render_template("country_view.sql.erb", with_binding: binding))
-    end
   end
 
   def render_template(template_name, with_binding:)
@@ -21,11 +12,8 @@ namespace :cartodb do
 
   desc "Setup CartoDB habitat tables and views"
   task setup: :environment do
-    Country.all.each do |country|
-      ['development', 'production', 'staging'].each do |environment|
-        setup_country_view(country, environment)
-        setup_carbon_view(country, environment)
-      end
+    ['development', 'production', 'staging'].each do |environment|
+      setup_carbon_view environment
     end
   end
 end

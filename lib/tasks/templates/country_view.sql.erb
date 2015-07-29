@@ -1,2 +1,0 @@
-CREATE OR REPLACE VIEW <%= Rails.application.secrets.cartodb['table_prefix'] %>_<%= habitat.name %>_<%= environment %>_<%= country.name %> AS
-SELECT * FROM <%= Rails.application.secrets.cartodb['table_prefix'] %>_<%= habitat.name %>_<%= environment %> WHERE country_id = '<%= country.iso %>';
