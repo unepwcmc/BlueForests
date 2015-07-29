@@ -21,11 +21,12 @@ BlueCarbon::Application.routes.draw do
     resources :mbtiles, only: :show
   end
 
+  get 'tool' => 'analysis#index', as: :tool
+
   get '/:locale' => 'pages#home'
   scope "(:locale)", :locale => /en|ar/ do
     get 'home' => 'pages#home'
     get 'about' => 'pages#about'
     get 'help' => 'pages#help'
-    get "layout" => 'analysis#index'
   end
 end
