@@ -15,12 +15,11 @@ AddMissingColumnsToGeometries	./db/migrate/20150210112951_add_missing_columns_to
 AddNotesToValidation	./db/migrate/20121214153038_add_notes_to_validation.rb	/^class AddNotesToValidation < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
 AddPostgisExtension	./db/migrate/20100209164949_add_postgis_extension.rb	/^class AddPostgisExtension < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
 AddUsersCountriesTable	./db/migrate/20150717145336_add_users_countries_table.rb	/^class AddUsersCountriesTable < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
-AdminController	./app/controllers/admin_controller.rb	/^class AdminController < ApplicationController$/;"	c	inherits:ApplicationController
 AnalysisController	./app/controllers/analysis_controller.rb	/^class AnalysisController < ApplicationController$/;"	c	inherits:ApplicationController
 Application	./config/application.rb	/^  class Application < Rails::Application$/;"	c	class:BlueCarbon	inherits:Rails.Application
 ApplicationController	./app/controllers/application_controller.rb	/^class ApplicationController < ActionController::Base$/;"	c	inherits:ActionController.Base
 Area	./app/models/area.rb	/^class Area < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
-AreasController	./app/controllers/areas_controller.rb	/^class AreasController < AdminController$/;"	c	inherits:AdminController
+AreasController	./app/controllers/areas_controller.rb	/^class AreasController < ApplicationController$/;"	c	inherits:ApplicationController
 Assignment	./app/models/assignment.rb	/^class Assignment < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
 Base	./lib/modules/mbtile/base.rb	/^class Mbtile::Base$/;"	c	class:Mbtile
 BlueCarbon	./config/application.rb	/^module BlueCarbon$/;"	m
@@ -28,7 +27,6 @@ CARTODB_QUERY_PATH	./lib/modules/mbtile/base.rb	/^  CARTODB_QUERY_PATH = 'lib\/m
 CARTODB_QUERY_TEMPLATE	./lib/modules/mbtile/base.rb	/^  CARTODB_QUERY_TEMPLATE = File.read(Rails.root.join(CARTODB_QUERY_PATH))$/;"	C	class:Mbtile.Base
 COLORS	./lib/modules/mbtile/style.rb	/^  COLORS = {$/;"	C	class:Mbtile.Style
 COUNTRIES	./db/seeds.rb	/^COUNTRIES = [$/;"	C	class:
-CantDefineCountryFromUserError	./lib/modules/subdomainer.rb	/^  class CantDefineCountryFromUserError < ArgumentError; end$/;"	c	class:Subdomainer	inherits:ArgumentError
 CartoDb	./lib/modules/carto_db.rb	/^module CartoDb$/;"	m
 ChangeAreasCoordinatesType	./db/migrate/20121221131343_change_areas_coordinates_type.rb	/^class ChangeAreasCoordinatesType < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
 Configuration	./lib/modules/mbtile/configuration.rb	/^class Mbtile::Configuration < Mbtile::Base$/;"	c	class:Mbtile	inherits:Mbtile.Base
@@ -53,11 +51,12 @@ MML_TEMPLATE	./lib/modules/mbtile/mml.rb	/^  MML_TEMPLATE = File.read(Rails.root
 Map	./lib/modules/carto_db/proxy/map.rb	/^module CartoDb::Proxy::Map$/;"	m	class:CartoDb.Proxy
 Mbtile	./app/models/mbtile.rb	/^class Mbtile < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
 MbtileGenerator	./app/workers/mbtile_generator.rb	/^class MbtileGenerator$/;"	c
-MbtilesController	./app/controllers/mbtiles_controller.rb	/^class MbtilesController < AdminController$/;"	c	inherits:AdminController
+MbtilesController	./app/controllers/mbtiles_controller.rb	/^class MbtilesController < ApplicationController$/;"	c	inherits:ApplicationController
 Mml	./lib/modules/mbtile/mml.rb	/^class Mbtile::Mml < Mbtile::Base$/;"	c	class:Mbtile	inherits:Mbtile.Base
 PagesController	./app/controllers/pages_controller.rb	/^class PagesController < ApplicationController$/;"	c	inherits:ApplicationController
+PagesHelper	./app/helpers/pages_helper.rb	/^module PagesHelper$/;"	m
 Photo	./app/models/photo.rb	/^class Photo < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
-PhotosController	./app/controllers/photos_controller.rb	/^class PhotosController < AdminController$/;"	c	inherits:AdminController
+PhotosController	./app/controllers/photos_controller.rb	/^class PhotosController < ApplicationController$/;"	c	inherits:ApplicationController
 Project	./lib/modules/mbtile/project.rb	/^class Mbtile::Project < Mbtile::Base$/;"	c	class:Mbtile	inherits:Mbtile.Base
 Proxy	./lib/modules/carto_db/proxy.rb	/^module CartoDb::Proxy$/;"	m	class:CartoDb
 ProxyController	./app/controllers/proxy_controller.rb	/^class ProxyController < ApplicationController$/;"	c	inherits:ApplicationController
@@ -65,6 +64,7 @@ ROLES	./db/seeds.rb	/^ROLES = [$/;"	C	class:
 ReindexUsersByEmailAndCountryId	./db/migrate/20150713124543_reindex_users_by_email_and_country_id.rb	/^class ReindexUsersByEmailAndCountryId < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
 RemoveNameFromValidation	./db/migrate/20121214153125_remove_name_from_validation.rb	/^class RemoveNameFromValidation < ActiveRecord::Migration$/;"	c	inherits:ActiveRecord.Migration
 Role	./app/models/role.rb	/^class Role < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
+SHARED_TEXT	./app/helpers/pages_helper.rb	/^  SHARED_TEXT = 'Measuring Carbon Stocks'$/;"	C	class:PagesHelper
 SQL_URL	./lib/modules/carto_db.rb	/^  SQL_URL = '\/api\/v2\/sql'$/;"	C	class:CartoDb
 SessionsController	./app/controllers/sessions_controller.rb	/^class SessionsController < Devise::SessionsController$/;"	c	inherits:Devise.SessionsController
 Shapefile	./lib/modules/carto_db/proxy/shapefile.rb	/^module CartoDb::Proxy::Shapefile$/;"	m	class:CartoDb.Proxy
@@ -73,11 +73,11 @@ Subdomainer	./lib/modules/subdomainer.rb	/^module Subdomainer$/;"	m
 TEMPLATES_PATH	./lib/modules/carto_db.rb	/^  TEMPLATES_PATH = Rails.root.join('lib', 'modules', 'carto_db', 'templates')$/;"	C	class:CartoDb
 USERNAME	./lib/modules/carto_db.rb	/^  USERNAME = Rails.application.secrets.cartodb['username']$/;"	C	class:CartoDb
 User	./app/models/user.rb	/^class User < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
-UsersController	./app/controllers/users_controller.rb	/^class UsersController < AdminController$/;"	c	inherits:AdminController
+UsersController	./app/controllers/users_controller.rb	/^class UsersController < ApplicationController$/;"	c	inherits:ApplicationController
 UsersCountry	./app/models/users_country.rb	/^class UsersCountry < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
 Validation	./app/models/validation.rb	/^class Validation < ActiveRecord::Base$/;"	c	inherits:ActiveRecord.Base
 Validation	./lib/modules/carto_db/validation.rb	/^class CartoDb::Validation$/;"	c	class:CartoDb
-ValidationsController	./app/controllers/validations_controller.rb	/^class ValidationsController < AdminController$/;"	c	inherits:AdminController
+ValidationsController	./app/controllers/validations_controller.rb	/^class ValidationsController < ApplicationController$/;"	c	inherits:ApplicationController
 about	./app/controllers/pages_controller.rb	/^  def about$/;"	f	class:PagesController
 after_sign_in_path_for	./app/controllers/sessions_controller.rb	/^  def after_sign_in_path_for resource, country_id=nil$/;"	f	class:SessionsController
 all	./app/models/habitat.rb	/^  def self.all$/;"	F	class:Habitat
@@ -155,6 +155,7 @@ country	./lib/modules/subdomainer.rb	/^  def self.country request$/;"	F	class:Su
 country=	./app/models/area.rb	/^  belongs_to :country$/;"	F	class:Area
 country=	./app/models/users_country.rb	/^  belongs_to :country$/;"	F	class:UsersCountry
 country=	./app/models/validation.rb	/^  belongs_to :country$/;"	F	class:Validation
+country_flag	./app/helpers/pages_helper.rb	/^  def country_flag country$/;"	f	class:PagesHelper
 create	./app/controllers/areas_controller.rb	/^  def create$/;"	f	class:AreasController
 create	./app/controllers/photos_controller.rb	/^  def create$/;"	f	class:PhotosController
 create	./app/controllers/sessions_controller.rb	/^  def create$/;"	f	class:SessionsController
@@ -227,9 +228,9 @@ generate	./lib/modules/mbtile/project.rb	/^  def generate$/;"	f	class:Mbtile.Pro
 generate	./lib/modules/mbtile/style.rb	/^  def generate$/;"	f	class:Mbtile.Style
 geo_json	./app/models/area.rb	/^  def geo_json$/;"	f	class:Area
 geojson	./lib/modules/mbtile/geojson.rb	/^  def geojson$/;"	f	class:Mbtile.Geojson
-get_layout_from_params	./app/controllers/analysis_controller.rb	/^  def get_layout_from_params$/;"	f	class:AnalysisController
 habitat_path	./lib/modules/mbtile/base.rb	/^  def habitat_path$/;"	f	class:Mbtile.Base
 help	./app/controllers/pages_controller.rb	/^  def help$/;"	f	class:PagesController
+hero_text	./app/helpers/pages_helper.rb	/^  def hero_text country$/;"	f	class:PagesHelper
 home	./app/controllers/pages_controller.rb	/^  def home$/;"	f	class:PagesController
 index	./app/controllers/analysis_controller.rb	/^  def index$/;"	f	class:AnalysisController
 index	./app/controllers/areas_controller.rb	/^  def index$/;"	f	class:AreasController
@@ -310,7 +311,6 @@ sign_in_via_xhr	./app/controllers/sessions_controller.rb	/^  def sign_in_via_xhr
 sign_out_via_xhr	./app/controllers/sessions_controller.rb	/^  def sign_out_via_xhr$/;"	f	class:SessionsController
 source	./lib/modules/carto_db/proxy/map.rb	/^  def self.source habitat$/;"	F	class:CartoDb.Proxy.Map
 sql	./lib/modules/carto_db/proxy/map.rb	/^  def self.sql habitat, country, where$/;"	F	class:CartoDb.Proxy.Map
-store_from_subdomain	./app/controllers/application_controller.rb	/^  def store_from_subdomain$/;"	f	class:ApplicationController
 style	./lib/modules/mbtile/style.rb	/^  def style$/;"	f	class:Mbtile.Style
 super_admin	./app/models/ability.rb	/^  def super_admin$/;"	f	class:Ability
 super_admin?	./app/models/user.rb	/^  def super_admin?$/;"	f	class:User
