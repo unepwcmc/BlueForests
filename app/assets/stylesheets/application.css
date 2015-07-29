@@ -4,4 +4,5 @@
 *= require_tree ./shared
 *= require 'login'
 *= require 'home'
+*= require 'analysis'
 */
