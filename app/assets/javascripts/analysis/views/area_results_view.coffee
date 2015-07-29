@@ -50,7 +50,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
       values =
         carbon: getResultByName("Carbon")
         area_km2: getResultByName("Area")
-        habitat_percentage: getResultByName("Percentage")
+        habitat_percentage: getResultByName("Percentage of Habitats")
 
       _.each values, (habitats, operation) ->
         _.each habitats, (habitat) ->
