@@ -8,7 +8,7 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
 
   constructor: (options) ->
     super(options)
-    @country = options.country
+    @countryIso = options.countryIso
     @model = new @collection.model()
     @areas = options.areas
 
@@ -44,7 +44,7 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
     )
 
   render: ->
-    $(@el).html(@template({country: @country, validation: @model.toJSON(), areas: @areas }))
+    $(@el).html(@template({countryIso: @countryIso, validation: @model.toJSON(), areas: @areas }))
 
     this.$("form").backboneLink(@model)
 
