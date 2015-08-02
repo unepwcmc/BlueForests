@@ -1,12 +1,1 @@
-<div id="validations"></div>
-<script type="text/javascript">
-  $(function() {
-      window.router = new BlueCarbon.Routers.ValidationsRouter({
-        country: <%= @current_country.to_json.html_safe %>,
-        validations: <%= @validations.to_json(include: [:user, photos: {only: :id, methods: [:attachment_url, :thumbnail_url]}]).html_safe -%>,
-        areas: <%= @areas.to_json.html_safe %>
-      });
-      Backbone.history.start();
-      router.navigate('new', {trigger: true});
-  });
-</script>
+<div id="new-validation" data-country-iso="<%= @current_country.iso %>"></div>
