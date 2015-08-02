@@ -1,5 +1,5 @@
 initializeMap = (opts={}) ->
-  new Map('map-analysis', opts).map
+  new Map('map', opts).map
 
 initializePica = (map, opts={}) ->
   window.pica = new Pica.Application(
@@ -31,8 +31,8 @@ setupTranslationLink = ->
       window.location.href = permalink
 
 $(document).ready ->
-  if $('#map-analysis').length > 0
-    countryIso = $('#map-analysis').data('country-iso')
+  if $('#map').length > 0
+    countryIso = $('#map').data('country-iso')
 
     map = initializeMap(countryIso: countryIso)
     initializePica(map, countryIso: countryIso)
