@@ -3,7 +3,7 @@ class ValidationsController < ApplicationController
   before_filter :check_country_for_restricted_pages
   before_filter :load_validations, only: :index
 
-  load_and_authorize_resource except: :index
+  load_and_authorize_resource except: [:index, :new, :create]
 
   def index
     @last_validation_id_by_habitat = Validation.most_recent_id_by_habitat(@validations)
@@ -43,10 +43,11 @@ class ValidationsController < ApplicationController
 
   def create
     @validation = Validation.new(validation_params)
+    @validation.country = @current_country
     @validation.user = current_user
 
     respond_to do |format|
-      if @validation.save
+      if can?(:create, @validation) && @validation.save
         format.html { redirect_to @validation, notice: 'Validation was successfully created.' }
         format.json { render json: @validation.to_json(include: [:user, photos: {only: :id, methods: [:attachment_url, :thumbnail_url]}]), status: :created, location: @validation }
       else

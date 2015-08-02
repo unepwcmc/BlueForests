@@ -15,8 +15,6 @@ class Validation < ActiveRecord::Base
   validates :user, presence: true
 
   before_create do
-    self.country = area.try(:country) || user.try(:country)
-
     if coordinates.kind_of?(Array)
       self.coordinates = "#{coordinates}"
     end
