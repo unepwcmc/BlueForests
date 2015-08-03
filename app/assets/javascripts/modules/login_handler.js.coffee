@@ -11,7 +11,7 @@ window.LoginHandler = class LoginHandler
   loadLoginModal: ->
     $.get(@opts.loginPath, (html) =>
       @$loginModalContainer.html(html)
-        .parent().removeClass('hidden')
+        .removeClass('hidden').parent().removeClass('hidden')
 
       @addFormEventListeners()
     )
@@ -50,5 +50,5 @@ window.LoginHandler = class LoginHandler
 
   handleCloseButton = ($closeButtonEl, $targetEl) ->
     $closeButtonEl.click( (ev) ->
-      $targetEl.empty().parent().addClass('hidden')
+      $targetEl.empty().addClass('hidden').parent().addClass('hidden')
     )

@@ -7,7 +7,7 @@
 
 .full-page-overlay { @include full-page-overlay($dark-blue) }
 
-.login-modal-container {
+.login-modal-container, .tool-modal-container {
   @include z-index(modal);
 
   display: block;
@@ -20,6 +20,9 @@
   font-size: 16px;
   background-color: $white;
 
+  &.hidden { display: none; }
+
   header { @include modal-header() }
   form   { @include form-element() }
+  ul     { list-style: none; }
 }

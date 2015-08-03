@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  if $('#map').length > 0
+  if $('.areas #map').length > 0
     map = new Map(
       'map',
       countryIso: $('#map').data('country-iso'),

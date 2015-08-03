@@ -1,4 +1,9 @@
 $(document).ready ( ->
+  addLoginHandler()
+  addToolSelectionHandler()
+)
+
+addLoginHandler = ->
   $loginButton = $('.login-button')
   $loginModalContainer = $('.login-modal-container')
 
@@ -7,4 +12,12 @@ $(document).ready ( ->
       $loginButton, $loginModalContainer,
       {loginPath: $loginButton.data('login-path')}
     )
-)
+
+addToolSelectionHandler = ->
+  $toolButton = $('.tool-button')
+  $toolModalContainer = $('.tool-modal-container')
+
+  if $toolButton.length > 0 and $toolModalContainer.length > 0
+    new ToolSelectionHandler(
+      $toolButton, $toolModalContainer
+    )
