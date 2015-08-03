@@ -4,7 +4,11 @@
 
 $ ->
   if $('#map').length > 0
-    map = new Map('map', countryIso: $('#map').data('country-iso')).map
+    map = new Map(
+      'map',
+      countryIso: $('#map').data('country-iso'),
+      bounds: $('#map').data('country-bounds')
+    ).map
     addDraw(map)
 
 addDraw = (map) ->

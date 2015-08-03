@@ -5,11 +5,6 @@ window.Map = class Map
     saltmarsh: '#007dff'
     algal_mat: '#ffe048'
     other: '#1dcbea'
-  DEFAULT_MAP_OPTS =
-    center: [24.5, 54]
-    zoom: 9
-    minZoom: 8
-    maxZoom: 19
 
   constructor: (elementId, mapOpts={}) ->
     @baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 17})
@@ -22,9 +17,12 @@ window.Map = class Map
     )
 
   initializeMap: (elementId, mapOpts) ->
-    mapOpts = _.extend(DEFAULT_MAP_OPTS, mapOpts)
+    mapOpts.maxBounds = L.latLngBounds(mapOpts.bounds)
+    mapOpts.center = mapOpts.maxBounds.getCenter()
     mapOpts.layers = [@baseSatellite]
+
     @map = L.map(elementId, mapOpts)
+    @map.fitBounds(mapOpts.maxBounds)
 
   addAttribution: ->
     attribution = L.control.attribution(position: 'bottomright', prefix: '')

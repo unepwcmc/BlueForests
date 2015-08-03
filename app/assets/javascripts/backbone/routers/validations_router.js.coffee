@@ -1,6 +1,7 @@
 class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
   initialize: (options) ->
     @countryIso = options.countryIso
+    @countryBounds = options.countryBounds
 
     @validations = new BlueCarbon.Collections.ValidationsCollection()
     @validations.reset options.validations
@@ -27,6 +28,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       map_id: 'map'
       coordinates: @findCoordinates()
       prevValidationId: prevValidationId
+      bounds: @countryBounds
     if z && y && x
       @initializeMap _.extend( {center: [y, x], zoom: z }, args )
     else
@@ -175,8 +177,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
 
     mapOpts = {}
     mapOpts.countryIso = $("##{mapId}").data('country-iso')
-    mapOpts.center = args.center if args.center?
-    mapOpts.zoom = args.zoom if args.zoom?
+    mapOpts.bounds = args.bounds
 
     map = new Map(mapId, mapOpts).map
 
