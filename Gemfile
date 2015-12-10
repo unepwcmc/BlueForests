@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.9'
+gem 'rails', '4.2.5'
 
 gem 'pg'
 
 gem 'devise'
-gem 'devise-token_authenticatable'
+gem 'devise-token_authenticatable', '~> 0.4.0'
 gem 'cancancan', '~> 1.10'
 
 gem 'rack-cors', :require => 'rack/cors'
@@ -24,7 +24,7 @@ gem 'rabl'
 
 gem 'httparty', '~> 0.13.3'
 
-gem 'activerecord-postgis-adapter', '2.2.0'
+gem 'activerecord-postgis-adapter', '~> 3.1.0'
 
 gem 'paperclip', '~> 3.0'
 
@@ -45,7 +45,7 @@ gem 'capistrano-sidekiq', '~> 0.4.0'
 gem 'rvm-capistrano', require: false
 gem 'brightbox', '>=2.3.9'
 
-gem 'rspec-rails', '~> 3.2.0', group: [:test, :development]
+gem 'rspec-rails', '~> 3.4.0', group: [:test, :development]
 group :test do
   gem 'factory_girl_rails', '~> 4.5.0'
   gem 'webmock', '~> 1.20.4'
