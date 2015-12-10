@@ -17,7 +17,7 @@ gem 'jquery-rails'
 gem 'html5-rails'
 
 gem 'daemons'
-gem 'sidekiq', '~> 2.17.8'
+gem 'sidekiq', '~> 4.0.1'
 gem 'sinatra', :require => nil
 
 gem 'rabl'
@@ -26,7 +26,7 @@ gem 'httparty', '~> 0.13.3'
 
 gem 'activerecord-postgis-adapter', '~> 3.1.0'
 
-gem 'paperclip', '~> 3.0'
+gem 'paperclip', '~> 4.3.2'
 
 group :assets do
   gem 'sass-rails'
