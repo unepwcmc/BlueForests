@@ -1,125 +1,58 @@
-require 'capistrano/sidekiq'
+# config valid only for current version of Capistrano
+lock '3.4.0'
 
-set :stages, %w(production staging)
-set :default_stage, 'staging'
-require 'capistrano/ext/multistage'
+set :application, 'blueforests'
+set :repo_url, 'git@github.com:unepwcmc/blueforests.git'
 
-set :application, "blueforest"
-set :repository,  "https://github.com/unepwcmc/BlueForest.git"
+# Default branch is :master
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-set(:deploy_to) { File.join("", "home", user, application) }
 
-set :user, "rails"
+set :branch, 'server-migration'
 
-set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :deploy_user, 'wcmc'
 
-set :branch, "master"
+
+# Default deploy_to directory is /var/www/my_app_name
+set :deploy_to, "/home/#{fetch(:deploy_user)}/#{fetch(:application)}"
+
+# Default value for :scm is :git
+set :scm, :git
 set :scm_username, "unepwcmc-read"
-set :git_enable_submodules, 1
-default_run_options[:pty] = true # Must be set for the password prompt from git to work
 
-set :use_sudo, false
 
-require 'rvm/capistrano'
-set :rvm_ruby_string, '2.1.2'
+set :rvm_type, :user
+set :rvm_ruby_version, '2.2.3'
 
-# bundler bootstrap
-require 'bundler/capistrano'
 
-# if you want to clean up old releases on each deploy uncomment this:
-after "deploy:restart", "deploy:cleanup"
 
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
+set :ssh_options, {
+  forward_agent: true,
+}
 
-# If you are using Passenger mod_rails uncomment this:
-namespace :deploy do
-  task :start do ; end
-  task :stop do ; end
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-  end
-end
 
-# Database
+# Default value for :format is :pretty
+# set :format, :pretty
 
-namespace :database do
-  desc "Generate a database configuration file"
-  task :build_configuration do
-    database_name = Capistrano::CLI.ui.ask("Database name: ")
-    database_user = Capistrano::CLI.ui.ask("Database username: ")
-    the_host = Capistrano::CLI.ui.ask("Database IP address: ")
-    pg_password = Capistrano::CLI.password_prompt("Database user password: ")
+# Default value for :log_level is :debug
+#set :log_level, :debug
 
-    db_options = {
-      "adapter" => "postgis",
-      "database" => database_name,
-      "username" => database_user,
-      "host" => the_host,
-      "password" => pg_password
-    }
+# Default value for :pty is false
+set :pty, true
 
-    config_options = db_options.to_yaml
-    run "mkdir -p #{shared_path}/config"
-    put config_options, "#{shared_path}/config/database.yml"
-  end
+# Default value for :linked_files is []
 
-  desc "Links the configuration file"
-  task :link_configuration_file do
-    run "ln -nsf #{shared_path}/config/database.yml #{latest_release}/config/database.yml"
-  end
-end
+set :linked_files, %w{config/database.yml config/config.yml .env}
 
-after "deploy:setup", "database:build_configuration"
-after "deploy:finalize_update", "database:link_configuration_file"
+# Default value for linked_dirs is []
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system','lib/tilemill')
 
-namespace :config do
-  desc "Links the env configuration file"
-  task :link_env_file do
-    run "ln -nsf #{shared_path}/.env #{latest_release}/.env"
-  end
-end
 
-after "deploy:finalize_update", "config:link_env_file"
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
-# Email
+# Default value for keep_releases is 5
+set :keep_releases, 5
 
-#namespace :mail do
-#  desc 'Generate setup_mail.rb file'
-#  task :setup do
-#    address = Capistrano::CLI.ui.ask("Enter the smtp mail address: ")
-#    password = Capistrano::CLI.ui.ask("Enter the smtp user password: ")
+set :passenger_restart_with_touch, false
 
-#    template = File.read("config/deploy/templates/setup_mail.rb.erb")
-#    buffer = ERB.new(template).result(binding)
-
-#    put(buffer, "#{shared_path}/config/initializers/setup_mail.rb")
-#  end
-
-#  desc "Links the mail folder"
-#  task :link_folder do
-#    run "ln -s #{shared_path}/config/initializers/setup_mail.rb #{latest_release}/config/initializers/setup_mail.rb"
-#  end
-#end
-#after "deploy:setup", "mail:setup"
-#after "deploy:update_code", "mail:link_folder"
-
-# Tilemill
-
-set(:shared_tilemill_path) {"#{shared_path}/tilemill"}
-
-namespace :tilemill do
-  desc "Make a shared tilemill folder"
-  task :make_shared_folder, :roles => :app do
-    run "mkdir -p #{shared_tilemill_path}"
-  end
-
-  desc "Links the tilemill folder"
-  task :link_folder, :roles => :db do
-    run "ln -s #{shared_tilemill_path} #{latest_release}/lib/tilemill"
-  end
-end
-
-after "deploy:setup", "tilemill:make_shared_folder"
-after "deploy:update_code", "tilemill:link_folder"

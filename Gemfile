@@ -39,11 +39,18 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'capistrano'
-gem 'capistrano-ext'
-gem 'capistrano-sidekiq', '~> 0.4.0'
-gem 'rvm-capistrano', require: false
-gem 'brightbox', '>=2.3.9'
+
+group :development do
+  gem 'capistrano', '~> 3.4', require: false
+  gem 'capistrano-rails',   '~> 1.1', require: false
+  gem 'capistrano-bundler', '~> 1.1', require: false
+  gem 'capistrano-rvm',   '~> 0.1', require: false
+  gem 'capistrano-sidekiq'
+  gem 'capistrano-passenger', '~> 0.1.1', require: false
+end
+
+
+
 
 gem 'rspec-rails', '~> 3.4.0', group: [:test, :development]
 group :test do
