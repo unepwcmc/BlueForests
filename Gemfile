@@ -31,7 +31,6 @@ gem 'paperclip', '~> 4.3.2'
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
-  gem 'therubyracer', :platforms => :ruby
 
   gem 'compass-rails'
   gem 'compass-h5bp'

@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20150717151226) do
   enable_extension "plpgsql"
   enable_extension "postgis"
 
-  create_table "areas", force: true do |t|
+  create_table "areas", force: :cascade do |t|
     t.string   "title"
     t.text     "coordinates"
     t.datetime "created_at"
@@ -25,14 +25,14 @@ ActiveRecord::Schema.define(version: 20150717151226) do
     t.integer  "country_id"
   end
 
-  create_table "assignments", force: true do |t|
+  create_table "assignments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "role_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "countries", force: true do |t|
+  create_table "countries", force: :cascade do |t|
     t.string   "name"
     t.string   "subdomain"
     t.string   "iso"
@@ -41,31 +41,31 @@ ActiveRecord::Schema.define(version: 20150717151226) do
     t.float    "bounds",     default: [], array: true
   end
 
-  create_table "geometries", force: true do |t|
-    t.string  "action"
-    t.integer "user_id"
-    t.integer "age"
-    t.integer "area_id"
-    t.integer "density"
-    t.string  "knowledge"
-    t.text    "notes"
-    t.string  "author"
-    t.boolean "display"
-    t.integer "phase",                limit: 8
-    t.integer "phase_id",             limit: 8
-    t.integer "prev_phase",           limit: 8
-    t.integer "edit_phase",           limit: 8
-    t.boolean "toggle"
-    t.float   "value"
-    t.spatial "the_geom",             limit: {:srid=>0, :type=>"geometry"}
-    t.integer "condition"
-    t.text    "habitat"
-    t.spatial "the_geom_webmercator", limit: {:srid=>0, :type=>"geometry"}
-    t.spatial "carbon_view",          limit: {:srid=>0, :type=>"geometry"}
-    t.string  "country_id"
+  create_table "geometries", force: :cascade do |t|
+    t.geometry "the_geom",             limit: {:srid=>0, :type=>"geometry"}
+    t.string   "action"
+    t.integer  "user_id"
+    t.integer  "age"
+    t.integer  "area_id"
+    t.integer  "density"
+    t.string   "knowledge"
+    t.text     "notes"
+    t.string   "author"
+    t.boolean  "display"
+    t.integer  "phase",                limit: 8
+    t.integer  "phase_id",             limit: 8
+    t.integer  "prev_phase",           limit: 8
+    t.integer  "edit_phase",           limit: 8
+    t.boolean  "toggle"
+    t.float    "value"
+    t.integer  "condition"
+    t.text     "habitat"
+    t.geometry "the_geom_webmercator", limit: {:srid=>0, :type=>"geometry"}
+    t.geometry "carbon_view",          limit: {:srid=>0, :type=>"geometry"}
+    t.string   "country_id"
   end
 
-  create_table "mbtiles", force: true do |t|
+  create_table "mbtiles", force: :cascade do |t|
     t.string   "status",                     default: "pending"
     t.datetime "last_generation_started_at"
     t.datetime "last_generated_at"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20150717151226) do
     t.datetime "updated_at"
   end
 
-  create_table "photos", force: true do |t|
+  create_table "photos", force: :cascade do |t|
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
@@ -85,14 +85,14 @@ ActiveRecord::Schema.define(version: 20150717151226) do
     t.datetime "updated_at"
   end
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "description"
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -108,17 +108,17 @@ ActiveRecord::Schema.define(version: 20150717151226) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
-  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "users_countries", force: true do |t|
+  create_table "users_countries", force: :cascade do |t|
     t.integer "country_id"
     t.integer "user_id"
   end
 
-  add_index "users_countries", ["user_id", "country_id"], :name => "index_users_countries_on_user_id_and_country_id", :unique => true
+  add_index "users_countries", ["user_id", "country_id"], name: "index_users_countries_on_user_id_and_country_id", unique: true, using: :btree
 
-  create_table "validations", force: true do |t|
+  create_table "validations", force: :cascade do |t|
     t.text     "coordinates"
     t.string   "action"
     t.datetime "recorded_at"
