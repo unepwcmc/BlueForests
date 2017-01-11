@@ -1,6 +1,6 @@
 <div class="hero <%= "for-country" if @current_country %>">
   <%= hero_text @current_country %>
-  <a href="<%= tool_path %>" class="btn tool-button">Start using the tool</a>
+  <a href="<%= tool_path %>" class="btn button button--landing-page tool-button">Start using the tool</a>
 </div>
 
 <article class="home-main main-container">
@@ -23,7 +23,9 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
         </p>
-        <a href="<%= tool_path %>" class="btn tool-button">Start using the tool</a>
+        <div>
+          <a href="<%= tool_path %>" class="btn tool-button" style="display: inline-block; margin-bottom: 10px;">Start using the tool</a>
+        </div>
         <a class="with-icon">Visit our help page</a>
       </section>
     </div>

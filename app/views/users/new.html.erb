@@ -1,9 +1,10 @@
-<div class="page-header">
-  <%= link_to users_path, :class => 'btn' do %>
-    <i class="icon-list-alt"></i>
-    Back
-  <% end %>
-  <h1>New User</h1>
-</div>
+<div class="admin">
+  <div class="admin__header">
+    <h1 class="admin__title">New User</h1>
+    <%= link_to users_path, class: "button" do %>
+      <i class="icon-list-alt"></i> Back
+    <% end %>
+  </div>
 
-<%= render 'form' %>
+  <%= render "form" %>
+</div>

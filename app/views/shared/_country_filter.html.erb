@@ -1,11 +1,11 @@
-<div class="btn-group">
-  <a class="btn dropdown-toggle" data-toggle="dropdown" id="country-select" href="#">
+<div class="admin__header-element dropdown">
+  <a class="dropdown__trigger" data-toggle-trigger="filter" id="country-select" href="#">
     Filter by country
     <span class="caret"></span>
   </a>
-  <ul class="dropdown-menu" aria-labelledby="country-select">
+  <div class="dropdown__target u-hide" data-toggle-target="filter">
     <% Country.pluck(:id, :name).each do |id, name| %>
-      <li><%= link_to name, send(path, country_id: id) %></li>
+      <%= link_to name, send(path, country_id: id), class: "dropdown__item" %>
     <% end %>
-  </ul>
+  </div>
 </div>

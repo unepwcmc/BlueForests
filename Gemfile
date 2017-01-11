@@ -31,6 +31,7 @@ gem 'paperclip', '~> 4.3.2'
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
+  gem 'font-awesome-sass', '~> 4.7.0'
 
   gem 'compass-rails'
   gem 'compass-h5bp'

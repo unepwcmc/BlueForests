@@ -20,13 +20,13 @@
     text-align: center;
   }
 
-  .login-button { @include log-in-button($color) }
+  .login-button {
+    background-color: transparent;
+    width: 100px;
+    border: solid 2px $color;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    line-height: 2rem;
+  }
 }
 
-@mixin log-in-button($color) {
-  background-color: transparent;
-  width: 100px;
-  border: solid 2px $color;
-  text-transform: uppercase;
-  font-size: 0.9em;
-}

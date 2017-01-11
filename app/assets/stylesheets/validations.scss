@@ -1,17 +1,22 @@
-.validations > main > div {
-  width: 100%;
-  height: 700px;
-}
+.validations {
 
-#map > div {
-  float: left;
-  height: 100%;
-  width: 60%;
+  main > div {
+    width: 100%;
+    height: 700px;
+  }
 
-  &::after { content: ""; }
-}
+  #map {
+    float: left;
+    height: 700px;
+    width: 60%;
 
-#sidebar {
-  float: right;
-  height: 100%;
+    &::after { content: ""; }
+  }
+
+  #sidebar {
+    float: left;
+    margin-left: 2.5rem;
+    width: calc(40% - 2.5rem);
+  }
+
 }

@@ -216,7 +216,7 @@ en:
     buttons:
       draw_polygon: "Draw a polygon"
       draw_another_polygon: "Draw another polygon"
-    delete_this_area: "Delete this area"
+    delete_this_area: "Delete"
     area: "Area"
     area_1: "Area # 1"
     area_2: "Area # 2"

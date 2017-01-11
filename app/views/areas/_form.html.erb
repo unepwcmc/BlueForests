@@ -8,13 +8,13 @@
     </div>
   <% end %>
 
-  <div class="form-inputs">
+  <div class="form__inputs">
     <%= f.input :title %>
     <%= f.input :coordinates, as: :hidden %>
     <%= f.input :country_id, as: :hidden %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, :class => "btn-primary" %>
+  <div class="form__actions">
+    <input type="submit" class="button" value="Create field site">
   </div>
 <% end %>

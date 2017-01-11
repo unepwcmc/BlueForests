@@ -13,10 +13,8 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     "new"                                : "newValidation"
     "new/:z/:y/:x"                       : "newValidation"
     "new/:z/:y/:x/:prevValidationId"     : "newValidation"
-    "index"                              : "index"
     ":id/edit"                           : "edit"
     ":id"                                : "show"
-    ".*"                                 : "index"
 
   newValidation: (z, y, x, prevValidationId) ->
     @view = new BlueCarbon.Views.Validations.NewView(
@@ -33,47 +31,6 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       @initializeMap _.extend( {center: [y, x], zoom: z }, args )
     else
       @initializeMap args
-
-    # Upload photo
-    new AjaxUpload 'upload-photo',
-      action: '/photos'
-      name: 'photo[attachment]'
-      data:
-        authenticity_token: $("meta[name='csrf-token']").attr("content")
-      responseType: 'json'
-      onSubmit: (file, extension) ->
-        $('#upload-photo').hide()
-        $("#photos-table tbody").append('<tr><td colspan="2"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></td></td></tr>')
-      onComplete: (file, response) =>
-        if response.errors?
-          #errors = for key, message of response.errors
-          #  message
-          #$('#upload-photo-progress').after("<div class=\"alert alert-error\">Image #{errors[0]}</div>")
-        else
-          photo_ids = @view.model.get('photo_ids')
-          photo_ids = photo_ids.concat(response['id'])
-          @view.model.set('photo_ids', photo_ids)
-
-          photos = @view.model.get('photos')
-          photos = photos.concat(response)
-          @view.model.set('photos', photos)
-
-          tr_content = $("<td><img src='#{response.thumbnail_url}' /></td><td><a href='#' class='btn'>Remove</a></td>")
-          tr_content.find('a').click (e) =>
-            photo_ids = @view.model.get('photo_ids')
-            @view.model.set('photo_ids', _.without(photo_ids, response['id']))
-
-            @view.model.set('photos', _.reject(@view.model.get('photos'), (p) -> return p['id'] == photo['id'] ))
-
-            $(e.target).closest('tr').remove()
-            return false
-          $("#photos-table tbody tr:last-child").html(tr_content)
-
-        $('#upload-photo').show()
-
-  index: ->
-    @view = new BlueCarbon.Views.Validations.IndexView(validations: @validations, collection: @validations)
-    $("#validations").html(@view.render().el)
 
   show: (id) ->
     validation = @validations.get(id)
@@ -101,52 +58,6 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       validation_id: id
     @initializeMap args
 
-    # Upload photo
-    new AjaxUpload 'upload-photo',
-      action: '/photos'
-      name: 'photo[attachment]'
-      data:
-        authenticity_token: $("meta[name='csrf-token']").attr("content")
-      responseType: 'json'
-      onSubmit: (file, extension) ->
-        $('#upload-photo').hide()
-        $("#photos-table tbody").append('<tr><td colspan="2"><div class="progress progress-striped active"><div class="bar" style="width: 100%;"></div></div></td></td></tr>')
-      onComplete: (file, response) =>
-        if response.errors?
-          #errors = for key, message of response.errors
-          #  message
-          #$('#upload-photo-progress').after("<div class=\"alert alert-error\">Image #{errors[0]}</div>")
-        else
-          photo_ids = @view.model.get('photo_ids')
-          photo_ids = photo_ids.concat(response['id'])
-          @view.model.set('photo_ids', photo_ids)
-
-          photos = @view.model.get('photos')
-          photos = photos.concat(response)
-          @view.model.set('photos', photos)
-
-          tr_content = $("<td><img src='#{response.thumbnail_url}' /></td><td><a href='#' class='btn'>Remove</a></td>")
-          tr_content.find('a').click (e) =>
-            photo_ids = @view.model.get('photo_ids')
-            @view.model.set('photo_ids', _.without(photo_ids, response['id']))
-            $(e.target).closest('tr').remove()
-            return false
-          $("#photos-table tbody tr:last-child").html(tr_content)
-
-        $('#upload-photo').show()
-
-    for photo in validation.get('photos')
-      tr_content = $("<tr><td><img src='#{photo.thumbnail_url}' /></td><td><a href='#' class='btn'>Remove</a></td></tr>")
-      tr_content.find('a').click (e) =>
-        photo_ids = @view.model.get('photo_ids')
-        @view.model.set('photo_ids', _.without(photo_ids, photo['id']))
-
-        @view.model.set('photos', _.reject(@view.model.get('photos'), (p) -> return p['id'] == photo['id'] ))
-
-        $(e.target).closest('tr').remove()
-        return false
-      $("#photos-table tbody").append(tr_content)
-
   renderUndoButton: () =>
     undoButtonSelector = $('#draw-a-polygon').find("#undo-draw-vertex")
 
@@ -155,7 +66,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
 
       if markerCount > 0
         unless undoButtonSelector.length > 0
-          undoButton = $('<a id="undo-draw-vertex" class="btn undo">')
+          undoButton = $('<button id="undo-draw-vertex" class="btn">Undo point</button>')
           undoButton.click (e) =>
             @removeLastMarker()
 

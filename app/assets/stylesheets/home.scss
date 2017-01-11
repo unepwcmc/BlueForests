@@ -25,15 +25,9 @@
   &.for-country { background-image: url(image-path('hero-bg-image.jpg')); }
 
   h1, h2 { text-shadow: 0px 0px 10px #222222; }
-  .btn { box-shadow: 0px 0px 10px #222222; }
 
   h1 { font-size: 2em; margin-top: -25px; margin-bottom: 0px; }
   h2 { font-size: 1em; margin-top: 5px; margin-bottom: 40px; }
-  .btn {
-    @include oval-button-bg-color($white);
-    @include oval-button-color($black);
-    @include oval-button-font-size(0.4em);
-  }
 }
 
 .home-main.main-container {
@@ -58,13 +52,4 @@
     font-weight: 100;
   }
 
-  .btn {
-    display: table;
-    margin-bottom: 10px;
-
-    @include oval-button-bg-color($dark-blue);
-    @include oval-button-color($white);
-    @include oval-button-height(3em);
-    @include oval-button-font-size(0.9em);
-  }
 }

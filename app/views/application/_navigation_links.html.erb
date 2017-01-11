@@ -1,15 +1,17 @@
 <% if user_signed_in? %>
-  <ul class="pull-right navigation-links">
-    <li><%= link_to 'Validations',                   validations_path %></li>
-    <li><%= link_to 'Users',                         users_path %></li>
-    <li><%= link_to 'Ipad Admin',                    areas_path %></li>
-    <li><%= link_to current_user.email.truncate(20), destroy_user_session_path, method: :delete %></li>
-  </ul>
+  <div class="header__right">
+    <%= selected_link_to 'Validations', validations_path, class: "header__element" %>
+    <%= selected_link_to 'Users', users_path, class: "header__element" %>
+    <%= selected_link_to 'Field Sites', areas_path, class: "header__element" %>
+    <%= link_to current_user.email.truncate(20), destroy_user_session_path, method: :delete, class: "header__element" %>
+  </div>
 <% else %>
-  <ul class="pull-right navigation-links">
-    <li><a href="<%= tool_path %>">Tool</a></li>
-    <li>Help</li>
-    <li>About</li>
-    <li><button data-login-path="<%= new_user_session_path %>" class="login-button">Log in</button></li>
-  </ul>
+  <div class="pull-right navigation-links">
+    <a class="header__element" href="<%= tool_path %>">Tool</a>
+    <a class="header__element" href="">Help</a>
+    <a class="header__element" href="">About</a>
+    <span class="header__element">
+      <button class="login-button" data-login-path="<%= new_user_session_path %>">Log in</button>
+    </span>
+  </div>
 <% end %>

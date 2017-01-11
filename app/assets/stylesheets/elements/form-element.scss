@@ -63,12 +63,5 @@
         background: no-repeat url(image-path('entypo/check-dark-blue.svg'));
       }
     }
-
-    .btn {
-      @include oval-button-height(3em);
-      @include oval-button-color($white);
-      @include oval-button-bg-color($dark-blue);
-      @include oval-button-font-size(0.9em);
-    }
   }
 }

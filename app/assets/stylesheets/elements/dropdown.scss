@@ -1,0 +1,25 @@
+@import "colors";
+
+.dropdown {
+  position: relative;
+
+  .dropdown__trigger {
+    color: $dark-blue;
+  }
+
+  .dropdown__target {
+    position: absolute;
+    padding: .5rem 2rem;
+    border: solid 2px $light-gray;
+    background-color: $white;
+    z-index: 9999;
+    margin-top: 1.5rem;
+  }
+
+  .dropdown__item {
+    display: block;
+    color: $dark-blue;
+    font-weight: 500;
+    margin: .75rem 0;
+  }
+}

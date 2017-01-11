@@ -4,6 +4,9 @@
 @import 'leaflet';
 @import 'leaflet.draw';
 
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
 @import 'colors';
 @import 'mixins';
 
@@ -28,8 +31,10 @@ html, body {
 .pull-left  { float: left }
 .pull-right { float: right }
 .hidden     { display: none }
+.clearfix   { overflow: hidden }
 
-.btn { @include oval-button(); }
+.u-hide { display: none; }
+
 a.with-icon { @include link-with-icon(arrow-with-circle-right-dark-blue); }
 
 .title {
@@ -40,3 +45,14 @@ a.with-icon { @include link-with-icon(arrow-with-circle-right-dark-blue); }
 
 .row  { @include row($padding: 30px 0px) }
 .half { @include column(50%, 20px) }
+
+// reset button
+[role="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button {
+    -webkit-box-sizing: content-box;
+       -moz-box-sizing: content-box;
+            box-sizing: content-box;
+}
