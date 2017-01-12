@@ -7,12 +7,16 @@ module PagesHelper
     content_tag(:h1, 'Blue Forests') + subtitle
   end
 
-  def country_flag country
+  def country_flag country, text=nil
     return nil unless country
 
     flag = content_tag(:i, '', class: "flag-icon flag-icon-#{country.iso.downcase}")
-    name = content_tag(:span, country.name.capitalize)
+    name = content_tag(:span, "  #{country.name.capitalize}")
 
-    content_tag(:div, flag + name, class: 'flag-and-name')
+    if text
+      content_tag(:div, flag + " #{text}", class: 'flag-and-name')
+    else
+      content_tag(:div, flag + name, class: 'flag-and-name')
+    end
   end
 end

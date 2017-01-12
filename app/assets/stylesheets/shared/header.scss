@@ -14,6 +14,7 @@
   @include align-items(stretch);
 
   height: 100%;
+  color: $dark-blue;
 
   .home-link        { @include home-link(color) }
   .navigation-links { @include navigation-links($dark-blue) }
@@ -38,7 +39,8 @@
   padding: 0 2rem;
   line-height: 6rem;
   font-weight: 500;
-  color: $dark-blue;
+  color: inherit;
+  background: none;
 
   &.is-selected {
     border-bottom: solid 4px $dark-blue;

@@ -1,3 +1,5 @@
+@import "colors";
+
 @mixin flag-icon-background {
   background-size: contain;
   background-position: 50%;
@@ -21,6 +23,9 @@
 @mixin flag-icon($country) {
   .flag-icon-#{$country} {
     background-image: url(image-path("flags/4x3/#{$country}.svg"));
+    border: solid 1px $light-gray;
+    padding: 0;
+    background-size: 90%;
     &.flag-icon-squared {
     background-image: url(image-path("flags/1x1/#{$country}.svg"));
     }

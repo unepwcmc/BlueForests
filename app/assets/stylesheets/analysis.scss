@@ -21,6 +21,10 @@
       margin-bottom: .333rem;
     }
 
+    .no-border {
+      border-bottom: none;
+    }
+
     p {
       font-size: 1.75rem;
       margin: 0;
@@ -75,6 +79,11 @@
 
   .new-polygon-container {
     text-align: center;
+  }
+
+  .loading {
+    text-align: center;
+    padding: 10rem;
   }
 
 }

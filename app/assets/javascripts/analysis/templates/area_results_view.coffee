@@ -2,7 +2,9 @@ window.JST ||= {}
 
 window.JST['area_results_view'] = _.template("""
   <% if (area.app.syncsInProgress == 1) { %>
-    <img src="/assets/loading-spinner.gif" class="loading">
+    <div class="loading">
+      <img src="/assets/loading-spinner.gif">
+    </div>
     <% } else { %>
     <% if (!_.isEmpty(results)) { %>
       <% if (_.isEmpty(results.habitats)) { %>
@@ -29,7 +31,7 @@ window.JST['area_results_view'] = _.template("""
           <i class="fa fa-user"></i><%= results.sum.human_emissions %>
         </p>
 
-        <h4 dir="<%= this.textDirection %>" ><%= polyglot.t("analysis.polygons_in_this_area") %> <sup class="tip" id="habitat_tip"></sup></h4>
+        <h4 class="no-border" dir="<%= this.textDirection %>" ><%= polyglot.t("analysis.polygons_in_this_area") %> <sup class="tip" id="habitat_tip"></sup></h4>
         <table class="table polygon-stats">
           <tr>
             <th><%= polyglot.t("analysis.ecosystem") %></th>

@@ -13,6 +13,12 @@
 
   background-color: $dark-blue;
 
+  .dropdown { display: none; }
+
+  .header__element.is-selected {
+    border-bottom: solid 4px white;
+  }
+
   .main-container {
     @include main-container($dark-blue);
     color: $white;
@@ -24,8 +30,8 @@
       .navigation-links { @include navigation-links($white) }
 
       .flag-and-name {
+        display: none;
         padding: 10px;
-        background-color: $very-dark-blue;
 
         span { font-size: 1.1em; }
         i { @include flag-icon-height(2em); margin-right: 10px; }

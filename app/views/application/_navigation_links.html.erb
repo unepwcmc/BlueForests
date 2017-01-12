@@ -3,13 +3,43 @@
     <%= selected_link_to 'Validations', validations_path, class: "header__element" %>
     <%= selected_link_to 'Users', users_path, class: "header__element" %>
     <%= selected_link_to 'Field Sites', areas_path, class: "header__element" %>
-    <%= link_to current_user.email.truncate(20), destroy_user_session_path, method: :delete, class: "header__element" %>
+
+    <span class="dropdown">
+      <button class="header__element" data-toggle-trigger="country-select">
+        <%= country_flag @current_country, current_user.email.truncate(20) %>
+      </button>
+      <div class="dropdown__target u-hide" data-toggle-target="country-select">
+        <% if current_user.super_admin? %>
+          <% Country.pluck(:id, :name).each do |id, name| %>
+            <% if name == @current_country.name %>
+              <div class="dropdown__item dropdown__item--nested"><i class="fa fa-chevron-right"></i>  <%= name %></div>
+            <% else %>
+              <%= link_to name, url_for(only_path: false, subdomain: name, controller: params[:controller], action: params[:action]), class: "dropdown__item" %>
+            <% end %>
+          <% end %>
+
+        <hr>
+        <% end %>
+
+        <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown__item" %>
+      </div>
+    </span>
   </div>
 <% else %>
   <div class="pull-right navigation-links">
-    <a class="header__element" href="<%= tool_path %>">Tool</a>
-    <a class="header__element" href="">Help</a>
-    <a class="header__element" href="">About</a>
+    <a class="header__element tool-button" href="<%= tool_path %>">Tool</a>
+    <% if @current_country %>
+      <span class="dropdown">
+        <button class="header__element" data-toggle-trigger="country-select">
+          <%= country_flag @current_country %>
+        </button>
+        <div class="dropdown__target u-hide" data-toggle-target="country-select">
+          <% Country.pluck(:id, :name).each do |id, name| %>
+            <%= link_to name, url_for(only_path: false, subdomain: name, controller: params[:controller], action: params[:action]), class: "dropdown__item" %>
+          <% end %>
+        </div>
+      </span>
+    <% end %>
     <span class="header__element">
       <button class="login-button" data-login-path="<%= new_user_session_path %>">Log in</button>
     </span>

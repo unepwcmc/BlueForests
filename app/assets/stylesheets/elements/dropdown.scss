@@ -13,7 +13,21 @@
     border: solid 2px $light-gray;
     background-color: $white;
     z-index: 9999;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
+    left: 0%;
+
+    &:before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid $light-gray;
+      top: -12px;
+      position: absolute;
+      left: 50%;
+      margin-left: -5px;
+    }
   }
 
   .dropdown__item {
@@ -21,5 +35,23 @@
     color: $dark-blue;
     font-weight: 500;
     margin: .75rem 0;
+  }
+
+  .dropdown__item--nested {
+    margin-left: -1rem;
+
+    i {
+      font-size: .75rem;
+      vertical-align: middle;
+    }
+  }
+
+  hr {
+    box-sizing: content-box;
+    height: 0;
+    width: calc(100% + 20px);
+    margin-left: -10px;
+    margin-top: 1rem;
+    border: 1px solid;
   }
 }
