@@ -4,7 +4,58 @@
 
   main {
     width: 100%;
-    height: 700px;
+    height: 1000px;
+  }
+
+  #sidebar {
+    float: left;
+    width: 40%;
+  }
+
+  #area_results {
+    padding: 0 1.5rem;
+
+    h4 {
+      line-height: 2rem;
+      border-bottom: solid 1px $light-gray;
+      margin-bottom: .333rem;
+    }
+
+    p {
+      font-size: 1.75rem;
+      margin: 0;
+    }
+
+    i {
+      margin-right: .333rem;
+    }
+
+    sup {
+      top: -1em;
+      font-size: .5em;
+    }
+
+    table {
+      th {
+        background-color: $light-gray;
+      }
+
+      tr:nth-child(odd) td {
+        background-color: white;
+      }
+      tr:nth-child(even) td {
+        background-color: $lightest-gray;
+      }
+    }
+  }
+
+  .footer {
+    margin-top: 2.5rem;
+    text-align: center;
+
+    .btn {
+      display: inline-block;
+    }
   }
 
   #map {
