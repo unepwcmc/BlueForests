@@ -1,3 +1,5 @@
+<%= content_for :title, "Show field site" %>
+
 <div class="admin static">
   <%= javascript_tag "window.areaCoordinates = #{@area.coordinates}" %>
   <div data-country-bounds="<%= @current_country.bounds.reverse.to_json %>" data-country-id="<%= @current_country.id %>" data-country-iso="<%= @current_country.iso %>" id="map"></div>
