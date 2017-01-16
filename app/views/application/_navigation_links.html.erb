@@ -10,9 +10,9 @@
       </button>
       <div class="dropdown__target u-hide" data-toggle-target="country-select">
         <% if current_user.super_admin? %>
-          <% Country.pluck(:id, :name).each do |id, name| %>
+          <% Country.order(:name).pluck(:id, :name).each do |id, name| %>
             <% if name == @current_country.name %>
-              <div class="dropdown__item dropdown__item--nested"><i class="fa fa-chevron-right"></i>  <%= name %></div>
+              <div class="dropdown__item dropdown__item--nested"><i class="fa fa-chevron-right"></i>  <%= name.titleize %></div>
             <% else %>
               <%= link_to name, url_for(only_path: false, subdomain: Subdomainer.resolve(name), controller: params[:controller], action: params[:action]), class: "dropdown__item" %>
             <% end %>
@@ -34,7 +34,7 @@
           <%= country_flag @current_country %>
         </button>
         <div class="dropdown__target u-hide" data-toggle-target="country-select">
-          <% Country.pluck(:id, :name).each do |id, name| %>
+          <% Country.order(:name).pluck(:id, :name).each do |id, name| %>
             <%= link_to name, url_for(only_path: false, subdomain: Subdomainer.resolve(name), controller: params[:controller], action: params[:action]), class: "dropdown__item" %>
           <% end %>
         </div>

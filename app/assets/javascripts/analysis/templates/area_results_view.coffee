@@ -8,7 +8,7 @@ window.JST['area_results_view'] = _.template("""
     <% } else { %>
     <% if (!_.isEmpty(results)) { %>
       <% if (_.isEmpty(results.habitats)) { %>
-        <%= polyglot.t("analysis.empty_result") %>
+        <div class="u-center"><%= polyglot.t("analysis.empty_result") %></div>
       <% } else { %>
         <h4 class="<%= this.textDirection %>">
           <%= polyglot.t("analysis.total_carbon_stock") %><sup class="tip" id="ca_stock_tip"></sup>

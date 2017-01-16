@@ -4,7 +4,7 @@
     <span class="caret"></span>
   </a>
   <div class="dropdown__target u-hide" data-toggle-target="filter">
-    <% Country.pluck(:id, :name).each do |id, name| %>
+    <% Country.order(:name).pluck(:id, :name).each do |id, name| %>
       <%= link_to name, send(path, country_id: id), class: "dropdown__item" %>
     <% end %>
   </div>
