@@ -39,4 +39,21 @@
     }
 
   }
+
+  .wcmc-logo {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: image-url("UNEP-WCMC-logo@2x.png");
+    background-image: -webkit-image-set(
+      image-url("UNEP-WCMC-logo.png") 1x,
+      image-url("UNEP-WCMC-logo@2x.png") 2x
+    );
+
+    display: inline-block;
+    height: 22px;
+    width: 50px;
+    margin-top: -2px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
 }
