@@ -19,23 +19,25 @@ addDraw = (map) ->
     drawnItems.addLayer(initialRectangle)
     map.fitBounds(initialRectangle.getBounds())
 
-  editableMap(map, drawnItems) if $('#area_coordinates').length > 0
-
   if $('#area_country_id').length > 0
     $('#area_country_id').val($('#map').data('country-id'))
 
   map.addLayer(drawnItems)
 
-editableMap = (map, drawnItems) ->
-  @map = map
-  @drawControl = new L.Control.Draw
-    polyline: false
-    circle: false
-    marker: false
-    rectangle: false
-  map.addControl(@drawControl)
+  # Action draw a polygon
+  $('#draw-a-polygon .btn').click (e) =>
+    $(e.target).toggleClass('btn-inverse btn-primary')
+
+    @polygonDraw = new L.Polygon.Draw(map, {shapeOptions: {color: '#bdd455'}}) unless @polygonDraw?
+
+    if $(e.target).hasClass('active')
+      @polygonDraw.disable()
+    else
+      @polygonDraw.enable()
 
   map.on 'draw:poly-created', (e) =>
+    $("#draw-a-polygon").addClass("hidden")
+    $("#inputs").removeClass("hidden")
     polygon = e.poly
 
     points = for point in polygon.getLatLngs()

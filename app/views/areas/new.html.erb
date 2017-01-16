@@ -1,7 +1,8 @@
-<div class="admin">
-  <div class="admin__header">
-    <h1 class="admin__title">New field site</h1>
-  </div>
+<div class="admin areas">
 
-  <%= render 'form' %>
+  <div data-country-bounds="<%= @current_country.bounds.reverse.to_json %>" data-country-id="<%= @current_country.id %>" data-country-iso="<%= @current_country.iso %>" id="map"></div>
+
+  <div id="sidebar">
+    <%= render 'form' %>
+  </div>
 </div>

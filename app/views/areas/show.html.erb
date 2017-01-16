@@ -1,45 +1,17 @@
-<div class="static">
+<div class="admin static">
   <%= javascript_tag "window.areaCoordinates = #{@area.coordinates}" %>
-  <div data-country-iso="<%= @current_country.iso %>" id="map"></div>
+  <div data-country-bounds="<%= @current_country.bounds.reverse.to_json %>" data-country-id="<%= @current_country.id %>" data-country-iso="<%= @current_country.iso %>" id="map"></div>
 
   <div id="sidebar" class="shadow">
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span12">
-          <h5>Field Site</h5>
+          <h1 class="admin__header">Field Site</h1>
 
           <dl>
             <dt>Title:</dt>
             <dd><%= @area.title %></dd>
           </dl>
-
-          <h5>MBTiles</h5>
-
-          <div class="accordion" id="accordion">
-            <% @mbtiles.each do |mbtile| %>
-              <div class="accordion-group">
-                <div class="accordion-heading">
-                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse_<%= mbtile.habitat %>">
-                    <%= mbtile.habitat.humanize %>
-                  </a>
-                </div>
-                <div id="collapse_<%= mbtile.habitat %>" class="accordion-body collapse">
-                  <div class="accordion-inner">
-                    <dl>
-                      <dt>Last generation started at:</dt>
-                      <dd><%= mbtile.last_generation_started_at || '-' %></dd>
-
-                      <dt>Last generated at:</dt>
-                      <dd><%= mbtile.last_generated_at || '-' %></dd>
-
-                      <dt>Status:</dt>
-                      <dd><%= mbtile.status %></dd>
-                    </dl>
-                  </div>
-                </div>
-              </div>
-            <% end %>
-          </div>
         </div>
       </div>
     </div>
