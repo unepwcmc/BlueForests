@@ -9,7 +9,7 @@
       <main>
         <ul>
           <% Country.pluck(:subdomain, :name).each do |(subdomain, name)| %>
-            <li> <%= link_to name, tool_url(subdomain: subdomain), class: 'with-icon' %> </li>
+            <li> <%= link_to name, tool_url(subdomain: Subdomainer.resolve(subdomain)), class: 'with-icon' %> </li>
           <% end %>
         </ul>
       </main>
