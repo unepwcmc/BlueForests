@@ -29,8 +29,11 @@
 //= require validations
 
 var roundToDecimals = function(number, places) {
-  places = Math.pow(10, places);
-  return Math.round(number * places) / places;
+  if(typeof number === "undefined") {
+    return 0;
+  }
+
+  return number.toFixed(places).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 };
 
 // Check if polygon self intersects (using openLayers)
