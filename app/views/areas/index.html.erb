@@ -32,7 +32,7 @@
             <tr>
               <td><%= link_to area.title, area %></td>
               <% if can? :manage, Area %>
-                <td><%= link_to 'Delete', area, confirm: 'Are you sure?', method: :delete %></td>
+                <td><%= link_to 'Delete', area_path(area), method: :delete, data: {confirm: "Are you sure you want to delete this field site?"} %></td>
               <% end %>
             </tr>
           <% end %>

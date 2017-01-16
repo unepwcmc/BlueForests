@@ -15,7 +15,7 @@
 
   <% if @last_validation_id_by_habitat[validation.habitat] == validation.id %>
     <td id="<%= validation.id %>_delete" class="deleteme">
-      <%= link_to "Delete", validation_path(validation.id), method: :delete %>
+      <%= link_to 'Delete', validation_path(validation.id), method: :delete, data: {confirm: "Are you sure you want to delete this validation?"} %>
     </td>
   <% else %>
     <td></td>
