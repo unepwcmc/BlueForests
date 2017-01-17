@@ -33,8 +33,9 @@ html, body {
 .hidden     { display: none }
 .clearfix   { overflow: hidden }
 
-.u-hide   { display: none;      }
-.u-center { text-align: center; }
+.u-hide       { display: none;                      }
+.u-center     { text-align: center;                 }
+.u-flex-start { align-items: flex-start !important; }
 
 a.with-icon { @include link-with-icon(arrow-with-circle-right-dark-blue); }
 
