@@ -3,7 +3,7 @@ window.JST ||= {}
 window.JST['area_results_view'] = _.template("""
   <% if (area.app.syncsInProgress == 1) { %>
     <div class="loading">
-      <img src="/assets/loading-spinner.gif">
+      <img src="/loading-spinner.gif">
     </div>
     <% } else { %>
     <% if (!_.isEmpty(results)) { %>
