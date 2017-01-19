@@ -36,7 +36,7 @@ class Backbone.Views.AreaControlsView extends Backbone.View
 
       if markerCount > 0
         unless undoButtonSelector.length > 0
-          $('.new-polygon-container').append($('<a id="undo-vertex" class="btn undo">'))
+          $('.new-polygon-container').append($('<a id="undo-vertex" class="btn btn-primary undo">Undo</a>'))
         return
 
     undoButtonSelector.remove()
