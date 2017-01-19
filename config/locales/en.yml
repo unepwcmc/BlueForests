@@ -252,4 +252,4 @@ en:
       start_drawing: "Click to start drawing shape"
       continue_drawing: "Click to continue drawing shape"
       close_shape: "Click first point to close this shape"
-    empty_result: "Your AOI doesn't intersect with any known ecosystems."
+    empty_result: "Your selected area does not contain any recorded Blue Forest habitats."
