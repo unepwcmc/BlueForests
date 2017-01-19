@@ -17,7 +17,7 @@ window.JST['area_results_view'] = _.template("""
           <%= roundToDecimals(results.sum.carbon, 2) %> <span>T</span>
         </p>
 
-        <h4 class="<%= this.textDirection %>"><%= polyglot.t("analysis.total_area") %> <sup class="tip" id="tot_area_tip"></sup></h4>
+        <h4 class="<%= this.textDirection %>"><%= polyglot.t("analysis.total_area") %></h4>
         <p class="<%= this.textDirection %>">
         <% if (results.sum.area > 1) { %>
           <%= roundToDecimals(results.sum.area, 2) %>
@@ -30,9 +30,9 @@ window.JST['area_results_view'] = _.template("""
         <table class="table polygon-stats">
           <tr>
             <th><%= polyglot.t("analysis.ecosystem") %></th>
-            <th dir="<%= this.texthirection %>"><%= polyglot.t("analysis.area_ha") %></th>
-            <th dir="<%= this.texthirection %>"><%= polyglot.t("analysis.area_percentage") %></th>
-            <th dir="<%= this.texthirection %>" title="Carbon Stock"><%= polyglot.t("analysis.c_stock") %></th>
+            <th dir="<%= this.textDirection %>"><%= polyglot.t("analysis.area_ha") %></th>
+            <th dir="<%= this.textDirection %>"><%= polyglot.t("analysis.area_percentage") %></th>
+            <th dir="<%= this.textDirection %>" title="Carbon Stock"><%= polyglot.t("analysis.c_stock") %></th>
           </tr>
           <% _.each(results.habitats, function(attributes, key) { %>
             <tr>

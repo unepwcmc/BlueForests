@@ -28,12 +28,12 @@ window.Map = class Map
     )
 
   initializeMap: (elementId, mapOpts) ->
-    mapOpts.maxBounds = L.latLngBounds(mapOpts.bounds)
-    mapOpts.center = mapOpts.maxBounds.getCenter()
+    maxBounds = L.latLngBounds(mapOpts.bounds)
+    mapOpts.center = maxBounds.getCenter()
     mapOpts.layers = [@baseSatellite]
 
     @map = L.map(elementId, mapOpts)
-    @map.fitBounds(mapOpts.maxBounds)
+    @map.fitBounds(maxBounds)
 
   addAttribution: ->
     attribution = L.control.attribution(position: 'bottomright', prefix: '')

@@ -221,7 +221,7 @@ en:
     area_1: "Area # 1"
     area_2: "Area # 2"
     area_3: "Area # 3"
-    area_ha: "Area <span>ha</sup></span>"
+    area_ha: "Area <span>km<sup>2</sup></span>"
     area_percentage: "Area <span>% of Tot.</span>"
     c_stock: "C-Stock <span>T</span>"
     total_area: "Area"
