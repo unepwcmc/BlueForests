@@ -26,6 +26,7 @@
     .row {
       @include row-divider(1px, $white);
 
+      .home-link .main-logo { height: 2rem !important; }
       .home-link        { @include home-link(white) }
       .navigation-links { @include navigation-links($white) }
 
