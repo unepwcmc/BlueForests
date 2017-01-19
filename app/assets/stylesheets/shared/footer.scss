@@ -30,6 +30,16 @@
       .home-link        { @include home-link(white) }
       .navigation-links { @include navigation-links($white) }
 
+      .support-centre {
+        margin-left: 2rem;
+        border: solid 1px $white;
+
+        &:hover {
+          background-color: $white;
+          color: $dark-blue;
+        }
+      }
+
       .flag-and-name {
         display: none;
         padding: 10px;

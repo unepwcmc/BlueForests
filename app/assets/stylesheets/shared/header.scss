@@ -18,6 +18,7 @@
 
   .home-link        { @include home-link(color) }
   .navigation-links { @include navigation-links($dark-blue) }
+  .support-centre   { display: none; }
 }
 
 .header__container {
