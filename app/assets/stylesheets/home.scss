@@ -57,4 +57,11 @@
     font-weight: 100;
   }
 
+  a {
+    color: $dark-blue;
+    font-weight: 500;
+
+    &:hover { text-decoration: underline; }
+  }
+
 }
