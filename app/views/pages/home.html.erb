@@ -7,66 +7,53 @@
 
 <article class="home-main main-container">
   <div class="row u-flex-start">
-    <div class="half">
+    <div class="<%= "half" if @current_country %>">
       <section>
-        <h3>
-          The Blue Forests Mapping tool allows you to learn more about the
-          important role of coastal marine ecosystems and their ability to absorb
-          and store carbon dioxide from the atmosphere.
-        </h3>
-        <p>
-          The Blue Forests Mapping tool has been designed as part of <a href="http://www.gefblueforests.org/">GEF Blue Forests Project</a>.
-          The tool is simple to use and provides a rapid overview of the
-          approximate total carbon stock value for a selected area of interest. This
-          information is further broken down to provide information on the contribution
-          of each ecosystem to the total carbon stock of the selected area.
-        </p>
-        <h3 class="title">What are blue forests?</h3>
-        <p>
-          'Blue forests' refer to the ability of coastal vegetation to
-          sequester carbon. Blue forests ecosystems, such as mangrove forests,
-          saltmarshes, seagrass beds and cyanobacterial mats, sequester and
-          store atmospheric carbon in biomass and sediments, sometimes at rates
-          higher than tropical rainforests.
-        </p>
-        <p>
-          When these ecosystems are destroyed, buried carbon can be released
-          into the atmosphere as carbon dioxide, contributing to climate
-          change.
-        </p>
-      </section>
-    </div>
-    <div class="half">
-      <section>
-        <% if @current_country %>
-          <%= render "pages/country_text/#{@current_country.subdomain}" %>
-        <% else %>
-          <h3 class="title">What is Blue Forests?</h3>
+        <% unless @current_country %>
+          <div class="half">
+        <% end %>
+          <h3>
+            The Blue Forests Mapping tool allows you to learn more about the
+            important role of coastal marine ecosystems and their ability to absorb
+            and store carbon dioxide from the atmosphere.
+          </h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-            occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-            mollit anim id est laborum.
+            The Blue Forests Mapping tool has been designed as part of <a href="http://www.gefblueforests.org/">GEF Blue Forests Project</a>.
+            The tool is simple to use and provides a rapid overview of the
+            approximate total carbon stock value for a selected area of interest. This
+            information is further broken down to provide information on the contribution
+            of each ecosystem to the total carbon stock of the selected area.
           </p>
-          <a class="with-icon">More information about the Blue Forests</a>
-        </section>
-        <section>
-          <h3 class="title">The Blue Forests Project</h3>
+        <% unless @current_country %>
+          </div>
+        <% end %>
+        <% unless @current_country %>
+          <div class="half">
+        <% end %>
+          <h3 class="title">What are blue forests?</h3>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-            commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-            occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-            mollit anim id est laborum.
+            'Blue forests' refer to the ability of coastal vegetation to
+            sequester carbon. Blue forests ecosystems, such as mangrove forests,
+            saltmarshes, seagrass beds and cyanobacterial mats, sequester and
+            store atmospheric carbon in biomass and sediments, sometimes at rates
+            higher than tropical rainforests.
           </p>
-          <a class="with-icon">More details about the project</a>
+          <p>
+            When these ecosystems are destroyed, buried carbon can be released
+            into the atmosphere as carbon dioxide, contributing to climate
+            change.
+          </p>
+        <% unless @current_country %>
+          </div>
         <% end %>
       </section>
+    </div>
+    <% if @current_country %>
+      <div class="half">
+        <section>
+          <%= render "pages/country_text/#{@current_country.subdomain}" %>
+        </section>
+    <% end %>
     </div>
   </div>
 </article>
