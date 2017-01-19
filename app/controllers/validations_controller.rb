@@ -100,8 +100,10 @@ class ValidationsController < ApplicationController
     @country ||= begin
       if params[:country_id] && current_user.super_admin?
         Country.find(params[:country_id]) rescue nil
+      elsif current_user.super_admin?
+        nil
       else
-        current_user.country
+        current_user.countries.first
       end
     end
   end
