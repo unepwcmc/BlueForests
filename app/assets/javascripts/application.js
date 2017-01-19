@@ -3,7 +3,7 @@
 //= require jquery_ujs
 //= require h5bp
 //= require bootstrap
-//= require leaflet
+//= require leaflet/leaflet
 //= require leaflet.draw
 //= require Leaflet.Bing
 //= require jQuery.XDomainRequest
