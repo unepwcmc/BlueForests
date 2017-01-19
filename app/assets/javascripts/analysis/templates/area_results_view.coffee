@@ -26,11 +26,6 @@ window.JST['area_results_view'] = _.template("""
         <% } %>
         <span>km<sup>2</sup></span></p>
 
-        <h4 dir="<%= this.textDirection %>" ><%= polyglot.t("analysis.equivalent_per_capita_CO2_emissions") %> <sup class="tip" id="co2_pc_emis_tip"></sup></h4>
-        <p class="<%= this.textDirection %>">
-          <i class="fa fa-user"></i><%= results.sum.human_emissions %>
-        </p>
-
         <h4 class="no-border" dir="<%= this.textDirection %>" ><%= polyglot.t("analysis.polygons_in_this_area") %> <sup class="tip" id="habitat_tip"></sup></h4>
         <table class="table polygon-stats">
           <tr>
