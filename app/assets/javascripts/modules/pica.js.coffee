@@ -455,11 +455,11 @@ class Pica.Views.NewPolygonView
     @polygon = options.polygon
 
     # Turn on Leaflet.draw polygon tool
-    @polygonDraw = new L.Polygon.Draw(Pica.config.map, {})
+    @polygonDraw = new L.Draw.Polygon(Pica.config.map, {})
     @polygonDraw.enable()
 
-    Pica.config.map.on 'draw:poly-created', (e) =>
-      mapPolygon = e.poly
+    Pica.config.map.on L.Draw.Event.CREATED, (e) =>
+      mapPolygon = e.layer
       @createPolygon mapPolygon
 
   createPolygon: (mapPolygon) ->

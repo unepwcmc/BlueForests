@@ -51,7 +51,7 @@ class Backbone.Views.AreaControlsView extends Backbone.View
       delete @polygonView
 
   deleteArea: (event) ->
-    
+
   render: =>
     @$el.html(@template(area: @area))
     area_results_view = new Backbone.Views.AreaResultsView(area: @area).render().$el

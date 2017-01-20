@@ -1,4 +1,5 @@
 /*
+*= require 'leaflet.draw'
 *= require 'z-index'
 *= require 'shared'
 *= require_tree ./shared
