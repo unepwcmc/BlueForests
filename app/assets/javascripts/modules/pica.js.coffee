@@ -463,7 +463,7 @@ class Pica.Views.NewPolygonView
       @createPolygon mapPolygon
 
   createPolygon: (mapPolygon) ->
-    @polygon.setGeomFromPoints(mapPolygon.getLatLngs()[0])
+    @polygon.setGeomFromPoints(mapPolygon.getLatLngs())
     @polygon.save(
       success: () =>
         @close()
