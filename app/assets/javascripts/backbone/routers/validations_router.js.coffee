@@ -85,7 +85,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     $('#draw-a-polygon .btn').click (e) =>
       $(e.target).toggleClass('btn-inverse btn-primary')
 
-      @polygonDraw = new L.Draw.Polygon() unless @polygonDraw?
+      @polygonDraw = new L.Draw.Polygon(map) unless @polygonDraw?
       map.on('draw:add-vertex', @renderUndoButton)
 
       if $(e.target).hasClass('active')
@@ -129,7 +129,7 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
 
   editableMap: (map, drawnItems) ->
     map.on L.Draw.Event.CREATED, (e) =>
-      latLngs = e.poly.getLatLngs()
+      latLngs = e.layer.getLatLngs()[0]
 
       # Check if polygon self intersects
       format = new OpenLayers.Format.WKT()
@@ -140,9 +140,9 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
         $('#draw-a-polygon .btn').toggleClass('btn-inverse active btn-primary')
         return false
 
-      $('#coordinates').val(@latLngsToString(e.poly.getLatLngs())).trigger('change')
+      $('#coordinates').val(@latLngsToString(e.layer.getLatLngs()[0])).trigger('change')
       drawnItems.clearLayers()
-      drawnItems.addLayer(e.poly)
+      drawnItems.addLayer(e.layer)
 
       $('#draw-a-polygon .btn').toggleClass('btn-inverse active btn-primary')
 
