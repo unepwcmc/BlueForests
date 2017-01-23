@@ -22,6 +22,9 @@ class Backbone.Views.FieldSitesView extends Backbone.View
   fitBounds: (event) =>
     event.preventDefault()
 
+    if @currentSite
+      @hide()
+
     $target = $(event.target)
 
     coordinates = _.map($target.data("site-bounds"), (coords) ->
