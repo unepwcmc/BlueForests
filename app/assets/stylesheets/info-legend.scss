@@ -1,0 +1,21 @@
+@import "colors";
+
+#map {
+  .info-legend {
+    background-color: $white;
+    padding: .5rem;
+
+    i {
+      width: 1rem;
+      height: 1rem;
+      vertical-align: middle;
+      display: inline-block;
+      margin-right: .25rem;
+    }
+
+    p {
+      font-size: .75rem;
+      margin: .75rem;
+    }
+  }
+}

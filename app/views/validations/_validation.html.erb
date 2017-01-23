@@ -10,8 +10,8 @@
   </td>
   <td><%= validation.action.capitalize %></td>
   <td><%= validation.habitat.gsub(/_/, ' ').capitalize %></td>
-  <td><a href="#/<%= validation.id %>">View</td>
-  <td><a href="#/<%= validation.id %>/edit">Edit</a></td>
+  <td><a href="<%= validation_path(validation.id) %>">View</td>
+  <td><a href="<%= edit_validation_path(validation.id) %>">Edit</a></td>
 
   <% if @last_validation_id_by_habitat[validation.habitat] == validation.id %>
     <td id="<%= validation.id %>_delete" class="deleteme">
