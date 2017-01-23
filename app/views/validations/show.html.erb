@@ -1,0 +1,70 @@
+<%= content_for :title, "Validation ##{@validation.id}" %>
+
+<div id="show-validation" class="admin validations">
+  <div data-country-iso="<%= @validation.country.iso %>" data-bounds="<%= @validation.country.bounds.to_json %>" id="map"></div>
+
+  <div id="sidebar" class="shadow simple-form">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span12">
+          <h1 class="admin__header">Validation #<%= @validation.id %></h1>
+
+          <a id="edit-validation" href="<%= edit_validation_path(@validation) %>" class="btn btn-primary">Edit</a>
+
+          <dl>
+            <dt>Action:</dt>
+            <dd><%= @validation.action.titleize %></dd>
+          </dl>
+
+          <dl>
+            <dt>Habitat:</dt>
+            <dd><%= @validation.habitat.humanize %></dd>
+          </dl>
+
+          <% if @validation.action != 'delete' %>
+            <dl>
+              <dt>Field Site:</dt>
+              <dd><%= @validation.area_id && areas.get(@validation.area_id).get('title') || '-' %></dd>
+            </dl>
+
+            <% if @validation.habitat == 'mangrove' || @validation.habitat == 'seagrass' || @validation.habitat == 'saltmarsh' %>
+              <dl>
+                <dt>Density:</dt>
+                <dd><%= @validation.density.blank? ? "Unknown" : {1 => "Sparse (&lt;20% cover)", 2 => "Moderate (20-50% cover)", 3 => "Dense (50-80% cover)", 4 => "Very dense (&gt;80% cover)"}[@validation.density] %></dd>
+              </dl>
+            <% end %>
+
+            <dl>
+              <dt>Evidence type:</dt>
+              <dd><%= {"Underlying imagery in browser" => "Underlying imagery in browser", "Local knowledge" => "Local knowledge", "Field visit" => "Field visit"}[@validation.knowledge] %></dd>
+            </dl>
+
+            <% if(@validation.habitat === 'mangrove') %>
+              <dl>
+                <dt>Condition:</dt>
+                <dd><%= {1 => "Undisturbed / Intact", 2 => "Degraded", 3 => "Restored / Rehabilitating", 4 => "Afforested/ Created", 5 => "Cleared"}[@validation.condition] %></dd>
+              </dl>
+            <% end %>
+
+            <% if(@validation.habitat === 'mangrove') %>
+              <dl>
+                <dt>Age:</dt>
+                <dd><%= @validation.age.blank? ? 'Unknown' : {1 => "Natural Mangrove", 2 => "2-10 yrs old", 3 => "10-25 yrs old", 4 => "25-50 yrs old"}[@validation.age] %></dd>
+              </dl>
+            <% end %>
+
+            <dl>
+              <dt>Recorded at:</dt>
+              <dd><%= @validation.recorded_at %></dd>
+            </dl>
+
+            <dl>
+              <dt>Notes:</dt>
+              <dd><%= @validation.notes || '-' %></dd>
+            </dl>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

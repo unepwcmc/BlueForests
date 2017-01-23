@@ -14,7 +14,6 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     "new/:z/:y/:x"                       : "newValidation"
     "new/:z/:y/:x/:prevValidationId"     : "newValidation"
     ":id/edit"                           : "edit"
-    ":id"                                : "show"
 
   newValidation: (z, y, x, prevValidationId) ->
     @view = new BlueCarbon.Views.Validations.NewView(
@@ -31,19 +30,6 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
       @initializeMap _.extend( {center: [y, x], zoom: z }, args )
     else
       @initializeMap args
-
-  show: (id) ->
-    validation = @validations.get(id)
-
-    @view = new BlueCarbon.Views.Validations.ShowView(model: validation, areas: @areas)
-    $("#validations").html(@view.render().el)
-
-    # Map
-    args =
-      map_id: 'map'
-      coordinates: JSON.parse(validation.get('coordinates'))
-      validation_id: id
-    @initializeMap args
 
   edit: (id) ->
     validation = @validations.get(id)
