@@ -76,6 +76,8 @@ class Pica.Model extends Pica.Events
       $.extend(
         options,
         contentType: "application/json"
+        headers:
+          'X-Magpie-ProjectId': Pica.config.projectId
         dataType: "json"
         data: data
       )
@@ -131,10 +133,6 @@ class Pica.Application extends Pica.Events
 
     $.support.cors = true
 
-    $.ajaxSetup
-      headers:
-        'X-Magpie-ProjectId': Pica.config.projectId
-
     @layers = []
     @fetch()
 
@@ -151,6 +149,8 @@ class Pica.Application extends Pica.Events
   fetch: ->
     $.ajax(
       url: "#{Pica.config.magpieUrl}/projects/#{Pica.config.projectId}.json"
+      headers:
+        'X-Magpie-ProjectId': Pica.config.projectId
       type: 'get'
       success: @parse
     )
@@ -403,6 +403,8 @@ class Pica.Models.Workspace extends Pica.Model
       area.destroy()
 
   setCurrentArea: (theArea) ->
+    @currentArea = null
+
     for area in @areas
       if area == theArea
         @currentArea = area

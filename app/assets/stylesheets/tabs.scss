@@ -8,6 +8,7 @@
 }
 
 .tabs__tab {
+  cursor: pointer;
   color: $dark-blue;
   border-right: solid 1px $light-gray;
   line-height: 3rem;
@@ -26,4 +27,16 @@
   cursor: pointer;
   font-size: 1.5rem;
   padding: 0 1rem;
+}
+
+.tabs__tab--sites {
+  background-color: $very-dark-blue;
+  color: $white;
+  border-right: solid 2px $very-dark-blue;
+
+  &.active {
+    color: $very-dark-blue;
+    background-color: $white;
+    border-bottom: solid 1px $white;
+  }
 }
