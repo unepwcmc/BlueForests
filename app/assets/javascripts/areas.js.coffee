@@ -28,19 +28,19 @@ addDraw = (map) ->
   $('#draw-a-polygon .btn').click (e) =>
     $(e.target).toggleClass('btn-inverse btn-primary')
 
-    @polygonDraw = new L.Polygon.Draw(map, {shapeOptions: {color: '#bdd455'}}) unless @polygonDraw?
+    @polygonDraw = new L.Draw.Polygon(map, {shapeOptions: {color: '#bdd455'}}) unless @polygonDraw?
 
     if $(e.target).hasClass('active')
       @polygonDraw.disable()
     else
       @polygonDraw.enable()
 
-  map.on 'draw:poly-created', (e) =>
+  map.on L.Draw.Event.CREATED, (e) =>
     $("#draw-a-polygon").addClass("hidden")
     $("#inputs").removeClass("hidden")
-    polygon = e.poly
+    polygon = e.layer
 
-    points = for point in polygon.getLatLngs()
+    points = for point in polygon.getLatLngs()[0]
       [point.lng, point.lat]
     points.push points[0]
 

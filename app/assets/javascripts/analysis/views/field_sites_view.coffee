@@ -42,7 +42,7 @@ class Backbone.Views.FieldSitesView extends Backbone.View
       [coords[1], coords[0]]
     )
 
-    poly = L.polyline(coordinates,
+    poly = L.polygon(coordinates,
       stroke: true,
       weight: 2,
       fill: true,
