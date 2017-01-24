@@ -37,7 +37,6 @@ class Pica.Models.Workspace extends Pica.Model
     @currentArea = null
 
     for area in @areas
-      debugger
       if area.attributes.name == theArea?.attributes?.name
         @currentArea = area
 

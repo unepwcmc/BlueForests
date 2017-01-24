@@ -38,7 +38,6 @@ class Pica.Model extends Pica.Events
       @app.notifySyncFinished()
       errorCallback(@, textStatus, jqXHR)
 
-    debugger
     if options.type == 'post' or options.type == 'put'
       data = @attributes
       data = JSON.stringify(data)
