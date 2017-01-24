@@ -30,7 +30,7 @@ class Backbone.Views.TabsView extends Backbone.View
       @workspace.setCurrentArea(null)
     else
       @workspace.selecting_site = false
-      area_index = $target.data('area-id')
+      area_index = $target.data("area-id")
       area = @workspace.areas[area_index]
 
       @workspace.setCurrentArea(area)

@@ -12,6 +12,8 @@ class Backbone.Views.AreaControlsView extends Backbone.View
   initialize: (options) ->
     @area = options.area
     @area.on('change', @render)
+    @area.app.on('syncStarted', @render)
+    @area.app.on('syncFinished', @render)
 
   toggleDrawing: (event) ->
     if @polygonView?
