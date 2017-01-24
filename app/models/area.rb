@@ -8,6 +8,19 @@ class Area < ActiveRecord::Base
   validates :coordinates, presence: true
 
   after_create :upload_to_carto
+  after_destroy :remove_from_carto
+
+  def self.sync_from_carto
+    query = "SELECT ST_AsGeoJSON(the_geom) geom, name, country_id FROM blueforests_field_sites_#{Rails.env}"
+    results = CartoDb.query(query)["rows"]
+
+    results.each do |row|
+      area = Area.find_or_initialize_by(title: row["name"])
+      area.coordinates = JSON.parse(row["geom"])["coordinates"][0]
+      area.country = Country.find_by_iso(row["country_id"])
+      area.save
+    end
+  end
 
   def geo_json
     %{
@@ -50,5 +63,8 @@ class Area < ActiveRecord::Base
     """
 
     CartoDb.query(query)
+  end
+
+  def remove_from_carto
   end
 end
