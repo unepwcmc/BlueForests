@@ -5,9 +5,10 @@ class Backbone.Views.TabsView extends Backbone.View
   template: JST['tabs']
 
   events:
-    'click .tabs .tabs__tab':  'changeTab'
-    'click #add-area':         'addArea'
-    'click #delete-area':      'deleteArea'
+    'click #add-area':               'addArea'
+    'click .tabs [data-area-id]':    'changeTab'
+    'click .tabs #field-sites-tab':  'changeTab'
+    'click #delete-area':            'deleteArea'
 
   initialize: (options = {}) ->
     @currentTab = new Backbone.Diorama.ManagedRegion()
