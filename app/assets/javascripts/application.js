@@ -18,6 +18,13 @@
 //= require ajaxupload
 //= require OpenLayers
 //= require_tree ./modules
+//
+//= require pica/events
+//= require pica/application
+//= require pica/model
+//= require_tree ./pica/models
+//= require_tree ./pica/views
+//
 //= require areas
 //= require_tree ./analysis/lib
 //= require_tree ./analysis/templates/
