@@ -19,7 +19,6 @@ class Backbone.Views.AreaResultsView extends Backbone.View
     "rtl"
 
   initialize: (options) ->
-    "I am in the AreaResultsView initializer!"
     @area = options.area
     @textDirection = @getTextDirection()
     @area.app.on('syncStarted', @render)
