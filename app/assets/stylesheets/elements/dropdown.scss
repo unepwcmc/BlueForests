@@ -9,11 +9,10 @@
 
   .dropdown__target {
     position: absolute;
-    padding: .5rem 2rem;
+    padding: .5rem 1.5rem;
     border: solid 2px $light-gray;
     background-color: $white;
     z-index: 9999;
-    margin-top: 1rem;
     left: 0%;
 
     &:before {

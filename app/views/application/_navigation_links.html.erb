@@ -33,7 +33,7 @@
     <a class="header__element tool-button" href="<%= tool_path %>">Tool</a>
     <% if @current_country %>
       <span class="dropdown">
-        <button class="header__element" data-toggle-trigger="country-select">
+        <button class="header__element header__element--dropdown" data-toggle-trigger="country-select">
           <%= country_flag @current_country %>
         </button>
         <div class="dropdown__target u-hide" data-toggle-target="country-select">
@@ -46,6 +46,6 @@
     <span class="header__element">
       <button class="login-button" data-login-path="<%= new_user_session_path %>">Log in</button>
     </span>
-    <a href="http://blueforests.wcmc.happyfox.com/kb/" class="support-centre header__element"><i class="fa fa-info-circle"></i> Support Centre</a>
+    <!--a href="http://blueforests.wcmc.happyfox.com/kb/" class="support-centre header__element"><i class="fa fa-info-circle"></i> Support Centre</a-->
   </div>
 <% end %>
