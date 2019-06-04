@@ -5,31 +5,44 @@ class Backbone.Views.TabsView extends Backbone.View
   template: JST['tabs']
 
   events:
-    'click .tabs li':     'changeTab'
-    'click #add-area':    'addArea'
-    'click #delete-area': 'deleteArea'
+    'click #add-area':               'addArea'
+    'click .tabs [data-area-id]':    'changeTab'
+    'click .tabs #field-sites-tab':  'changeTab'
+    'click #delete-area':            'deleteArea'
 
   initialize: (options = {}) ->
     @currentTab = new Backbone.Diorama.ManagedRegion()
     @workspace = window.pica.currentWorkspace
 
-    @setAreaById(options.areaId) if options.areaId?
+    if options.areaId?
+      @setAreaById(options.areaId)
+    else
+      @workspace.selecting_site = true
+      @workspace.setCurrentArea(null)
+
     @workspace.areas[0].setName(polyglot.t("analysis.area_1"))
 
 
   changeTab: (event) ->
-    area_index = $(event.target).data('area-id')
-    area = @workspace.areas[area_index]
+    $target = $(event.target)
 
-    @workspace.setCurrentArea(area)
+    if($target.attr("id") == "field-sites-tab")
+      @workspace.selecting_site = true
+      @workspace.setCurrentArea(null)
+    else
+      @workspace.selecting_site = false
+      area_index = $target.data("area-id")
+      area = @workspace.areas[area_index]
+
+      @workspace.setCurrentArea(area)
+
     @render()
 
   addArea: ->
-    if pica.currentWorkspace.areas.length <= 3
-      app = window.pica
+    if @workspace.areas.length <= 3
       area = @workspace.addArea()
       area.setName(
-        polyglot.t("analysis.area_#{pica.currentWorkspace.areas.length + 1}")
+        polyglot.t("analysis.area_#{pica.currentWorkspace.areas.length}")
       )
       @workspace.setCurrentArea(area)
       @render()
@@ -59,8 +72,16 @@ class Backbone.Views.TabsView extends Backbone.View
   render: (view = null) ->
     @$el.html(@template(workspace: @workspace))
 
-    unless view?
-      view = new Backbone.Views.AreaView(area: @workspace.currentArea)
+    if not view?
+      if @workspace.selecting_site
+        view = new Backbone.Views.FieldSitesView()
+        view.on("selected", =>
+          @workspace.selecting_site = false
+          @workspace.setCurrentArea(@workspace.areas[0])
+          @render()
+        )
+      else
+        view = new Backbone.Views.AreaView(area: @workspace.currentArea)
 
     @currentTab.showView(view)
     @$el.find('#area').html(@currentTab.$el)

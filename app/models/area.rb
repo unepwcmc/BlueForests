@@ -7,8 +7,32 @@ class Area < ActiveRecord::Base
   validates :title, presence: true, uniqueness: true
   validates :coordinates, presence: true
 
+  after_create :upload_to_carto
+  after_destroy :remove_from_carto
+
+  def self.sync_from_carto
+    query = "SELECT ST_AsGeoJSON(the_geom) geom, name, country_id FROM blueforests_field_sites_#{Rails.env}"
+    results = CartoDb.query(query)["rows"]
+
+    results.each do |row|
+      area = Area.find_or_initialize_by(title: row["name"])
+      area.coordinates = JSON.parse(row["geom"])["coordinates"][0]
+      area.country = Country.find_by_iso(row["country_id"])
+      area.save
+    end
+  end
+
   def geo_json
-    "{\"type\":\"Polygon\",\"coordinates\":#{coordinates}}"
+    %{
+      {
+        "type":"Polygon",
+        "coordinates": [#{coordinates}],
+        "crs":{
+          "type":"name",
+          "properties":{"name":"EPSG:4326"}
+        }
+      }
+    }
   end
 
   def json_coordinates
@@ -26,5 +50,21 @@ class Area < ActiveRecord::Base
     Habitat.all.each do |habitat|
       mbtiles << Mbtile.new(habitat: habitat.name)
     end
+  end
+
+  def upload_to_carto
+    query = """
+      INSERT INTO blueforests_field_sites_#{Rails.env} (the_geom, country_id, name)
+      VALUES (
+        ST_SetSRID(ST_GeomFromGeoJSON(#{ActiveRecord::Base.sanitize(geo_json)}), 4326),
+        #{ActiveRecord::Base.sanitize(country.iso)},
+        #{ActiveRecord::Base.sanitize(title)}
+      )
+    """
+
+    CartoDb.query(query)
+  end
+
+  def remove_from_carto
   end
 end

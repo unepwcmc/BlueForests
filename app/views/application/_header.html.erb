@@ -1,12 +1,13 @@
-<header id="header">
-  <div class="main-container">
-    <div class="row">
-      <a href="<%= home_path %>" class="home-link pull-left">
-        <img src="<%= asset_path 'main-logo.png' %>" class="main-logo"></img>
-        <div class="mapping-tool">Mapping tool</div>
-      </a>
+<header class="header__container">
+  <div class="header">
+    <a href="<%= home_path %>" class="home-link pull-left">
+      <img src="<%= asset_path 'main-logo.png' %>" class="main-logo"></img>
 
-      <%= render 'navigation_links' %>
-    </div>
+      <% if @current_country %>
+        <div class="mapping-tool"><%= @current_country.name %></div>
+      <% end %>
+    </a>
+
+    <%= render 'navigation_links' %>
   </div>
 </header>

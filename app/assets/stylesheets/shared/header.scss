@@ -1,20 +1,49 @@
+@import "flexbox";
 @import '../colors';
 
 @import '../elements/main-container';
 @import '../elements/home-link';
 @import '../elements/navigation-links';
 
-#header {
-  font-size: 16px;
+.header {
+  max-width: 1088px;
+  margin: auto;
 
-  height: 100px;
-  width: 100%;
+  @include flexbox;
+  @include justify-content(space-between);
+  @include align-items(stretch);
 
-  .main-container {
-    @extend %main-container;
+  height: 100%;
+  color: $dark-blue;
 
-    .home-link        { @include home-link(color) }
-    .navigation-links { @include navigation-links($dark-blue) }
-  }
+  .home-link        { @include home-link(color) }
+  .navigation-links { @include navigation-links($dark-blue) }
+  .support-centre   { display: none; }
 }
 
+.header__container {
+  font-size: 16px;
+
+  height: 6rem;
+  width: 100%;
+
+  border-bottom: solid 1px $light-gray;
+}
+
+.header__right {
+  @include flexbox;
+  @include justify-content(flex-end);
+  @include align-items(stretch);
+}
+
+.header__element {
+  padding: 0 2rem;
+  line-height: 6rem;
+  font-weight: 500;
+  color: inherit;
+  background: none;
+
+  &.is-selected {
+    border-bottom: solid 4px $dark-blue;
+  }
+}

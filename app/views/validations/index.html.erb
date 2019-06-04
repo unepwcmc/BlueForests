@@ -1,43 +1,53 @@
-<div id="validations" class="static">
-  <div class="page-header">
-    <a href="<%= new_validation_path %>" class="btn btn-primary"><i class="icon-plus icon-white"></i> New Validation</a>
-      <div class="btn-group">
-        <a class="btn dropdown-toggle" data-toggle="dropdown" id="export" href="#">
-          Export
+<%= content_for :title, "Validations" %>
+
+<div id="validations" class="admin">
+  <div class="admin__header">
+    <h1 class="admin__title">Listing validations</h1>
+
+
+    <div class="admin__header-right">
+      <div class="admin__header-element dropdown">
+        <a class="dropdown__trigger" data-toggle-trigger="export" id="export" href="#">
+          Export <i class="fa fa-chevron-down"></i>
           <span class="caret"></span>
         </a>
-        <ul class="dropdown-menu" aria-labelledby="export">
+        <div class="dropdown__target u-hide" data-toggle-target="export">
           <% Habitat.all.each do |habitat| %>
-            <li>
-              <a href="<%= export_validations_path(habitat: habitat.to_param, country_id: params[:country_id]) %>"><%= habitat.pretty_name %></a>
-            </li>
+            <a class="dropdown__item" href="<%= export_validations_path(habitat: habitat.to_param, country_id: params[:country_id]) %>">
+              <%= habitat.pretty_name %>
+            </a>
           <% end %>
-        </ul>
+        </div>
       </div>
+
       <% if current_user.super_admin? %>
         <%= render 'shared/country_filter', path: :validations_path %>
       <% end %>
-    <h1>Listing validations</h1>
+
+      <a href="<%= new_validation_path %>" class="admin__header-element button"><i class="icon-plus icon-white"></i> New Validation</a>
+    </div>
   </div>
   <% if @validations.any? %>
-    <table id="validations-table" class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <% if current_user.super_admin? %><th>Country</th><% end %>
-          <th>User</th>
-          <th>Edit Type</th>
-          <th>Habitat</th>
-          <th></th>
-          <th></th>
-          <th>Latest</th>
-        </tr>
-      </thead>
-      <tbody>
-        <%= render partial: 'validation', collection: @validations %>
-      </tbody>
-    </table>
+    <div class="table__container">
+      <table id="validations-table" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <% if current_user.super_admin? %><th>Country</th><% end %>
+            <th>User</th>
+            <th>Edit Type</th>
+            <th>Habitat</th>
+            <th></th>
+            <th></th>
+            <th>Latest</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'validation', collection: @validations %>
+        </tbody>
+      </table>
+    </div>
   <% else %>
-    <h2 style="text-align: center">There are no validations yet</h2>
+    <h2 class="admin__no-results">There are no validations yet</h2>
   <% end %>
 </div>

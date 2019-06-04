@@ -1,7 +1,7 @@
 <%= simple_form_for(@user, defaults: { input_html: { class: 'span8' } }) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
+  <div class="form__inputs">
     <%= f.input :email, required: true, autofocus: true %>
     <%= f.input :password, required: true %>
     <%= f.input :password_confirmation, required: true %>
@@ -10,10 +10,12 @@
       <%= f.association :countries, required: true %>
     <% end %>
 
-    <%= f.association :roles, as: :check_boxes, collection: Role.accessible_by(current_ability), label: false, label_method: -> (role) { "#{role.name.humanize.capitalize}<br> <span class='description'>#{role.description}</span>".html_safe }, input_html: { class: nil, disabled: (@user == current_user) } %>
+    <%= f.association :roles, as: :check_boxes, collection: Role.accessible_by(current_ability), label: false, label_method: -> (role) {
+          "#{role.name.humanize.capitalize}<br> <span class='description'>#{role.description}</span>".html_safe
+        }, input_html: { class: nil, disabled: (@user == current_user) } %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, :class => "btn-primary", :value => 'Save User' %>
+  <div class="form__actions">
+    <input type="submit" class="button" value="Save User">
   </div>
 <% end %>

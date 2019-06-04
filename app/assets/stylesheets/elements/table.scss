@@ -1,0 +1,36 @@
+@import "colors";
+
+.table {
+  width: 100%;
+  text-align: left;
+
+  th {
+    border-bottom: solid 1px $light-gray;
+  }
+
+  th, td {
+    padding: 1rem .75rem;
+  }
+
+  a {
+    font-weight: 500;
+    color: $dark-blue;
+  }
+
+  tr:nth-child(even) {
+    background-color: $lightest-gray;
+  }
+
+  th:last-child, td:last-child {
+    padding-right: 0;
+  }
+}
+
+.table__container {
+  border: solid 1px $light-gray;
+  width: 100%;
+  width: calc(100% + 2rem);
+  margin-left: -1rem;
+  padding: .75rem;
+  box-sizing: border-box;
+}

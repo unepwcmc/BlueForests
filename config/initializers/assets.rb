@@ -1,0 +1,1 @@
+Rails.application.config.assets.precompile += %w( opentip.css leaflet.ie.css leaflet.draw.ie.css pages.css pages.js polyglot.js polyfills.js)

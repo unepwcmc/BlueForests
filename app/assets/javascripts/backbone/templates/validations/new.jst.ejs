@@ -1,10 +1,10 @@
 <div data-country-iso="<%= countryIso %>" id="map"></div>
 
-<div id="sidebar" class="shadow">
+<div id="sidebar" class="shadow simple-form">
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
-        <h5>New validation</h5>
+        <h1 class="admin__header">New validation</h1>
 
         <form id="new-validation" name="validation">
           <div class="form-inputs">
@@ -114,20 +114,15 @@
               <div class="control-group recorded_at">
                 <label class="control-label" for="recorded_at">Recorded at</label>
                 <div class="controls row-fluid">
-                  <div class="span2">
+                  <div>
+                    <p>Date</p>
                     <input class="span12" type="number" min="1" max="31" name="recorded_at(3i)" value="<%= validation["recorded_at(3i)"] %>">
-                  </div>
-                  <div class="span2">
                     <input class="span12" type="number" min="1" max="12" name="recorded_at(2i)" value="<%= validation["recorded_at(2i)"] %>">
-                  </div>
-                  <div class="span3">
                     <input class="span12" type="number" min="1970" max="2050" name="recorded_at(1i)" value="<%= validation["recorded_at(1i)"] %>">
                   </div>
-                  <div class="span1">&nbsp;</div>
-                  <div class="span2">
-                    <input class="span12" type="number" min="0" max="23" name="recorded_at(4i)" value="<%= validation["recorded_at(4i)"] %>">
-                  </div>
-                  <div class="span2">
+                  <div>
+                    <p>Time</p>
+                    <input class="span12" type="number" min="0" max="23" name="recorded_at(4i)" value="<%= validation["recorded_at(4i)"] %>">:
                     <input class="span12" type="number" min="0" max="59" name="recorded_at(5i)" value="<%= validation["recorded_at(5i)"] %>">
                   </div>
                 </div>
@@ -140,18 +135,6 @@
                 </div>
               </div>
             </div>
-
-            <table id="photos-table" class="table">
-              <thead>
-                <tr>
-                  <th>Photo</th>
-                  <th>
-                    <div class="button-wrapper"><a href="#" id="upload-photo" class="btn">Upload</a></div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
 
             <input class="btn btn-primary width-100-percent submit-button hidden" type="submit" value="Save Validation" />
           </div>

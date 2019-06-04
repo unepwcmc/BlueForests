@@ -7,13 +7,17 @@
 @import '../elements/flag-icon';
 
 #footer {
-  height: 225px;
-
   font-weight: 100;
   font-size: 14px;
   width: 100%;
 
   background-color: $dark-blue;
+
+  .dropdown { display: none; }
+
+  .header__element.is-selected {
+    border-bottom: solid 4px white;
+  }
 
   .main-container {
     @include main-container($dark-blue);
@@ -22,17 +26,45 @@
     .row {
       @include row-divider(1px, $white);
 
+      .home-link .main-logo { height: 2rem !important; }
       .home-link        { @include home-link(white) }
       .navigation-links { @include navigation-links($white) }
 
+      .support-centre {
+        margin-left: 2rem;
+        border: solid 1px $white;
+
+        &:hover {
+          background-color: $white;
+          color: $dark-blue;
+        }
+      }
+
       .flag-and-name {
+        display: none;
         padding: 10px;
-        background-color: $very-dark-blue;
 
         span { font-size: 1.1em; }
         i { @include flag-icon-height(2em); margin-right: 10px; }
       }
     }
 
+  }
+
+  .wcmc-logo {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: image-url("UNEP-WCMC-logo@2x.png");
+    background-image: -webkit-image-set(
+      image-url("UNEP-WCMC-logo.png") 1x,
+      image-url("UNEP-WCMC-logo@2x.png") 2x
+    );
+
+    display: inline-block;
+    height: 22px;
+    width: 50px;
+    margin-top: -2px;
+    margin-left: 10px;
+    vertical-align: middle;
   }
 }

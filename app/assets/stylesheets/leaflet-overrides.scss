@@ -1,0 +1,60 @@
+@import "colors";
+@import "flexbox";
+
+.leaflet-left .leaflet-control { margin-left: 20px; }
+.leaflet-top .leaflet-control { margin-top: 20px; }
+
+.leaflet-touch .leaflet-control-zoom {
+  background: none;
+  padding: 0px;
+}
+
+.leaflet-touch .leaflet-control-zoom a {
+  @include flexbox;
+  @include justify-content(center);
+  @include align-items(center);
+
+  width: 42px;
+  height: 42px;
+  background-color: $dark-blue;
+  background-image: none;
+  border-radius: 0;
+  font-size: 1.75rem;
+  color: $white;
+
+  &:hover {
+    color: $dark-blue;
+    background-color: $white;
+  }
+}
+
+.leaflet-control-zoom-in {
+  margin-bottom: 12px;
+}
+
+.leaflet-touch .leaflet-control-layers {
+  border-radius: 0;
+  border: none;
+}
+
+.leaflet-control-layers a {
+  @include flexbox;
+  @include justify-content(center);
+  @include align-items(center);
+
+  background-image: none;
+  background-color: $dark-blue;
+  background-image: none;
+  font-size: 1.25rem;
+  color: $white;
+
+  &:hover {
+    color: $dark-blue;
+    background-color: $white;
+  }
+
+  &:after {
+    font-family: FontAwesome;
+    content: "\f0c9";
+  }
+}

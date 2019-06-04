@@ -1,9 +1,18 @@
 /*
+*= require 'leaflet.draw'
 *= require 'z-index'
 *= require 'shared'
 *= require_tree ./shared
+*= require 'elements/dropdown'
+*= require 'elements/button'
+*= require 'elements/table'
 *= require 'login'
 *= require 'home'
 *= require 'analysis'
 *= require 'validations'
+*= require 'admin'
+*= require 'form'
+*= require 'tabs'
+*= require 'leaflet-overrides'
+*= require 'info-legend'
 */

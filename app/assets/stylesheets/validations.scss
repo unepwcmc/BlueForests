@@ -1,17 +1,25 @@
-.validations > main > div {
-  width: 100%;
-  height: 700px;
-}
+.validations, .areas {
+  main > div {
+    width: 100%;
+    height: 700px;
+  }
 
-#map > div {
-  float: left;
-  height: 100%;
-  width: 60%;
+  #map {
+    float: left;
+    height: 700px;
+    width: 60%;
 
-  &::after { content: ""; }
-}
+    &::after { content: ""; }
+  }
 
-#sidebar {
-  float: right;
-  height: 100%;
+  #sidebar {
+    float: left;
+    margin-left: 2.5rem;
+    width: calc(40% - 2.5rem);
+  }
+
+  #edit-validation {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
 }

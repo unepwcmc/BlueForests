@@ -1,10 +1,20 @@
 window.Map = class Map
   HABITATS =
-    mangrove: '#008b00'
-    seagrass: '#9b1dea'
-    saltmarsh: '#007dff'
-    algal_mat: '#ffe048'
-    other: '#1dcbea'
+    mangrove:
+      color: '#008b00'
+      name: 'Mangrove'
+    seagrass:
+      color: '#9b1dea'
+      name: 'Seagrass'
+    saltmarsh:
+      color: '#007dff'
+      name: 'Saltmarsh'
+    algal_mat:
+      color: '#ffe048'
+      name: 'Algal Mat'
+    other:
+      color: '#1dcbea'
+      name: 'Other'
 
   constructor: (elementId, mapOpts={}) ->
     @baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 17})
@@ -12,21 +22,21 @@ window.Map = class Map
 
     @initializeMap(elementId, mapOpts)
     @addAttribution()
+    @addLegend()
     @addOverlays(mapOpts.countryIso, (err, overlays) =>
       L.control.layers(@baseMaps, overlays).addTo(@map)
     )
 
   initializeMap: (elementId, mapOpts) ->
-    mapOpts.maxBounds = L.latLngBounds(mapOpts.bounds)
-    mapOpts.center = mapOpts.maxBounds.getCenter()
+    maxBounds = L.latLngBounds(mapOpts.bounds)
+    mapOpts.center = maxBounds.getCenter()
     mapOpts.layers = [@baseSatellite]
 
     @map = L.map(elementId, mapOpts)
-    @map.fitBounds(mapOpts.maxBounds)
+    @map.fitBounds(maxBounds)
 
   addAttribution: ->
     attribution = L.control.attribution(position: 'bottomright', prefix: '')
-    attribution.addAttribution('Developed for the Abu Dhabi Blue Carbon Demonstration Project')
     attribution.addTo(@map)
 
   baseMaps: ->
@@ -48,16 +58,32 @@ window.Map = class Map
     , done)
 
   getSublayers: ->
-    _.map(HABITATS, (polygon_fill, habitat) ->
+    _.map(HABITATS, (properties, habitat) ->
       where = "toggle = true AND (action <> 'delete' OR action IS NULL)"
       style = """
         #bc_#{habitat} {
           line-color: #FFF;
           line-width: 0.5;
-          polygon-fill: #{polygon_fill};
+          polygon-fill: #{properties.color};
           polygon-opacity: 0.4
         }
       """
 
       {habitat: habitat, where: where, style: style}
     )
+
+  addLegend: ->
+    legend = L.control({position: 'topright'})
+
+    legend.onAdd = ->
+      div = L.DomUtil.create('div', 'info-legend')
+
+      for habitat, properties of HABITATS
+        div.innerHTML += """
+          <p><i style="background-color:#{properties.color}"></i>#{properties.name}</p>
+        """
+
+      div
+
+    legend.addTo(@map)
+

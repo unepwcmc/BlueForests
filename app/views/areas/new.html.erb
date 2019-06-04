@@ -1,15 +1,10 @@
-<div class="static">
-<div data-country-id="<%= @current_country.id %>" data-country-iso="<%= @current_country.iso %>" id="map"></div>
+<%= content_for :title, "New field site" %>
 
-  <div id="sidebar" class="shadow">
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span12">
-          <h5>New area</h5>
+<div class="admin areas">
 
-          <%= render 'form' %>
-        </div>
-      </div>
-    </div>
+  <div data-country-bounds="<%= @current_country.bounds.reverse.to_json %>" data-country-id="<%= @current_country.id %>" data-country-iso="<%= @current_country.iso %>" id="map"></div>
+
+  <div id="sidebar">
+    <%= render 'form' %>
   </div>
 </div>

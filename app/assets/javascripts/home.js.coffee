@@ -1,6 +1,7 @@
 $(document).ready ( ->
   addLoginHandler()
   addToolSelectionHandler()
+  addToggle()
 )
 
 addLoginHandler = ->
@@ -21,3 +22,8 @@ addToolSelectionHandler = ->
     new ToolSelectionHandler(
       $toolButton, $toolModalContainer
     )
+
+addToggle = ->
+  $("[data-toggle-trigger]").each((_i, el) ->
+    new Toggle(el)
+  )

@@ -1,30 +1,29 @@
-<div class="page-header">
-  <%= link_to users_path, :class => 'btn' do %>
-    <i class="icon-list-alt"></i>
-    Back
-  <% end %>
+<%= content_for :title, "Show user" %>
 
-  <% if can? :manage, @user %>
-    <%= link_to edit_user_path(@user), :class => 'btn btn-primary' do %>
-      <i class="icon-pencil icon-white"></i>
-      Edit
-    <% end %>
-  <% end%>
+<div class="admin">
+  <div class="admin__header">
+    <h1 class="admin__title">User</h1>
 
-  <% if can? :manage, User %>
-    <%= link_to user_path(@user), :method => :delete, :confirm => "Are you sure?", :class => 'btn btn-danger' do %>
-      <i class="icon-remove icon-white"></i>
-      Delete
-    <% end %>
-  <% end %>
+    <div class="admin__right">
+      <% if can? :manage, @user %>
+        <%= link_to edit_user_path(@user), :class => "admin__header-element button" do %>
+          <i class="icon-pencil icon-white"></i> Edit
+        <% end %>
+      <% end%>
 
-  <h1>User</h1>
+      <% if can? :manage, User %>
+        <%= link_to user_path(@user), :method => :delete, :confirm => "Are you sure?", :class => "admin__header-element button button--danger" do %>
+          <i class="icon-remove icon-white"></i> Delete
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <dl>
+    <dt>Email:</dt>
+    <dd><%= @user.email %></dd>
+
+    <dt>Roles:</dt>
+    <dd><%= (@user.roles.any? and @user.roles.map(&:name).map(&:titleize).join(', ')) or '-' %></dd>
+  </dl>
 </div>
-
-<dl>
-  <dt>Email:</dt>
-  <dd><%= @user.email %></dd>
-
-  <dt>Roles:</dt>
-  <dd><%= (@user.roles.any? and @user.roles.map(&:name).join(', ')) or '-' %></dd>
-</dl>

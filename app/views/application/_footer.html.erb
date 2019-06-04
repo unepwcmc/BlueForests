@@ -3,14 +3,22 @@
     <div class="row">
       <a href="<%= home_path %>" class="home-link pull-left">
         <img src="<%= asset_path 'main-white-logo.png' %>" class="main-logo"></img>
-        <div class="mapping-tool">Mapping tool</div>
+        <div class="mapping-tool">Mapping Tool</div>
       </a>
 
       <%= render 'navigation_links' %>
     </div>
     <div class="row">
       <%= country_flag @current_country %>
-      <p>The Blue Forests Mapping Toolkit was developed by</p>
+      <p>
+        The Blue Forests Mapping Tool was developed by
+        <a href="https://www.unep-wcmc.org">
+          <i class="wcmc-logo"></i>
+        </a>
+      </p>
+      <p class="pull-right">
+        Copyright <%= Date.today.year %> UNEP WCMC
+      </p>
     </div>
   </div>
 </footer>

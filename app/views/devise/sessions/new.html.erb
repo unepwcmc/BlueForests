@@ -21,7 +21,7 @@
   <% else %>
     <fieldset>
       <%= label_tag(:country_id, 'Country') %>
-      <%= select(:session, :country_id, Country.pluck(:name, :id)) %>
+      <%= select(:session, :country_id, Country.order(:name).pluck(:name, :id)) %>
     </fieldset>
   <% end %>
 

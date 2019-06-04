@@ -1,4 +1,5 @@
 <%= simple_form_for(@area, :defaults => { :input_html => { :class => 'span12' } }) do |f| %>
+  <h1 class="admin__header">New field site</h1>
 
   <%= f.error_notification %>
 
@@ -8,13 +9,19 @@
     </div>
   <% end %>
 
-  <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :coordinates, as: :hidden %>
-    <%= f.input :country_id, as: :hidden %>
+  <div id="draw-a-polygon" class="control-group">
+    <button type="button" class="btn btn-primary" data-toggle="button">Draw a polygon</button>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, :class => "btn-primary" %>
+  <div id="inputs" class="hidden">
+    <div class="form__inputs">
+      <%= f.input :title %>
+      <%= f.input :coordinates, as: :hidden %>
+      <%= f.input :country_id, as: :hidden %>
+    </div>
+
+    <div class="form__actions">
+      <input type="submit" class="button" value="Create field site">
+    </div>
   </div>
 <% end %>

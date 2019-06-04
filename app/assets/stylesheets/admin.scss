@@ -1,0 +1,52 @@
+@import "_flexbox";
+@import "elements/main-container";
+@import "elements/link-with-icon";
+
+.admin {
+  padding-top: 2.5rem;
+  margin-bottom: 6rem;
+  min-height: 75vh;
+  @extend %main-container;
+}
+
+.admin__title {
+  font-weight: 300;
+}
+
+.admin__header {
+  @include flexbox;
+  @include justify-content(space-between);
+  @include align-items(center);
+
+  margin-bottom: 2.25rem;
+}
+
+.admin__header-right {
+  @include flexbox;
+  @include justify-content(flex-end);
+  @include align-items(center);
+}
+
+.admin__header-element {
+  float: left;
+  font-weight: 500;
+
+  &:not(:last-child) {
+    margin-right: 2.5rem;
+  }
+}
+
+.link-with-icon {
+  @include link-with-icon(arrow-down);
+}
+
+.admin__no-results {
+  line-height: 10rem;
+  text-align: center;
+}
+
+// admin scope
+.admin {
+  dt { margin-bottom: .25rem; }
+  dd { margin-bottom: 1rem; }
+}

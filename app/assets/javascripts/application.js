@@ -3,7 +3,7 @@
 //= require jquery_ujs
 //= require h5bp
 //= require bootstrap
-//= require leaflet
+//= require leaflet/leaflet
 //= require leaflet.draw
 //= require Leaflet.Bing
 //= require jQuery.XDomainRequest
@@ -14,11 +14,17 @@
 //= require backbone/blue_carbon
 //= require jquery.dataTables
 //= require jquery.dataTables.dateSorter
-//= require opentip-jquery
 //= require data_tables_bootstrap
 //= require ajaxupload
 //= require OpenLayers
 //= require_tree ./modules
+//
+//= require pica/events
+//= require pica/application
+//= require pica/model
+//= require_tree ./pica/models
+//= require_tree ./pica/views
+//
 //= require areas
 //= require_tree ./analysis/lib
 //= require_tree ./analysis/templates/
@@ -29,8 +35,11 @@
 //= require validations
 
 var roundToDecimals = function(number, places) {
-  places = Math.pow(10, places);
-  return Math.round(number * places) / places;
+  if(typeof number === "undefined") {
+    return 0;
+  }
+
+  return number.toFixed(places).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 };
 
 // Check if polygon self intersects (using openLayers)

@@ -1,0 +1,31 @@
+@import "colors";
+
+.button, .btn {
+  border: 0;
+  font: inherit;
+  line-height: normal;
+  overflow: visible;
+  padding: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  color: $white;
+  text-transform: uppercase;
+  border-radius: 20px;
+  background-color: $dark-blue;
+  padding: .75rem 2rem;
+}
+
+.button--danger {
+  background-color: $red;
+}
+
+.button--landing-page {
+  background-color: $white;
+  color: $black;
+  font-size: .4em;
+  box-shadow: 0px 0px 10px #222222;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 700;
+  text-align: center;
+}

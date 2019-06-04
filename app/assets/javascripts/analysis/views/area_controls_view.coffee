@@ -12,6 +12,8 @@ class Backbone.Views.AreaControlsView extends Backbone.View
   initialize: (options) ->
     @area = options.area
     @area.on('change', @render)
+    @area.app.on('syncStarted', @render)
+    @area.app.on('syncFinished', @render)
 
   toggleDrawing: (event) ->
     if @polygonView?
@@ -36,7 +38,7 @@ class Backbone.Views.AreaControlsView extends Backbone.View
 
       if markerCount > 0
         unless undoButtonSelector.length > 0
-          $('.new-polygon-container').append($('<a id="undo-vertex" class="btn undo">'))
+          $('.new-polygon-container').append($('<a id="undo-vertex" class="btn btn-primary undo">Undo</a>'))
         return
 
     undoButtonSelector.remove()
@@ -51,7 +53,7 @@ class Backbone.Views.AreaControlsView extends Backbone.View
       delete @polygonView
 
   deleteArea: (event) ->
-    
+
   render: =>
     @$el.html(@template(area: @area))
     area_results_view = new Backbone.Views.AreaResultsView(area: @area).render().$el

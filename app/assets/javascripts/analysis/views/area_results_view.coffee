@@ -19,19 +19,10 @@ class Backbone.Views.AreaResultsView extends Backbone.View
     "rtl"
 
   initialize: (options) ->
-    "I am in the AreaResultsView initializer!"
     @area = options.area
     @textDirection = @getTextDirection()
     @area.app.on('syncStarted', @render)
     @area.app.on('syncFinished', @render)
-
-
-  humanEmissionsAsTime: (timeInYears) ->
-    timeInDays = roundToDecimals(timeInYears * 365, 2)
-    timeInYears = roundToDecimals(timeInYears, 2)
-    if timeInYears < 1
-      return "#{timeInDays} <span>#{polyglot.t('analysis.days')}</span>"
-    return "#{timeInYears} <span>#{polyglot.t('analysis.years')}</span>"
 
 
   resultsToObj: ->
@@ -61,7 +52,6 @@ class Backbone.Views.AreaResultsView extends Backbone.View
 
       results.sum.area = getResultByName("Total Area")
       results.sum.carbon = getResultByName("Total Carbon")
-      results.sum.human_emissions = @humanEmissionsAsTime(getResultByName("Emissions"))
 
       return results
     else
@@ -79,23 +69,8 @@ class Backbone.Views.AreaResultsView extends Backbone.View
 
   render: =>
     @$el.html(@template(area: @area, results: @resultsToObj()))
-    if @$el.find("#tot_area_tip").length > 0 then @initializeTooltips()
     this
 
 
   onClose: ->
     @area.off('change', @render)
-
-
-  initializeTooltips: ->
-    _.each @TOOLTIP_DATA, (value, key, list) =>
-      el = @$el.find("##{key}")
-      options =
-        tipJoint: "bottom"
-        fixed: true
-        background: "#fff"
-        borderColor: "#384658"
-        #showOn: "creation"  # For debugging
-        className: @getTextDirection()
-      new Opentip(el, value, options)
-
