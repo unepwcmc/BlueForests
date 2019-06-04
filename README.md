@@ -18,13 +18,20 @@ brew install redis
 
 git clone git@github.com:mapbox/tilemill.git vendor/tilemill
 cd vendor/tilemill
+nvm install 8.15.0
 npm install
 
 cd ../..
 
 git clone https://github.com/mapbox/projectmill.git vendor/projectmill
 cd vendor/projectmill
+npm config set registry http://registry.npmjs.org/
+nvm install 0.10.24
 npm install
+
+
+cd ../..
+bundle install
 ```
 
 You'll need to setup a `.env` file to utilise CartoDB:

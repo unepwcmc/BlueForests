@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.5'
 
-gem 'pg'
+gem 'pg', '~> 0.15'
 
 gem 'devise'
 gem 'devise-token_authenticatable', '~> 0.4.0'
