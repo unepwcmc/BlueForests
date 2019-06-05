@@ -22,7 +22,6 @@ window.Map = class Map
 
     @initializeMap(elementId, mapOpts)
     @addAttribution()
-    # @addLegend()
     @addOverlays(mapOpts.countryIso, (err, overlays) =>
       L.control.layers(@baseMaps, overlays, {collapsed:false}).addTo(@map)
     )
@@ -70,21 +69,6 @@ window.Map = class Map
 
       {habitat: habitat, where: where, style: style}
     )
-
-  addLegend: ->
-    legend = L.control({position: 'topright'})
-
-    legend.onAdd = ->
-      div = L.DomUtil.create('div', 'info-legend')
-
-      for habitat, properties of HABITATS
-        div.innerHTML += """
-          <p><i style="background-color:#{properties.color}"></i>#{properties.name}</p>
-        """
-
-      div
-
-    legend.addTo(@map)
 
   getLegendItemHtml: (sublayer) ->
     prettyName = polyglot.t("analysis.#{sublayer.habitat}")
