@@ -24,7 +24,7 @@ window.Map = class Map
     @addAttribution()
     # @addLegend()
     @addOverlays(mapOpts.countryIso, (err, overlays) =>
-      L.control.layers(@baseMaps, overlays).addTo(@map)
+      L.control.layers(@baseMaps, overlays, {collapsed:false}).addTo(@map)
     )
 
   initializeMap: (elementId, mapOpts) ->
