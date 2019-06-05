@@ -22,7 +22,7 @@ window.Map = class Map
 
     @initializeMap(elementId, mapOpts)
     @addAttribution()
-    @addLegend()
+    # @addLegend()
     @addOverlays(mapOpts.countryIso, (err, overlays) =>
       L.control.layers(@baseMaps, overlays).addTo(@map)
     )
@@ -50,9 +50,8 @@ window.Map = class Map
 
       MapProxy.newMap(sublayer, (err, tilesUrl) =>
         tilesUrl = decodeURIComponent(tilesUrl)
-        prettyName = polyglot.t("analysis.#{sublayer.habitat}")
 
-        sublayers[prettyName] = L.tileLayer(tilesUrl).addTo(@map)
+        sublayers[@getLegendItemHtml(sublayer)] = L.tileLayer(tilesUrl).addTo(@map)
         cb(null, sublayers)
       )
     , done)
@@ -87,3 +86,12 @@ window.Map = class Map
 
     legend.addTo(@map)
 
+  getLegendItemHtml: (sublayer) ->
+    prettyName = polyglot.t("analysis.#{sublayer.habitat}")
+
+    return "<div class='custom-checkbox-row'>
+              <span class='custom-checkbox custom-checkbox__outer'>
+                <div class='custom-checkbox__inner' style='background-color:" + HABITATS[sublayer.habitat].color + "'></div>
+              </span>
+              <span>"+prettyName+"</span>
+            </div>"

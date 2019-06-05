@@ -1,0 +1,34 @@
+%hidden-input {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: - 1px;
+  overflow: hidden;
+  padding: 0;
+  white-space: nowrap;
+  width: 1px;
+  opacity: 0;
+  position: absolute;
+}
+
+@mixin custom_input_checked($default-input-selector, $custom-input-selector) {
+  #{$default-input-selector} {
+    &:checked + #{$custom-input-selector} {
+      @content;
+    }
+  }
+}
+@mixin custom_input_focus_default($default-input-selector, $custom-input-selector) {
+  #{$default-input-selector} {
+    &:focus + #{$custom-input-selector} {
+      outline-width: 2px;
+      outline-style: solid;
+      outline-color: Highlight;
+      
+      @media (-webkit-min-device-pixel-ratio:0) {
+        outline-color: -webkit-focus-ring-color;
+        outline-style: auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+@import 'colors';
+@import 'form-helpers';
+
+$border: solid 2px $gray;
+$radio-outer-width: 22px;
+
+@mixin radio-button {
+  background-color: $white;
+  border: $border;
+  border-radius: 100%;
+
+  width: $radio-outer-width; height: $radio-outer-width;
+  
+  display: block;
+  position: relative;
+}
+
+@mixin radio-button-inner {
+  border: $border;
+  border-radius: 100%;
+
+  width: 14px; height: 14px;
+
+  top: 2px;
+  left: 2px;
+
+  display: block;
+  position: absolute;
+
+  transform: scale(0);
+  transition: transform .2s ease-in-out;
+}
+
+.custom-checkbox-row {
+  cursor: pointer;
+  margin: 6px;
+
+  display: flex;
+  align-items: center;
+}
+
+.custom-checkbox {
+  margin-right: 6px;
+
+  &__inner {
+    @include radio-button-inner();
+  }
+  &__outer {
+    @include radio-button();
+  }
+}
+
+@include custom_input_checked('.leaflet-control-layers-selector', 'span') {
+  .custom-checkbox__inner { transform: scale(1) }
+}
+
+@include custom_input_focus_default('.leaflet-control-layers-selector', 'span .custom-checkbox');
+
+.leaflet-control-layers-selector {
+  @extend %hidden-input;
+}
