@@ -32,18 +32,18 @@ $radio-outer-width: 22px;
   transition: transform .2s ease-in-out;
 }
 
-.custom-checkbox-row {
+.custom-radio-row {
   color: $dark-blue;
   cursor: pointer;
   font-family: $font-family;
   font-size: 14px;
-  margin: 6px 24px 6px 6px;
+  margin: 6px 18px 6px 6px;
 
   display: flex;
   align-items: center;
 }
 
-.custom-checkbox {
+.custom-radio {
   margin-right: 6px;
 
   &__inner {
@@ -55,10 +55,10 @@ $radio-outer-width: 22px;
 }
 
 @include custom_input_checked('.leaflet-control-layers-selector', 'span') {
-  .custom-checkbox__inner { transform: scale(1) }
+  .custom-radio__inner { transform: scale(1) }
 }
 
-@include custom_input_focus_default('.leaflet-control-layers-selector', 'span .custom-checkbox');
+@include custom_input_focus_default('.leaflet-control-layers-selector', 'span .custom-radio');
 
 .leaflet-control-layers-selector {
   @extend %hidden-input;

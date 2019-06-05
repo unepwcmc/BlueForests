@@ -73,9 +73,9 @@ window.Map = class Map
   getLegendItemHtml: (sublayer) ->
     prettyName = polyglot.t("analysis.#{sublayer.habitat}")
 
-    return "<div class='custom-checkbox-row'>
-              <span class='custom-checkbox custom-checkbox__outer'>
-                <div class='custom-checkbox__inner' style='background-color:" + HABITATS[sublayer.habitat].color + "'></div>
+    return "<div class='custom-radio-row'>
+              <span class='custom-radio custom-radio__outer'>
+                <div class='custom-radio__inner' style='background-color:" + HABITATS[sublayer.habitat].color + "'></div>
               </span>
               <span>"+prettyName+"</span>
             </div>"
