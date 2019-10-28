@@ -3,7 +3,7 @@ CREATE OR REPLACE VIEW <%= Rails.application.secrets.cartodb['table_prefix'] %>_
   FROM <%= Rails.application.secrets.cartodb['table_prefix'] %>_mangrove_<%= environment %> mngr
   LEFT JOIN carbon_values b
   ON mngr.habitat = b.habitat
-  WHERE toggle = true AND action <> 'delete'
+  WHERE toggle::boolean = true AND action <> 'delete'
 
   UNION ALL
 
@@ -11,7 +11,7 @@ CREATE OR REPLACE VIEW <%= Rails.application.secrets.cartodb['table_prefix'] %>_
   FROM <%= Rails.application.secrets.cartodb['table_prefix'] %>_saltmarsh_<%= environment %> sltm
   LEFT JOIN carbon_values b
   ON sltm.habitat = b.habitat
-  WHERE toggle = true AND action <> 'delete'
+  WHERE toggle::boolean = true AND action <> 'delete'
 
   UNION ALL
 
@@ -19,7 +19,7 @@ CREATE OR REPLACE VIEW <%= Rails.application.secrets.cartodb['table_prefix'] %>_
   FROM <%= Rails.application.secrets.cartodb['table_prefix'] %>_seagrass_<%= environment %> sgrs
   LEFT JOIN carbon_values b
   ON sgrs.habitat = b.habitat
-  WHERE toggle = true and action <> 'delete'
+  WHERE toggle::boolean = true and action <> 'delete'
 
   UNION ALL
 
@@ -27,4 +27,4 @@ CREATE OR REPLACE VIEW <%= Rails.application.secrets.cartodb['table_prefix'] %>_
   FROM <%= Rails.application.secrets.cartodb['table_prefix'] %>_algal_mat_<%= environment %> algm
   LEFT JOIN carbon_values b
   ON (algm.habitat = b.habitat)
-  WHERE toggle = true AND action <> 'delete';
+  WHERE toggle::boolean = true AND action <> 'delete';

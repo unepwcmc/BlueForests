@@ -5,7 +5,7 @@ SELECT * FROM (
   ) AS the_geom
   FROM <%= CartoDb.table_name @habitat %> t
   WHERE ST_Intersects(t.the_geom, ST_GeomFromText('MultiPolygon(((<%= @area.json_coordinates %>)))', 4326))
-        AND toggle = true
+        AND toggle::boolean = true
         AND (action <> 'delete' OR action IS NULL)
         AND country_id = '<%= @area.country.iso %>'
 ) AS intersected_geom
