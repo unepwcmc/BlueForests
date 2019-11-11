@@ -8,6 +8,8 @@ module CartoDb::Proxy::Map
       body: mapconfig_json(sql, cartocss),
       headers: {'Content-Type' => 'application/json'}
     )
+
+    Rails.logger.info "carto_response: #{carto_response.inspect}"
     extract_tiles_url(carto_response.body)
   end
 
