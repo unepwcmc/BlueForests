@@ -38,7 +38,7 @@ module CartoDb::Proxy::Map
     parts = "SELECT * FROM #{source(habitat)}"
     parts << " WHERE country_id = '#{country.iso}'"
     parts << " AND #{where}" if where
-    puts parts
+    Rails.logger.info parts
     parts
   end
 
