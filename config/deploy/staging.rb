@@ -3,6 +3,7 @@ set :stage, :staging
 server "web-staging.linode.unep-wcmc.org", user: 'wcmc', roles: %w{app web db}
 server "db-staging.linode.unep-wcmc.org", user: 'wcmc', roles: %w{bkp}, no_release: true
 
+set :branch, "fix/cast-toggle-string-as-boolean"
 set :application, "blueforests"
 set :server_name, "blueforests.web-staging.linode.unep-wcmc.org"
 set :sudo_user, "wcmc"
