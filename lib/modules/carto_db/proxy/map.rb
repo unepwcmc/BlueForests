@@ -16,7 +16,7 @@ module CartoDb::Proxy::Map
   def self.extract_tiles_url response
     info = JSON.parse(response)
     tiles_path = URI.escape("/api/v1/map/#{info["layergroupid"]}/{z}/{x}/{y}.png")
-    puts "LAYERGROUPID: #{info['layergroupid']}"
+    Rails.logger.info "LAYERGROUPID: #{info['layergroupid']}"
     CartoDb.build_url(tiles_path, with_api_key: false)
   end
 
