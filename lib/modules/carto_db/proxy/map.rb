@@ -36,8 +36,9 @@ module CartoDb::Proxy::Map
 
   def self.sql habitat, country, where
     parts = "SELECT * FROM #{source(habitat)}"
-    parts << " WHERE country_id = 'ARE'"
+    parts << " WHERE country_id = '#{country.iso}'"
     parts << " AND #{where}" if where
+    puts parts
     parts
   end
 
