@@ -9,12 +9,13 @@
 
   .dropdown__target {
     position: absolute;
-    padding: .5rem 2rem;
+    padding: .5rem 1.5rem;
     border: solid 2px $light-gray;
     background-color: $white;
     z-index: 9999;
-    margin-top: 1rem;
-    left: 0%;
+    left: 50%;
+
+    transform: translateX(-50%);
 
     &:before {
       content: "";
@@ -28,6 +29,10 @@
       left: 50%;
       margin-left: -5px;
     }
+
+    &--navigation {
+      width: 180px;
+    }
   }
 
   .dropdown__item {
@@ -35,6 +40,10 @@
     color: $dark-blue;
     font-weight: 500;
     margin: .75rem 0;
+
+    &--selected {
+      text-decoration: underline;
+    }
   }
 
   .dropdown__item--nested {
