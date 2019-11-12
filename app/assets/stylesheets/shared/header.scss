@@ -4,10 +4,14 @@
 @import '../elements/main-container';
 @import '../elements/home-link';
 @import '../elements/navigation-links';
+@import '../elements/drop-arrow';
+
+$header-height: 5rem;
 
 .header {
   max-width: 1088px;
   margin: auto;
+  padding: 0 2rem;
 
   @include flexbox;
   @include justify-content(space-between);
@@ -16,7 +20,9 @@
   height: 100%;
   color: $dark-blue;
 
-  .home-link        { @include home-link(color) }
+  .home-link {
+    @include home-link(color);
+  }
   .navigation-links { @include navigation-links($dark-blue) }
   .support-centre   { display: none; }
 }
@@ -24,7 +30,7 @@
 .header__container {
   font-size: 16px;
 
-  height: 6rem;
+  height: $header-height;
   width: 100%;
 
   border-bottom: solid 1px $light-gray;
@@ -37,11 +43,29 @@
 }
 
 .header__element {
-  padding: 0 2rem;
-  line-height: 6rem;
+  margin: 0 1.5rem;
+  line-height: $header-height;
   font-weight: 500;
   color: inherit;
   background: none;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &--dropdown {
+    display: flex;
+    align-items: center;
+
+    &::after {
+      margin-left: 6px;
+      @include arrow-svg;
+    }
+  }
+
+  &.toggle--active {
+    @include drop-arrow--active;
+  }
 
   &.is-selected {
     border-bottom: solid 4px $dark-blue;

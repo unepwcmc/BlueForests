@@ -9,6 +9,7 @@
 
 @import 'colors';
 @import 'mixins';
+@import 'fonts';
 
 @import 'elements/oval-button';
 @import 'elements/link-with-icon';
@@ -16,11 +17,9 @@
 @import 'elements/column';
 
 html, body {
-  font-family: 'Ubuntu', sans-serif;
+  font-family: $font-family;
   font-weight: 100;
   color: $gray;
-
-  *:focus { outline: none; }
 
   fieldset { border: none; }
   h1 { margin: 0px; }

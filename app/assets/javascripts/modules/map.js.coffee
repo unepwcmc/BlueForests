@@ -22,9 +22,8 @@ window.Map = class Map
 
     @initializeMap(elementId, mapOpts)
     @addAttribution()
-    @addLegend()
     @addOverlays(mapOpts.countryIso, (err, overlays) =>
-      L.control.layers(@baseMaps, overlays).addTo(@map)
+      L.control.layers(@baseMaps, overlays, {collapsed:false}).addTo(@map)
     )
 
   initializeMap: (elementId, mapOpts) ->
@@ -50,9 +49,8 @@ window.Map = class Map
 
       MapProxy.newMap(sublayer, (err, tilesUrl) =>
         tilesUrl = decodeURIComponent(tilesUrl)
-        prettyName = polyglot.t("analysis.#{sublayer.habitat}")
 
-        sublayers[prettyName] = L.tileLayer(tilesUrl).addTo(@map)
+        sublayers[@getLegendItemHtml(sublayer)] = L.tileLayer(tilesUrl).addTo(@map)
         cb(null, sublayers)
       )
     , done)
@@ -72,18 +70,12 @@ window.Map = class Map
       {habitat: habitat, where: where, style: style}
     )
 
-  addLegend: ->
-    legend = L.control({position: 'topright'})
+  getLegendItemHtml: (sublayer) ->
+    prettyName = polyglot.t("analysis.#{sublayer.habitat}")
 
-    legend.onAdd = ->
-      div = L.DomUtil.create('div', 'info-legend')
-
-      for habitat, properties of HABITATS
-        div.innerHTML += """
-          <p><i style="background-color:#{properties.color}"></i>#{properties.name}</p>
-        """
-
-      div
-
-    legend.addTo(@map)
-
+    return "<div class='custom-radio-row'>
+              <span class='custom-radio custom-radio__outer'>
+                <div class='custom-radio__inner' style='background-color:" + HABITATS[sublayer.habitat].color + "'></div>
+              </span>
+              <span>"+prettyName+"</span>
+            </div>"

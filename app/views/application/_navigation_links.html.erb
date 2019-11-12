@@ -11,7 +11,7 @@
           <%= country_flag @current_country, current_user.email.truncate(20) %>
         </button>
       <% end %>
-      <div class="dropdown__target u-hide" data-toggle-target="country-select">
+      <div class="dropdown__target dropdown__target--navigation u-hide" data-toggle-target="country-select">
         <% if current_user.super_admin? %>
           <% Country.order(:name).pluck(:subdomain, :name).each do |subdomain, name| %>
             <% if @current_country && (name == @current_country.name) %>
@@ -33,12 +33,12 @@
     <a class="header__element tool-button" href="<%= tool_path %>">Tool</a>
     <% if @current_country %>
       <span class="dropdown">
-        <button class="header__element" data-toggle-trigger="country-select">
+        <button class="header__element header__element--dropdown" data-toggle-trigger="country-select">
           <%= country_flag @current_country %>
         </button>
-        <div class="dropdown__target u-hide" data-toggle-target="country-select">
+        <div class="dropdown__target dropdown__target--navigation u-hide" data-toggle-target="country-select">
           <% Country.order(:name).pluck(:subdomain, :name).each do |subdomain, name| %>
-            <%= link_to name, url_for(only_path: false, subdomain: Subdomainer.resolve(subdomain), controller: params[:controller], action: params[:action]), class: "dropdown__item" %>
+            <%= link_to name, url_for(only_path: false, subdomain: Subdomainer.resolve(subdomain), controller: params[:controller], action: params[:action]), class: "dropdown__item #{name == @current_country.name ? 'dropdown__item--selected' : '' }" %>
           <% end %>
         </div>
       </span>
@@ -46,6 +46,6 @@
     <span class="header__element">
       <button class="login-button" data-login-path="<%= new_user_session_path %>">Log in</button>
     </span>
-    <a href="http://blueforests.wcmc.happyfox.com/kb/" class="support-centre header__element"><i class="fa fa-info-circle"></i> Support Centre</a>
+    <!--a href="http://blueforests.wcmc.happyfox.com/kb/" class="support-centre header__element"><i class="fa fa-info-circle"></i> Support Centre</a-->
   </div>
 <% end %>

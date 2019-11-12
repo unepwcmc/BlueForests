@@ -1,0 +1,14 @@
+@mixin arrow-svg {
+  content: '';
+  background-image: image-url('icons/drop_arrow.svg');
+  background-repeat: no-repeat;
+  width: 17px; height: 9px;
+
+  display: inline-block;
+}
+
+@mixin drop-arrow--active {
+  &::after {
+    transform: rotate(180deg);
+  }
+}

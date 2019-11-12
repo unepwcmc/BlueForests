@@ -6,6 +6,7 @@
 *= require 'elements/dropdown'
 *= require 'elements/button'
 *= require 'elements/table'
+*= require 'elements/radio'
 *= require 'login'
 *= require 'home'
 *= require 'analysis'

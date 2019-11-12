@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="9px" viewBox="0 0 17 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>Drop-Arrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Pa" stroke="none" stroke-width="2" fill="none" fill-rule="evenodd">
+        <g id="Explore-1-(D)" transform="translate(-219.000000, -445.000000)">
+            <g id="Drop-Arrow" transform="translate(220.000000, 445.000000)">
+                <polyline id="Shape" stroke="#FFFFFF" points="0 0 7.5 8 15 0"></polyline>
+                <polyline id="Shape" stroke="#333f85" points="0 0 7.5 8 15 0"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

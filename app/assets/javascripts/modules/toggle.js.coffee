@@ -11,6 +11,7 @@ window.Toggle = class Toggle
     $el.click((ev) ->
       ev.preventDefault()
 
+      $el.toggleClass("toggle--active")
       $targetEl.toggleClass("u-hide")
       $targetAltEl.toggleClass("u-hide")
 
