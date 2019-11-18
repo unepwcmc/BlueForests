@@ -9,7 +9,6 @@ module CartoDb::Proxy::Map
       headers: {'Content-Type' => 'application/json'}
     )
 
-    Rails.logger.info "carto_response: #{carto_response.inspect}"
     extract_tiles_url(carto_response.body)
   end
 
@@ -18,7 +17,6 @@ module CartoDb::Proxy::Map
   def self.extract_tiles_url response
     info = JSON.parse(response)
     tiles_path = URI.escape("/api/v1/map/#{info["layergroupid"]}/{z}/{x}/{y}.png")
-    Rails.logger.info "LAYERGROUPID: #{info['layergroupid']}"
     CartoDb.build_url(tiles_path, with_api_key: false)
   end
 
@@ -40,7 +38,6 @@ module CartoDb::Proxy::Map
     parts = "SELECT * FROM #{source(habitat)}"
     parts << " WHERE country_id = '#{country.iso}'"
     parts << " AND #{where}" if where
-    Rails.logger.info parts
     parts
   end
 
