@@ -38,8 +38,6 @@ class ApplicationController < ActionController::Base
   end
 
   def check_country_for_restricted_pages
-    Rails.logger.info "current_country: #{current_country.name}"
-    Rails.logger.info "current_user.countries: #{current_user.countries.pluck(:name).inspect}"
     if signed_in? && !current_user.countries.include?(current_country)
       redirect_to(root_url)
     end
