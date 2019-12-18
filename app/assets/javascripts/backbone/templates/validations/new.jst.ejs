@@ -39,9 +39,25 @@
               </div>
 
               <div id="control-group-action" class="control-group btn-group" data-toggle="buttons-radio">
-                <button type="button" class="btn btn-primary" data-action="validate">Confirm</button>
+                <p>Type of habitat validation</p>
+                <!-- <button type="button" class="btn btn-primary" data-action="validate">Confirm</button>
                 <button type="button" class="btn btn-primary" data-action="add">Add</button>
-                <button type="button" class="btn btn-primary" data-action="delete">Delete</button>
+                <button type="button" class="btn btn-primary" data-action="delete">Delete</button> -->
+
+                <div>
+                  <input type="radio" value="validate" data-action="validate">
+                  <label for="validate">validate</label>
+                </div>
+
+                <div>
+                  <input type="radio" value="add" data-action="add">
+                  <label for="add">add</label>
+                </div>
+
+                <div>
+                  <input type="radio" value="delete" data-action="delete">
+                  <label for="delete">remove</label>
+                </div>
               </div>
             </div>
 
