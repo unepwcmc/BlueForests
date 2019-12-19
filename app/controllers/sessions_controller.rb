@@ -16,7 +16,7 @@ class SessionsController < Devise::SessionsController
   def sign_in_via_xhr
     user = User.find_for_authentication(params[:user].merge(params[:session]))
 
-    if user.valid_password?(params[:user][:password])
+    if user.present? && user.valid_password?(params[:user][:password])
       render(
         json: { auth_token: user.authentication_token },
         success: true, status: :created,
