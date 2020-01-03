@@ -39,7 +39,7 @@ RSpec.describe PagesHelper, type: :helper do
 
     context 'when country is set' do
       let(:country) { FactoryGirl.build(:country, iso: 'mz', name: 'mozambique') }
-      let(:expected_text) { '<div class="flag-and-name"><i class="flag-icon flag-icon-mz"></i><span>Mozambique</span></div>' }
+      let(:expected_text) { '<div class="flag-and-name"><i class="flag-icon flag-icon-mz"></i><span>  Mozambique</span></div>' }
 
       it { is_expected.to eq expected_text }
     end
