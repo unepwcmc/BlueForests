@@ -3,6 +3,7 @@ require 'rails_helper'
 describe Mbtile do
   describe ".already_generated?" do
     before(:example) do
+      allow(CartoDb).to receive(:query)
       allow(CartoDb::Validation).to receive(:create)
     end
 
