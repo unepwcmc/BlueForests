@@ -11,7 +11,7 @@ module PagesHelper
     return nil unless country
 
     flag = content_tag(:i, '', class: "flag-icon flag-icon-#{country.iso.downcase}")
-    name = content_tag(:span, "  #{country.name.titleize}")
+    name = content_tag(:span, "#{country.name.titleize}")
 
     if text
       content_tag(:div, flag + " #{text}", class: 'flag-and-name')
