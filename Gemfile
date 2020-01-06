@@ -55,7 +55,7 @@ end
 gem 'rspec-rails', '~> 3.4.0', group: [:test, :development]
 group :test do
   gem 'factory_girl_rails', '~> 4.5.0'
-  gem 'webmock', '~> 1.20.4'
+  gem 'webmock', '~> 2.1'
   gem 'timecop', '~> 0.7.1'
 end
 

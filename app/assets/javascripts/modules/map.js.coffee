@@ -57,7 +57,7 @@ window.Map = class Map
 
   getSublayers: ->
     _.map(HABITATS, (properties, habitat) ->
-      where = "toggle = true AND (action <> 'delete' OR action IS NULL)"
+      where = "toggle::boolean = true AND (validate_action <> 'delete' OR validate_action IS NULL)"
       style = """
         #bc_#{habitat} {
           line-color: #FFF;

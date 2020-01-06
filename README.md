@@ -16,7 +16,7 @@ brew install postgresql
 brew install postgis
 brew install redis
 
-git clone git@github.com:mapbox/tilemill.git vendor/tilemill
+git clone https://github.com/tilemill-project/tilemill vendor/tilemill
 cd vendor/tilemill
 nvm install 8.15.0
 npm install

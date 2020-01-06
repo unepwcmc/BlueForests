@@ -18,7 +18,7 @@ module CartoDb::Proxy::Shapefile
       LEFT JOIN bc_density_codes cvd on cvd.density_code = tb.density
       LEFT JOIN bc_condition_codes cvc on cvc.condition_code = tb.condition
       LEFT JOIN bc_age_codes cva on cva.age_code = tb.age
-      WHERE toggle = 'true' AND action <> 'delete'
+      WHERE toggle = 'true' AND validate_action <> 'delete'
     """.tap { |query|
       query << " AND country_id = '#{country.iso}'" if country
     }.squish
