@@ -52,13 +52,13 @@ class BlueCarbon.Views.Validations.NewView extends Backbone.View
       $(".show-with-#{$(e.target).val()}").removeClass('hidden')
 
     # Action btn-group
-    this.$(".btn-group button").click (e) ->
-      $(e.target).removeClass('btn-primary').addClass('btn-inverse')
-      $(e.target).siblings().removeClass('btn-inverse').addClass('btn-primary')
-      $('#action').val($(e.target).data('action')).trigger('change')
+    this.$('input[name="action-radio"]').click (e) ->
+      validationType = $(e.target).data('action')
+      
+      $('#action').val(validationType).trigger('change')
       $('input.submit-button').removeClass('hidden')
 
-      if $(e.target).data('action') == 'delete'
+      if validationType == 'delete'
         $('#other-fields').addClass('hidden')
         $('.form-actions').removeClass('hidden')
       else

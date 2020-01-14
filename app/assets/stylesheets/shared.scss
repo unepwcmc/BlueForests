@@ -21,7 +21,11 @@ html, body {
   font-weight: 100;
   color: $gray;
 
-  fieldset { border: none; }
+  fieldset { 
+    border: none; 
+    margin: 0;
+    padding: 0;
+  }
   h1 { margin: 0px; }
   a { text-decoration: none; color: inherit; }
   button { border: none; padding: 0; }
