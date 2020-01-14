@@ -26,6 +26,10 @@ html, body {
     margin: 0;
     padding: 0;
   }
+  textarea {
+    width: 100%; max-width: 320px;
+    height: 120px;
+  }
   h1 { margin: 0px; }
   a { text-decoration: none; color: inherit; }
   button { border: none; padding: 0; }
