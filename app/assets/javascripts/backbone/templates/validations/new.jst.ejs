@@ -38,27 +38,33 @@
                 </div>
               </div>
 
-              <div id="control-group-action" class="control-group btn-group" data-toggle="buttons-radio">
-                <p>Type of habitat validation</p>
-                <!-- <button type="button" class="btn btn-primary" data-action="validate">Confirm</button>
-                <button type="button" class="btn btn-primary" data-action="add">Add</button>
-                <button type="button" class="btn btn-primary" data-action="delete">Delete</button> -->
+              <fieldset>
+                <legend class="control-label">
+                  Type of habitat validation
+                </legend>
 
                 <div>
-                  <input type="radio" value="validate" data-action="validate">
-                  <label for="validate">validate</label>
+                  <label for="validation-type-validate">
+                    <input id="validation-type-validate" type="radio" name="action-radio" data-action="validate">
+                    Confirm existing habitat
+                  </label
+                  >
                 </div>
 
                 <div>
-                  <input type="radio" value="add" data-action="add">
-                  <label for="add">add</label>
+                  <label for="validation-type-add">
+                    <input id="validation-type-add" type="radio" name="action-radio" data-action="add">
+                    New Habitat
+                  </label>
                 </div>
 
                 <div>
-                  <input type="radio" value="delete" data-action="delete">
-                  <label for="delete">remove</label>
+                  <label for="validation-type-delete">
+                    <input id="validation-type-delete" type="radio" name="action-radio" data-action="delete">
+                    Remove habitat
+                  </label>
                 </div>
-              </div>
+              </fieldset>
             </div>
 
             <div id="other-fields" class="hidden">
