@@ -17,8 +17,11 @@ window.Map = class Map
       name: 'Other'
 
   constructor: (elementId, mapOpts={}) ->
-    @baseMap = L.tileLayer('http://tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {maxZoom: 17})
-    @baseSatellite =  new L.BingLayer("ApZALeudlU-OTm7Me2qekFHrstBXNdv3hft6qy3ZeTQWD6a460-QqCQyYnDigINc", {type: "Aerial", maxZoom: 19})
+    @baseMap = L.tileLayer(
+      'https://tile.openstreetmap.org/{z}/{x}/{y}.png', 
+      { maxZoom: 17}
+    )
+    @baseSatellite =  new L.BingLayer("ApZALeudlU-OTm7Me2qekFHrstBXNdv3hft6qy3ZeTQWD6a460-QqCQyYnDigINc", {type: "AerialWithLabels", maxZoom: 19})
 
     @initializeMap(elementId, mapOpts)
     @addAttribution()
@@ -29,7 +32,7 @@ window.Map = class Map
   initializeMap: (elementId, mapOpts) ->
     maxBounds = L.latLngBounds(mapOpts.bounds)
     mapOpts.center = maxBounds.getCenter()
-    mapOpts.layers = [@baseSatellite]
+    mapOpts.layers = [@baseMap]
 
     @map = L.map(elementId, mapOpts)
     @map.fitBounds(maxBounds)
@@ -63,7 +66,7 @@ window.Map = class Map
           line-color: #FFF;
           line-width: 0.5;
           polygon-fill: #{properties.color};
-          polygon-opacity: 0.4
+          polygon-opacity: 0.5
         }
       """
 
