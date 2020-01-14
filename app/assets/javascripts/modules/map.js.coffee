@@ -4,7 +4,7 @@ window.Map = class Map
       color: '#008b00'
       name: 'Mangrove'
     seagrass:
-      color: '#9b1dea'
+      color: '#f35f8d'
       name: 'Seagrass'
     saltmarsh:
       color: '#007dff'
