@@ -2,6 +2,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :current_country
   before_filter :check_country
+  before_filter :set_phrases
+
+  def set_phrases
+    @phrases = I18nRepo::ANALYSIS
+  end
 
   # CanCan
   def current_ability

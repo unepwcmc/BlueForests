@@ -35,13 +35,14 @@ class BlueCarbon.Routers.ValidationsRouter extends Backbone.Router
     validation = @validations.get(id)
 
     @view = new BlueCarbon.Views.Validations.EditView(model: validation, areas: @areas)
-    $("#validations").html(@view.render().el)
+    $("#edit-validation-page").html(@view.render().el)
 
     # Map
     args =
       map_id: 'map'
       coordinates: JSON.parse(validation.get('coordinates'))
       validation_id: id
+      bounds: @countryBounds
     @initializeMap args
 
   renderUndoButton: () =>

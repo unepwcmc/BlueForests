@@ -1,0 +1,10 @@
+<%= content_for :title, "Edit validation" %>
+
+<div class="admin">
+  <div 
+    id="edit-validation-page" 
+    data-country-bounds="<%= @current_country.bounds.reverse.to_json %>" 
+    data-country-iso="<%= @current_country.iso %>"
+    data-validation="<%= @validation.to_json %>"
+  ></div>
+</div>
