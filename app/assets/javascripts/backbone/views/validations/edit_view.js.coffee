@@ -44,6 +44,8 @@ class BlueCarbon.Views.Validations.EditView extends Backbone.View
 
     this.$("form").backboneLink(@model)
 
+    this.$(".show-with-" + @model.attributes.habitat).removeClass('hidden')
+
     # Action btn-group
     this.$(".btn-group button[data-action='#{@model.get('action')}']").removeClass('btn-primary').addClass('btn-inverse active')
 

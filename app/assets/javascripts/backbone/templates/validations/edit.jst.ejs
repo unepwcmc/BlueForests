@@ -1,6 +1,6 @@
 <div id="map"></div>
 
-<div id="sidebar" class="shadow">
+<div id="sidebar" class="shadow simple-form">
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
@@ -10,7 +10,7 @@
           <div class="form-inputs">
             <div id="other-fields">
 
-              <div class="control-group density <%= validation.habitat %> show-with-mangrove show-with-seagrass show-with-saltmarsh">
+              <div class="control-group density <%= validation.habitat %> show-with-mangrove show-with-seagrass show-with-saltmarsh hidden">
                 <label class="control-label" for="density">Density of habitat</label>
                 <div class="controls">
                   <select class="span12" name="density" id="density">
@@ -34,7 +34,7 @@
                 </div>
               </div>
 
-              <div class="control-group condition <%= validation.habitat %> show-with-mangrove">
+              <div class="control-group condition <%= validation.habitat %> show-with-mangrove hidden">
                 <label class="control-label" for="condition">Condition</label>
                 <div class="controls">
                   <select class="span12" name="condition" id="condition">
@@ -47,7 +47,7 @@
                 </div>
               </div>
 
-              <div class="control-group age <%= validation.habitat %> show-with-mangrove">
+              <div class="control-group age <%= validation.habitat %> show-with-mangrove hidden">
                 <label class="control-label" for="age">Age of habitat</label>
                 <div class="controls">
                   <select class="span12" name="age" id="age">
@@ -60,7 +60,7 @@
                 </div>
               </div>
 
-              <div class="control-group species <%= validation.habitat %> show-with-seagrass">
+              <div class="control-group species <%= validation.habitat %> show-with-seagrass hidden">
                 <label class="control-label" for="species">Species</label>
                 <div class="controls">
                   <select class="span12" name="species" id="species">
