@@ -1,7 +1,7 @@
 class Mbtile::Style < Mbtile::Base
   COLORS = {
     mangrove:  '008b00',
-    seagrass:  '9b1dea',
+    seagrass:  'f35f8d',
     sabkha:    'f38417',
     saltmarsh: '007dff',
     algal_mat: 'ffe048',
