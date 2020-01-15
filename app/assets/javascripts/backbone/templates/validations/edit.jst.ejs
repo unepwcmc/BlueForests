@@ -4,11 +4,19 @@
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span12">
-        <h5>Edit validation</h5>
+        <h1 class="admin__header">Edit validation</h1>
+
 
         <form id="edit-validation" name="validation">
           <div class="form-inputs">
             <div id="other-fields">
+
+              <div class="control-group">
+                <label class="control-label" for="habitat">
+                  Habitat type
+                </label>
+                <div id="habitat"><%= polyglot.t('analysis.' + validation.habitat) %></div>
+              </div>
 
               <div class="control-group density <%= validation.habitat %> show-with-mangrove show-with-seagrass show-with-saltmarsh hidden">
                 <label class="control-label" for="density">Density of habitat</label>
