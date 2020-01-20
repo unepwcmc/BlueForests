@@ -15,7 +15,19 @@ rvm:
 addons:
   postgresql: 9.6
 before_script:
-- psql -c 'create database travis_ci_test' -U postgres
+- sudo apt-get update
+- sudo apt-get install libgdal1h
+- sudo apt-get install gdal-bin
+- sudo apt-get install libproj-dev
+- sudo apt-get install libspatialite-dev --force-yes
+- sudo apt-get install libgeos-c1 --force-yes
+- echo libgeos-c1 hold | sudo dpkg --set-selections
+- echo libgdal1 hold | sudo dpkg --set-selections
+- sudo apt-get install libgdal-dev --force-yes
+- sudo apt-get install libgdal1-dev --force-yes
+- sudo apt-get install postgresql-9.3-postgis-2.3 -f
+- psql -c 'create database blueforests_test' -U postgres
+- psql -c 'CREATE EXTENSION postgis;' -U postgres -d blueforests_test
 - cp config/database.yml.travis config/database.yml
 - cp config/secrets.yml.travis config/secrets.yml
 - git clone https://github.com/tilemill-project/tilemill vendor/tilemill
