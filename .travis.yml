@@ -23,7 +23,7 @@ before_script:
 - nvm install 8.15.0
 - npm install
 - cd ../..
-- git clone https://github.com/mapbox/projectmill.git vendor/projectmill
+- git clone https://github.com/tilemill-project/tilemill vendor/projectmill
 - cd vendor/projectmill
 - npm config set registry http://registry.npmjs.org/
 - nvm install 0.10.24
