@@ -9,6 +9,7 @@ branches:
   only:
   - master
   - develop
+  - feature/add-travis
 rvm:
 - 2.2.3
 addons:
