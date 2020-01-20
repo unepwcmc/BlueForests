@@ -5,6 +5,10 @@ cache:
   yarn: true
 language: ruby
 bundler_args: --without development production staging
+branches:
+  only:
+  - master
+  - develop
 rvm:
 - 2.2.3
 addons:
