@@ -1,9 +1,10 @@
+dist: trusty
+language: ruby
 sudo: false
 before_install:
   - gem install bundler -v '1.16.2'
 cache:
   yarn: true
-language: ruby
 bundler_args: --without development production staging
 branches:
   only:
