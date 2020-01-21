@@ -16,6 +16,8 @@ rvm:
 addons:
   postgresql: 9.3
 before_script:
+- sleep 10
+- cp .env.example .env
 - sudo apt-get purge libgdal1
 - sudo apt-add-repository --remove ppa:ubuntugis/ppa -y
 - sudo apt-get update
