@@ -47,6 +47,8 @@ before_script:
 - npm install
 - RAILS_ENV=test bundle exec rake db:migrate
 - RAILS_ENV=test bundle exec rake test
+services:
+  - redis-server
 notifications:
   slack:
     secure: RlKYPkZvtv2qeFCXhuwc9ph2autnObOTtvyOfL0vUEJoEm4hNiKcGEBP5q9BBRGKB9jLzh9lWeTuOgwhK9ndWnxHcIwegXoJqBTcndPhVD9gLtsvKRHqHMSiOa7sUZI/atPOJgS6cHQOkJ0msqoo31DsWzRqleimqz/++2SDsbc=
