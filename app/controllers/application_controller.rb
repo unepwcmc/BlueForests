@@ -2,6 +2,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :current_country
   before_filter :check_country
+  before_filter :set_phrases
+
+  def set_phrases
+    @phrases = I18nRepo::ANALYSIS
+  end
 
   # CanCan
   def current_ability
@@ -38,8 +43,6 @@ class ApplicationController < ActionController::Base
   end
 
   def check_country_for_restricted_pages
-    Rails.logger.info "current_country: #{current_country.name}"
-    Rails.logger.info "current_user.countries: #{current_user.countries.pluck(:name).inspect}"
     if signed_in? && !current_user.countries.include?(current_country)
       redirect_to(root_url)
     end

@@ -7,6 +7,7 @@ RSpec.describe AreasController, type: :controller do
   let(:current_user) { FactoryGirl.create(:project_manager, countries: [country]) }
 
   before :each do
+    allow(CartoDb).to receive(:query)
     @request.host = 'mozambique.blueforests.io'
     sign_in current_user
   end

@@ -2,7 +2,6 @@ class AnalysisController < ApplicationController
   before_filter :set_locale
 
   def index
-    @phrases = I18nRepo::ANALYSIS
   end
 
   private

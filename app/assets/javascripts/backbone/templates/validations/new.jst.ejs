@@ -26,9 +26,10 @@
 
             <div id="habitat-and-action" class="hidden">
               <div class="control-group habitat">
+                <label for="habitat" class="control-label">Habitat type</label>
                 <div class="controls">
                   <select class="span12" name="habitat" id="habitat">
-                    <option value="">Habitat</option>
+                    <option value="">Select a habitat</option>
                     <option value="mangrove"<% if("mangrove" == validation.habitat) { %> selected="selected"<% } %>>Mangrove</option>
                     <option value="seagrass"<% if("seagrass" == validation.habitat) { %> selected="selected"<% } %>>Seagrass</option>
                     <option value="saltmarsh"<% if("saltmarsh" == validation.habitat) { %> selected="selected"<% } %>>Saltmarsh</option>
@@ -38,11 +39,33 @@
                 </div>
               </div>
 
-              <div id="control-group-action" class="control-group btn-group" data-toggle="buttons-radio">
-                <button type="button" class="btn btn-primary" data-action="validate">Confirm</button>
-                <button type="button" class="btn btn-primary" data-action="add">Add</button>
-                <button type="button" class="btn btn-primary" data-action="delete">Delete</button>
-              </div>
+              <fieldset class="control-group">
+                <legend class="control-label">
+                  Type of habitat validation
+                </legend>
+
+                <div>
+                  <label for="validation-type-validate">
+                    <input id="validation-type-validate" type="radio" name="action-radio" data-action="validate">
+                    Confirm existing habitat
+                  </label
+                  >
+                </div>
+
+                <div>
+                  <label for="validation-type-add">
+                    <input id="validation-type-add" type="radio" name="action-radio" data-action="add">
+                    New Habitat
+                  </label>
+                </div>
+
+                <div>
+                  <label for="validation-type-delete">
+                    <input id="validation-type-delete" type="radio" name="action-radio" data-action="delete">
+                    Remove habitat
+                  </label>
+                </div>
+              </fieldset>
             </div>
 
             <div id="other-fields" class="hidden">

@@ -5,11 +5,11 @@ ROLES = [
 ]
 
 COUNTRIES = [
-  {name: 'Mozambique', subdomain: 'mozambique', iso: 'MZ', iso3: 'MOZ', bounds: [[-26.8602715039999, 30.2138452550002], [-10.4690080709999, 40.8479923840001]]},
-  {name: 'Ecuador', subdomain: 'ecuador', iso: 'EC', iso3: 'ECU', bounds: [[-5.01137257899988, -92.0115860669999], [1.66437409100016, -75.2272639579999]]},
-  {name: 'Indonesia', subdomain: 'indonesia', iso: 'ID', iso3: 'IDN', bounds: [[-10.9226213519998, 95.0127059250001], [5.9101016300001, 140.977626994]]},
-  {name: 'Madagascar', subdomain: 'madagascar', iso: 'MG', iso3: 'MDG', bounds: [[-25.5985653629998, 43.2229110040001], [-11.9436174459998, 50.5039168630001]]},
-  {name: 'United Arab Emirates', subdomain: 'uae', iso: 'AE', iso3: 'ARE', bounds: [[26.28219, 56.38343], [22.644409, 51.497978]]}
+  {name: 'Mozambique', subdomain: 'mozambique', iso: 'MZ', bounds: [[-26.8602715039999, 30.2138452550002], [-10.4690080709999, 40.8479923840001]]},
+  {name: 'Ecuador', subdomain: 'ecuador', iso: 'EC', bounds: [[-5.01137257899988, -92.0115860669999], [1.66437409100016, -75.2272639579999]]},
+  {name: 'Indonesia', subdomain: 'indonesia', iso: 'ID', bounds: [[-10.9226213519998, 95.0127059250001], [5.9101016300001, 140.977626994]]},
+  {name: 'Madagascar', subdomain: 'madagascar', iso: 'MG', bounds: [[-25.5985653629998, 43.2229110040001], [-11.9436174459998, 50.5039168630001]]},
+  {name: 'United Arab Emirates', subdomain: 'uae', iso: 'AE', bounds: [[26.28219, 56.38343], [22.644409, 51.497978]]}
 ]
 
 def populate
