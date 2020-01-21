@@ -1,4 +1,4 @@
 test:
-  adapter: postgresql
+  adapter: postgis
   database: blueforests_test
   username: postgres
