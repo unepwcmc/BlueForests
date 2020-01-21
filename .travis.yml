@@ -45,7 +45,7 @@ before_script:
 - npm config set registry http://registry.npmjs.org/
 - nvm install 0.10.24
 - npm install
-- RAILS_ENV=test bundle exec rake db:migrate
+- RAILS_ENV=test bundle exec rake db:create db:migrate
 - RAILS_ENV=test bundle exec rspec
 services:
   - redis-server
