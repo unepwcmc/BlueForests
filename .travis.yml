@@ -2,10 +2,10 @@ dist: trusty
 language: ruby
 sudo: false
 before_install:
-  - gem install bundler -v '1.16.2'
+- gem install bundler -v '1.16.2'
 cache:
   yarn: true
-bundler_args: --without development production staging
+bundler_args: "--without development production staging"
 branches:
   only:
   - master
@@ -45,4 +45,5 @@ before_script:
 - npm install
 - RAILS_ENV=test bundle exec rake db:migrate
 notifications:
-  slack: ???
+  slack:
+    secure: RlKYPkZvtv2qeFCXhuwc9ph2autnObOTtvyOfL0vUEJoEm4hNiKcGEBP5q9BBRGKB9jLzh9lWeTuOgwhK9ndWnxHcIwegXoJqBTcndPhVD9gLtsvKRHqHMSiOa7sUZI/atPOJgS6cHQOkJ0msqoo31DsWzRqleimqz/++2SDsbc=
