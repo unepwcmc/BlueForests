@@ -46,7 +46,7 @@ before_script:
 - nvm install 0.10.24
 - npm install
 - RAILS_ENV=test bundle exec rake db:migrate
-- RAILS_ENV=test bundle exec rake test
+- RAILS_ENV=test bundle exec rspec
 services:
   - redis-server
 notifications:
