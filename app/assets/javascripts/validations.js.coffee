@@ -13,8 +13,17 @@ $(document).ready( ->
     router.navigate('new', {trigger: true})
 
   if $showValidation.length > 0
-    $map = $("#map")
-    new Map("map", $map.data())
+    validation = $showValidation.data('validation')
+    window.router = new BlueCarbon.Routers.ValidationsRouter(
+      countryIso: $showValidation.data('country-iso')
+      countryBounds: $showValidation.data('country-bounds')
+      validations: [validation]
+    )
+
+    validationIdStr = validation.id.toString()
+    
+    Backbone.history.start()
+    router.navigate(validationIdStr, {trigger: true})
 
   if $editValidation.length > 0
     validation = $editValidation.data('validation')

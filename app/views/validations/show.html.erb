@@ -1,7 +1,13 @@
 <%= content_for :title, "Validation ##{@validation.id}" %>
 
-<div id="show-validation" class="admin validations">
-  <div data-country-iso="<%= @validation.country.iso %>" data-bounds="<%= @validation.country.bounds.to_json %>" id="map"></div>
+<div 
+  id="show-validation" 
+  class="admin validations"
+  data-country-bounds="<%= @current_country.bounds.reverse.to_json %>" 
+  data-country-iso="<%= @current_country.iso %>"
+  data-validation="<%= @validation.to_json %>"
+>
+  <div id="map"></div>
 
   <div id="sidebar" class="shadow simple-form">
     <div class="container-fluid">
