@@ -47,6 +47,13 @@
 
 // admin scope
 .admin {
-  dt { margin-bottom: .25rem; }
-  dd { margin-bottom: 1rem; }
+  dt { 
+    margin-bottom: .5rem;
+    font-weight: 500;
+  }
+
+  dd {
+    margin-left: 0; 
+    margin-bottom: 1rem; 
+  }
 }
