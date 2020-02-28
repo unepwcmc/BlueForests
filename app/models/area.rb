@@ -52,9 +52,10 @@ class Area < ActiveRecord::Base
     end
   end
 
+  CARTO_TABLE_NAME = "blueforests_field_sites_#{Rails.env}".freeze
   def upload_to_carto
     query = """
-      INSERT INTO blueforests_field_sites_#{Rails.env} (the_geom, country_id, name)
+      INSERT INTO #{CARTO_TABLE_NAME} (the_geom, country_id, name)
       VALUES (
         ST_SetSRID(ST_GeomFromGeoJSON(#{ActiveRecord::Base.sanitize(geo_json)}), 4326),
         #{ActiveRecord::Base.sanitize(country.iso)},
@@ -66,5 +67,15 @@ class Area < ActiveRecord::Base
   end
 
   def remove_from_carto
+    _title = ActiveRecord::Base.sanitize(title)
+    _country_iso = ActiveRecord::Base.sanitize(country.iso)
+
+    query = """
+      DELETE
+      FROM #{CARTO_TABLE_NAME} t
+      WHERE t.name = #{_title} AND t.country_id = #{_country_iso}
+    """
+
+    CartoDb.query(query)
   end
 end
