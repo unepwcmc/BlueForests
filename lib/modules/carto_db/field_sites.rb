@@ -1,4 +1,4 @@
-module CartoDb::StudySites
+module CartoDb::FieldSites
   # Temporary logic to skip work in progress tables or non existing ones
   COUNTRIES_TO_IGNORE = %w(mozambique).freeze
   SUFFIX = 'study_sites'.freeze
@@ -6,9 +6,9 @@ module CartoDb::StudySites
   SCHEMA_NAME = CartoDb::USERNAME.freeze
   CARTO_ERROR = 'No rows returned'.freeze
 
-  TABLE_NAME = "blueforests_study_sites_#{Rails.env}".freeze
+  TABLE_NAME = "blueforests_field_sites_2020_#{Rails.env}".freeze
   def self.create_table
-    create_study_sites_table
+    create_field_sites_table
     sanitise_data_tables
     copy_data
   end
@@ -68,7 +68,7 @@ module CartoDb::StudySites
     "#{country.subdomain}_#{SUFFIX}"
   end
 
-  def self.create_study_sites_table
+  def self.create_field_sites_table
     query = <<-SQL
       CREATE TABLE IF NOT EXISTS #{TABLE_NAME}(
         the_geom GEOMETRY NOT NULL,
@@ -95,6 +95,7 @@ module CartoDb::StudySites
   end
 
   COLUMN_NAMES = %w(the_geom id name).freeze
+  DUMMY_NAME = "'No name provided #' || cartodb_id || ' for '".freeze
   def self.copy_data
     column_names = COLUMN_NAMES.join(',')
 
@@ -103,7 +104,8 @@ module CartoDb::StudySites
       CartoDb.query(
         <<-SQL
           INSERT INTO #{TABLE_NAME}(#{column_names}, country_id)
-          SELECT #{column_names}, '#{country_iso}' AS country_id FROM #{get_table_name(c)}
+          SELECT the_geom, id, COALESCE(name, #{DUMMY_NAME} || '#{country_iso}'), '#{country_iso}' AS country_id
+          FROM #{get_table_name(c)}
         SQL
       )
     end
