@@ -16,4 +16,9 @@ namespace :cartodb do
       setup_carbon_view environment
     end
   end
+
+  desc "Create field sites table"
+  task import_field_sites: :environment do
+    CartoDb::FieldSites.import
+  end
 end
