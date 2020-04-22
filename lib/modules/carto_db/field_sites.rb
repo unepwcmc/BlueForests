@@ -4,20 +4,30 @@ module CartoDb::FieldSites
   SUFFIX = 'study_sites'.freeze
 
   SCHEMA_NAME = CartoDb::USERNAME.freeze
-  CARTO_ERROR = 'No rows returned'.freeze
 
   TABLE_NAME = "blueforests_field_sites_2020_#{Rails.env}".freeze
-  def self.create_table
-    create_field_sites_table
-    sanitise_data_tables
-    copy_data
+
+  def self.import
+    unless source_tables_exist?
+      Rails.logger.info('Some source tables are missing!')
+      return false
+    end
+
+    if table_exists?
+      Rails.logger.info("#{TABLE_NAME} already exists! Skipping...")
+      return false
+    end
+
+    create_table
   end
 
   def self.drop_table
     CartoDb.query("DROP TABLE #{TABLE_NAME};")
   end
 
-  def self.tables_exist?
+  private
+
+  def self.source_tables_exist?
     query = <<-SQL
       SELECT table_name
       FROM information_schema.tables
@@ -26,7 +36,7 @@ module CartoDb::FieldSites
 
     carto_response = CartoDb.query(query)
     if carto_response['error'].present? || carto_response['rows'].blank?
-      Rails.logger.info(carto_response['error'] || CARTO_ERROR)
+      Rails.logger.info(carto_response['error'] || 'No rows returned!')
       return false
     end
 
@@ -41,7 +51,23 @@ module CartoDb::FieldSites
     false
   end
 
-  private
+  def self.table_exists?
+    query = <<-SQL
+      SELECT EXISTS(
+        SELECT table_name
+        FROM information_schema.tables
+        WHERE table_name = '#{TABLE_NAME}'
+      )
+    SQL
+
+    CartoDb.query(query)
+  end
+
+  def self.create_table
+    create_field_sites_table
+    sanitise_data_tables
+    copy_data
+  end
 
   def self.tables_to_ignore
     COUNTRIES_TO_IGNORE.map { |c| "#{c}_#{SUFFIX}" }
@@ -68,11 +94,12 @@ module CartoDb::FieldSites
     "#{country.subdomain}_#{SUFFIX}"
   end
 
+  # The privacy of the generated table needs to be changed later
+  # unless the table already exists and it's public or public with link
   def self.create_field_sites_table
     query = <<-SQL
       CREATE TABLE IF NOT EXISTS #{TABLE_NAME}(
         the_geom GEOMETRY NOT NULL,
-        id INTEGER NOT NULL,
         name VARCHAR,
         country_id VARCHAR(2) NOT NULL
       );
@@ -80,9 +107,13 @@ module CartoDb::FieldSites
       SELECT cdb_cartodbfytable('#{SCHEMA_NAME}', '#{TABLE_NAME}');
     SQL
 
-    CartoDb.query(query)
+    res = CartoDb.query(query)
+    return if check_for_carto_errors(res)
+
+    res['rows'].first['exists']
   end
 
+  # Some tables do not have a name column
   def self.sanitise_data_tables
     tables_used.each do |t|
       CartoDb.query(
@@ -94,20 +125,27 @@ module CartoDb::FieldSites
     end
   end
 
-  COLUMN_NAMES = %w(the_geom id name).freeze
   DUMMY_NAME = "'No name provided #' || cartodb_id || ' for '".freeze
   def self.copy_data
-    column_names = COLUMN_NAMES.join(',')
-
     countries_used.each do |c|
       country_iso = c.iso
-      CartoDb.query(
+      res = CartoDb.query(
         <<-SQL
-          INSERT INTO #{TABLE_NAME}(#{column_names}, country_id)
-          SELECT the_geom, id, COALESCE(name, #{DUMMY_NAME} || '#{country_iso}'), '#{country_iso}' AS country_id
+          INSERT INTO #{TABLE_NAME}(the_geom, name, country_id)
+          SELECT the_geom, COALESCE(name, #{DUMMY_NAME} || '#{country_iso}'), '#{country_iso}' AS country_id
           FROM #{get_table_name(c)}
         SQL
       )
+
+      check_for_carto_errors(res)
     end
+  end
+
+  def self.check_for_carto_errors(carto_response)
+    if carto_response['error'].present?
+      Rails.logger.info(carto_response['error'])
+      return true
+    end
+    false
   end
 end
