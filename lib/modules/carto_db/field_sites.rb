@@ -6,15 +6,21 @@ module CartoDb::FieldSites
   SCHEMA_NAME = CartoDb::USERNAME.freeze
 
   TABLE_NAME = "blueforests_field_sites_2020_#{Rails.env}".freeze
+  ERROR_MESSAGES = {
+    sources: 'Some source tables are missing!',
+    table_exists: "#{TABLE_NAME} already exists! Skipping...",
+    no_rows: 'No rows returned!',
+    tables_missing: 'The following tables are missing from CARTO: '
+  }.freeze
 
   def self.import
     unless source_tables_exist?
-      Rails.logger.info('Some source tables are missing!')
+      Rails.logger.info(ERROR_MESSAGES[:sources])
       return false
     end
 
     if table_exists?
-      Rails.logger.info("#{TABLE_NAME} already exists! Skipping...")
+      Rails.logger.info(ERROR_MESSAGES[:table_exists])
       return false
     end
 
@@ -22,7 +28,7 @@ module CartoDb::FieldSites
   end
 
   def self.drop_table
-    CartoDb.query("DROP TABLE #{TABLE_NAME};")
+    CartoDb.query("DROP TABLE #{TABLE_NAME}")
   end
 
   private
@@ -36,7 +42,7 @@ module CartoDb::FieldSites
 
     carto_response = CartoDb.query(query)
     if carto_response['error'].present? || carto_response['rows'].blank?
-      Rails.logger.info(carto_response['error'] || 'No rows returned!')
+      Rails.logger.info(carto_response['error'] || ERROR_MESSAGES[:no_rows])
       return false
     end
 
@@ -45,7 +51,7 @@ module CartoDb::FieldSites
 
     return true if tables_diff.empty?
 
-    Rails.logger.info('The following tables are missing from CARTO: ')
+    Rails.logger.info(ERROR_MESSAGES[:tables_missing])
     Rails.logger.info(tables_diff.join(','))
 
     false
@@ -60,7 +66,10 @@ module CartoDb::FieldSites
       )
     SQL
 
-    CartoDb.query(query)
+    res = CartoDb.query(query)
+    return if check_for_carto_errors(res)
+
+    res['rows'].first['exists']
   end
 
   def self.create_table
@@ -107,22 +116,21 @@ module CartoDb::FieldSites
       SELECT cdb_cartodbfytable('#{SCHEMA_NAME}', '#{TABLE_NAME}');
     SQL
 
-    res = CartoDb.query(query)
-    return if check_for_carto_errors(res)
-
-    res['rows'].first['exists']
+    return false if check_for_carto_errors(CartoDb.query(query))
   end
 
   # Some tables do not have a name column
   def self.sanitise_data_tables
     tables_used.each do |t|
-      CartoDb.query(
+      res = CartoDb.query(
         <<-SQL
           ALTER TABLE #{t}
           ADD COLUMN IF NOT EXISTS name VARCHAR;
         SQL
       )
+      return false if check_for_carto_errors(res)
     end
+    true
   end
 
   DUMMY_NAME = "'No name provided #' || cartodb_id || ' for '".freeze
@@ -137,8 +145,9 @@ module CartoDb::FieldSites
         SQL
       )
 
-      check_for_carto_errors(res)
+      return false if check_for_carto_errors(res)
     end
+    true
   end
 
   def self.check_for_carto_errors(carto_response)
