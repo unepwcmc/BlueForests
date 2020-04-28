@@ -10,8 +10,9 @@ class Area < ActiveRecord::Base
   after_create :upload_to_carto
   after_destroy :remove_from_carto
 
+  CARTO_TABLE_NAME = "blueforests_field_sites_2020_#{Rails.env}".freeze
   def self.sync_from_carto
-    query = "SELECT ST_AsGeoJSON(the_geom) geom, name, country_id FROM blueforests_field_sites_#{Rails.env}"
+    query = "SELECT ST_AsGeoJSON(the_geom) geom, name, country_id FROM #{CARTO_TABLE_NAME}"
     results = CartoDb.query(query)["rows"]
 
     results.each do |row|
@@ -52,7 +53,6 @@ class Area < ActiveRecord::Base
     end
   end
 
-  CARTO_TABLE_NAME = "blueforests_field_sites_#{Rails.env}".freeze
   def upload_to_carto
     query = """
       INSERT INTO #{CARTO_TABLE_NAME} (the_geom, country_id, name)

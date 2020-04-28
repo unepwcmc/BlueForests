@@ -12,7 +12,8 @@ class Backbone.Views.FieldSitesView extends Backbone.View
   render: =>
     iso = $(Pica.config.map.getContainer()).data("country-iso")
     base = "https://carbon-tool.carto.com/api/v2/sql"
-    query = "SELECT * FROM blueforests_field_sites_staging WHERE country_id = '#{iso}'"
+    environment = document.body.dataset.environment || 'staging'
+    query = "SELECT * FROM blueforests_field_sites_2020_#{environment} WHERE country_id = '#{iso}'"
 
     $.getJSON("#{base}?format=GeoJSON&q=#{query}", (data) =>
       @$el.html(@template(field_sites: data.features))

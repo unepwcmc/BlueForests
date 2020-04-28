@@ -112,3 +112,22 @@ There is a [template
 table](https://carbon-tool.cartodb.com/tables/blueforests_template/) to
 duplicate from, as CartoDB does not let you create tables manually via
 SQL.
+
+With regards field sites, the table currently in use on CARTO is:
+
+* blueforests_field_sites_2020_#{environment} (production currently missing)
+
+Such table can be created with:
+
+```
+bundle exec rake cartodb:import_field_sites
+```
+
+For the above to work, it is necessary that the following tables already exists on CARTO:
+
+* ecuador_study_sites
+* madagascar_study_sites
+* indonesia_study_sites
+* uae_study_sites
+
+Those are the source tables used to populate the main field sites table mentioned above.
