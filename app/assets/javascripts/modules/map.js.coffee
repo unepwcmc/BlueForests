@@ -18,7 +18,7 @@ window.Map = class Map
 
   constructor: (elementId, mapOpts={}) ->
     @baseMap = L.tileLayer(
-      'https://tile.openstreetmap.org/{z}/{x}/{y}.png', 
+      'https://api.mapbox.com/styles/v1/unepwcmc/ck6hsqzns0vx31iqxdcgccgow/tiles/{z}/{x}/{y}?access_token=' + window.MAPBOX_API_KEY, 
       { maxZoom: 17}
     )
     @baseSatellite =  new L.BingLayer("ApZALeudlU-OTm7Me2qekFHrstBXNdv3hft6qy3ZeTQWD6a460-QqCQyYnDigINc", {type: "AerialWithLabels", maxZoom: 19})

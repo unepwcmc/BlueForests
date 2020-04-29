@@ -19,6 +19,9 @@
 
     <%= render "stylesheets" %>
     <%= javascript_include_tag "polyfills" %>
+    <script>
+      window.MAPBOX_API_KEY = '<%= Rails.application.secrets.mapbox_api_key %>'
+    </script>
 
     <%= csrf_meta_tag %>
   </head>
