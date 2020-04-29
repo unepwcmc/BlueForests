@@ -12,9 +12,9 @@ window.Map = class Map
     algal_mat:
       color: '#ffe048'
       name: 'Algal Mat'
-    other:
-      color: '#1dcbea'
-      name: 'Other'
+    # other:
+    #   color: '#1dcbea'
+    #   name: 'Other'
 
   constructor: (elementId, mapOpts={}) ->
     @baseMap = L.tileLayer(
