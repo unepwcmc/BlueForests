@@ -42,7 +42,7 @@ window.JST['area_results_view'] = _.template("""
             </tr>
           <% }) %>
         </table>
-        <div class="polygon-stats__disclaimer"><%= polyglot.t("analysis.disclaimer") %></div>
+        <p class="polygon-stats__disclaimer"><%= polyglot.t("analysis.disclaimer") %></p>
       <% } %>
     <% } %>
 
