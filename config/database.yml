@@ -3,7 +3,7 @@ development:
   database: blueforests_development
   pool: 25
   username: postgres
-  password:
+  password: postgres
   host: localhost
 
 test:
@@ -12,7 +12,7 @@ test:
   host: localhost
   pool: 5
   username: postgres
-  password:
+  password: postgres
   host: localhost
 
 production:

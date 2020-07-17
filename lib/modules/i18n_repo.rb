@@ -20,6 +20,8 @@ module I18nRepo
       "analysis.area_percentage"),
     "analysis.c_stock"=> I18n.t(
       "analysis.c_stock"),
+    "analysis.disclaimer"=> I18n.t(
+      "analysis.disclaimer"),
     "analysis.total_area"=> I18n.t(
       "analysis.total_area"),
     "analysis.total_carbon_stock"=> I18n.t(
@@ -32,8 +34,6 @@ module I18nRepo
       "analysis.years"),
     "analysis.days"=> I18n.t(
       "analysis.days"),
-    "analysis.polygons_in_this_area"=> I18n.t(
-      "analysis.polygons_in_this_area"),
     "analysis.habitat"=> I18n.t(
       "analysis.habitat"),
     "analysis.ecosystem"=> I18n.t(

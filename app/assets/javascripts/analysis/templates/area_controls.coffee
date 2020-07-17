@@ -2,12 +2,6 @@ window.JST ||= {}
 
 window.JST['area_controls'] = _.template("""
   <% if (!(area.app.syncsInProgress == 1)) { %>
-    <div class="clearfix">
-      <a dir="<%= this.textDirection %>" href="#" id="delete-area">
-        <i class="fa fa-trash"></i>
-        <%= polyglot.t("analysis.delete_this_area") %>
-      </a>
-    </div>
 
     <div class="new-polygon-container">
       <% if (area.polygons.length > 0) { %>
@@ -25,3 +19,10 @@ window.JST['area_controls'] = _.template("""
   <div id="area_results">
   </div>
 """)
+
+# <div class="clearfix">
+#   <a dir="<%= this.textDirection %>" href="#" id="delete-area">
+#     <i class="fa fa-trash"></i>
+#     <%= polyglot.t("analysis.delete_this_area") %>
+#   </a>
+# </div>
