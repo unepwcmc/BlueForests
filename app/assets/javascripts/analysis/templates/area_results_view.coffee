@@ -38,7 +38,7 @@ window.JST['area_results_view'] = _.template("""
               <td dir="<%= this.textDirection %>" ><%= key %></td>
               <td><%= roundToDecimals(attributes.area_km2, 2) %></td>
               <td><%= roundToDecimals(attributes.area_km2, 2) %></td>
-              <td><%= roundToDecimals(Math.ceil(attributes.carbon), 0) %></td>
+              <td><%= Math.ceil(attributes.carbon).toLocaleString() %></td>
             </tr>
           <% }) %>
         </table>
