@@ -53,6 +53,8 @@ class Backbone.Views.AreaResultsView extends Backbone.View
       results.sum.area = getResultByName("Total Area")
       results.sum.carbon = getResultByName("Total Carbon")
 
+      console.log(results)
+
       return results
     else
       return {}
