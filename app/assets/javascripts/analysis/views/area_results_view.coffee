@@ -61,7 +61,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
       orderedHabitatNames = ['Mangroves', 'Seagrasses', 'Saltmarshes', 'Algal Mats']
 
       _.each orderedHabitatNames, (name) ->
-        console.log(results, habitatOrder)
+        console.log(results, habitatResults)
 
         if habitatResults[name]
           results.orderedHabitats.push(habitatResults[name])
