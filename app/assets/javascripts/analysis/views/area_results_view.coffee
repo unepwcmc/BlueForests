@@ -53,7 +53,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
           return if "#{habitat.habitat}" is 'null' or "#{habitat.habitat}" is 'other'
           habitatResults[polyglot.t("analysis.#{habitat.habitat}")] ||= {}
           habitatResults[polyglot.t("analysis.#{habitat.habitat}")][operation] = habitat[operation]
-          habitatResults[polyglot.t("analysis.#{habitat.habitat}")].habitat = habitat.habitat
+          habitatResults[polyglot.t("analysis.#{habitat.habitat}")].habitat = polyglot.t("analysis.#{habitat.habitat}")
 
       results.sum.area = getResultByName("Total Area")
       results.sum.carbon = getResultByName("Total Carbon")
