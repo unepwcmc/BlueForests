@@ -30,10 +30,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
       results =
         sum: {}
         orderedHabitats: []
-
       habitatResults = {}
-
-      console.log(@area.get('results'))
 
       compareByName = (name) ->
         (obj) ->
@@ -41,6 +38,16 @@ class Backbone.Views.AreaResultsView extends Backbone.View
 
       getResultByName = (name) =>
         _.find(@area.get('results'), compareByName(name)).value
+
+      getOrderedHabitats = (results) ->
+        orderedHabitatNames = ['Mangroves', 'Seagrasses', 'Saltmarshes', 'Algal Mats']
+        habitats = []
+        
+        _.each orderedHabitatNames, (name) ->
+          if results[name]
+            habitats.push(results[name])
+        
+        return habitats
 
       values =
         carbon: getResultByName("Carbon")
@@ -57,16 +64,7 @@ class Backbone.Views.AreaResultsView extends Backbone.View
 
       results.sum.area = getResultByName("Total Area")
       results.sum.carbon = getResultByName("Total Carbon")
-
-      orderedHabitatNames = ['Mangroves', 'Seagrasses', 'Saltmarshes', 'Algal Mats']
-
-      _.each orderedHabitatNames, (name) ->
-        console.log(results, habitatResults)
-
-        if habitatResults[name]
-          results.orderedHabitats.push(habitatResults[name])
-
-      console.log(results, habitatResults)
+      results.orderedHabitats = getOrderedHabitats(habitatResults)
 
       return results
     else
