@@ -29,15 +29,11 @@ window.JST['area_results_view'] = _.template("""
         <table class="table polygon-stats">
           <tr>
             <th><%= polyglot.t("analysis.habitat") %></th>
-            <th dir="<%= this.textDirection %>"><%= polyglot.t("analysis.area_ha") %></th>
-            <th dir="<%= this.textDirection %>"><%= polyglot.t("analysis.area_percentage") %></th>
             <th dir="<%= this.textDirection %>" title="Carbon Stock"><%= polyglot.t("analysis.c_stock") %></th>
           </tr>
           <% _.each(results.orderedHabitats, function(habitat) { %>
             <tr>
               <td dir="<%= this.textDirection %>" ><%= habitat.habitat %></td>
-              <td><%= roundToDecimals(habitat.area_km2, 2) %></td>
-              <td><%= roundToDecimals(habitat.area_km2, 2) %></td>
               <td><%= Math.ceil(habitat.carbon).toLocaleString() %></td>
             </tr>
           <% }) %>
