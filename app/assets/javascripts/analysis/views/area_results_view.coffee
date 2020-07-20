@@ -29,7 +29,11 @@ class Backbone.Views.AreaResultsView extends Backbone.View
     if @area.get('results')? && @area.get('results').length > 0
       results =
         sum: {}
-        habitats: {}
+        orderedHabitats: []
+
+      habitatResults = {}
+
+      console.log(@area.get('results'))
 
       compareByName = (name) ->
         (obj) ->
@@ -47,13 +51,24 @@ class Backbone.Views.AreaResultsView extends Backbone.View
         _.each habitats, (habitat) ->
           # TODO actually remove other from calculations
           return if "#{habitat.habitat}" is 'null' or "#{habitat.habitat}" is 'other'
-          results.habitats[polyglot.t("analysis.#{habitat.habitat}")] ||= {}
-          results.habitats[polyglot.t("analysis.#{habitat.habitat}")][operation] = habitat[operation]
+          habitatResults[polyglot.t("analysis.#{habitat.habitat}")] ||= {}
+          habitatResults[polyglot.t("analysis.#{habitat.habitat}")][operation] = habitat[operation]
+          habitatResults[polyglot.t("analysis.#{habitat.habitat}")].habitat = habitat.habitat
 
       results.sum.area = getResultByName("Total Area")
       results.sum.carbon = getResultByName("Total Carbon")
 
-      console.log(results)
+      orderedHabitatNames = ['Mangroves', 'Seagrasses', 'Saltmarshes', 'Algal Mats']
+
+      results.orderedHabitats = _.each orderedHabitatNames, (name) ->
+        console.log(results, habitatOrder)
+        
+        if habitatResults[name]
+          results.orderedHabitats.push({
+            habitatResults[name]
+          })
+
+      console.log(results, habitatResults)
 
       return results
     else

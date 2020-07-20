@@ -7,7 +7,7 @@ window.JST['area_results_view'] = _.template("""
     </div>
     <% } else { %>
     <% if (!_.isEmpty(results)) { %>
-      <% if (_.isEmpty(results.habitats)) { %>
+      <% if (results.orderedHabitats.length == 0) { %>
         <div class="u-center"><%= polyglot.t("analysis.empty_result") %></div>
       <% } else { %>
         <h4 class="<%= this.textDirection %>">
@@ -33,12 +33,12 @@ window.JST['area_results_view'] = _.template("""
             <th dir="<%= this.textDirection %>"><%= polyglot.t("analysis.area_percentage") %></th>
             <th dir="<%= this.textDirection %>" title="Carbon Stock"><%= polyglot.t("analysis.c_stock") %></th>
           </tr>
-          <% _.each(results.habitats, function(attributes, key) { %>
+          <% _.each(results.orderedHabitats, function(habitat) { %>
             <tr>
-              <td dir="<%= this.textDirection %>" ><%= key %></td>
-              <td><%= roundToDecimals(attributes.area_km2, 2) %></td>
-              <td><%= roundToDecimals(attributes.area_km2, 2) %></td>
-              <td><%= Math.ceil(attributes.carbon).toLocaleString() %></td>
+              <td dir="<%= this.textDirection %>" ><%= habitat.habitat %></td>
+              <td><%= roundToDecimals(habitat.area_km2, 2) %></td>
+              <td><%= roundToDecimals(habitat.area_km2, 2) %></td>
+              <td><%= Math.ceil(habitat.carbon).toLocaleString() %></td>
             </tr>
           <% }) %>
         </table>
