@@ -5,7 +5,6 @@
 //= require bootstrap
 //= require leaflet/leaflet
 //= require leaflet.draw
-//= require Leaflet.Bing
 //= require jQuery.XDomainRequest
 //= require underscore.1.4.4
 //= require backbone.1.0.0
