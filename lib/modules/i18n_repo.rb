@@ -20,6 +20,8 @@ module I18nRepo
       "analysis.area_percentage"),
     "analysis.c_stock"=> I18n.t(
       "analysis.c_stock"),
+    "analysis.carbon_stock_unit"=> I18n.t(
+      "analysis.carbon_stock_unit"),
     "analysis.disclaimer"=> I18n.t(
       "analysis.disclaimer"),
     "analysis.total_area"=> I18n.t(

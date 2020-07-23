@@ -14,7 +14,8 @@ window.JST['area_results_view'] = _.template("""
           <%= polyglot.t("analysis.total_carbon_stock") %><sup class="tip" id="ca_stock_tip"></sup>
         </h4>
         <p class="<%= this.textDirection %>">
-          <%= roundToDecimals(results.sum.carbon, 2) %> <span>T</span>
+          <%= roundToDecimals(results.sum.carbon, 2) %> 
+          <span><%= polyglot.t("analysis.carbon_stock_unit") %></span>
         </p>
 
         <h4 class="<%= this.textDirection %>"><%= polyglot.t("analysis.total_area") %></h4>
@@ -34,7 +35,7 @@ window.JST['area_results_view'] = _.template("""
           <% _.each(results.orderedHabitats, function(habitat) { %>
             <tr>
               <td dir="<%= this.textDirection %>" ><%= habitat.habitat %></td>
-              <td><%= Math.ceil(habitat.carbon).toLocaleString() %></td>
+              <td><%= Math.ceil(habitat.carbon).toLocaleString() + polyglot.t("analysis.carbon_stock_unit") %></td>
             </tr>
           <% }) %>
         </table>

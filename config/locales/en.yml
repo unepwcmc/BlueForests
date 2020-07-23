@@ -224,6 +224,7 @@ en:
     area_ha: "Area <span>km<sup>2</sup></span>"
     area_percentage: "% of Total Area"
     c_stock: "Carbon Stock"
+    carbon_stock_unit: "t"
     disclaimer: "Carbon calculations for seagrasses, saltmarshes and algal mats are based on global averages, calculated as value per km2. Mangrove carbon storage calculations are based on national estimates."
     total_area: "Total Area Selected"
     total_carbon_stock: "Total Carbon Stock"
