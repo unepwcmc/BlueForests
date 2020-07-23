@@ -35,7 +35,7 @@ window.JST['area_results_view'] = _.template("""
           <% _.each(results.orderedHabitats, function(habitat) { %>
             <tr>
               <td dir="<%= this.textDirection %>" ><%= habitat.habitat %></td>
-              <td><%= Math.ceil(habitat.carbon).toLocaleString() + polyglot.t("analysis.carbon_stock_unit") %></td>
+              <td><%= Math.ceil(habitat.carbon).toLocaleString() + ' ' + polyglot.t("analysis.carbon_stock_unit") %></td>
             </tr>
           <% }) %>
         </table>
