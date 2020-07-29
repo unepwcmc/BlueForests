@@ -205,9 +205,10 @@ en:
       <<: *errors
 
   # Blue Carbon stuff
-  tool: TOOL
-  help: HELP
-  about: ABOUT
+  tool: Tool
+  help: Help
+  about: About
+  methodology: Methodology
   developed_by: "The Abu Dhabi Blue Carbon Mapping Toolkit was developed by"
   sign_in: "SIGN IN"
   contact: "CONTACT"

@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_country
-    unrecognised_subdomain = current_country.nil? && !is_root?
+    unrecognised_subdomain = current_country.nil? && !is_subdomain_agnostic?
     redirect_to(root_url(subdomain: Subdomainer.root)) if unrecognised_subdomain
   end
 
@@ -46,6 +46,10 @@ class ApplicationController < ActionController::Base
     if signed_in? && !current_user.countries.include?(current_country)
       redirect_to(root_url)
     end
+  end
+
+  def is_subdomain_agnostic?
+    [help_path, methodology_path].include?(request.path) || is_root?
   end
 
   def is_root?

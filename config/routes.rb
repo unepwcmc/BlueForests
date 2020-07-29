@@ -22,11 +22,6 @@ BlueCarbon::Application.routes.draw do
   end
 
   get 'tool' => 'analysis#index', as: :tool
-
-  get '/:locale' => 'pages#home'
-  scope "(:locale)", :locale => /en|ar/ do
-    get 'home' => 'pages#home'
-    get 'about' => 'pages#about'
-    get 'help' => 'pages#help'
-  end
+  get 'help' => 'pages#help', as: :help
+  get 'methodology' => 'pages#methodology', as: :methodology
 end

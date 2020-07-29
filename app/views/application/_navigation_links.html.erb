@@ -30,7 +30,9 @@
   </div>
 <% else %>
   <div class="header__right pull-right navigation-links">
-    <a class="header__element tool-button" href="<%= tool_path %>">Tool</a>
+    <a class="header__element tool-button" href="<%= tool_path %>"><%= t('tool') %></a>
+    <a class="header__element" href="<%= methodology_path %>"><%= t('methodology') %></a>
+    <a class="header__element" href="<%= help_path %>"><%= t('help') %></a>
     <% if @current_country %>
       <span class="dropdown">
         <button class="header__element header__element--dropdown" data-toggle-trigger="country-select">
