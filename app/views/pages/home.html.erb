@@ -30,6 +30,7 @@
         <% unless @current_country %>
           <div class="half">
         <% end %>
+        <section class="<%= 'home-aside' unless @current_country %>">
           <h3 class="title">What are blue forests?</h3>
           <p>
             'Blue forests' refer to the ability of coastal vegetation to
@@ -43,6 +44,7 @@
             into the atmosphere as carbon dioxide, contributing to climate
             change.
           </p>
+        </section>
         <% unless @current_country %>
           </div>
         <% end %>
