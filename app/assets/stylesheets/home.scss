@@ -46,6 +46,7 @@
     font-size: 1.6em;
     font-weight: 300;
     line-height: 1.5em;
+    margin-top: 0;
 
     &.title { margin-bottom: -24px }
   }
@@ -64,4 +65,13 @@
     &:hover { text-decoration: underline; }
   }
 
+}
+
+.home-aside {
+  background-color: $lightest-gray;
+  padding: 40px;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
