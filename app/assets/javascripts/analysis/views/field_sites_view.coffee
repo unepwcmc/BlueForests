@@ -16,6 +16,7 @@ class Backbone.Views.FieldSitesView extends Backbone.View
     query = "SELECT * FROM blueforests_field_sites_2020_#{environment} WHERE country_id = '#{iso}'"
 
     $.getJSON("#{base}?format=GeoJSON&q=#{query}", (data) =>
+      console.log(data.features)
       @$el.html(@template(field_sites: data.features))
     )
 

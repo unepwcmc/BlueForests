@@ -227,6 +227,7 @@ en:
     c_stock: "Carbon Stock"
     carbon_stock_unit: "t"
     disclaimer: "Carbon calculations for seagrasses, saltmarshes and algal mats are based on global averages, calculated as value per km<sup>2</sup>. Mangrove carbon storage calculations are based on national estimates."
+    no_field_sites: "No field site data is currently available for this country."
     total_area: "Total Area Selected"
     total_carbon_stock: "Total Carbon Stock"
     total_size_area_interest: "The total size of your Area of Interest in km2"

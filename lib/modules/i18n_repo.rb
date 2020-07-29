@@ -24,6 +24,8 @@ module I18nRepo
       "analysis.carbon_stock_unit"),
     "analysis.disclaimer"=> I18n.t(
       "analysis.disclaimer"),
+    "analysis.no_field_sites"=> I18n.t(
+      "analysis.no_field_sites"),
     "analysis.total_area"=> I18n.t(
       "analysis.total_area"),
     "analysis.total_carbon_stock"=> I18n.t(
