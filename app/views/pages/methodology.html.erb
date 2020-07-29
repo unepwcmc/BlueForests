@@ -1,2 +1,26 @@
 <%= content_for :title, "Methodology" %>
-Methodology
+<main class="page-container">
+  <h1 class="page-title">
+    <%= t('methodology_page.title') %>
+  </h1>
+  <% t('methodology_page.paragraphs').each do |p| %>
+    <p><%= p.html_safe %></p>
+  <% end %>
+
+  <table class="table table-bordered table-striped">
+    <tr>
+      <% t('methodology_page.table.headers').each do |h| %>
+        <th><%= h.html_safe %></th>
+      <% end %>
+    </tr>
+    <% t('methodology_page.table.rows').each do |row| %>
+      <tr>
+        <% row.each do |entry| %>
+          <td><%= entry.html_safe %></td>
+        <% end %>
+      </tr>
+    <% end %>
+
+    <caption><%= t('methodology_page.table.caption').html_safe %></caption>
+  </table>
+</main>

@@ -15,6 +15,7 @@
 *= require 'admin'
 *= require 'form'
 *= require 'tabs'
+*= require 'page'
 *= require 'leaflet-overrides'
 *= require 'info-legend'
 */

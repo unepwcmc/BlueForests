@@ -1,8 +1,14 @@
 @import "colors";
 
 .table {
+  caption-side: bottom;
   width: 100%;
   text-align: left;
+
+  caption {
+    text-align: left;
+    margin-top: 10px;
+  }
 
   th {
     border-bottom: solid 1px $light-gray;

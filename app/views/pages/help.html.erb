@@ -1,2 +1,23 @@
 <%= content_for :title, "Help" %>
-HELP
+
+<main class="page-container">
+  <h1 class="page-title">
+    <%= t('help_page.title') %>
+  </h1>
+  <p>
+    <%= t('help_page.intro') %>
+  </p>
+
+  <iframe
+    class="page-video" 
+    width="560" 
+    height="315" 
+    src="https://www.youtube.com/embed/d0JP2uCjUTU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen></iframe>
+
+  <p><ul class="page-list">
+    <% t('help_page.bullets').each do |b| %>
+      <li><%= b.html_safe %></li>
+    <% end %>
+  </ul></p>
+</main>
