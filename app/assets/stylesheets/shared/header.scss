@@ -70,4 +70,8 @@ $header-height: 5rem;
   &.is-selected {
     border-bottom: solid 4px $dark-blue;
   }
+
+  .flag-and-name {
+    white-space: nowrap;
+  }
 }
