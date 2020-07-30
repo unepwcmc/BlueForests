@@ -279,7 +279,7 @@ en:
         <br><br>
         The tool retrieves information relating to the amount of carbon stored in the selected area – both as a total value and broken down by habitat. The tool also provides you with information about the spatial extent of the specific area."
       -
-        If you wish to define a new area, simply click the ‘+ button at the top right-hand side and repeat the same process. You can create up to 3 different areas of drawn polygons and related calculations
+        "If you wish to define a new area, simply click the ‘+' button at the top right-hand side and repeat the same process. You can create up to 3 different areas of drawn polygons and related calculations."
 
   methodology_page:
     title: Methodology
