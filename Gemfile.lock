@@ -175,7 +175,8 @@ GEM
     rabl (0.14.1)
       activesupport (>= 2.3.14)
     rack (1.6.11)
-    rack-cors (1.0.3)
+    rack-cors (1.0.5)
+      rack (>= 1.6.0)
     rack-protection (1.5.5)
       rack
     rack-test (0.6.3)
