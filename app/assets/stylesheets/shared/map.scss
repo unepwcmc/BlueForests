@@ -1,0 +1,31 @@
+$disclaimer-padding: 6px;
+$disclaimer-height-without-padding: 39px;
+$disclaimer-height-with-padding: $disclaimer-height-without-padding + 2 * $disclaimer-padding;
+
+#map {
+  height: calc(100% - #{$disclaimer-height-with-padding});
+  width: 100%;
+}
+
+.map {
+  &__container {
+    float: left;
+    width: 60%;
+
+    .analysis {
+      height: 100%;
+    }
+
+    .areas &,
+    .validations {
+      height: 700px;
+    }
+  }
+  
+  &__disclaimer {
+    background-color: $light-gray;
+    font-size: 12px;
+    padding: $disclaimer-padding;
+    height: $disclaimer-height-without-padding;
+  }
+}

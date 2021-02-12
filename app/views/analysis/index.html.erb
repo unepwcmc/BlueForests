@@ -1,4 +1,10 @@
 <%= content_for :title, "Tool" %>
 
-<div data-country-bounds="<%= @current_country.bounds.to_json %>" data-country-iso="<%= @current_country.iso %>" id="map"></div>
+<div class="map__container">
+  <div data-country-bounds="<%= @current_country.bounds.to_json %>" data-country-iso="<%= @current_country.iso %>" id="map"></div>
+
+  <div class="map__disclaimer">
+    <%= t('map_disclaimer') %>
+  </div>
+</div>
 <aside id="sidebar"></aside>

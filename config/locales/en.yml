@@ -244,6 +244,7 @@ en:
     other: "Other"
     satellite: "Satellite"
     map: "Map"
+    map_disclaimer: "The designations employed and the presentation of material on this map do not imply the expression of any opinion whatsoever on the part of the Secretariat of the United Nations concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries."
     share_your_work: "Share Your Work"
     export_your_report: "Export Your Report"
     tooltips:
@@ -259,7 +260,7 @@ en:
   
   help_page:
     title: How to use the Blue Forest Mapping Tool
-    intro: One of the key features of the Blue Forest Mapping Tool is the ability to easily obtain the amount of carbon stored in coastal habitats. These steps below show you have to use this feature.
+    intro: One of the key features of the Blue Forest Mapping Tool is the ability to easily obtain the amount of carbon stored in coastal habitats. The video and steps below show you how to use this feature.
     bullets:
       - 
         "To begin from the homepage, simply click ‘Start using the tool’.  You then have a choice of countries to select from.<br><br>
@@ -287,7 +288,7 @@ en:
       - 
         The Blue Forests Mapping Tool uses the following Methodology to carbon stored in marine and coastal habitats.
       - 
-        In order to calculate the quantity of blue carbon in each site we have used the most recent, globally consistent estimates of blue carbon storage per unit area (Table 1 below) multiplied this by the area of each of the habitats in the selected areas.
+        In order to calculate the quantity of blue carbon at each site we have used the most recent, globally consistent estimates of blue carbon storage per unit area (Table 1 below) multiplied by the area of each of the habitats in the selected areas.
       - 
         The analysis is restricted to the quantity of carbon stored within the first metre of soil due to the availability of data. As such, the final values likely represent a conservative estimate of the total carbon found.
       - 

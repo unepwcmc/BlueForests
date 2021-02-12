@@ -5,10 +5,6 @@
   }
 
   #map {
-    float: left;
-    height: 700px;
-    width: 60%;
-
     &::after { content: ""; }
   }
 
