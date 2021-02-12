@@ -14,12 +14,12 @@ $disclaimer-height-with-padding: $disclaimer-height-without-padding + 2 * $discl
     float: left;
     width: 60%;
 
-    .analysis {
+    .analysis & {
       height: 100%;
     }
 
     .areas &,
-    .validations {
+    .validations & {
       height: 700px;
     }
   }
