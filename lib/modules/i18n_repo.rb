@@ -56,6 +56,8 @@ module I18nRepo
       "analysis.other"),
     "analysis.map"=> I18n.t(
       "analysis.map"),
+    "analysis.map_disclaimer"=> I18n.t(
+      "analysis.map_disclaimer"),
     "analysis.satellite"=> I18n.t(
       "analysis.satellite"),
     "analysis.share_your_work"=> I18n.t(
