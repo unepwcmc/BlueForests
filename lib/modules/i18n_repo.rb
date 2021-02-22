@@ -58,6 +58,8 @@ module I18nRepo
       "analysis.map"),
     "analysis.map_disclaimer"=> I18n.t(
       "analysis.map_disclaimer"),
+    "analysis.methodology_link_text"=> I18n.t(
+      "analysis.methodology_link_text"),
     "analysis.satellite"=> I18n.t(
       "analysis.satellite"),
     "analysis.share_your_work"=> I18n.t(

@@ -11,7 +11,11 @@
 
   #sidebar {
     float: left;
+    padding-bottom: $methodology-text-height;
     width: 40%;
+    height: calc(100% - #{$methodology-text-height});
+    
+    position: relative;
   }
 
   #area_results {

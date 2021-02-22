@@ -245,6 +245,7 @@ en:
     satellite: "Satellite"
     map: "Map"
     map_disclaimer: "The designations employed and the presentation of material on this map do not imply the expression of any opinion whatsoever on the part of the Secretariat of the United Nations concerning the legal status of any country, territory, city or area or of its authorities, or concerning the delimitation of its frontiers or boundaries."
+    methodology_link_text: "Find out more about our data sources and how we calculate carbon values on our <a href='/methodology' title='Go to Methodology'>methodology page</a>."
     share_your_work: "Share Your Work"
     export_your_report: "Export Your Report"
     tooltips:
