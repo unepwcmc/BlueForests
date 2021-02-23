@@ -9,6 +9,7 @@
 *= require 'elements/table'
 *= require 'elements/radio'
 *= require 'elements/polygon-stats'
+*= require 'elements/methodology-text'
 *= require 'login'
 *= require 'home'
 *= require 'analysis'

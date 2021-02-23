@@ -11,8 +11,8 @@ class Backbone.Routers.AnalysisRouter extends Backbone.Router
 
   index: ->
     @tabsView.showView(new Backbone.Views.TabsView())
-    $('#sidebar').html(@tabsView.$el)
+    $('#sidebar-content').html(@tabsView.$el)
 
   show: (id) ->
     @tabsView.showView(new Backbone.Views.TabsView(areaId: id))
-    $('#sidebar').html(@tabsView.$el)
+    $('#sidebar-content').html(@tabsView.$el)

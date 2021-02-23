@@ -1,7 +1,17 @@
+@import '../variables.scss';
+@import '../colors.scss';
+
 .methodology-text {
   padding: 0 1.5rem;
   height: $methodology-text-height;
 
   position: absolute;
   bottom: 0;
+
+  a {
+    color: $dark-blue;
+    font-weight: 500;
+
+    &:hover { text-decoration: underline; }
+  }
 }
