@@ -1,18 +1,16 @@
-@import '../variables.scss';
 @import '../colors.scss';
 
 .methodology-text {
-  margin: $methodology-text-margin 0;
-  padding: 0 1.5rem;
-  height: $methodology-text-height;
-
-  position: absolute;
-  bottom: 0;
+  margin: 10px 0;
 
   a {
     color: $dark-blue;
     font-weight: 500;
 
     &:hover { text-decoration: underline; }
+  }
+
+  &__wrapper {
+    padding: 0 1.5rem;
   }
 }
