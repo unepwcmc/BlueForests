@@ -13,9 +13,9 @@
   #sidebar {
     float: left;
     margin-left: 2.5rem;
-    padding-bottom: $methodology-text-height;
+    padding-bottom: $methodology-text-height-with-margin;
     width: calc(40% - 2.5rem);
-    height: calc(100% - #{$methodology-text-height});
+    height: calc(100% - #{$methodology-text-height-with-margin});
     
     position: relative;
   }
