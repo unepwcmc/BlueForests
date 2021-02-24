@@ -1,4 +1,4 @@
 $header-height: 5rem;
 $methodology-text-height: 38px;
 $methodology-text-margin: 10px;
-$methodology-text-height-with-margin: calc(#{$methodology-text-height} + 2 * $methodology-text-margin)
+$methodology-text-height-with-margin: calc(#{$methodology-text-height} + 2 * #{$methodology-text-margin})
