@@ -47,6 +47,15 @@ html, body {
 
 a.with-icon { @include link-with-icon(arrow-with-circle-right-dark-blue); }
 
+.paragraph-with-links {
+  a {
+    color: $dark-blue;
+    font-weight: 500;
+
+    &:hover { text-decoration: underline; }
+  }
+}
+
 .title {
   font-family: 'Cabin', sans-serif;
   font-weight: 400;
