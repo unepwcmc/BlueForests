@@ -23,7 +23,7 @@ module CartoDb
 
   def self.table_name habitat
     prefix = Rails.application.secrets.cartodb['table_prefix']
-    "#{prefix}_#{habitat}_#{Rails.env}"
+    "#{prefix}_#{habitat}_staging"
   end
 
   def self.build_url path, opts={}
