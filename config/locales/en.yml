@@ -258,21 +258,21 @@ en:
       continue_drawing: "Click to continue drawing shape"
       close_shape: "Click first point to close this shape"
     empty_result: "Your selected area does not contain any recorded Blue Forest habitats."
-  
+
   help_page:
     title: How to use the Blue Forest Mapping Tool
     intro: One of the key features of the Blue Forest Mapping Tool is the ability to easily obtain the amount of carbon stored in coastal habitats. The video and steps below show you how to use this feature.
     bullets:
-      - 
+      -
         "To begin from the homepage, simply click ‘Start using the tool’.  You then have a choice of countries to select from.<br><br>
         Alternatively, once you have begun using the tool you can switch between countries by selecting them from the navigation menu. The current country you are viewing is indicated along with the appropriate country flag."
-      - 
+      -
         "Once the country map has loaded, you can focus on areas where blue carbon habitat has been recorded using the scroll or zoom buttons.
         <br><br>
         You will see the study sites that were part of the GEF Blue Forests Project listed on the side. Hovering over the study sites with your mouse will reveal their location on the map."
-      - 
+      -
         "Hovering over field site names to show that they appear on the map. You can scroll and zoom on map to view different areas in more detail."
-      - 
+      -
         "To define the area that you are interested in you can draw a polygon over an area of habitat directly onto the map.
         <br><br>
         Simply click the ‘draw a polygon’ button.
@@ -286,43 +286,43 @@ en:
   methodology_page:
     title: Methodology
     paragraphs:
-      - 
-        The Blue Forests Mapping Tool uses the following Methodology to carbon stored in marine and coastal habitats.
-      - 
+      -
+        The Blue Forests Mapping Tool uses the following methodology to estimate carbon stored in marine and coastal habitats.
+      -
         In order to calculate the quantity of blue carbon at each site we have used the most recent, globally consistent estimates of blue carbon storage per unit area (Table 1 below) multiplied by the area of each of the habitats in the selected areas.
-      - 
+      -
         The analysis is restricted to the quantity of carbon stored within the first metre of soil due to the availability of data. As such, the final values likely represent a conservative estimate of the total carbon found.
-      - 
+      -
         Furthermore, the limited availability of data means that the analysis does not capture spatial variability in carbon estimates between sites and geographies.
     table:
       headers:
-        - 
+        -
           Habitat
-        - 
+        -
           Megagrams of carbon per hectare (km<sup>2</sup>/ha) in the top 1 metre of soil
-        - 
+        -
           Citation
       rows:
-        - 
-          - 
+        -
+          -
             Mangrove
-          - 
+          -
             Country dependent with a global average of 2.83
-          - 
+          -
             'Atwood, TB et al., (2017) Global patterns in mangrove soil carbon stocks and losses. Nature Climate Change 7: 523-52. DOI: <a href="https://www.nature.com/articles/nclimate3326?proof=trueMay" title="Global patterns in mangrove soil carbon stocks and losses" target="_blank">10.1038/nclimate3326</a>'
-        - 
-          - 
+        -
+          -
             Seagrass
-          - 
+          -
             '1.39'
-          - 
+          -
             'Fourqurean, JW et al., (2012) Seagrass ecosystems as a globally significant carbon stock. Nature Geoscience 5: 505-509. DOI: <a href="https://www.nature.com/articles/ngeo1477" title="Seagrass ecosystems as a globally significant carbon stock" target="_blank">10.1038/ngeo1477</a>'
         -
-          - 
+          -
             Saltmarshes
-          - 
+          -
             '2.55'
-          - 
+          -
             '<a href="https://www.ipcc-nggip.iges.or.jp/public/wetlands/pdf/Wetlands_separate_files/WS_Chp4_Coastal_Wetlands.pdf" title="Supplement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories: Wetlands" target="_blank">IPCC (2013). Coastal Wetlands.</a> In: 2013 Supplement to the 2006 IPCC guidelines for National Greenhouse Gas Inventories (eds. Alongi, D., Karim, A., Kennedy, H., Chen, G., Chmura, G., Crooks, S et al.).'
       caption: "<strong>Table 1.</strong> Sources of blue carbon estimates."
 
